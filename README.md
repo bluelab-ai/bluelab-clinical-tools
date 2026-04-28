@@ -1,4 +1,4 @@
-# 🧠 bluelab-clinical-tools
+#  bluelab-clinical-tools
 
 **Practical tools for clinical research workflows**
 
@@ -7,7 +7,7 @@
 
 ---
 
-## 🔍 Overview
+##  Overview
 
 This repository contains a curated collection of lightweight tools designed to improve efficiency across clinical trial workflows, including:
 
@@ -21,14 +21,14 @@ Each tool is designed to be **practical, reusable, and composable**.
 
 ---
 
-## 🧩 Modules
+##  Modules
 
 Each module focuses on a specific area of clinical research.  
 Click into each directory for detailed tools and examples.
 
 ---
 
-### 🔵 Data Management（数据管理文档生成助手）
+###  Data Management（数据管理文档生成助手）
 
 Tools for clinical data management documentation.
 
@@ -40,7 +40,7 @@ Tools for clinical data management documentation.
 
 ---
 
-### 🟢 Statistical Analysis（统计分析）
+###  Statistical Analysis（统计分析）
 
 Tools supporting statistical planning and analysis workflows.
 
@@ -53,7 +53,7 @@ Tools supporting statistical planning and analysis workflows.
 
 ---
 
-### 🟠 TFL / CSR Reporting Automation（统计分析 / 临床研究报告自动起草助手）
+###  TFL / CSR Reporting Automation（统计分析 / 临床研究报告自动起草助手）
 
 Tools for statistical output generation and reporting automation.
 
@@ -64,7 +64,7 @@ Tools for statistical output generation and reporting automation.
 
 ---
 
-### 🟣 Medical Writing（医学助手）
+###  Medical Writing（医学助手）
 
 Tools assisting medical and scientific writing workflows.
 
@@ -77,7 +77,7 @@ Tools assisting medical and scientific writing workflows.
 
 ---
 
-## 🏗️ Repository Structure
+##  Repository Structure
 
 ```text
 bluelab-clinical-tools/
@@ -97,7 +97,7 @@ bluelab-clinical-tools/
 └── README.md
 ```
 
-## ⚙️ Design Principles
+##  Design Principles
 
 - **Small and focused**  
   Each tool solves one clear problem.
@@ -116,7 +116,7 @@ bluelab-clinical-tools/
 
 ---
 
-## 🔄 Workflow Pattern
+##  Workflow Pattern
 
 Most tools follow a common pattern:
 
@@ -130,7 +130,7 @@ Most tools follow a common pattern:
 
 ---
 
-## 📦 Status
+##  Status
 
 🚧 Active development
 
@@ -138,7 +138,7 @@ Modules may vary in maturity from prototype to internally usable tools.
 
 ---
 
-## 🔒 Usage
+##  Usage
 
 This repository is intended for **internal use only**.
 
@@ -146,7 +146,7 @@ Do not distribute or reuse outside the organization without permission.
 
 ---
 
-## 🧠 Vision
+##  Vision
 
 We focus on building **high-impact tools**, not platforms.
 
@@ -156,7 +156,7 @@ We focus on building **high-impact tools**, not platforms.
 
 ---
 
-## 🤝 Contributing (Internal)
+##  Contributing (Internal)
 
 - Keep tools small and clearly scoped  
 - Provide examples for every tool  
