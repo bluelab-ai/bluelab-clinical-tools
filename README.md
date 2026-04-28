@@ -116,19 +116,6 @@ bluelab-clinical-tools/
 
 ---
 
-##  Workflow Pattern
-
-Most tools follow a common pattern:
-
-**Input → Structured Processing → Output → AI Enhancement → Deliverable**
-
-**Examples:**
-
-- Protocol → Structured JSON → SAP  
-- Dataset → SAS → TFL → Report draft  
-- Literature → Structured notes → Summary  
-
----
 
 ##  Status
 
