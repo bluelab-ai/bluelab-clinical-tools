@@ -28,11 +28,11 @@ Click into each directory for detailed tools and examples.
 
 ### 🔵 Data Management（数据管理文档生成助手）
 
-Tools for data management workflows and documentation.
+Tools for clinical data management documentation.
 
-- DMP / DVP / CRF support（方案与CRF相关文档支持）
-- Structured data extraction（结构化数据提取）
-- Data-related document generation（数据管理文档生成）
+- CRF (Case Report Form) Completion Guideline Draft Generator（CRF填写指南初稿生成工具）  
+- DMP (Data Management Plan) Draft Generator（DMP初稿生成工具）  
+- DVP (Data Validation Plan) Draft Generator（DVP初稿生成工具）  
 
 👉 [`/data-management`](./data-management)
 
@@ -42,21 +42,21 @@ Tools for data management workflows and documentation.
 
 Tools supporting statistical planning and analysis workflows.
 
-- SAP目录骨架 / TFL shell建议 / 漏项提示  
-- SAP skeleton generation  
-- Analysis workflow support  
+- SAP (Statistical Analysis Plan) Draft Generator（SAP正文初稿生成工具）  
+- TFL (Tables, Figures, Listings) Shell Generator（TFL shell初稿生成工具）  
+- TFL Shell Quality Check Tool（TFL shell漏项检测与预警工具）  
+  (AI-assisted validation for completeness, missing sections, and structure issues)
 
 👉 [`/stat-analysis`](./stat-analysis)
 
 ---
 
-### 🟠 TFL/CSR Reporting Automation（统计报告自动起草助手）
+### 🟠 TFL / CSR Reporting Automation（统计分析 / 临床研究报告自动起草助手）
 
-Tools for generating statistical outputs and report drafts.
+Tools for statistical output generation and reporting automation.
 
-- TFL generation via SAS integration（基于SAS的TFL生成）  
-- AI-assisted interpretation of outputs（AI结果解读）  
-- Draft generation of result sections（结果段落草稿生成）  
+- TFL → CSR (Clinical Study Report) Results Draft Generator（基于TFL生成CSR结果段落初稿工具）  
+- Automated TFL Generation Pipeline (SAS + AI-assisted workflow)（基于SAS与AI的TFL自动生成工具，Demo版本）  
 
 👉 [`/report-automation`](./report-automation)
 
@@ -66,9 +66,10 @@ Tools for generating statistical outputs and report drafts.
 
 Tools assisting medical and scientific writing workflows.
 
-- 文献结构化摘要 / 证据表 / 综述与Meta辅助  
-- Literature structuring  
-- Evidence summarization  
+- Structured Literature Summary Generator（文献结构化摘要生成工具）  
+- Evidence Table Generator（证据表生成工具）  
+  (Structured comparison of study design, population, interventions, outcomes, and results)  
+- Review & Meta-analysis Assistance Tool（综述与Meta分析辅助工具）  
 
 👉 [`/medical-writing`](./medical-writing)
 
