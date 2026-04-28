@@ -1,4 +1,4 @@
-#  bluelab-clinical-tools
+# ⚙️ bluelab-clinical-tools
 
 **Practical tools for clinical research workflows**
 
@@ -28,7 +28,7 @@ Click into each directory for detailed tools and examples.
 
 ---
 
-###  Data Management（数据管理文档生成助手）
+### 🔵 Data Management（数据管理文档生成助手）
 
 Tools for clinical data management documentation.
 
@@ -40,7 +40,7 @@ Tools for clinical data management documentation.
 
 ---
 
-###  Statistical Analysis（统计分析）
+### 🟢 Statistical Analysis（统计分析）
 
 Tools supporting statistical planning and analysis workflows.
 
@@ -53,7 +53,7 @@ Tools supporting statistical planning and analysis workflows.
 
 ---
 
-###  TFL / CSR Reporting Automation（统计分析 / 临床研究报告自动起草助手）
+### 🟠 TFL / CSR Reporting Automation（统计分析 / 临床研究报告自动起草助手）
 
 Tools for statistical output generation and reporting automation.
 
@@ -64,7 +64,7 @@ Tools for statistical output generation and reporting automation.
 
 ---
 
-###  Medical Writing（医学助手）
+### 🟣 Medical Writing（医学助手）
 
 Tools assisting medical and scientific writing workflows.
 
