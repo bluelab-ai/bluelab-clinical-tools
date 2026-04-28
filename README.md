@@ -3,6 +3,7 @@
 **Practical tools for clinical research workflows**
 
 > Building small, usable, and AI-powered tools for real-world clinical operations.
+> 让临床研究，从“做项目”变成“用工具”。
 
 ---
 
@@ -93,3 +94,69 @@ bluelab-clinical-tools/
 │
 ├── docs/
 └── README.md
+
+## ⚙️ Design Principles
+
+- **Small and focused**  
+  Each tool solves one clear problem.
+
+- **Composable**  
+  Tools can be combined into larger workflows.
+
+- **Practical over perfect**  
+  Prioritize usability in real-world scenarios.
+
+- **Structured outputs**  
+  Prefer JSON / tables / standardized formats.
+
+- **AI as augmentation**  
+  AI assists workflows but does not replace validation.
+
+---
+
+## 🔄 Workflow Pattern
+
+Most tools follow a common pattern:
+
+**Input → Structured Processing → Output → AI Enhancement → Deliverable**
+
+**Examples:**
+
+- Protocol → Structured JSON → SAP  
+- Dataset → SAS → TFL → Report draft  
+- Literature → Structured notes → Summary  
+
+---
+
+## 📦 Status
+
+🚧 Active development
+
+Modules may vary in maturity from prototype to internally usable tools.
+
+---
+
+## 🔒 Usage
+
+This repository is intended for **internal use only**.
+
+Do not distribute or reuse outside the organization without permission.
+
+---
+
+## 🧠 Vision
+
+We focus on building **high-impact tools**, not platforms.
+
+- Reduce repetitive work  
+- Structure complex workflows  
+- Make clinical processes programmable  
+
+---
+
+## 🤝 Contributing (Internal)
+
+- Keep tools small and clearly scoped  
+- Provide examples for every tool  
+- Reuse shared skills and prompts  
+- Avoid duplication across modules  
