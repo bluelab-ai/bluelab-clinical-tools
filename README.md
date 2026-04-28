@@ -28,17 +28,17 @@ Click into each directory for detailed tools and examples.
 
 ### 🔵 Data Management（数据管理文档生成助手）
 
-Tools for clinical data workflows and documentation.
+Tools for data management workflows and documentation.
 
-- DMP / DVP / CRF填写指南初稿自动生成  
-- Structured data extraction  
-- Data-related document generation  
+- DMP / DVP / CRF support（方案与CRF相关文档支持）
+- Structured data extraction（结构化数据提取）
+- Data-related document generation（数据管理文档生成）
 
 👉 [`/data-management`](./data-management)
 
 ---
 
-### 🟢 Statistical Analysis（SAP骨架生成助手）
+### 🟢 Statistical Analysis（统计分析）
 
 Tools supporting statistical planning and analysis workflows.
 
@@ -50,13 +50,13 @@ Tools supporting statistical planning and analysis workflows.
 
 ---
 
-### 🟠 Reporting Automation（统计报告自动起草助手）
+### 🟠 TFL/CSR Reporting Automation（统计报告自动起草助手）
 
 Tools for generating statistical outputs and report drafts.
 
-- 保留原方向：调用SAS程序 → 自动产出TFL → 生成结果段描述初稿  
-- TFL generation via SAS integration  
-- AI-assisted interpretation of outputs  
+- TFL generation via SAS integration（基于SAS的TFL生成）  
+- AI-assisted interpretation of outputs（AI结果解读）  
+- Draft generation of result sections（结果段落草稿生成）  
 
 👉 [`/report-automation`](./report-automation)
 
