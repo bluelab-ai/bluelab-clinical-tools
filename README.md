@@ -3,7 +3,7 @@
 **Practical tools for clinical research workflows**
 
 > Building small, usable, and AI-powered tools for real-world clinical operations.
-> 让临床研究，从“做项目”变成“用工具”。
+
 
 ---
 
@@ -17,6 +17,7 @@ This repository contains a curated collection of lightweight tools designed to i
 - Medical writing  
 
 Each tool is designed to be **practical, reusable, and composable**.
+> 让临床研究，从“做项目”变成“用工具”。
 
 ---
 
