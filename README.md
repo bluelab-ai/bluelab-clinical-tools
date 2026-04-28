@@ -95,6 +95,7 @@ bluelab-clinical-tools/
 │
 ├── docs/
 └── README.md
+```
 
 ## ⚙️ Design Principles
 
