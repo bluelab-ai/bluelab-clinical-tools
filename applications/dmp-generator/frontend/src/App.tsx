@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ProjectProvider } from "./contexts/ProjectContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import LogFormPage from "./pages/LogFormPage";
@@ -11,9 +12,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 export default function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <ProjectProvider>
-          <Routes>
+      <ThemeProvider>
+        <AuthProvider>
+          <ProjectProvider>
+            <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route
@@ -44,6 +46,7 @@ export default function App() {
           </Routes>
         </ProjectProvider>
       </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

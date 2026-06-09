@@ -1,42 +1,42 @@
-import { useState, FormEvent } from "react";
+import { Sparkles, Play } from "lucide-react";
 
 interface Props {
-  onSend: (message: string) => void;
   onStartDMP: () => void;
+  onContinueDMP: () => void;
   disabled: boolean;
   canGenerate: boolean;
+  hasSession: boolean;
 }
 
-export default function ChatInput({ onSend, onStartDMP, disabled, canGenerate }: Props) {
-  const [text, setText] = useState("");
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!text.trim()) return;
-    onSend(text.trim());
-    setText("");
-  };
-
+export default function ChatInput({ onStartDMP, onContinueDMP, disabled, canGenerate, hasSession }: Props) {
   return (
-    <form onSubmit={handleSubmit} style={{ display: "flex", gap: 8, padding: 12, borderTop: "1px solid #333" }}>
-      <input
-        style={{ flex: 1, padding: 10, borderRadius: 6, border: "1px solid #555", background: "#111", color: "#fff", fontSize: 13 }}
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder={disabled ? "Claude is working..." : "Type a message..."}
-        disabled={disabled}
-      />
-      <button type="submit" disabled={disabled} style={{ padding: "8px 16px", cursor: disabled ? "not-allowed" : "pointer" }}>
-        Send
-      </button>
+    <div className="flex justify-center gap-3 p-4 bg-white dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800">
       <button
         type="button"
         disabled={disabled || !canGenerate}
+        className={`px-6 py-3 font-semibold rounded-xl shadow-sm active:scale-[0.98] transition-all cursor-pointer disabled:cursor-not-allowed flex items-center gap-2 text-base ${
+          canGenerate && !disabled
+            ? "bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-white text-white dark:text-slate-900"
+            : "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600"
+        }`}
         onClick={onStartDMP}
-        style={{ padding: "8px 16px", background: canGenerate ? "#2a5a3a" : "#333", cursor: canGenerate && !disabled ? "pointer" : "not-allowed" }}
       >
+        <Sparkles size={16} />
         Generate DMP
       </button>
-    </form>
+      <button
+        type="button"
+        disabled={disabled || !hasSession}
+        className={`px-6 py-3 font-semibold rounded-xl shadow-sm active:scale-[0.98] transition-all cursor-pointer disabled:cursor-not-allowed flex items-center gap-2 text-base ${
+          hasSession && !disabled
+            ? "bg-blue-600 hover:bg-blue-700 text-white"
+            : "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600"
+        }`}
+        onClick={onContinueDMP}
+      >
+        <Play size={16} />
+        Continue
+      </button>
+    </div>
   );
 }

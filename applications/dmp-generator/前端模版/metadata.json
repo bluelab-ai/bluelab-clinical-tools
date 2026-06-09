@@ -1,0 +1,6 @@
+{
+  "name": "DMP.Architect",
+  "description": "An enterprise-grade Data Management Plan (DMP) configuration and compliance platform helping researchers model, validate, and build standardized documents.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

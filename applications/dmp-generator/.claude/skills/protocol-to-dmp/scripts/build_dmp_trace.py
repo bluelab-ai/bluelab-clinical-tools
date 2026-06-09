@@ -136,18 +136,48 @@ def load_xlsx_rows(path: Path) -> list[dict[str, Any]]:
     return rows
 
 
+def _extract_xml_text_with_ins(element: Any) -> str:
+    """Extract text from a docx XML element, including tracked insertions (w:ins)
+    but excluding tracked deletions (w:del)."""
+    from lxml import etree
+
+    NSMAP = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
+    text_parts: list[str] = []
+
+    def _walk(el):
+        tag = etree.QName(el).localname if isinstance(el.tag, str) else ""
+        if tag == "del":
+            return
+        if tag == "ins":
+            for child in el:
+                _walk(child)
+            return
+        if tag == "t":
+            txt = el.text or ""
+            if txt:
+                text_parts.append(txt)
+            return
+        if tag in ("rPr", "pPr", "pBdr", "tblPr", "tcPr", "trPr", "tblGrid"):
+            return
+        for child in el:
+            _walk(child)
+
+    _walk(element)
+    return "".join(text_parts)
+
+
 def read_docx_text(path: Path) -> tuple[str, list[str]]:
     from docx import Document
 
     doc = Document(path)
     lines: list[str] = []
     for para in doc.paragraphs:
-        text = para.text.strip()
+        text = _extract_xml_text_with_ins(para._element).strip()
         if text:
             lines.append(text)
     for table_index, table in enumerate(doc.tables):
         for row_index, row in enumerate(table.rows):
-            cells = [cell.text.strip() for cell in row.cells]
+            cells = [_extract_xml_text_with_ins(cell._tc).strip() for cell in row.cells]
             cells = [cell for cell in cells if cell]
             if cells:
                 lines.append(f"[表{table_index + 1} 行{row_index + 1}] " + " | ".join(cells))
@@ -627,6 +657,20 @@ def protocol_title(lines: list[str]) -> tuple[str | None, list[str]]:
     return None, []
 
 
+def normalize_version(value: str | None) -> str | None:
+    """Normalize version string to uppercase V prefix: v4.0→V4.0, 1.3→V1.3, V1.0→V1.0."""
+    if not value:
+        return value
+    stripped = value.strip()
+    if not stripped:
+        return value
+    if stripped[0].lower() == "v":
+        return f"V{stripped[1:]}"
+    if stripped[0].isdigit():
+        return f"V{stripped}"
+    return value
+
+
 def filename_version(path: Path | None) -> tuple[str | None, list[str]]:
     if not path:
         return None, []
@@ -640,10 +684,17 @@ def filename_version(path: Path | None) -> tuple[str | None, list[str]]:
 def filename_version_date(path: Path | None) -> tuple[str | None, list[str]]:
     if not path:
         return None, []
+    # Try separated: 2024-01-11, 2024.01.11, 2024年01月11日
     match = re.search(r"(\d{4})[-_.年](\d{1,2})[-_.月](\d{1,2})", path.stem)
     if not match:
+        # Try unseparated: 20240111 (8 consecutive digits)
+        match = re.search(r"(?<!\d)(\d{4})(\d{2})(\d{2})(?!\d)", path.stem)
+    if not match:
         return None, []
-    value = f"{int(match.group(1)):04d}-{int(match.group(2)):02d}-{int(match.group(3)):02d}"
+    y, m, d = int(match.group(1)), int(match.group(2)), int(match.group(3))
+    if not (1 <= m <= 12 and 1 <= d <= 31):
+        return None, []
+    value = f"{y:04d}-{m:02d}-{d:02d}"
     return value, [f"方案文件名 `{path.name}` 提供方案版本日期线索：{value}"]
 
 
@@ -678,13 +729,15 @@ def protocol_lookup(item: str, text: str, lines: list[str], protocol_path: Path 
     if item == "方案版本号":
         value, evidence = first_regex(
             [
-                r"(?:方案)?版本(?:号)?(?:和日期)?[：:]\s*(V?\d+(?:\.\d+)+)",
-                r"(?:方案)?版本(?:号)?(?:和日期)?[：:]\s*(V?\d+(?:\.\d+)*)",
-                r"Version\s*[:：]?\s*(V?\d+(?:\.\d+)*)",
+                r"(?:方案)?版本(?:号)?(?:[和及与/、]?(?:版本)?日期)?[：:]\s*(?:\|\s*)?([Vv]?\d+(?:\.\d+)+)",
+                r"(?:方案)?版本(?:号)?(?:[和及与/、]?(?:版本)?日期)?[：:]\s*(?:\|\s*)?([Vv]?\d+(?:\.\d+)*)",
+                r"Version\s*[:：]?\s*([Vv]?\d+(?:\.\d+)*)",
             ],
             text,
         )
+        value = normalize_version(value)
         filename_value, filename_evidence = filename_version(protocol_path)
+        filename_value = normalize_version(filename_value)
         if filename_value and (not value or looks_like_partial_version(value, filename_value)):
             return result_from_value(filename_value, filename_evidence + evidence, confident=True)
         if value and filename_value and norm(value) != norm(filename_value):
@@ -698,23 +751,34 @@ def protocol_lookup(item: str, text: str, lines: list[str], protocol_path: Path 
     if item == "方案版本日期":
         value, evidence = first_regex(
             [
+                # Combined version+date: 方案版本号和日期：V1.0/2025.11.24   or  版本号/版本日期：v4.0/2023-05-23
+                r"(?:方案)?版本(?:号)?(?:和|及|与|\/|、)(?:版本)?日期[：:]\s*(?:V?\d+(?:\.\d+)*[/\\,;；，、]\s*)?([0-9]{4}[-./年][0-9]{1,2}[-./月][0-9]{1,2}日?)",
+                # Standalone: 方案版本日期：2025.11.24
                 r"(?:方案)?版本日期[：:]\s*([0-9]{4}[-./年][0-9]{1,2}[-./月][0-9]{1,2}日?)",
-                r"(?:日期|签署日期)[：:]\s*([0-9]{4}[-./年][0-9]{1,2}[-./月][0-9]{1,2}日?)",
+                # Table cell: V1.1，2024年9月2日 (date after version in same cell)
+                r"(?:V\d+(?:\.\d+)*[/\\,;；，、]\s*)?([0-9]{4}年[0-9]{1,2}月[0-9]{1,2}日)",
+                # Bare date near 方案: 方案...日期：2025.11.24
+                r"(?:方案)(?:.{0,8}?)(?:日期)[：:]\s*([0-9]{4}[-./年][0-9]{1,2}[-./月][0-9]{1,2}日?)",
             ],
             text,
         )
         filename_value, filename_evidence = filename_version_date(protocol_path)
-        if filename_value and not value:
-            return result_from_value(filename_value, filename_evidence, confident=True)
         if value:
             normalized_value = normalize_date_value(value)
+            result = result_from_value(normalized_value, evidence, confident=True)
             if filename_value and normalized_value != filename_value:
-                return {
-                    "status": "conflict",
-                    "value": None,
-                    "evidence": evidence + filename_evidence,
-                }
-            return result_from_value(normalized_value, evidence, confident=bool(normalized_value))
+                result["evidence"].extend(filename_evidence)
+                result["evidence"].append(
+                    f"方案文件名日期 `{filename_value}` 与正文 `{normalized_value}` 不一致，以正文为准"
+                )
+            return result
+        if filename_value:
+            return {
+                "status": "uncertain",
+                "value": filename_value,
+                "evidence": filename_evidence
+                + ["注意：版本日期仅从文件名推断，未在方案正文中找到对应字段，请人工确认"],
+            }
         return result_from_value(value, evidence, confident=bool(value))
 
     if item in {"申办者名称", "申办方名称"}:

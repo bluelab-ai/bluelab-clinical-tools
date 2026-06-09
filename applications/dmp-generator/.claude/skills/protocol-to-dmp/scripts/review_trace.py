@@ -19,6 +19,7 @@ import argparse
 import json
 import re
 from pathlib import Path
+from typing import Any
 
 # ---------------------------------------------------------------------------
 # High-risk fields prone to regex extraction errors (from semantic_review.py)
@@ -46,6 +47,35 @@ def norm(value: str) -> str:
 # Protocol reading (from semantic_review.py)
 # ---------------------------------------------------------------------------
 
+def _extract_xml_text_with_ins(element: Any) -> str:
+    """Extract text from a docx XML element, including tracked insertions (w:ins)
+    but excluding tracked deletions (w:del)."""
+    from lxml import etree
+
+    text_parts: list[str] = []
+
+    def _walk(el):
+        tag = etree.QName(el).localname if isinstance(el.tag, str) else ""
+        if tag == "del":
+            return
+        if tag == "ins":
+            for child in el:
+                _walk(child)
+            return
+        if tag == "t":
+            txt = el.text or ""
+            if txt:
+                text_parts.append(txt)
+            return
+        if tag in ("rPr", "pPr", "pBdr", "tblPr", "tcPr", "trPr", "tblGrid"):
+            return
+        for child in el:
+            _walk(child)
+
+    _walk(element)
+    return "".join(text_parts)
+
+
 def read_protocol_text(protocol_path: Path) -> str:
     suffix = protocol_path.suffix.lower()
     if suffix == ".docx":
@@ -54,12 +84,12 @@ def read_protocol_text(protocol_path: Path) -> str:
         doc = Document(str(protocol_path))
         parts: list[str] = []
         for para in doc.paragraphs:
-            text = para.text.strip()
+            text = _extract_xml_text_with_ins(para._element).strip()
             if text:
                 parts.append(text)
         for table in doc.tables:
             for row in table.rows:
-                cells = [cell.text.strip() for cell in row.cells]
+                cells = [_extract_xml_text_with_ins(cell._tc).strip() for cell in row.cells]
                 cells = [c for c in cells if c]
                 if cells:
                     parts.append(" | ".join(cells))

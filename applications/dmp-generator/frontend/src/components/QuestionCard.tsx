@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Question } from "../types";
+import { AlertTriangle, Send } from "lucide-react";
 
 interface Props {
   questions: Question[];
@@ -10,17 +11,20 @@ export default function QuestionCard({ questions, onAnswer }: Props) {
   const [inputs, setInputs] = useState<Record<string, string>>({});
 
   return (
-    <div style={{ marginTop: 8, padding: 12, background: "#1a2a1a", borderRadius: 6, borderLeft: "3px solid #fbbf24" }}>
-      <div style={{ color: "#fbbf24", fontSize: 12, marginBottom: 8 }}>Action Required</div>
+    <div className="mt-3 p-4 bg-amber-50/50 rounded-xl border-l-4 border-amber-400">
+      <div className="flex items-center gap-2 text-amber-700 text-xs font-semibold font-mono uppercase tracking-wider mb-3">
+        <AlertTriangle size={14} />
+        Action Required
+      </div>
       {questions.map((q) => (
-        <div key={q.id} style={{ marginBottom: 8 }}>
-          <p style={{ color: "#ccc", fontSize: 13, margin: "0 0 6px" }}>{q.text}</p>
+        <div key={q.id} className="mb-3 last:mb-0">
+          <p className="text-slate-700 text-sm font-medium mb-2">{q.text}</p>
           {q.type === "choice" && q.options ? (
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <div className="flex gap-2 flex-wrap">
               {q.options.map((opt, i) => (
                 <button
                   key={i}
-                  style={{ padding: "4px 12px", background: "#2a5a3a", border: "none", borderRadius: 4, color: "#fff", cursor: "pointer", fontSize: 12 }}
+                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold cursor-pointer active:scale-95 transition-all"
                   onClick={() => onAnswer(opt)}
                 >
                   {String.fromCharCode(65 + i)}: {opt}
@@ -28,17 +32,18 @@ export default function QuestionCard({ questions, onAnswer }: Props) {
               ))}
             </div>
           ) : (
-            <div style={{ display: "flex", gap: 8 }}>
+            <div className="flex gap-2">
               <input
-                style={{ flex: 1, padding: 6, borderRadius: 4, border: "1px solid #555", background: "#111", color: "#fff", fontSize: 12 }}
+                className="flex-1 bg-white border border-slate-200 focus:border-blue-500 rounded-lg px-3 py-2 text-sm text-slate-800 outline-none focus:ring-2 focus:ring-blue-100 transition-all"
                 value={inputs[q.id] || ""}
                 onChange={(e) => setInputs({ ...inputs, [q.id]: e.target.value })}
                 placeholder="Type your answer..."
               />
               <button
-                style={{ padding: "4px 12px", background: "#3a3a5a", border: "none", borderRadius: 4, color: "#fff", cursor: "pointer", fontSize: 12 }}
+                className="px-4 py-2 bg-slate-700 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold cursor-pointer active:scale-95 transition-all flex items-center gap-1.5"
                 onClick={() => inputs[q.id] && onAnswer(inputs[q.id])}
               >
+                <Send size={12} />
                 Submit
               </button>
             </div>

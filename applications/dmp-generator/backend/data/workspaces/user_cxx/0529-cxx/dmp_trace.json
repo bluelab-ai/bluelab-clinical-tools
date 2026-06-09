@@ -1,0 +1,1565 @@
+{
+  "metadata": {
+    "created_at": "2026-06-03T15:49:33",
+    "protocol": "/Users/xulei/项目/sdk测试/backend/data/workspaces/user_cxx/0529-cxx/奇致-皮秒激光治疗机-临床试验方案-雀斑-V1.1-20240902-定稿new.docx",
+    "dm_log": "/Users/xulei/项目/sdk测试/backend/data/workspaces/user_cxx/0529-cxx/dm-log.json",
+    "template": "/Users/xulei/项目/sdk测试/backend/../.claude/skills/protocol-to-dmp/assets/DMP-登记系统.docx",
+    "selected_template_name": "DMP-登记系统.docx",
+    "template_selection": {
+      "decision": "registry",
+      "selected_template_name": "DMP-登记系统.docx",
+      "是否使用随机系统": "否",
+      "是否使用登记系统": "是",
+      "evidence": [
+        "DM日志字段 `是否使用随机系统`: 否",
+        "DM日志字段 `是否使用登记系统`: 是"
+      ]
+    },
+    "checklist": "/Users/xulei/项目/sdk测试/backend/../.claude/skills/protocol-to-dmp/assets/DMP非固定内容清单.xlsx",
+    "checklist_rows": 49,
+    "protected_table_like_sections": [
+      "9",
+      "15.2",
+      "26.1",
+      "27.1",
+      "27.2",
+      "27.3",
+      "29"
+    ],
+    "version_records": [
+      {
+        "版本号": "V1.0",
+        "版本日期": "2025-12-05",
+        "撰写者/修订者": "张三",
+        "版本修订内容": "初稿"
+      },
+      {
+        "版本号": "V2.0",
+        "版本日期": "2026-05-10",
+        "撰写者/修订者": "张三",
+        "版本修订内容": "根据方案V1.4 更新：将数据采集方式由PDC改为EDC"
+      },
+      {
+        "版本号": "V3.0",
+        "版本日期": "2025-12-05",
+        "撰写者/修订者": "张三",
+        "版本修订内容": "初版"
+      },
+      {
+        "版本号": "V1.0",
+        "版本日期": "2025-12-05",
+        "撰写者/修订者": "张三",
+        "版本修订内容": "初版"
+      }
+    ],
+    "dm_entry_count": 4,
+    "signature_signers": {
+      "writer": "张三",
+      "reviewers": {
+        "key 1": {
+          "role": "数据管理单位审核人",
+          "name": "李四"
+        },
+        "key 2": {
+          "role": "申办者审核人",
+          "name": "王五"
+        },
+        "key 3": {
+          "role": "CRO审核人",
+          "name": "赵六"
+        },
+        "key 4": {
+          "role": "统计分析单位审核人",
+          "name": "陈七"
+        }
+      },
+      "raw": {
+        "数据管理单位审核人": "李四",
+        "申办者审核人": "王五",
+        "CRO审核人": "赵六",
+        "统计分析单位审核人": "陈七",
+        "撰写人": "张三"
+      }
+    }
+  },
+  "items": [
+    {
+      "seq": 1,
+      "key": "DMP版本号",
+      "section": "封面 / 页眉/ 签署页",
+      "topic": "基础项目信息",
+      "item": "DMP版本号",
+      "granularity": "字段填充",
+      "rule": "按项目实际DMP版本填写；后续页眉/签署页引用同一字段。",
+      "required_content": "V0.1/V1.0/V1.1等",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "V1.0",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `DMP版本号`: V1.0"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 2,
+      "key": "DMP版本日期",
+      "section": "封面 / 页眉/ 签署页",
+      "topic": "基础项目信息",
+      "item": "DMP版本日期",
+      "granularity": "字段填充",
+      "rule": "按项目实际DMP版本日期填写；后续页眉/签署页引用同一字段。",
+      "required_content": "DMP日期",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "2025-12-05",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `DMP版本日期`: 2025-12-05"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 3,
+      "key": "临床试验方案名称",
+      "section": "封面 / 页眉 / 签署页",
+      "topic": "基础项目信息",
+      "item": "临床试验方案名称",
+      "granularity": "字段填充",
+      "rule": "从方案封面或正式方案信息填入，全文多处引用。",
+      "required_content": "方案全称",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "一项前瞻性、多中心、随机、盲法评价、半面对照、非劣效临床试验，评估532nm Nd:YAG皮秒激光治疗机治疗表皮色素增加性皮肤病的安全性和有效性",
+      "source_used": "方案",
+      "evidence": [
+        "[表3 行1] 试验名称 | 一项前瞻性、多中心、随机、盲法评价、半面对照、非劣效临床试验，评估532nm Nd:YAG皮秒激光治疗机治疗表皮色素增加性皮肤病的安全性和有效性"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "protocol_literal"
+      }
+    },
+    {
+      "seq": 4,
+      "key": "方案编号",
+      "section": "封面 / 页眉",
+      "topic": "基础项目信息",
+      "item": "方案编号",
+      "granularity": "字段填充",
+      "rule": "从正式方案信息填入，全文多处引用。",
+      "required_content": "方案编号",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "ML-3050PS-CIP-01",
+      "source_used": "方案",
+      "evidence": [
+        "方案编号：ML-3050PS-CIP-01 一项前瞻性、多中心、随机、盲法评价、半面对照、非劣效临床试验，评估532nm Nd:YAG皮秒激光治疗机治疗表皮色素增加性皮肤病的安全性和有效性 目录 缩略词表5 方案摘要6 1申办者信息9 1.1 申办者名称9 1.2 申办者地址9 1.3 申办者联系方式9 2临床试验机构和主要研究者信息9 3临床试验的背景资料9"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "protocol_literal"
+      }
+    },
+    {
+      "seq": 5,
+      "key": "方案版本号",
+      "section": "封面",
+      "topic": "基础项目信息",
+      "item": "方案版本号",
+      "granularity": "字段填充",
+      "rule": "从正式方案信息填入。",
+      "required_content": "方案版本号",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "V1.1",
+      "source_used": "方案",
+      "evidence": [
+        "AG皮秒激光治疗机 [表1 行2] 型号规格： | ML-3050PS [表1 行3] 需进行临床试验审批的第三类医疗器械： | 是□ 否☒ [表1 行4] 方案版本号和日期： | V1.1，2024年9月2日 [表1 行5] 临床试验组长单位/协调研究者： | 上海交通大学医学院附属第九人民医院/林晓曦中国医学科学院皮肤病医院/林彤 [表1 行6] 临床试验机构/主要研究者： | 详见单独的临床试验机构和主要研究者列表 [表1 行7] 申办者： | 武汉奇致激光技术股份有限公司 [表2 行1] 英文 |"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 6,
+      "key": "方案版本日期",
+      "section": "封面",
+      "topic": "基础项目信息",
+      "item": "方案版本日期",
+      "granularity": "字段填充",
+      "rule": "从正式方案信息填入。",
+      "required_content": "方案日期",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "2024-09-02",
+      "source_used": "方案",
+      "evidence": [
+        "1 行2] 型号规格： | ML-3050PS [表1 行3] 需进行临床试验审批的第三类医疗器械： | 是□ 否☒ [表1 行4] 方案版本号和日期： | V1.1，2024年9月2日 [表1 行5] 临床试验组长单位/协调研究者： | 上海交通大学医学院附属第九人民医院/林晓曦中国医学科学院皮肤病医院/林彤 [表1 行6] 临床试验机构/主要研究者： | 详见单独的临床试验机构和主要研究者列表 [表1 行7] 申办者： | 武汉奇致激光技术股份有限公司 [表2 行1] 英文 | 中文 [表2 行2"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 7,
+      "key": "申办者名称",
+      "section": "封面 / 页眉 / 签署页",
+      "topic": "机构信息",
+      "item": "申办者名称",
+      "granularity": "字段填充",
+      "rule": "按项目实际申办者填写，全文多处引用。",
+      "required_content": "申办者名称",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "武汉奇致激光技术股份有限公司",
+      "source_used": "方案",
+      "evidence": [
+        "[表1 行7] 申办者： | 武汉奇致激光技术股份有限公司"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "protocol_literal"
+      }
+    },
+    {
+      "seq": 8,
+      "key": "临床监查方名称",
+      "section": "封面 / 签署页 / 6 项目人员职责",
+      "topic": "机构信息",
+      "item": "临床监查方名称",
+      "granularity": "字段填充",
+      "rule": "按项目实际临床监查方/CRO填写；没有独立监查方时需确认写法。",
+      "required_content": "临床监查方名称",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "泰格医药科技有限公司",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `临床监查方名称`: 泰格医药科技有限公司"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 9,
+      "key": "统计分析单位名称",
+      "section": "封面 / 页眉 / 签署页",
+      "topic": "机构信息",
+      "item": "统计分析单位名称",
+      "granularity": "字段填充",
+      "rule": "按项目实际统计分析单位填写；",
+      "required_content": "统计分析单位名称",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "北大临床研究所",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `统计分析方名称`: 北大临床研究所"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 10,
+      "key": "版本修订记录",
+      "section": "版本修订记录",
+      "topic": "版本管理",
+      "item": "版本修订记录",
+      "granularity": "字段填充",
+      "rule": "初版通常写新版；修订版需写清修订内容。",
+      "required_content": "修订内容",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "初版",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `版本修订记录`: 初版"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 11,
+      "key": "版本号",
+      "section": "版本修订记录",
+      "topic": "版本管理",
+      "item": "版本号",
+      "granularity": "字段填充",
+      "rule": "按项目实际DMP版本填写；",
+      "required_content": "撰写/修订者",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "V1.0",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `DMP版本号`: V1.0"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 12,
+      "key": "版本日期",
+      "section": "版本修订记录",
+      "topic": "版本管理",
+      "item": "版本日期",
+      "granularity": "字段填充",
+      "rule": "按项目实际DMP版本日期填写；",
+      "required_content": "V0.1/V1.0/V1.1等",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "2025-12-05",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `DMP版本日期`: 2025-12-05"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 13,
+      "key": "撰写者修订者",
+      "section": "版本修订记录",
+      "topic": "版本管理",
+      "item": "撰写者修订者",
+      "granularity": "字段填充",
+      "rule": "按项目实际DMP撰写者填写；",
+      "required_content": "撰写/修订者",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "张三",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `撰写者/修订者`: 张三"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 14,
+      "key": "签署页配置",
+      "section": "签署页",
+      "topic": "签署信息",
+      "item": "签署页配置",
+      "granularity": "字段填充",
+      "rule": "填写DM日志中的\"撰写者/修订者\"；",
+      "required_content": "撰写人",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "张三",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `撰写者/修订者`: 张三"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 15,
+      "key": "页眉",
+      "section": "页眉",
+      "topic": "页眉",
+      "item": "页眉",
+      "granularity": "字段填充",
+      "rule": "根据项目填写申办者、方案编号、DMP版本号、DMP版本日期",
+      "required_content": "根据项目填写申办者、方案编号、版本号、版本日期",
+      "source_type": "方案+DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "武汉奇致激光技术股份有限公司，ML-3050PS-CIP-01",
+      "source_used": "方案",
+      "evidence": [
+        "[表1 行7] 申办者： | 武汉奇致激光技术股份有限公司",
+        "方案编号：ML-3050PS-CIP-01 一项前瞻性、多中心、随机、盲法评价、半面对照、非劣效临床试验，评估532nm Nd:YAG皮秒激光治疗机治疗表皮色素增加性皮肤病的安全性和有效性 目录 缩略词表5 方案摘要6 1申办者信息9 1.1 申办者名称9 1.2 申办者地址9 1.3 申办者联系方式9 2临床试验机构和主要研究者信息9 3临床试验的背景资料9"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 85,
+        "completeness": 80,
+        "hallucination_risk": 5,
+        "overall_confidence": 86,
+        "extraction_method": "combined_fields"
+      }
+    },
+    {
+      "seq": 16,
+      "key": "研究名称",
+      "section": "3 试验概述",
+      "topic": "试验概述表",
+      "item": "研究名称",
+      "granularity": "字段填充",
+      "rule": "从方案中方案摘要区域抽取研究名称。",
+      "required_content": "研究名称",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "一项前瞻性、多中心、随机、盲法评价、半面对照、非劣效临床试验，评估532nm Nd:YAG皮秒激光治疗机治疗表皮色素增加性皮肤病的安全性和有效性",
+      "source_used": "方案",
+      "evidence": [
+        "[表3 行1] 试验名称 | 一项前瞻性、多中心、随机、盲法评价、半面对照、非劣效临床试验，评估532nm Nd:YAG皮秒激光治疗机治疗表皮色素增加性皮肤病的安全性和有效性"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 17,
+      "key": "研究设计",
+      "section": "3 试验概述",
+      "topic": "试验概述表",
+      "item": "研究设计",
+      "granularity": "字段填充",
+      "rule": "从方案中方案摘要区域抽取研究设计，如随机、盲法、多中心、平行对照、单臂等。",
+      "required_content": "研究设计",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "本试验为前瞻性、多中心、随机、盲法评价、半面对照、非劣效的临床试验。",
+      "source_used": "方案 + LLM语义审核 + few-shot格式化",
+      "evidence": [
+        "[表3 行7] 试验设计 | 本临床试验采用前瞻性、多中心、随机、盲法评价、半面对照、非劣效临床试验设计，计划入组89例符合要求的受试者，预期在经皮秒激光治疗后，试验器械的治疗有效率非劣于对照器械。所有入选本试验的受试者，选择两侧面部基本对称的区域作为目标治疗区域，通过1:1随机化分组来决定两侧面部接受的治疗。随机结果为左侧试验器械+右侧对照器械，或左侧对照器械+右侧试验器械。治疗顺序统一规定为从左侧面部开始。试验器械为武汉奇致激光技术股份有限公司生产的532nm Nd:YAG皮秒激光治疗机，对照器械为Candela Corporation生产的PicoWay® Nd:YAG皮秒激光治疗仪，所有受试者在经过1次治疗之后，于治疗后4周和8周进行2次随访，对激光治疗的安全有效性进行评价。本试验将收集和分析以下数据：主要有效性评价指标（治疗有效率），次要有效性评价指标【疗效优异率、全局美容效果分级量表（Global Aesthetic Improvement Scale，GAIS）、疼痛评分（visual analog scale，VAS）、受试者满意度】，以及安全性评价指标（激光治疗的不良反应发生率、不良事件和严重不良事件发生率、器械缺陷发生率）。",
+        "LLM语义审核修正: 当前值包含样本量、治疗流程、终点描述等属于其他字段的内容，研究设计应仅描述设计类型本身。",
+        "修正前值: 本临床试验采用前瞻性、多中心、随机、盲法评价、半面对照、非劣效临床试验设计，计划入组89例符合要求的受试者，预期在经皮秒激光治疗后，试验器械的治疗有效率非劣于对照器械。所有入选本试验的受试者，选择两侧面部基本对称的区域作为目标治疗区域，通过1:1随机化分组来决定两侧面部接受的治疗。随机结果为左侧试验器械+右侧对照器械，或左侧对照器械+右侧试验器械。治疗顺序统一规定为从左侧面部开始。试验器械为武汉奇致激光技术股份有限公司生产的532nm Nd:YAG皮秒激光治疗机，对照器械为Candela Corporation生产的PicoWay® Nd:YAG皮秒激光治疗仪，所有受试者在经过1次治疗之后，于治疗后4周和8周进行2次随访，对激光治疗的安全有效性进行评价。本试验将收集和分析以下数据：主要有效性评价指标（治疗有效率），次要有效性评价指标【疗效优异率、全局美容效果分级量表（Global Aesthetic Improvement Scale，GAIS）、疼痛评分（visual analog scale，VAS）、受试者满意度】，以及安全性评价指标（激光治疗的不良反应发生率、不良事件和严重不良事件发生率、器械缺陷发生率）。",
+        "few-shot格式化: 参照few-shot示例的简洁单句格式，去除冗余信息。",
+        "格式化前值: 本临床试验采用前瞻性、多中心、随机、盲法评价、半面对照、非劣效临床试验设计。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 18,
+      "key": "研究目的",
+      "section": "3 试验概述",
+      "topic": "试验概述表",
+      "item": "研究目的",
+      "granularity": "字段填充",
+      "rule": "从方案中方案摘要区域抽取主要/次要研究目的。",
+      "required_content": "研究目的",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "评价武汉奇致激光技术股份有限公司生产的532nm Nd:YAG皮秒激光治疗机治疗表皮色素增加性皮肤病的安全性和有效性",
+      "source_used": "方案",
+      "evidence": [
+        "[表3 行6] 试验目的 | 评价武汉奇致激光技术股份有限公司生产的532nm Nd:YAG皮秒激光治疗机治疗表皮色素增加性皮肤病的安全性和有效性"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 19,
+      "key": "样本量",
+      "section": "3 试验概述",
+      "topic": "试验概述表",
+      "item": "样本量",
+      "granularity": "字段填充",
+      "rule": "从方案中方案摘要区域抽取计划入组例数。",
+      "required_content": "样本量",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "结合主要评价终点（治疗有效率）、既往研究数据及临床实际开展条件，同时考虑受试者脱落等因素，最终确定本试验共需纳入受试者89例。",
+      "source_used": "方案 + few-shot格式化",
+      "evidence": [
+        "之间的差异。 试验设计 总体设计及确定依据 本次临床试验采用前瞻性、多中心、半面对照、盲法评价、非劣效试验设计，预期试验器械的治疗有效率非劣于对照器械。 本试验计划入组89例符合要求的受试者，选择两侧面部基本对称的区域作为目标治疗区域，通过1:1随机化分组来决定两侧面部接受的治疗。随机结果为左侧试验器械+右侧对照器械，或左侧对照器械+右侧试验器械。试验器械为武汉奇致激光技术股份有限公司生产的532nm Nd:YAG皮秒激光治疗机，对照器械为Candela Corporation生产的PicoWay® Nd",
+        "few-shot格式化: 参照few-shot示例的模板句式，包含样本量推导逻辑和最终数值。",
+        "格式化前值: 89例符合要求的受试者"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 20,
+      "key": "主要有效性终点",
+      "section": "3 试验概述",
+      "topic": "试验概述表",
+      "item": "主要有效性终点",
+      "granularity": "字段填充",
+      "rule": "从方案中方案摘要区域抽取主要有效性终点。",
+      "required_content": "主要终点",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "治疗有效率：治疗有效率结果是基于每位受试者色素病变清除率的结果。在此研究中，治疗有效被定义为治疗后8周，受试者色素病变清除率≥50%。因此，器械的治疗有效率为使用此种器械治疗后8周，色素病变清除率≥50%的受试者占比，计算公式为：治疗有效率=色素病变清除率≥50%的受试者例数/受试者例数×100%。",
+      "source_used": "方案 + LLM语义审核",
+      "evidence": [
+        "本试验总样本量的计算基于主要终点指标：器械的治疗有效率。",
+        "[表3 行10] 主要有效性终点 | 治疗有效率治疗有效率结果是基于每位受试者色素病变清除率的结果。在此研究中，治疗有效被定义为治疗后8周，受试者色素病变清除率≥50%。因此，器械的治疗有效率为使用此种器械治疗后8周，色素病变清除率≥50%的受试者占比，计算公式为：治疗有效率=色素病变清除率≥50%的受试者例数受试者例数×100%。",
+        "LLM语义审核修正: 当前值首句来自样本量计算章节而非终点定义。保留方案摘要表3行10的终点定义原文。",
+        "修正前值: 本试验总样本量的计算基于主要终点指标：器械的治疗有效率。\n[表3 行10] 主要有效性终点 | 治疗有效率治疗有效率结果是基于每位受试者色素病变清除率的结果。在此研究中，治疗有效被定义为治疗后8周，受试者色素病变清除率≥50%。因此，器械的治疗有效率为使用此种器械治疗后8周，色素病变清除率≥50%的受试者占比，计算公式为：治疗有效率=色素病变清除率≥50%的受试者例数受试者例数×100%。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 30,
+        "hallucination_risk": 5,
+        "overall_confidence": 62,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 21,
+      "key": "其他终点",
+      "section": "3 试验概述",
+      "topic": "试验概述表",
+      "item": "其他终点",
+      "granularity": "字段填充",
+      "rule": "从方案中方案摘要区域抽取次要终点、安全性终点、探索性终点等。",
+      "required_content": "其他终点",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "次要有效性终点：\n疗效优异率在基线期和治疗后8周，每位受试遵循标准图片采集流程，使用高清图片采集工具采集受试者正位、双侧位45°和双侧位90°的标准化图片。采用盲法评价，由三名不参与研究过程的医学专业人员作为评价者，评价者通过识别并记录治疗前及治疗后的病灶数量来计算清除率。采用三名评价者分别独立评价的方式，最终清除率取三位评价者评价结果的平均值。将治疗后病变数量减少的比例定义为色素病变清除率。具体计算公式为：色素病变清除率=治疗前病变数量-治疗后病变数量治疗前病变数量×100%。之后，基于上述公式计算出的结果，评价者将赋予其不同的分值：4分：75%-100%，显效3分：50%-74%，有效2分：25%-49%，无效1分：＜25%，无效疗效优异结果是基于每位受试者色素病变清除率的结果。在此研究中，疗效优异被定义为受试者色素病变清除率≥75%。因此，器械的疗效优异率为使用此种器械色素病变清除率≥75%（或达到4分）的受试者占比。全局美容效果分级量表（GAIS）治疗后8周，采用盲法评价，采用两名评价者分别独立评价的方式，如果两名评价者的结果不一致，则引入第三名评价者，进行最终判定。此评分采用5分法，具体评分标准如下：5分：明显改善4分：中度改善3分：轻度改善2分：没变化1分：恶化疼痛评分（VAS）每位受试者在完成一侧面部治疗后，即刻采用视觉模拟评分量表对自身感受到的疼痛进行评价。分值范围为0-100分。0分定义为无痛，100分定义为受试者能想象到的最大程度的疼痛。受试者满意度在治疗后8周，由受试者分别对面部两侧治疗效果的满意度进行评价。评分采用Likert 5分法，具体评分标准如下：5分：很满意4分：满意3分：不置可否2分：不满意1分：很不满意\n安全性终点：\n激光治疗的不良反应发生率注：根据症状持续时间和严重程度来决定与器械的相关性。不良事件（AE）/严重不良事件（SAE）发生率器械缺陷发生率",
+      "source_used": "方案",
+      "evidence": [
+        "[表3 行11] 次要有效性终点 | 疗效优异率在基线期和治疗后8周，每位受试遵循标准图片采集流程，使用高清图片采集工具采集受试者正位、双侧位45°和双侧位90°的标准化图片。采用盲法评价，由三名不参与研究过程的医学专业人员作为评价者，评价者通过识别并记录治疗前及治疗后的病灶数量来计算清除率。采用三名评价者分别独立评价的方式，最终清除率取三位评价者评价结果的平均值。将治疗后病变数量减少的比例定义为色素病变清除率。具体计算公式为：色素病变清除率=治疗前病变数量-治疗后病变数量治疗前病变数量×100%。之后，基于上述公式计算出的结果，评价者将赋予其不同的分值：4分：75%-100%，显效3分：50%-74%，有效2分：25%-49%，无效1分：＜25%，无效疗效优异结果是基于每位受试者色素病变清除率的结果。在此研究中，疗效优异被定义为受试者色素病变清除率≥75%。因此，器械的疗效优异率为使用此种器械色素病变清除率≥75%（或达到4分）的受试者占比。全局美容效果分级量表（GAIS）治疗后8周，采用盲法评价，采用两名评价者分别独立评价的方式，如果两名评价者的结果不一致，则引入第三名评价者，进行最终判定。此评分采用5分法，具体评分标准如下：5分：明显改善4分：中度改善3分：轻度改善2分：没变化1分：恶化疼痛评分（VAS）每位受试者在完成一侧面部治疗后，即刻采用视觉模拟评分量表对自身感受到的疼痛进行评价。分值范围为0-100分。0分定义为无痛，100分定义为受试者能想象到的最大程度的疼痛。受试者满意度在治疗后8周，由受试者分别对面部两侧治疗效果的满意度进行评价。评分采用Likert 5分法，具体评分标准如下：5分：很满意4分：满意3分：不置可否2分：不满意1分：很不满意",
+        "[表3 行12] 安全性终点 | 激光治疗的不良反应发生率注：根据症状持续时间和严重程度来决定与器械的相关性。不良事件（AE）/严重不良事件（SAE）发生率器械缺陷发生率"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 22,
+      "key": "统计分析人群",
+      "section": "3 试验概述",
+      "topic": "试验概述表",
+      "item": "统计分析人群",
+      "granularity": "字段填充",
+      "rule": "若方案摘要有人群细致描述，则用方案摘要，否则，来自方案的分析数据集章节，把对于人群的叙述全部粘贴。",
+      "required_content": "FAS/PPS/SS的具体描述",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "全分析集（FAS）：按照意向性治疗（Intention To Treat，ITT）原则，包括所有随机化且至少一侧面部接受过一种器械治疗的受试者。\n符合方案集（PPS）：包括FAS中可获得主要有效性评价指标的观察数据、未发生影响主要有效性评价的重大方案偏离的受试者。\n安全性集（SS）：包括所有随机化且至少一侧面部接受过一种器械治疗，至少进行过一次安全性评价的受试者。",
+      "source_used": "方案",
+      "evidence": [
+        "全分析集（FAS）：按照意向性治疗（Intention To Treat，ITT）原则，包括所有随机化且至少一侧面部接受过一种器械治疗的受试者。",
+        "符合方案集（PPS）：包括FAS中可获得主要有效性评价指标的观察数据、未发生影响主要有效性评价的重大方案偏离的受试者。",
+        "安全性集（SS）：包括所有随机化且至少一侧面部接受过一种器械治疗，至少进行过一次安全性评价的受试者。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 23,
+      "key": "项目类型_药物_器械",
+      "section": "2 遵循的法规和支持性文件",
+      "topic": "项目类型",
+      "item": "项目类型：药物 / 器械",
+      "granularity": "统一模板选择",
+      "rule": "只需判断一次：药物项目保留药物项目模板；器械项目保留器械项目模板。",
+      "required_content": "药物/器械",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "器械项目",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `项目类型：药物 / 器械`: 器械项目"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 24,
+      "key": "项目数据采集模式_EDC_PDC",
+      "section": "6 项目人员职责；7.1；10.1；10.2；10.3；12.1-12.3；13；14；15；16；17；18；22；26.1；26.2；",
+      "topic": "EDC/PDC通用选择",
+      "item": "项目数据采集模式：EDC / PDC",
+      "granularity": "统一模板选择",
+      "rule": "只需判断一次：对于有关章节，EDC项目保留EDC模板，PDC项目保留PDC模板；",
+      "required_content": "EDC或PDC",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "PDC",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 25,
+      "key": "EDC系统供应商_系统类型",
+      "section": "7.3；7.5；7.6",
+      "topic": "数据管理系统",
+      "item": "EDC系统供应商/系统类型",
+      "granularity": "统一模板选择",
+      "rule": "仅在EDC项目中判断：按赛美斯、青蜂、里恩、太美V5/V6、易迪希、其他系统等整体选择系统模板。",
+      "required_content": "系统名称、供应商、版本号、服务器地址（如适用）",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "项目数据采集模式：EDC / PDC=EDC",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC",
+        "适用条件 `项目数据采集模式：EDC / PDC=EDC` 不成立：`项目数据采集模式：EDC / PDC` 当前值为 `PDC`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": 26,
+      "key": "随机系统供应商_系统类型",
+      "section": "8.1",
+      "topic": "随机系统",
+      "item": "随机系统供应商/系统类型",
+      "granularity": "统一模板选择",
+      "rule": "仅在使用随机系统时判断：按医墨、易迪希、赛美斯或其他随机系统整体选择模板。",
+      "required_content": "无额外逐项填写",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否使用随机系统=是",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `是否使用随机系统`: 否",
+        "适用条件 `是否使用随机系统=是` 不成立：`是否使用随机系统` 当前值为 `否`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "25.1",
+      "key": "EDC其他系统供应商名称",
+      "section": "7.3；7.5；7.6",
+      "topic": "数据管理系统",
+      "item": "EDC其他系统供应商名称",
+      "granularity": "字段填充",
+      "rule": "当EDC系统供应商/系统类型选择其他系统时，填充7.3“/模板7/其他系统”中的EDC系统供应商公司名称。",
+      "required_content": "其他EDC系统供应商公司名称",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "项目数据采集模式：EDC / PDC=EDC;EDC系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC",
+        "适用条件 `项目数据采集模式：EDC / PDC=EDC` 不成立：`项目数据采集模式：EDC / PDC` 当前值为 `PDC`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "25.2",
+      "key": "EDC其他系统名称",
+      "section": "7.3；7.5；7.6",
+      "topic": "数据管理系统",
+      "item": "EDC其他系统名称",
+      "granularity": "字段填充",
+      "rule": "当EDC系统供应商/系统类型选择其他系统时，填充7.3“/模板7/其他系统”中的EDC系统名称。",
+      "required_content": "其他EDC系统名称",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "项目数据采集模式：EDC / PDC=EDC;EDC系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC",
+        "适用条件 `项目数据采集模式：EDC / PDC=EDC` 不成立：`项目数据采集模式：EDC / PDC` 当前值为 `PDC`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "25.3",
+      "key": "EDC其他系统维护负责方",
+      "section": "7.3；7.5；7.6",
+      "topic": "数据管理系统",
+      "item": "EDC其他系统维护负责方",
+      "granularity": "字段填充",
+      "rule": "当EDC系统供应商/系统类型选择其他系统时，填充7.3“/模板7/其他系统”中的系统维护负责方。",
+      "required_content": "其他EDC系统维护负责方",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "项目数据采集模式：EDC / PDC=EDC;EDC系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC",
+        "适用条件 `项目数据采集模式：EDC / PDC=EDC` 不成立：`项目数据采集模式：EDC / PDC` 当前值为 `PDC`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "25.4",
+      "key": "EDC其他系统版本号",
+      "section": "7.3；7.5；7.6",
+      "topic": "数据管理系统",
+      "item": "EDC其他系统版本号",
+      "granularity": "字段填充",
+      "rule": "当EDC系统供应商/系统类型选择其他系统时，填充7.3“/模板7/其他系统”中的EDC版本号。",
+      "required_content": "其他EDC系统版本号",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "项目数据采集模式：EDC / PDC=EDC;EDC系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC",
+        "适用条件 `项目数据采集模式：EDC / PDC=EDC` 不成立：`项目数据采集模式：EDC / PDC` 当前值为 `PDC`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "25.5",
+      "key": "EDC其他系统服务器地址",
+      "section": "7.3；7.5；7.6",
+      "topic": "数据管理系统",
+      "item": "EDC其他系统服务器地址",
+      "granularity": "字段填充",
+      "rule": "当EDC系统供应商/系统类型选择其他系统时，填充7.3“/模板7/其他系统”中的服务器地址。",
+      "required_content": "其他EDC系统服务器地址",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "项目数据采集模式：EDC / PDC=EDC;EDC系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC",
+        "适用条件 `项目数据采集模式：EDC / PDC=EDC` 不成立：`项目数据采集模式：EDC / PDC` 当前值为 `PDC`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "26.1",
+      "key": "随机其他系统供应商名称",
+      "section": "8.1",
+      "topic": "随机系统",
+      "item": "随机其他系统供应商名称",
+      "granularity": "字段填充",
+      "rule": "当随机系统供应商/系统类型选择其他随机系统时，填充8.1“/模板4/其他随机系统”中的随机系统供应商公司名称。",
+      "required_content": "其他随机系统供应商公司名称",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否使用随机系统=是;随机系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `是否使用随机系统`: 否",
+        "适用条件 `是否使用随机系统=是` 不成立：`是否使用随机系统` 当前值为 `否`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "26.2",
+      "key": "随机其他系统搭建负责方",
+      "section": "8.1",
+      "topic": "随机系统",
+      "item": "随机其他系统搭建负责方",
+      "granularity": "字段填充",
+      "rule": "当随机系统供应商/系统类型选择其他随机系统时，填充8.1“/模板4/其他随机系统”中的系统搭建负责方。",
+      "required_content": "其他随机系统搭建负责方",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否使用随机系统=是;随机系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `是否使用随机系统`: 否",
+        "适用条件 `是否使用随机系统=是` 不成立：`是否使用随机系统` 当前值为 `否`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "26.3",
+      "key": "随机其他系统维护负责方",
+      "section": "8.1",
+      "topic": "随机系统",
+      "item": "随机其他系统维护负责方",
+      "granularity": "字段填充",
+      "rule": "当随机系统供应商/系统类型选择其他随机系统时，填充8.1“/模板4/其他随机系统”中的系统维护负责方。",
+      "required_content": "其他随机系统维护负责方",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否使用随机系统=是;随机系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `是否使用随机系统`: 否",
+        "适用条件 `是否使用随机系统=是` 不成立：`是否使用随机系统` 当前值为 `否`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "26.4",
+      "key": "随机其他系统版本号",
+      "section": "8.1",
+      "topic": "随机系统",
+      "item": "随机其他系统版本号",
+      "granularity": "字段填充",
+      "rule": "当随机系统供应商/系统类型选择其他随机系统时，填充8.1“/模板4/其他随机系统”中的随机系统版本号。",
+      "required_content": "其他随机系统版本号",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否使用随机系统=是;随机系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `是否使用随机系统`: 否",
+        "适用条件 `是否使用随机系统=是` 不成立：`是否使用随机系统` 当前值为 `否`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "26.5",
+      "key": "随机其他系统服务器地址",
+      "section": "8.1",
+      "topic": "随机系统",
+      "item": "随机其他系统服务器地址",
+      "granularity": "字段填充",
+      "rule": "当随机系统供应商/系统类型选择其他随机系统时，填充8.1“/模板4/其他随机系统”中的服务器地址。",
+      "required_content": "其他随机系统服务器地址",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否使用随机系统=是;随机系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `是否使用随机系统`: 否",
+        "适用条件 `是否使用随机系统=是` 不成立：`是否使用随机系统` 当前值为 `否`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": 27,
+      "key": "数据录入和质疑模板",
+      "section": "17 数据录入；18 数据质疑",
+      "topic": "录入/质疑",
+      "item": "数据录入和质疑模板",
+      "granularity": "统一模板选择",
+      "rule": "随EDC/PDC自动选择整段模板；不要逐条确认PDC双人双遍录入、EDC研究者/CRC录入、质疑角色等默认内容。",
+      "required_content": "无额外逐项填写",
+      "source_type": "",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "PDC模板",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 70,
+        "completeness": 65,
+        "hallucination_risk": 5,
+        "overall_confidence": 76,
+        "extraction_method": "derived"
+      }
+    },
+    {
+      "seq": 28,
+      "key": "是否涉及外部数据",
+      "section": "6 项目人员职责；19；25.2；26.1；27；29；30；31",
+      "topic": "外部数据",
+      "item": "是否涉及外部数据",
+      "granularity": "统一模板选择",
+      "rule": "只需判断一次：若涉及外部数据，相关章节保留外部数据内容；若不涉及，相关章节写不适用/删除对应角色和文件。",
+      "required_content": "是/否",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "是",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `是否涉及外部数据`: 是"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 29,
+      "key": "设计的外部数据类型",
+      "section": "19 外部数据管理",
+      "topic": "外部数据",
+      "item": "设计的外部数据类型",
+      "granularity": "字段填充",
+      "rule": "填写本项目涉及的外部数据类型，如核心实验室等。",
+      "required_content": "外部数据类型",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否涉及外部数据=是",
+      "status": "filled",
+      "value": "中心实验室电子化数据（Central Lab Data）、中心阅片数据（Imaging Data）",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `设计的外部数据类型`: 中心实验室电子化数据（Central Lab Data）、中心阅片数据（Imaging Data）"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 30,
+      "key": "是否涉及医学编码",
+      "section": "20 医学编码",
+      "topic": "医学编码",
+      "item": "是否涉及医学编码",
+      "granularity": "字段填充",
+      "rule": "只需判断一次：若涉及医学编码，相关章节保留外部数据内容；若不涉及，相关章节写不适用/删除对应角色和文件。",
+      "required_content": "编码表单",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "否",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `是否涉及医学编码`: 否"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 31,
+      "key": "是否涉及针对有药物警戒系统的项目",
+      "section": "21 SAE一致性核查",
+      "topic": "SAE一致性核查",
+      "item": "是否涉及针对有药物警戒系统的项目",
+      "granularity": "统一模板选择",
+      "rule": "只需判断一次：涉及针对有药物警戒系统的项目则选模板1；否则选模板2；",
+      "required_content": "是/否",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "否",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `是否涉及针对有药物警戒系统的项目`: 否"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 32,
+      "key": "是否有阶段性分析_中期分析",
+      "section": "25；27.2；相关锁库/递交条件",
+      "topic": "阶段性分析",
+      "item": "是否有阶段性分析/中期分析",
+      "granularity": "统一模板选择",
+      "rule": "只需判断一次：有阶段性分析则保留第25章和27.2相关递交内容；无则删除或写不适用。",
+      "required_content": "是/否",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "否",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `是否有阶段性分析/中期分析`: 否"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 33,
+      "key": "阶段性分析目的和阶段要求",
+      "section": "25.1 目的及阶段",
+      "topic": "阶段性分析",
+      "item": "阶段性分析目的和阶段要求",
+      "granularity": "字段填充",
+      "rule": "有阶段性分析时填写方案或项目约定的目的、阶段、触发条件。",
+      "required_content": "目的、阶段、触发时间点",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否有阶段性分析/中期分析=是",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `是否有阶段性分析/中期分析`: 否",
+        "适用条件 `是否有阶段性分析/中期分析=是` 不成立：`是否有阶段性分析/中期分析` 当前值为 `否`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": 34,
+      "key": "是否需要数据管理报告",
+      "section": "28 数据管理报告",
+      "topic": "数据管理报告",
+      "item": "是否需要数据管理报告",
+      "granularity": "适用性判断",
+      "rule": "根据有无此服务范围判断使用模板1还是模板2",
+      "required_content": "是/否",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "是",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `是否需要数据管理报告`: 是"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 35,
+      "key": "是否包含向申办者数据递交服务范围",
+      "section": "29 向申办者数据递交",
+      "topic": "向申办者递交",
+      "item": "是否包含向申办者数据递交服务范围",
+      "granularity": "统一模板选择",
+      "rule": "只需判断一次：有该服务范围则保留适用模板；无则使用不适用模板。",
+      "required_content": "是/否",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "是",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `是否包含向申办者数据递交服务范围`: 是"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 36,
+      "key": "项目质量控制等级_模板",
+      "section": "31 数据质量控制",
+      "topic": "质量控制",
+      "item": "项目质量控制等级/模板",
+      "granularity": "统一模板选择",
+      "rule": "判断项目是高标准/低标准；整体选择数据质量控制模板。",
+      "required_content": "高标准/低标准",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "高标准项目",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `项目质量控制等级/模板`: 高标准项目"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 37,
+      "key": "AI可自动判断的项目特征",
+      "section": "全文",
+      "topic": "AI判断辅助",
+      "item": "AI可自动判断的项目特征",
+      "granularity": "AI判断",
+      "rule": "AI可基于方案初步判断项目类型、是否随机、是否盲法、是否有阶段性分析、是否涉及外部数据/药物警戒/医学编码，但需输出证据和待确认项。",
+      "required_content": "AI判断结果+证据摘录",
+      "source_type": "",
+      "missing_handling": "NA",
+      "applicability_condition": "",
+      "status": "qc_rule",
+      "value": null,
+      "source_used": "QC规则",
+      "evidence": [],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 50,
+        "completeness": 85,
+        "hallucination_risk": 20,
+        "overall_confidence": 71,
+        "extraction_method": "search"
+      }
+    },
+    {
+      "seq": 38,
+      "key": "方案与DM日志信息冲突",
+      "section": "全文",
+      "topic": "冲突处理",
+      "item": "方案与DM日志信息冲突",
+      "granularity": "质控规则",
+      "rule": "如方案和DM日志冲突，不自动覆盖；列入冲突清单，由DM确认。",
+      "required_content": "冲突字段、两个来源的原文",
+      "source_type": "",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "qc_rule",
+      "value": null,
+      "source_used": "QC规则",
+      "evidence": [],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 50,
+        "completeness": 85,
+        "hallucination_risk": 20,
+        "overall_confidence": 71,
+        "extraction_method": "search"
+      }
+    },
+    {
+      "seq": 39,
+      "key": "方案和DM日志均未提供的信息",
+      "section": "全文",
+      "topic": "缺失处理",
+      "item": "方案和DM日志均未提供的信息",
+      "granularity": "质控规则",
+      "rule": "不得编造；按缺失时处理列输出待确认、使用模板默认值或写NA。",
+      "required_content": "缺失字段清单",
+      "source_type": "",
+      "missing_handling": "NA",
+      "applicability_condition": "",
+      "status": "qc_rule",
+      "value": null,
+      "source_used": "QC规则",
+      "evidence": [],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 50,
+        "completeness": 85,
+        "hallucination_risk": 20,
+        "overall_confidence": 71,
+        "extraction_method": "search"
+      }
+    }
+  ],
+  "dm_log_keys": [
+    "CRO审核人",
+    "DMP版本号",
+    "DMP版本日期",
+    "EDC系统供应商/系统类型",
+    "[0].CRO审核人",
+    "[0].DMP版本号",
+    "[0].DMP版本日期",
+    "[0].临床监查方名称",
+    "[0].撰写者/修订者",
+    "[0].数据管理单位审核人",
+    "[0].是否使用登记系统",
+    "[0].是否使用随机系统",
+    "[0].是否包含向申办者数据递交服务范围",
+    "[0].是否有阶段性分析/中期分析",
+    "[0].是否涉及医学编码",
+    "[0].是否涉及外部数据",
+    "[0].是否涉及针对有药物警戒系统的项目",
+    "[0].是否需要数据管理报告",
+    "[0].是否需要预递交",
+    "[0].版本修订记录",
+    "[0].申办者审核人",
+    "[0].统计分析单位审核人",
+    "[0].统计分析方名称",
+    "[0].设计的外部数据类型",
+    "[0].项目数据采集模式：EDC / PDC",
+    "[0].项目类型：药物 / 器械",
+    "[0].项目质量控制等级/模板",
+    "[1].CRO审核人",
+    "[1].DMP版本号",
+    "[1].DMP版本日期",
+    "[1].EDC系统供应商/系统类型",
+    "[1].临床监查方名称",
+    "[1].撰写者/修订者",
+    "[1].数据管理单位审核人",
+    "[1].是否使用登记系统",
+    "[1].是否使用随机系统",
+    "[1].是否包含向申办者数据递交服务范围",
+    "[1].是否有阶段性分析/中期分析",
+    "[1].是否涉及医学编码",
+    "[1].是否涉及外部数据",
+    "[1].是否涉及针对有药物警戒系统的项目",
+    "[1].是否需要数据管理报告",
+    "[1].是否需要预递交",
+    "[1].版本修订记录",
+    "[1].申办者审核人",
+    "[1].统计分析单位审核人",
+    "[1].统计分析方名称",
+    "[1].设计的外部数据类型",
+    "[1].项目数据采集模式：EDC / PDC",
+    "[1].项目类型：药物 / 器械",
+    "[1].项目质量控制等级/模板",
+    "[2].CRO审核人",
+    "[2].DMP版本号",
+    "[2].DMP版本日期",
+    "[2].EDC系统供应商/系统类型",
+    "[2].临床监查方名称",
+    "[2].撰写者/修订者",
+    "[2].数据管理单位审核人",
+    "[2].是否使用登记系统",
+    "[2].是否使用随机系统",
+    "[2].是否包含向申办者数据递交服务范围",
+    "[2].是否有阶段性分析/中期分析",
+    "[2].是否涉及医学编码",
+    "[2].是否涉及外部数据",
+    "[2].是否涉及针对有药物警戒系统的项目",
+    "[2].是否需要数据管理报告",
+    "[2].是否需要预递交",
+    "[2].版本修订记录",
+    "[2].申办者审核人",
+    "[2].统计分析单位审核人",
+    "[2].统计分析方名称",
+    "[2].设计的外部数据类型",
+    "[2].项目数据采集模式：EDC / PDC",
+    "[2].项目类型：药物 / 器械",
+    "[2].项目质量控制等级/模板",
+    "[3].CRO审核人",
+    "[3].DMP版本号",
+    "[3].DMP版本日期",
+    "[3].临床监查方名称",
+    "[3].撰写人",
+    "[3].撰写者/修订者",
+    "[3].数据管理单位审核人",
+    "[3].是否使用登记系统",
+    "[3].是否使用随机系统",
+    "[3].是否包含向申办者数据递交服务范围",
+    "[3].是否有阶段性分析/中期分析",
+    "[3].是否涉及医学编码",
+    "[3].是否涉及外部数据",
+    "[3].是否涉及针对有药物警戒系统的项目",
+    "[3].是否需要数据管理报告",
+    "[3].是否需要预递交",
+    "[3].版本修订记录",
+    "[3].申办者审核人",
+    "[3].统计分析单位审核人",
+    "[3].统计分析方名称",
+    "[3].设计的外部数据类型",
+    "[3].项目数据采集模式：EDC / PDC",
+    "[3].项目类型：药物 / 器械",
+    "[3].项目质量控制等级/模板",
+    "临床监查方名称",
+    "撰写人",
+    "撰写者/修订者",
+    "数据管理单位审核人",
+    "是否使用登记系统",
+    "是否使用随机系统",
+    "是否包含向申办者数据递交服务范围",
+    "是否有阶段性分析/中期分析",
+    "是否涉及医学编码",
+    "是否涉及外部数据",
+    "是否涉及针对有药物警戒系统的项目",
+    "是否需要数据管理报告",
+    "是否需要预递交",
+    "版本修订记录",
+    "申办者审核人",
+    "统计分析单位审核人",
+    "统计分析方名称",
+    "设计的外部数据类型",
+    "项目数据采集模式：EDC / PDC",
+    "项目类型：药物 / 器械",
+    "项目质量控制等级/模板"
+  ]
+}

@@ -1,0 +1,80 @@
+<h2>动画体系 — Fluid Storytelling</h2>
+<p class="subtitle">有节奏的入场、方向性的过渡、弹性缓动。以下为全局可复用的动画定义</p>
+
+<div class="section">
+  <h3>缓动曲线</h3>
+  <div style="display:flex;gap:16px;max-width:700px;">
+    <div style="flex:1;background:#121216;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px;">
+      <code style="font-size:12px;color:#c4b5fd;">ease-out</code>
+      <p style="font-size:12px;color:#a1a1aa;margin-top:4px;">入场动画<br>cubic-bezier(0.16, 1, 0.3, 1)</p>
+    </div>
+    <div style="flex:1;background:#121216;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px;">
+      <code style="font-size:12px;color:#c4b5fd;">ease-spring</code>
+      <p style="font-size:12px;color:#a1a1aa;margin-top:4px;">弹性反馈<br>cubic-bezier(0.34, 1.56, 0.64, 1)</p>
+    </div>
+    <div style="flex:1;background:#121216;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px;">
+      <code style="font-size:12px;color:#c4b5fd;">ease-in-out</code>
+      <p style="font-size:12px;color:#a1a1aa;margin-top:4px;">状态切换<br>cubic-bezier(0.65, 0, 0.35, 1) — 默认</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:28px;">
+  <h3>入场动画 — 按方向叙事</h3>
+  <div style="display:flex;flex-direction:column;gap:10px;max-width:700px;">
+    <div style="display:flex;align-items:center;gap:12px;background:#121216;border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:12px 16px;">
+      <span style="font-size:12px;font-weight:600;color:#a78bfa;min-width:100px;">fade-in-up</span>
+      <span style="font-size:12px;color:#a1a1aa;">透明度 0→1 + translateY(12px→0)</span>
+      <span style="font-size:11px;color:#71717a;margin-left:auto;">消息入场</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;background:#121216;border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:12px 16px;">
+      <span style="font-size:12px;font-weight:600;color:#a78bfa;min-width:100px;">fade-in-right</span>
+      <span style="font-size:12px;color:#a1a1aa;">透明度 0→1 + translateX(16px→0)</span>
+      <span style="font-size:11px;color:#71717a;margin-left:auto;">面板滑入</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;background:#121216;border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:12px 16px;">
+      <span style="font-size:12px;font-weight:600;color:#a78bfa;min-width:100px;">scale-in</span>
+      <span style="font-size:12px;color:#a1a1aa;">透明度 0→1 + scale(0.95→1)</span>
+      <span style="font-size:11px;color:#71717a;margin-left:auto;">弹窗/菜单</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;background:#121216;border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:12px 16px;">
+      <span style="font-size:12px;font-weight:600;color:#a78bfa;min-width:100px;">slide-down</span>
+      <span style="font-size:12px;color:#a1a1aa;">translateY(-8px→0) + 透明度</span>
+      <span style="font-size:11px;color:#71717a;margin-left:auto;">下拉/展开</span>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:28px;">
+  <h3>微交互 — 操作反馈</h3>
+  <div style="display:flex;gap:16px;max-width:700px;">
+    <div style="flex:1;background:#121216;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px;">
+      <h4 style="font-size:13px;color:#e4e4e7;">按钮 hover</h4>
+      <p style="font-size:12px;color:#a1a1aa;">scale(1.02) + 阴影扩散</p>
+      <p style="font-size:11px;color:#71717a;">duration: 200ms, ease-spring</p>
+    </div>
+    <div style="flex:1;background:#121216;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px;">
+      <h4 style="font-size:13px;color:#e4e4e7;">卡片 hover</h4>
+      <p style="font-size:12px;color:#a1a1aa;">translateY(-2px) + 边框增亮</p>
+      <p style="font-size:11px;color:#71717a;">duration: 200ms, ease-out</p>
+    </div>
+    <div style="flex:1;background:#121216;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px;">
+      <h4 style="font-size:13px;color:#e4e4e7;">输入框聚焦</h4>
+      <p style="font-size:12px;color:#a1a1aa;">边框发光 + 微缩放</p>
+      <p style="font-size:11px;color:#71717a;">box-shadow glow ring</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:28px;">
+  <h3>Stagger 延时 — 列表叙事感</h3>
+  <p style="font-size:13px;color:#a1a1aa;">列表项/消息按 60ms 间隔依次入场，营造「流畅叙事」节奏</p>
+  <div style="display:flex;gap:8px;margin-top:12px;max-width:700px;">
+    <div style="flex:1;height:32px;background:#1a1a22;border-radius:6px;border:1px solid rgba(255,255,255,0.06);"></div>
+    <div style="flex:1;height:32px;background:#1a1a22;border-radius:6px;border:1px solid rgba(255,255,255,0.06);"></div>
+    <div style="flex:1;height:32px;background:#1a1a22;border-radius:6px;border:1px solid rgba(255,255,255,0.06);"></div>
+    <div style="flex:1;height:32px;background:#1a1a22;border-radius:6px;border:1px solid rgba(255,255,255,0.06);"></div>
+    <div style="flex:1;height:32px;background:#1a1a22;border-radius:6px;border:1px solid rgba(255,255,255,0.06);"></div>
+  </div>
+  <p style="font-size:11px;color:#52525b;margin-top:6px;text-align:center;">delay: 0ms → 60ms → 120ms → 180ms → 240ms</p>
+</div>

@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse
 
 from app.config import UPLOAD_MAX_SIZE_MB, UPLOAD_ALLOWED_EXTENSIONS
-from app.dependencies import get_current_user
+from app.dependencies import get_current_user, get_project
 from app.utils.security import safe_path
 
 router = APIRouter(dependencies=[Depends(get_current_user)])
@@ -15,13 +15,13 @@ router = APIRouter(dependencies=[Depends(get_current_user)])
 MAX_BYTES = UPLOAD_MAX_SIZE_MB * 1024 * 1024
 
 
-def _workspace_dir(workspace: str) -> str:
+def _ws_project_dir(workspace: str, project: str) -> str:
     from app.config import WORKSPACES_DIR
-    return os.path.join(WORKSPACES_DIR, workspace)
+    return os.path.join(WORKSPACES_DIR, workspace, project)
 
 
 @router.post("/upload")
-async def upload_file(file: UploadFile, request: Request):
+async def upload_file(file: UploadFile, request: Request, project: str = Depends(get_project)):
     ext = Path(file.filename or "").suffix.lower()
     if ext not in UPLOAD_ALLOWED_EXTENSIONS:
         raise HTTPException(400, f"File type {ext} not allowed")
@@ -30,7 +30,8 @@ async def upload_file(file: UploadFile, request: Request):
     if len(contents) > MAX_BYTES:
         raise HTTPException(400, f"File exceeds {UPLOAD_MAX_SIZE_MB}MB limit")
 
-    ws_dir = _workspace_dir(request.state.workspace)
+    ws_dir = _ws_project_dir(request.state.workspace, project)
+    os.makedirs(ws_dir, exist_ok=True)
     dest = os.path.join(ws_dir, file.filename)
     if os.path.exists(dest):
         bak = dest + ".bak"
@@ -47,8 +48,8 @@ async def upload_file(file: UploadFile, request: Request):
 
 
 @router.get("/list")
-def list_files(request: Request):
-    ws_dir = _workspace_dir(request.state.workspace)
+def list_files(request: Request, project: str = Depends(get_project)):
+    ws_dir = _ws_project_dir(request.state.workspace, project)
     if not os.path.exists(ws_dir):
         return {"files": []}
 
@@ -78,16 +79,33 @@ def list_files(request: Request):
 
 
 @router.get("/download/{filename}")
-def download_file(filename: str, request: Request):
-    path = safe_path(request.state.workspace, filename)
+def download_file(filename: str, request: Request, project: str = Depends(get_project)):
+    path = safe_path(request.state.workspace, project, filename)
     if not path.exists():
         raise HTTPException(404, "File not found")
     return FileResponse(str(path), filename=filename)
 
 
+@router.get("/read/{filename}")
+def read_file(filename: str, request: Request, project: str = Depends(get_project)):
+    try:
+        path = safe_path(request.state.workspace, project, filename)
+    except ValueError:
+        raise HTTPException(400, "Invalid filename")
+    if not path.exists():
+        raise HTTPException(404, "File not found")
+    if not path.is_file():
+        raise HTTPException(400, "Not a file")
+    try:
+        content = path.read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        raise HTTPException(400, "File is not a readable text file")
+    return {"name": filename, "content": content}
+
+
 @router.delete("/delete/{filename}")
-def delete_file(filename: str, request: Request):
-    path = safe_path(request.state.workspace, filename)
+def delete_file(filename: str, request: Request, project: str = Depends(get_project)):
+    path = safe_path(request.state.workspace, project, filename)
     if not path.exists():
         raise HTTPException(404, "File not found")
     os.remove(str(path))

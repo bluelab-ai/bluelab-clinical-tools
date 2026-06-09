@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(/Library/Frameworks/Python.framework/Versions/3.10/bin/python3 .claude/skills/protocol-to-dmp/scripts/build_dmp_trace.py --protocol backend/data/workspaces/user_cxx/0529-cxx/方案.docx --dm-log backend/data/workspaces/user_cxx/0529-cxx/dm-log.json --template-dir .claude/skills/protocol-to-dmp/assets --checklist .claude/skills/protocol-to-dmp/assets/DMP非固定内容清单.xlsx --out /tmp/test_confidence_trace.json --protocol-dump /tmp/test_confidence_dump.txt)",
+      "Bash(python3 .claude/skills/protocol-to-dmp/scripts/build_dmp_trace.py --protocol backend/data/workspaces/user_cxx/0529-cxx/方案.docx --dm-log backend/data/workspaces/user_cxx/0529-cxx/dm-log.json --template-dir .claude/skills/protocol-to-dmp/assets --checklist .claude/skills/protocol-to-dmp/assets/DMP非固定内容清单.xlsx --out /tmp/test_confidence_trace.json --protocol-dump /tmp/test_confidence_dump.txt)"
+    ]
+  }
+}

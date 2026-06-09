@@ -1,0 +1,273 @@
+{
+  "metadata": {
+    "created_at": "2026-06-01T14:36:45",
+    "protocol": "/Users/xulei/项目/sdk测试/backend/data/workspaces/user_jkl/proj1/1.荷清超声溶栓-确证-临床试验方案-2026.05.28.docx",
+    "dm_log": "/Users/xulei/项目/sdk测试/backend/data/workspaces/user_jkl/proj1/dm-log.json",
+    "template": "/Users/xulei/项目/sdk测试/.claude/skills/protocol-to-dmp/assets/DMP-随机系统.docx",
+    "selected_template_name": "DMP-随机系统.docx",
+    "template_selection": {
+      "decision": "random",
+      "selected_template_name": "DMP-随机系统.docx",
+      "是否使用随机系统": "是",
+      "是否使用登记系统": "否",
+      "evidence": [
+        "DM日志字段 `是否使用随机系统`: 是",
+        "DM日志字段 `是否使用登记系统`: 否"
+      ]
+    },
+    "checklist": "/Users/xulei/项目/sdk测试/.claude/skills/protocol-to-dmp/assets/DMP非固定内容清单.xlsx",
+    "checklist_rows": 49,
+    "protected_table_like_sections": [
+      "9",
+      "15.2",
+      "26.1",
+      "27.1",
+      "27.2",
+      "27.3",
+      "29"
+    ],
+    "version_records": [
+      {
+        "版本号": "v1.0",
+        "版本日期": "2025-11-19",
+        "撰写者/修订者": "小张",
+        "版本修订内容": "1.0"
+      }
+    ],
+    "dm_entry_count": 1,
+    "signature_signers": {
+      "writer": "",
+      "reviewers": {
+        "key 1": {
+          "role": "数据管理单位审核人",
+          "name": "小李"
+        },
+        "key 2": {
+          "role": "申办者审核人",
+          "name": "小王"
+        },
+        "key 3": {
+          "role": "CRO审核人",
+          "name": "小赵"
+        },
+        "key 4": {
+          "role": "统计分析单位审核人",
+          "name": "小孙"
+        }
+      },
+      "raw": {
+        "数据管理单位审核人": "小李",
+        "申办者审核人": "小王",
+        "CRO审核人": "小赵",
+        "统计分析单位审核人": "小孙"
+      }
+    }
+  },
+  "protocol_path": "/Users/xulei/项目/sdk测试/backend/data/workspaces/user_jkl/proj1/protocol_dump.txt",
+  "fewshot_path": "/Users/xulei/项目/sdk测试/.claude/skills/protocol-to-dmp/assets/fewshot.md",
+  "semantic_fields": [
+    "主要有效性终点",
+    "其他终点",
+    "样本量",
+    "研究设计",
+    "统计分析人群"
+  ],
+  "fewshot_fields": [
+    "样本量",
+    "研究目的",
+    "研究设计"
+  ],
+  "review_items": [
+    {
+      "key": "研究设计",
+      "item": "研究设计",
+      "section": "3 试验概述",
+      "current_value": "前瞻性、多中心、随机、对照、优效性设计",
+      "current_status": "filled",
+      "needs_semantic_review": true,
+      "evidence_snippet": "[表3 行3] 试验设计 | 前瞻性、多中心、随机、对照、优效性设计",
+      "protocol_context": "cedure | 标准操作规程\n[表2 行46] SS | Safety Set | 安全性分析集\n[表2 行47] TT | Thrombin Time | 凝血酶时间\n[表2 行48] USACDT | Ultrasound-Accelerated Catheter-Directed Thrombolysis | 超声加速导管定向溶栓\n[表2 行49] VCSS | Venous Clinical Severity Score | 静脉临床严重程度评分\n[表2 行50] VTE | Venous Thromboembolism | 静脉血栓栓塞症\n[表2 行51] WBC | White Blood Cell | 白细胞\n[表2 行52] WCCF | Worst Case Carry Forward | 最坏情况结转\n[表3 行1] 试验题目 | 验证超声溶栓导管配合超声溶栓主机用于清除深静脉血栓的安全性和有效性的前瞻性、多中心、随机、对照临床试验\n[表3 行2] 试验目的 | 验证北京荷清和创医疗科技有限公司生产的超声溶栓导管配合超声溶栓主机用于治疗深静脉血栓的安全性和有效性\n[表3 行3] 试验设计 | 前瞻性、多中心、随机、对照、优效性设计\n[表3 行4] 试验器械 | 试验组：器械名称：超声溶栓导管、超声溶栓主机\n生产企业：北京荷清和创医疗科技有限公司\n对照组：器械名称：灌注系统Infusion System\n生产企业：安启医疗AngioDynamics, Inc\n[表3 行5] 样本量计算\n[表3 行6] 随访期限 | 6个月\n[表3 行7] 入选/排除标准 | 入选标准\n18周岁≤年龄≤75周岁，性别不限\n有明确的DVT临床症状及影像学（彩色多普勒超声或CTV/MRV或静脉造影等检查）证实为中央型（髂静脉和/或股总静脉和/或股浅静脉存在血栓）或混合型（腘静脉血栓同时合并髂静脉或股静脉血栓）\n患肢深静脉血栓发病时间≤天\n同意参加本研究，并自愿签署知情同意书的患者\n排除标准\n[表3 行8] 有效性指标 | 主要评价指标：\n溶栓治疗24血栓清除率\n次要评价指标：\n溶栓总时间\n尿激酶总剂量\n溶栓治疗30min血栓清除率\n溶栓治疗30min、溶栓治疗24h血栓清除成功率\n器械成功率\n出院前及术后1个月患肢消肿率\n术后1个月、3个月、6个月静脉临床严重程度评分(VCSS)较基线值变化；\n术后1个月和6个月的靶病变静脉通畅率\n术",
+      "corrected_value": null,
+      "correction_reason": "",
+      "review_decision": "",
+      "needs_fewshot_format": true,
+      "fewshot_examples": [
+        "本研究是一项前瞻性、多中心、单组、目标值法的临床试验。",
+        "本试验为随机、平行对照、多中心的开放性临床试验。"
+      ],
+      "field_prompt": "",
+      "formatted_value": null,
+      "format_reason": "",
+      "format_decision": "",
+      "current_confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72
+      },
+      "confidence_adjustment": {
+        "extraction_accuracy_delta": 0,
+        "completeness_delta": 0,
+        "hallucination_risk_delta": 0,
+        "adjustment_reason": ""
+      }
+    },
+    {
+      "key": "研究目的",
+      "item": "研究目的",
+      "section": "3 试验概述",
+      "current_value": "验证北京荷清和创医疗科技有限公司生产的超声溶栓导管配合超声溶栓主机用于治疗深静脉血栓的安全性和有效性",
+      "current_status": "filled",
+      "needs_semantic_review": false,
+      "evidence_snippet": "",
+      "protocol_context": "",
+      "corrected_value": null,
+      "correction_reason": "",
+      "review_decision": "",
+      "needs_fewshot_format": true,
+      "fewshot_examples": [],
+      "field_prompt": "方案摘要中经常存在信息混写或嵌套的情况。不要把整段摘要当作一个不可拆分的提取单元。填写 Section `3 试验概述` 的任何单元格前，都必须根据当前行标题判断内容边界，只提取属于该行的最小必要方案原文。即使某些内容出现在同一个段落、同一个项目符号或同一个表格单元格中，只要它属于其他行，也必须排除。\n\n填写每一行前，必须先判断当前行需要的信息类型，例如：研究名称、研究设计、研究目的、样本量、主要有效性终点、其他终点、统计分析人群等。然后只提取能够回答该行标题的内容。\n\n如果方案中的原文段落或表格单元格包含多个嵌套信息，应先在语义上进行拆分，再提取对应内容。例如：如果“研究目的”中同时包含有效性终点、安全性终点或探索性终点的描述，则“研究目的”行只保留描述研究目的本身的文字，不要包含终点定义；如果“研究设计”中同时包含样本量、治疗周期、访视安排或终点信息，则“研究设计”行只保留描述研究设计本身的文字，不要包含其他字段内容。",
+      "formatted_value": null,
+      "format_reason": "",
+      "format_decision": "",
+      "current_confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72
+      },
+      "confidence_adjustment": {
+        "extraction_accuracy_delta": 0,
+        "completeness_delta": 0,
+        "hallucination_risk_delta": 0,
+        "adjustment_reason": ""
+      }
+    },
+    {
+      "key": "样本量",
+      "item": "样本量",
+      "section": "3 试验概述",
+      "current_value": "52例，考虑20%的脱落率，最终样本量为每组66例，共132例",
+      "current_status": "filled",
+      "needs_semantic_review": true,
+      "evidence_snippet": "本临床研究结果，优效设计，假设试验组溶栓治疗24h血栓清除率与对照组差值为%，标准差为18%，统计检验的显著性水平取单侧0.025，把握度取80%，计算所得每组样本量为52例，考虑20%的脱落率，最终样本量为每组66例，共132例。样本量计算公式如下： 其中σ为对照组预期标准差；为预期的两组均数之差的绝对值， = ；Δ为优效性界值，取。 样本量分配以及其确定依据 本试验将同时在多家临床试验机构同时开展，原则上，将尽可能的均匀分配各中心的入组数量，以保证充分的中心代表性。但考虑到可行性和入选进度，将会根据实际情况对入组数量进行调整，尽量保证每家中",
+      "protocol_context": "。CRF需要记录补救治疗的详细内容。\n偏倚控制措施\n根据研究方案、国家医疗器械临床试验相关规定和GCP原则以及公司标准操作流程(SOP)进行临床试验。申办方对参加本次研究的研究者进行研究方案以及研究器械操作规范的培训，确保研究者充分了解研究流程及研究器械使用说明。\n申办者委派合格临床试验监查员(CRA)对研究中心进行监查，做好质量控制工作及监查记录，并及时与研究者沟通在监查中发现的问题。\n本研究为多中心临床试验，尽量减少由于不同研究中心的研究者手术操作的习惯造成的偏倚。\n采用随机系统进行区组随机的方法，分层因素包括中心、临床分型（急性期（发病时间≤14d）、亚急性期（14d＜发病时间≤30d））。每一位患者入组时，参研机构研究者登录随机化网站，随机化后，系统即显示该患者的分组安排，根据随机结果实施干预，以减少偏倚。\n主要评价指标“溶栓治疗24h血栓清除率”由专业人员在盲态下根据血管造影影像资料进行统一评价。\n本试验严格按照临床试验方案实施，从而减少因偏离或违背方案造成的偏倚。\n统计学考虑\n样本量估算\n计算公式、各参数取值\n本研究以溶栓治疗24h血栓清除率为主要指标，根据研究文献以及小样本临床研究结果，优效设计，假设试验组溶栓治疗24h血栓清除率与对照组差值为%，标准差为18%，统计检验的显著性水平取单侧0.025，把握度取80%，计算所得每组样本量为52例，考虑20%的脱落率，最终样本量为每组66例，共132例。样本量计算公式如下：\n其中σ为对照组预期标准差；为预期的两组均数之差的绝对值， = ；Δ为优效性界值，取。\n样本量分配以及其确定依据\n本试验将同时在多家临床试验机构同时开展，原则上，将尽可能的均匀分配各中心的入组数量，以保证充分的中心代表性。但考虑到可行性和入选进度，将会根据实际情况对入组数量进行调整，尽量保证每家中心的入选规模相对平衡，而对某一特定中心、其最终的入组规模不应超过总病例数的50%。\n分析数据集\n全分析集(Full analysis Set，FAS)：按照意向性分析(ITT)原则，所有入组并使用器械的受试者将进入FAS。对于主要评价指标的缺失，主要疗效指标的缺失可采用最差填补原则进行填补，其它次要疗效指标不进行填补。\n符合方案集(Per Protocol Set，PPS)：指所有完成试验且排除了严重违背方案的治疗人群亚组。\n安全性数据集(Safety Set，SS)：指所有参与临床试验且使用了试验用器械、并且至少有一次安全性评价的受试者集。\n受试者剔除标准\n资料统计分析前，由主要研究者、申办方、统计单位判断个例是否出现下列情况之一，主要研究者应依据受试者完成试验的程度和退组原因等因素综合判断是否将此受试者剔除，并做出相关说明。受试者符合下列任何一项，则考虑剔除：\n受试者个例的选择违反了入选标准或符合排除标准，不应当进入试验；\n试验期间，受试者不遵守试验计划，依从性差，对病例的疗效评价或安全性评价产生影响。如未曾使用试验产品、没有任何观察数据等。\n统计方法\n本临床试验为前瞻性、多中心、",
+      "corrected_value": null,
+      "correction_reason": "",
+      "review_decision": "",
+      "needs_fewshot_format": true,
+      "fewshot_examples": [
+        "结合主要评价终点、既往研究数据及临床实际开展条件，同时考虑受试者脱落等因素，最终确定本试验共需纳入受试者【XX】例。"
+      ],
+      "field_prompt": "",
+      "formatted_value": null,
+      "format_reason": "",
+      "format_decision": "",
+      "current_confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72
+      },
+      "confidence_adjustment": {
+        "extraction_accuracy_delta": 0,
+        "completeness_delta": 0,
+        "hallucination_risk_delta": 0,
+        "adjustment_reason": ""
+      }
+    },
+    {
+      "key": "主要有效性终点",
+      "item": "主要有效性终点",
+      "section": "3 试验概述",
+      "current_value": "主要评价指标：\n溶栓治疗24血栓清除率",
+      "current_status": "filled",
+      "needs_semantic_review": true,
+      "evidence_snippet": "[表3 行8] 有效性指标 | 主要评价指标：\n溶栓治疗24血栓清除率\n次要评价指标：\n溶栓总时间\n尿激酶总剂量\n溶栓治疗30min血栓清除率\n溶栓治疗30min、溶栓治疗24h血栓清除成功率\n器械成功率\n出院前及术后1个月患肢消肿率\n术后1个月、3个月、6个月静脉临床严重程度评分(VCSS)较基线值变化；\n术后1个月和6个月的靶病变静脉通畅率\n术后6个月血栓后综合征(PTS)发生率\n对靶血管因血栓导致正向血流消失患者，溶栓后30min正向血流恢复率",
+      "protocol_context": " 最坏情况结转\n[表3 行1] 试验题目 | 验证超声溶栓导管配合超声溶栓主机用于清除深静脉血栓的安全性和有效性的前瞻性、多中心、随机、对照临床试验\n[表3 行2] 试验目的 | 验证北京荷清和创医疗科技有限公司生产的超声溶栓导管配合超声溶栓主机用于治疗深静脉血栓的安全性和有效性\n[表3 行3] 试验设计 | 前瞻性、多中心、随机、对照、优效性设计\n[表3 行4] 试验器械 | 试验组：器械名称：超声溶栓导管、超声溶栓主机\n生产企业：北京荷清和创医疗科技有限公司\n对照组：器械名称：灌注系统Infusion System\n生产企业：安启医疗AngioDynamics, Inc\n[表3 行5] 样本量计算\n[表3 行6] 随访期限 | 6个月\n[表3 行7] 入选/排除标准 | 入选标准\n18周岁≤年龄≤75周岁，性别不限\n有明确的DVT临床症状及影像学（彩色多普勒超声或CTV/MRV或静脉造影等检查）证实为中央型（髂静脉和/或股总静脉和/或股浅静脉存在血栓）或混合型（腘静脉血栓同时合并髂静脉或股静脉血栓）\n患肢深静脉血栓发病时间≤天\n同意参加本研究，并自愿签署知情同意书的患者\n排除标准\n[表3 行8] 有效性指标 | 主要评价指标：\n溶栓治疗24血栓清除率\n次要评价指标：\n溶栓总时间\n尿激酶总剂量\n溶栓治疗30min血栓清除率\n溶栓治疗30min、溶栓治疗24h血栓清除成功率\n器械成功率\n出院前及术后1个月患肢消肿率\n术后1个月、3个月、6个月静脉临床严重程度评分(VCSS)较基线值变化；\n术后1个月和6个月的靶病变静脉通畅率\n术后6个月血栓后综合征(PTS)发生率\n对靶血管因血栓导致正向血流消失患者，溶栓后30min正向血流恢复率\n[表3 行9] 安全性指标 | 术后1个月主要不良事件(MAE)的发生情况\n住院期间严重出血事件的发生情况\n研究期间的全因死亡率\n研究期间与试验器械相关不良事件及严重不良事件发生情况\n研究期间总不良事件及严重不良事件发生情况\n[表3 行10] 试验流程 | 本研究的访视点包括筛选期(-14~0天)、治疗期(0~7天)、出院前(1~10天)、术后1个月(±7天)、术后3个月(±15天)、术后6个月(±15天)，所有参加本临床试验的受试者完成6个月随访后，统计分析所有指标数据，出具临床试验分中心小结和临床试验报告，用于向国家药品监督管理局提交注册。\n[表4 行1] 试验过程 | 入组及治疗 | 入组及治疗 | 随访期 | 随访期 | 随访期 | 随访期\n[表4 行2] 访视编号 | 访视1 | 访视2 | 访视3 | 访视4 | 访视5 | 访视6\n[表4 行3] 时间点 | 筛选期1\n(-14~0天) | 治疗期\n(0~7天) | 出院前\n(1~10天) | 术后1个月(±7天) | 术后3个月(±15天) | 术后6个月(±15天)\n[表4 行4] 知情同意 | X\n[表4 行5] ",
+      "corrected_value": null,
+      "correction_reason": "",
+      "review_decision": "",
+      "needs_fewshot_format": false,
+      "fewshot_examples": [],
+      "field_prompt": "",
+      "formatted_value": null,
+      "format_reason": "",
+      "format_decision": "",
+      "current_confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72
+      },
+      "confidence_adjustment": {
+        "extraction_accuracy_delta": 0,
+        "completeness_delta": 0,
+        "hallucination_risk_delta": 0,
+        "adjustment_reason": ""
+      }
+    },
+    {
+      "key": "其他终点",
+      "item": "其他终点",
+      "section": "3 试验概述",
+      "current_value": "次要评价指标：\n溶栓总时间\n尿激酶总剂量\n溶栓治疗30min血栓清除率\n溶栓治疗30min、溶栓治疗24h血栓清除成功率\n器械成功率\n出院前及术后1个月患肢消肿率\n术后1个月、3个月、6个月静脉临床严重程度评分(VCSS)较基线值变化；\n术后1个月和6个月的靶病变静脉通畅率\n术后6个月血栓后综合征(PTS)发生率\n对靶血管因血栓导致正向血流消失患者，溶栓后30min正向血流恢复率\n安全性指标：\n术后1个月主要不良事件(MAE)的发生情况\n住院期间严重出血事件的发生情况\n研究期间的全因死亡率\n研究期间与试验器械相关不良事件及严重不良事件发生情况\n研究期间总不良事件及严重不良事件发生情况",
+      "current_status": "filled",
+      "needs_semantic_review": true,
+      "evidence_snippet": "[表3 行8] 有效性指标 | 主要评价指标：\n溶栓治疗24血栓清除率\n次要评价指标：\n溶栓总时间\n尿激酶总剂量\n溶栓治疗30min血栓清除率\n溶栓治疗30min、溶栓治疗24h血栓清除成功率\n器械成功率\n出院前及术后1个月患肢消肿率\n术后1个月、3个月、6个月静脉临床严重程度评分(VCSS)较基线值变化；\n术后1个月和6个月的靶病变静脉通畅率\n术后6个月血栓后综合征(PTS)发生率\n对靶血管因血栓导致正向血流消失患者，溶栓后30min正向血流恢复率",
+      "protocol_context": " 最坏情况结转\n[表3 行1] 试验题目 | 验证超声溶栓导管配合超声溶栓主机用于清除深静脉血栓的安全性和有效性的前瞻性、多中心、随机、对照临床试验\n[表3 行2] 试验目的 | 验证北京荷清和创医疗科技有限公司生产的超声溶栓导管配合超声溶栓主机用于治疗深静脉血栓的安全性和有效性\n[表3 行3] 试验设计 | 前瞻性、多中心、随机、对照、优效性设计\n[表3 行4] 试验器械 | 试验组：器械名称：超声溶栓导管、超声溶栓主机\n生产企业：北京荷清和创医疗科技有限公司\n对照组：器械名称：灌注系统Infusion System\n生产企业：安启医疗AngioDynamics, Inc\n[表3 行5] 样本量计算\n[表3 行6] 随访期限 | 6个月\n[表3 行7] 入选/排除标准 | 入选标准\n18周岁≤年龄≤75周岁，性别不限\n有明确的DVT临床症状及影像学（彩色多普勒超声或CTV/MRV或静脉造影等检查）证实为中央型（髂静脉和/或股总静脉和/或股浅静脉存在血栓）或混合型（腘静脉血栓同时合并髂静脉或股静脉血栓）\n患肢深静脉血栓发病时间≤天\n同意参加本研究，并自愿签署知情同意书的患者\n排除标准\n[表3 行8] 有效性指标 | 主要评价指标：\n溶栓治疗24血栓清除率\n次要评价指标：\n溶栓总时间\n尿激酶总剂量\n溶栓治疗30min血栓清除率\n溶栓治疗30min、溶栓治疗24h血栓清除成功率\n器械成功率\n出院前及术后1个月患肢消肿率\n术后1个月、3个月、6个月静脉临床严重程度评分(VCSS)较基线值变化；\n术后1个月和6个月的靶病变静脉通畅率\n术后6个月血栓后综合征(PTS)发生率\n对靶血管因血栓导致正向血流消失患者，溶栓后30min正向血流恢复率\n[表3 行9] 安全性指标 | 术后1个月主要不良事件(MAE)的发生情况\n住院期间严重出血事件的发生情况\n研究期间的全因死亡率\n研究期间与试验器械相关不良事件及严重不良事件发生情况\n研究期间总不良事件及严重不良事件发生情况\n[表3 行10] 试验流程 | 本研究的访视点包括筛选期(-14~0天)、治疗期(0~7天)、出院前(1~10天)、术后1个月(±7天)、术后3个月(±15天)、术后6个月(±15天)，所有参加本临床试验的受试者完成6个月随访后，统计分析所有指标数据，出具临床试验分中心小结和临床试验报告，用于向国家药品监督管理局提交注册。\n[表4 行1] 试验过程 | 入组及治疗 | 入组及治疗 | 随访期 | 随访期 | 随访期 | 随访期\n[表4 行2] 访视编号 | 访视1 | 访视2 | 访视3 | 访视4 | 访视5 | 访视6\n[表4 行3] 时间点 | 筛选期1\n(-14~0天) | 治疗期\n(0~7天) | 出院前\n(1~10天) | 术后1个月(±7天) | 术后3个月(±15天) | 术后6个月(±15天)\n[表4 行4] 知情同意 | X\n[表4 行5] ",
+      "corrected_value": null,
+      "correction_reason": "",
+      "review_decision": "",
+      "needs_fewshot_format": false,
+      "fewshot_examples": [],
+      "field_prompt": "",
+      "formatted_value": null,
+      "format_reason": "",
+      "format_decision": "",
+      "current_confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72
+      },
+      "confidence_adjustment": {
+        "extraction_accuracy_delta": 0,
+        "completeness_delta": 0,
+        "hallucination_risk_delta": 0,
+        "adjustment_reason": ""
+      }
+    },
+    {
+      "key": "统计分析人群",
+      "item": "统计分析人群",
+      "section": "3 试验概述",
+      "current_value": "全分析集(Full analysis Set，FAS)：按照意向性分析(ITT)原则，所有入组并使用器械的受试者将进入FAS。对于主要评价指标的缺失，主要疗效指标的缺失可采用最差填补原则进行填补，其它次要疗效指标不进行填补。\n符合方案集(Per Protocol Set，PPS)：指所有完成试验且排除了严重违背方案的治疗人群亚组。\n安全性数据集(Safety Set，SS)：指所有参与临床试验且使用了试验用器械、并且至少有一次安全性评价的受试者集。",
+      "current_status": "filled",
+      "needs_semantic_review": true,
+      "evidence_snippet": "全分析集(Full analysis Set，FAS)：按照意向性分析(ITT)原则，所有入组并使用器械的受试者将进入FAS。对于主要评价指标的缺失，主要疗效指标的缺失可采用最差填补原则进行填补，其它次要疗效指标不进行填补。",
+      "protocol_context": "网站，随机化后，系统即显示该患者的分组安排，根据随机结果实施干预，以减少偏倚。\n主要评价指标“溶栓治疗24h血栓清除率”由专业人员在盲态下根据血管造影影像资料进行统一评价。\n本试验严格按照临床试验方案实施，从而减少因偏离或违背方案造成的偏倚。\n统计学考虑\n样本量估算\n计算公式、各参数取值\n本研究以溶栓治疗24h血栓清除率为主要指标，根据研究文献以及小样本临床研究结果，优效设计，假设试验组溶栓治疗24h血栓清除率与对照组差值为%，标准差为18%，统计检验的显著性水平取单侧0.025，把握度取80%，计算所得每组样本量为52例，考虑20%的脱落率，最终样本量为每组66例，共132例。样本量计算公式如下：\n其中σ为对照组预期标准差；为预期的两组均数之差的绝对值， = ；Δ为优效性界值，取。\n样本量分配以及其确定依据\n本试验将同时在多家临床试验机构同时开展，原则上，将尽可能的均匀分配各中心的入组数量，以保证充分的中心代表性。但考虑到可行性和入选进度，将会根据实际情况对入组数量进行调整，尽量保证每家中心的入选规模相对平衡，而对某一特定中心、其最终的入组规模不应超过总病例数的50%。\n分析数据集\n全分析集(Full analysis Set，FAS)：按照意向性分析(ITT)原则，所有入组并使用器械的受试者将进入FAS。对于主要评价指标的缺失，主要疗效指标的缺失可采用最差填补原则进行填补，其它次要疗效指标不进行填补。\n符合方案集(Per Protocol Set，PPS)：指所有完成试验且排除了严重违背方案的治疗人群亚组。\n安全性数据集(Safety Set，SS)：指所有参与临床试验且使用了试验用器械、并且至少有一次安全性评价的受试者集。\n受试者剔除标准\n资料统计分析前，由主要研究者、申办方、统计单位判断个例是否出现下列情况之一，主要研究者应依据受试者完成试验的程度和退组原因等因素综合判断是否将此受试者剔除，并做出相关说明。受试者符合下列任何一项，则考虑剔除：\n受试者个例的选择违反了入选标准或符合排除标准，不应当进入试验；\n试验期间，受试者不遵守试验计划，依从性差，对病例的疗效评价或安全性评价产生影响。如未曾使用试验产品、没有任何观察数据等。\n统计方法\n本临床试验为前瞻性、多中心、随机、对照、优效性设计。\n一般原则\n统计分析将采用SAS 9.4（或更高版本）进行数据处理，样本量计算采用PASS 2021软件。\n定量指标的描述将计算均值、标准差、中位数、最小值、最大值，下四分位数(Q1)，上四分位数(Q3)，分类指标描述各类的例数及百分数。统计分析将采用SAS 9.4（或更高版本）进行数据处理，p",
+      "corrected_value": null,
+      "correction_reason": "",
+      "review_decision": "",
+      "needs_fewshot_format": false,
+      "fewshot_examples": [],
+      "field_prompt": "",
+      "formatted_value": null,
+      "format_reason": "",
+      "format_decision": "",
+      "current_confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72
+      },
+      "confidence_adjustment": {
+        "extraction_accuracy_delta": 0,
+        "completeness_delta": 0,
+        "hallucination_risk_delta": 0,
+        "adjustment_reason": ""
+      }
+    }
+  ]
+}

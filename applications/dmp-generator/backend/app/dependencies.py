@@ -17,3 +17,12 @@ def get_current_user(
     request.state.user_id = payload["user_id"]
     request.state.workspace = payload["workspace"]
     return payload
+
+
+FORBIDDEN_CHARS = {"..", "/", "\\", " ", "\t", "\n", "\r"}
+
+
+def get_project(project: str):
+    if not project or any(c in project for c in FORBIDDEN_CHARS):
+        raise HTTPException(400, "Invalid project name")
+    return project

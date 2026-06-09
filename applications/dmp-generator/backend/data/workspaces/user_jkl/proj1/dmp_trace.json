@@ -1,0 +1,1475 @@
+{
+  "metadata": {
+    "created_at": "2026-06-01T14:36:45",
+    "protocol": "/Users/xulei/项目/sdk测试/backend/data/workspaces/user_jkl/proj1/1.荷清超声溶栓-确证-临床试验方案-2026.05.28.docx",
+    "dm_log": "/Users/xulei/项目/sdk测试/backend/data/workspaces/user_jkl/proj1/dm-log.json",
+    "template": "/Users/xulei/项目/sdk测试/.claude/skills/protocol-to-dmp/assets/DMP-随机系统.docx",
+    "selected_template_name": "DMP-随机系统.docx",
+    "template_selection": {
+      "decision": "random",
+      "selected_template_name": "DMP-随机系统.docx",
+      "是否使用随机系统": "是",
+      "是否使用登记系统": "否",
+      "evidence": [
+        "DM日志字段 `是否使用随机系统`: 是",
+        "DM日志字段 `是否使用登记系统`: 否"
+      ]
+    },
+    "checklist": "/Users/xulei/项目/sdk测试/.claude/skills/protocol-to-dmp/assets/DMP非固定内容清单.xlsx",
+    "checklist_rows": 49,
+    "protected_table_like_sections": [
+      "9",
+      "15.2",
+      "26.1",
+      "27.1",
+      "27.2",
+      "27.3",
+      "29"
+    ],
+    "version_records": [
+      {
+        "版本号": "v1.0",
+        "版本日期": "2025-11-19",
+        "撰写者/修订者": "小张",
+        "版本修订内容": "1.0"
+      }
+    ],
+    "dm_entry_count": 1,
+    "signature_signers": {
+      "writer": "",
+      "reviewers": {
+        "key 1": {
+          "role": "数据管理单位审核人",
+          "name": "小李"
+        },
+        "key 2": {
+          "role": "申办者审核人",
+          "name": "小王"
+        },
+        "key 3": {
+          "role": "CRO审核人",
+          "name": "小赵"
+        },
+        "key 4": {
+          "role": "统计分析单位审核人",
+          "name": "小孙"
+        }
+      },
+      "raw": {
+        "数据管理单位审核人": "小李",
+        "申办者审核人": "小王",
+        "CRO审核人": "小赵",
+        "统计分析单位审核人": "小孙"
+      }
+    }
+  },
+  "items": [
+    {
+      "seq": 1,
+      "key": "DMP版本号",
+      "section": "封面 / 页眉/ 签署页",
+      "topic": "基础项目信息",
+      "item": "DMP版本号",
+      "granularity": "字段填充",
+      "rule": "按项目实际DMP版本填写；后续页眉/签署页引用同一字段。",
+      "required_content": "V0.1/V1.0/V1.1等",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "v1.0",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `DMP版本号`: v1.0"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 2,
+      "key": "DMP版本日期",
+      "section": "封面 / 页眉/ 签署页",
+      "topic": "基础项目信息",
+      "item": "DMP版本日期",
+      "granularity": "字段填充",
+      "rule": "按项目实际DMP版本日期填写；后续页眉/签署页引用同一字段。",
+      "required_content": "DMP日期",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "2025-11-19",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `DMP版本日期`: 2025-11-19"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 3,
+      "key": "临床试验方案名称",
+      "section": "封面 / 页眉 / 签署页",
+      "topic": "基础项目信息",
+      "item": "临床试验方案名称",
+      "granularity": "字段填充",
+      "rule": "从方案封面或正式方案信息填入，全文多处引用。",
+      "required_content": "方案全称",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "验证超声溶栓导管配合超声溶栓主机用于清除深静脉血栓的安全性和有效性的前瞻性、多中心、随机、对照临床试验",
+      "source_used": "方案",
+      "evidence": [
+        "[表3 行1] 试验题目 | 验证超声溶栓导管配合超声溶栓主机用于清除深静脉血栓的安全性和有效性的前瞻性、多中心、随机、对照临床试验"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "protocol_literal"
+      }
+    },
+    {
+      "seq": 4,
+      "key": "方案编号",
+      "section": "封面 / 页眉",
+      "topic": "基础项目信息",
+      "item": "方案编号",
+      "granularity": "字段填充",
+      "rule": "从正式方案信息填入，全文多处引用。",
+      "required_content": "方案编号",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "HQHC202302",
+      "source_used": "方案",
+      "evidence": [
+        "方案编号：HQHC202302 验证超声溶栓导管配合超声溶栓主机用于清除深静脉血栓的安全性和有效性的前瞻性、多中心、随机、对照临床试验 临床试验方案 试验医疗器械名称：超声溶栓导管、超声溶栓主机 型号规格：详见正文 需进行临床试验审批的第三类医疗器械 是□ 否 方案版本号和日期：V1.0/2025.11.24 临床试验机构：北京清华长庚医院 协"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "protocol_literal"
+      }
+    },
+    {
+      "seq": 5,
+      "key": "方案版本号",
+      "section": "封面",
+      "topic": "基础项目信息",
+      "item": "方案版本号",
+      "granularity": "字段填充",
+      "rule": "从正式方案信息填入。",
+      "required_content": "方案版本号",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "V1.0",
+      "source_used": "方案",
+      "evidence": [
+        "、多中心、随机、对照临床试验 临床试验方案 试验医疗器械名称：超声溶栓导管、超声溶栓主机 型号规格：详见正文 需进行临床试验审批的第三类医疗器械 是□ 否 方案版本号和日期：V1.0/2025.11.24 临床试验机构：北京清华长庚医院 协调研究者：吴巍巍 申办者：北京荷清和创医疗科技有限公司 缩略语 方案摘要 临床试验流程图 注： 筛选期：如果患者签署知情同意书前，已进行相关检查，且在术前14天内，这些数据可以作为本临床试验的数据进行收集，患者无需再进行相关检查，如血常规、血生化、妊娠试验、凝血"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 6,
+      "key": "方案版本日期",
+      "section": "封面",
+      "topic": "基础项目信息",
+      "item": "方案版本日期",
+      "granularity": "字段填充",
+      "rule": "从正式方案信息填入。",
+      "required_content": "方案日期",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "2025-11-24",
+      "source_used": "方案",
+      "evidence": [
+        "、多中心、随机、对照临床试验 临床试验方案 试验医疗器械名称：超声溶栓导管、超声溶栓主机 型号规格：详见正文 需进行临床试验审批的第三类医疗器械 是□ 否 方案版本号和日期：V1.0/2025.11.24 临床试验机构：北京清华长庚医院 协调研究者：吴巍巍 申办者：北京荷清和创医疗科技有限公司 缩略语 方案摘要 临床试验流程图 注： 筛选期：如果患者签署知情同意书前，已进行相关检查，且在术前14天内，这些数据可以作为本临床试验的数据进行收集，患者无需再进行相关检查，如血常规、血生化、妊娠试验、凝血功能、心电图、下肢静脉",
+        "方案文件名 `1.荷清超声溶栓-确证-临床试验方案-2026.05.28.docx` 提供方案版本日期线索：2026-05-28",
+        "方案文件名日期 `2026-05-28` 与正文 `2025-11-24` 不一致，以正文为准"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 7,
+      "key": "申办者名称",
+      "section": "封面 / 页眉 / 签署页",
+      "topic": "机构信息",
+      "item": "申办者名称",
+      "granularity": "字段填充",
+      "rule": "按项目实际申办者填写，全文多处引用。",
+      "required_content": "申办者名称",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "北京荷清和创医疗科技有限公司",
+      "source_used": "方案",
+      "evidence": [
+        "见正文 需进行临床试验审批的第三类医疗器械 是□ 否 方案版本号和日期：V1.0/2025.11.24 临床试验机构：北京清华长庚医院 协调研究者：吴巍巍 申办者：北京荷清和创医疗科技有限公司 缩略语 方案摘要 临床试验流程图 注： 筛选期：如果患者签署知情同意书前，已进行相关检查，且在术前14天内，这些数据可以作为本临床试验的数据进行收集，患者无需再进行相关检查，如血常规、血生化、妊娠试验、凝血功能、心电图、下肢静脉超声等； 生命体征：血压、心率/脉搏、体温、呼吸、血氧饱和度； 血常规：红细胞(RBC)、"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "protocol_literal"
+      }
+    },
+    {
+      "seq": 8,
+      "key": "临床监查方名称",
+      "section": "封面 / 签署页 / 6 项目人员职责",
+      "topic": "机构信息",
+      "item": "临床监查方名称",
+      "granularity": "字段填充",
+      "rule": "按项目实际临床监查方/CRO填写；没有独立监查方时需确认写法。",
+      "required_content": "临床监查方名称",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "北京清华长庚医院",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `临床监查方名称`: 北京清华长庚医院"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 9,
+      "key": "统计分析单位名称",
+      "section": "封面 / 页眉 / 签署页",
+      "topic": "机构信息",
+      "item": "统计分析单位名称",
+      "granularity": "字段填充",
+      "rule": "按项目实际统计分析单位填写；",
+      "required_content": "统计分析单位名称",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "蓝气球医学研究有限公司",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `统计分析方名称`: 蓝气球医学研究有限公司"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 10,
+      "key": "版本修订记录",
+      "section": "版本修订记录",
+      "topic": "版本管理",
+      "item": "版本修订记录",
+      "granularity": "字段填充",
+      "rule": "初版通常写新版；修订版需写清修订内容。",
+      "required_content": "修订内容",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "1.0",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `版本修订记录`: 1.0"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 11,
+      "key": "版本号",
+      "section": "版本修订记录",
+      "topic": "版本管理",
+      "item": "版本号",
+      "granularity": "字段填充",
+      "rule": "按项目实际DMP版本填写；",
+      "required_content": "撰写/修订者",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "v1.0",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `DMP版本号`: v1.0"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 12,
+      "key": "版本日期",
+      "section": "版本修订记录",
+      "topic": "版本管理",
+      "item": "版本日期",
+      "granularity": "字段填充",
+      "rule": "按项目实际DMP版本日期填写；",
+      "required_content": "V0.1/V1.0/V1.1等",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "2025-11-19",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `DMP版本日期`: 2025-11-19"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 13,
+      "key": "撰写者修订者",
+      "section": "版本修订记录",
+      "topic": "版本管理",
+      "item": "撰写者修订者",
+      "granularity": "字段填充",
+      "rule": "按项目实际DMP撰写者填写；",
+      "required_content": "撰写/修订者",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "小张",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `撰写者/修订者`: 小张"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 14,
+      "key": "签署页配置",
+      "section": "签署页",
+      "topic": "签署信息",
+      "item": "签署页配置",
+      "granularity": "字段填充",
+      "rule": "填写DM日志中的\"撰写者/修订者\"；",
+      "required_content": "撰写人",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "小张",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `撰写者/修订者`: 小张"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 15,
+      "key": "页眉",
+      "section": "页眉",
+      "topic": "页眉",
+      "item": "页眉",
+      "granularity": "字段填充",
+      "rule": "根据项目填写申办者、方案编号、DMP版本号、DMP版本日期",
+      "required_content": "根据项目填写申办者、方案编号、版本号、版本日期",
+      "source_type": "方案+DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "北京荷清和创医疗科技有限公司，HQHC202302",
+      "source_used": "方案",
+      "evidence": [
+        "见正文 需进行临床试验审批的第三类医疗器械 是□ 否 方案版本号和日期：V1.0/2025.11.24 临床试验机构：北京清华长庚医院 协调研究者：吴巍巍 申办者：北京荷清和创医疗科技有限公司 缩略语 方案摘要 临床试验流程图 注： 筛选期：如果患者签署知情同意书前，已进行相关检查，且在术前14天内，这些数据可以作为本临床试验的数据进行收集，患者无需再进行相关检查，如血常规、血生化、妊娠试验、凝血功能、心电图、下肢静脉超声等； 生命体征：血压、心率/脉搏、体温、呼吸、血氧饱和度； 血常规：红细胞(RBC)、",
+        "方案编号：HQHC202302 验证超声溶栓导管配合超声溶栓主机用于清除深静脉血栓的安全性和有效性的前瞻性、多中心、随机、对照临床试验 临床试验方案 试验医疗器械名称：超声溶栓导管、超声溶栓主机 型号规格：详见正文 需进行临床试验审批的第三类医疗器械 是□ 否 方案版本号和日期：V1.0/2025.11.24 临床试验机构：北京清华长庚医院 协"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 85,
+        "completeness": 80,
+        "hallucination_risk": 5,
+        "overall_confidence": 86,
+        "extraction_method": "combined_fields"
+      }
+    },
+    {
+      "seq": 16,
+      "key": "研究名称",
+      "section": "3 试验概述",
+      "topic": "试验概述表",
+      "item": "研究名称",
+      "granularity": "字段填充",
+      "rule": "从方案中方案摘要区域抽取研究名称。",
+      "required_content": "研究名称",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "验证超声溶栓导管配合超声溶栓主机用于清除深静脉血栓的安全性和有效性的前瞻性、多中心、随机、对照临床试验",
+      "source_used": "方案",
+      "evidence": [
+        "[表3 行1] 试验题目 | 验证超声溶栓导管配合超声溶栓主机用于清除深静脉血栓的安全性和有效性的前瞻性、多中心、随机、对照临床试验"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 17,
+      "key": "研究设计",
+      "section": "3 试验概述",
+      "topic": "试验概述表",
+      "item": "研究设计",
+      "granularity": "字段填充",
+      "rule": "从方案中方案摘要区域抽取研究设计，如随机、盲法、多中心、平行对照、单臂等。",
+      "required_content": "研究设计",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "前瞻性、多中心、随机、对照、优效性设计",
+      "source_used": "方案",
+      "evidence": [
+        "[表3 行3] 试验设计 | 前瞻性、多中心、随机、对照、优效性设计"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 18,
+      "key": "研究目的",
+      "section": "3 试验概述",
+      "topic": "试验概述表",
+      "item": "研究目的",
+      "granularity": "字段填充",
+      "rule": "从方案中方案摘要区域抽取主要/次要研究目的。",
+      "required_content": "研究目的",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "验证北京荷清和创医疗科技有限公司生产的超声溶栓导管配合超声溶栓主机用于治疗深静脉血栓的安全性和有效性",
+      "source_used": "方案",
+      "evidence": [
+        "[表3 行2] 试验目的 | 验证北京荷清和创医疗科技有限公司生产的超声溶栓导管配合超声溶栓主机用于治疗深静脉血栓的安全性和有效性"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 19,
+      "key": "样本量",
+      "section": "3 试验概述",
+      "topic": "试验概述表",
+      "item": "样本量",
+      "granularity": "字段填充",
+      "rule": "从方案中方案摘要区域抽取计划入组例数。",
+      "required_content": "样本量",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "52例，考虑20%的脱落率，最终样本量为每组66例，共132例",
+      "source_used": "方案",
+      "evidence": [
+        "本临床研究结果，优效设计，假设试验组溶栓治疗24h血栓清除率与对照组差值为%，标准差为18%，统计检验的显著性水平取单侧0.025，把握度取80%，计算所得每组样本量为52例，考虑20%的脱落率，最终样本量为每组66例，共132例。样本量计算公式如下： 其中σ为对照组预期标准差；为预期的两组均数之差的绝对值， = ；Δ为优效性界值，取。 样本量分配以及其确定依据 本试验将同时在多家临床试验机构同时开展，原则上，将尽可能的均匀分配各中心的入组数量，以保证充分的中心代表性。但考虑到可行性和入选进度，将会根据实际情况对入组数量进行调整，尽量保证每家中"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 20,
+      "key": "主要有效性终点",
+      "section": "3 试验概述",
+      "topic": "试验概述表",
+      "item": "主要有效性终点",
+      "granularity": "字段填充",
+      "rule": "从方案中方案摘要区域抽取主要有效性终点。",
+      "required_content": "主要终点",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "主要评价指标：\n溶栓治疗24血栓清除率",
+      "source_used": "方案",
+      "evidence": [
+        "[表3 行8] 有效性指标 | 主要评价指标：\n溶栓治疗24血栓清除率\n次要评价指标：\n溶栓总时间\n尿激酶总剂量\n溶栓治疗30min血栓清除率\n溶栓治疗30min、溶栓治疗24h血栓清除成功率\n器械成功率\n出院前及术后1个月患肢消肿率\n术后1个月、3个月、6个月静脉临床严重程度评分(VCSS)较基线值变化；\n术后1个月和6个月的靶病变静脉通畅率\n术后6个月血栓后综合征(PTS)发生率\n对靶血管因血栓导致正向血流消失患者，溶栓后30min正向血流恢复率"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 21,
+      "key": "其他终点",
+      "section": "3 试验概述",
+      "topic": "试验概述表",
+      "item": "其他终点",
+      "granularity": "字段填充",
+      "rule": "从方案中方案摘要区域抽取次要终点、安全性终点、探索性终点等。",
+      "required_content": "其他终点",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "次要评价指标：\n溶栓总时间\n尿激酶总剂量\n溶栓治疗30min血栓清除率\n溶栓治疗30min、溶栓治疗24h血栓清除成功率\n器械成功率\n出院前及术后1个月患肢消肿率\n术后1个月、3个月、6个月静脉临床严重程度评分(VCSS)较基线值变化；\n术后1个月和6个月的靶病变静脉通畅率\n术后6个月血栓后综合征(PTS)发生率\n对靶血管因血栓导致正向血流消失患者，溶栓后30min正向血流恢复率\n安全性指标：\n术后1个月主要不良事件(MAE)的发生情况\n住院期间严重出血事件的发生情况\n研究期间的全因死亡率\n研究期间与试验器械相关不良事件及严重不良事件发生情况\n研究期间总不良事件及严重不良事件发生情况",
+      "source_used": "方案",
+      "evidence": [
+        "[表3 行8] 有效性指标 | 主要评价指标：\n溶栓治疗24血栓清除率\n次要评价指标：\n溶栓总时间\n尿激酶总剂量\n溶栓治疗30min血栓清除率\n溶栓治疗30min、溶栓治疗24h血栓清除成功率\n器械成功率\n出院前及术后1个月患肢消肿率\n术后1个月、3个月、6个月静脉临床严重程度评分(VCSS)较基线值变化；\n术后1个月和6个月的靶病变静脉通畅率\n术后6个月血栓后综合征(PTS)发生率\n对靶血管因血栓导致正向血流消失患者，溶栓后30min正向血流恢复率",
+        "[表3 行9] 安全性指标 | 术后1个月主要不良事件(MAE)的发生情况\n住院期间严重出血事件的发生情况\n研究期间的全因死亡率\n研究期间与试验器械相关不良事件及严重不良事件发生情况\n研究期间总不良事件及严重不良事件发生情况"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 22,
+      "key": "统计分析人群",
+      "section": "3 试验概述",
+      "topic": "试验概述表",
+      "item": "统计分析人群",
+      "granularity": "字段填充",
+      "rule": "若方案摘要有人群细致描述，则用方案摘要，否则，来自方案的分析数据集章节，把对于人群的叙述全部粘贴。",
+      "required_content": "FAS/PPS/SS的具体描述",
+      "source_type": "方案",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "全分析集(Full analysis Set，FAS)：按照意向性分析(ITT)原则，所有入组并使用器械的受试者将进入FAS。对于主要评价指标的缺失，主要疗效指标的缺失可采用最差填补原则进行填补，其它次要疗效指标不进行填补。\n符合方案集(Per Protocol Set，PPS)：指所有完成试验且排除了严重违背方案的治疗人群亚组。\n安全性数据集(Safety Set，SS)：指所有参与临床试验且使用了试验用器械、并且至少有一次安全性评价的受试者集。",
+      "source_used": "方案",
+      "evidence": [
+        "全分析集(Full analysis Set，FAS)：按照意向性分析(ITT)原则，所有入组并使用器械的受试者将进入FAS。对于主要评价指标的缺失，主要疗效指标的缺失可采用最差填补原则进行填补，其它次要疗效指标不进行填补。",
+        "符合方案集(Per Protocol Set，PPS)：指所有完成试验且排除了严重违背方案的治疗人群亚组。",
+        "安全性数据集(Safety Set，SS)：指所有参与临床试验且使用了试验用器械、并且至少有一次安全性评价的受试者集。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 65,
+        "completeness": 60,
+        "hallucination_risk": 5,
+        "overall_confidence": 72,
+        "extraction_method": "protocol_regex"
+      }
+    },
+    {
+      "seq": 23,
+      "key": "项目类型_药物_器械",
+      "section": "2 遵循的法规和支持性文件",
+      "topic": "项目类型",
+      "item": "项目类型：药物 / 器械",
+      "granularity": "统一模板选择",
+      "rule": "只需判断一次：药物项目保留药物项目模板；器械项目保留器械项目模板。",
+      "required_content": "药物/器械",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "器械项目",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `项目类型：药物 / 器械`: 器械项目"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 24,
+      "key": "项目数据采集模式_EDC_PDC",
+      "section": "6 项目人员职责；7.1；10.1；10.2；10.3；12.1-12.3；13；14；15；16；17；18；22；26.1；26.2；",
+      "topic": "EDC/PDC通用选择",
+      "item": "项目数据采集模式：EDC / PDC",
+      "granularity": "统一模板选择",
+      "rule": "只需判断一次：对于有关章节，EDC项目保留EDC模板，PDC项目保留PDC模板；",
+      "required_content": "EDC或PDC",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "PDC",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 25,
+      "key": "EDC系统供应商_系统类型",
+      "section": "7.3；7.5；7.6",
+      "topic": "数据管理系统",
+      "item": "EDC系统供应商/系统类型",
+      "granularity": "统一模板选择",
+      "rule": "仅在EDC项目中判断：按赛美斯、青蜂、里恩、太美V5/V6、易迪希、其他系统等整体选择系统模板。",
+      "required_content": "系统名称、供应商、版本号、服务器地址（如适用）",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "项目数据采集模式：EDC / PDC=EDC",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC",
+        "适用条件 `项目数据采集模式：EDC / PDC=EDC` 不成立：`项目数据采集模式：EDC / PDC` 当前值为 `PDC`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": 26,
+      "key": "随机系统供应商_系统类型",
+      "section": "8.1",
+      "topic": "随机系统",
+      "item": "随机系统供应商/系统类型",
+      "granularity": "统一模板选择",
+      "rule": "仅在使用随机系统时判断：按医墨、易迪希、赛美斯或其他随机系统整体选择模板。",
+      "required_content": "无额外逐项填写",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否使用随机系统=是",
+      "status": "filled",
+      "value": "易迪希",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `随机系统供应商/系统类型`: 易迪希"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": "25.1",
+      "key": "EDC其他系统供应商名称",
+      "section": "7.3；7.5；7.6",
+      "topic": "数据管理系统",
+      "item": "EDC其他系统供应商名称",
+      "granularity": "字段填充",
+      "rule": "当EDC系统供应商/系统类型选择其他系统时，填充7.3“/模板7/其他系统”中的EDC系统供应商公司名称。",
+      "required_content": "其他EDC系统供应商公司名称",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "项目数据采集模式：EDC / PDC=EDC;EDC系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC",
+        "适用条件 `项目数据采集模式：EDC / PDC=EDC` 不成立：`项目数据采集模式：EDC / PDC` 当前值为 `PDC`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "25.2",
+      "key": "EDC其他系统名称",
+      "section": "7.3；7.5；7.6",
+      "topic": "数据管理系统",
+      "item": "EDC其他系统名称",
+      "granularity": "字段填充",
+      "rule": "当EDC系统供应商/系统类型选择其他系统时，填充7.3“/模板7/其他系统”中的EDC系统名称。",
+      "required_content": "其他EDC系统名称",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "项目数据采集模式：EDC / PDC=EDC;EDC系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC",
+        "适用条件 `项目数据采集模式：EDC / PDC=EDC` 不成立：`项目数据采集模式：EDC / PDC` 当前值为 `PDC`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "25.3",
+      "key": "EDC其他系统维护负责方",
+      "section": "7.3；7.5；7.6",
+      "topic": "数据管理系统",
+      "item": "EDC其他系统维护负责方",
+      "granularity": "字段填充",
+      "rule": "当EDC系统供应商/系统类型选择其他系统时，填充7.3“/模板7/其他系统”中的系统维护负责方。",
+      "required_content": "其他EDC系统维护负责方",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "项目数据采集模式：EDC / PDC=EDC;EDC系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC",
+        "适用条件 `项目数据采集模式：EDC / PDC=EDC` 不成立：`项目数据采集模式：EDC / PDC` 当前值为 `PDC`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "25.4",
+      "key": "EDC其他系统版本号",
+      "section": "7.3；7.5；7.6",
+      "topic": "数据管理系统",
+      "item": "EDC其他系统版本号",
+      "granularity": "字段填充",
+      "rule": "当EDC系统供应商/系统类型选择其他系统时，填充7.3“/模板7/其他系统”中的EDC版本号。",
+      "required_content": "其他EDC系统版本号",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "项目数据采集模式：EDC / PDC=EDC;EDC系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC",
+        "适用条件 `项目数据采集模式：EDC / PDC=EDC` 不成立：`项目数据采集模式：EDC / PDC` 当前值为 `PDC`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "25.5",
+      "key": "EDC其他系统服务器地址",
+      "section": "7.3；7.5；7.6",
+      "topic": "数据管理系统",
+      "item": "EDC其他系统服务器地址",
+      "granularity": "字段填充",
+      "rule": "当EDC系统供应商/系统类型选择其他系统时，填充7.3“/模板7/其他系统”中的服务器地址。",
+      "required_content": "其他EDC系统服务器地址",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "项目数据采集模式：EDC / PDC=EDC;EDC系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC",
+        "适用条件 `项目数据采集模式：EDC / PDC=EDC` 不成立：`项目数据采集模式：EDC / PDC` 当前值为 `PDC`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "26.1",
+      "key": "随机其他系统供应商名称",
+      "section": "8.1",
+      "topic": "随机系统",
+      "item": "随机其他系统供应商名称",
+      "granularity": "字段填充",
+      "rule": "当随机系统供应商/系统类型选择其他随机系统时，填充8.1“/模板4/其他随机系统”中的随机系统供应商公司名称。",
+      "required_content": "其他随机系统供应商公司名称",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否使用随机系统=是;随机系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `是否使用随机系统`: 是",
+        "适用条件 `是否使用随机系统=是` 已满足。",
+        "DM日志字段 `随机系统供应商/系统类型`: 易迪希",
+        "适用条件 `随机系统供应商/系统类型=其他` 不成立：`随机系统供应商/系统类型` 当前值为 `易迪希`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "26.2",
+      "key": "随机其他系统搭建负责方",
+      "section": "8.1",
+      "topic": "随机系统",
+      "item": "随机其他系统搭建负责方",
+      "granularity": "字段填充",
+      "rule": "当随机系统供应商/系统类型选择其他随机系统时，填充8.1“/模板4/其他随机系统”中的系统搭建负责方。",
+      "required_content": "其他随机系统搭建负责方",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否使用随机系统=是;随机系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `是否使用随机系统`: 是",
+        "适用条件 `是否使用随机系统=是` 已满足。",
+        "DM日志字段 `随机系统供应商/系统类型`: 易迪希",
+        "适用条件 `随机系统供应商/系统类型=其他` 不成立：`随机系统供应商/系统类型` 当前值为 `易迪希`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "26.3",
+      "key": "随机其他系统维护负责方",
+      "section": "8.1",
+      "topic": "随机系统",
+      "item": "随机其他系统维护负责方",
+      "granularity": "字段填充",
+      "rule": "当随机系统供应商/系统类型选择其他随机系统时，填充8.1“/模板4/其他随机系统”中的系统维护负责方。",
+      "required_content": "其他随机系统维护负责方",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否使用随机系统=是;随机系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `是否使用随机系统`: 是",
+        "适用条件 `是否使用随机系统=是` 已满足。",
+        "DM日志字段 `随机系统供应商/系统类型`: 易迪希",
+        "适用条件 `随机系统供应商/系统类型=其他` 不成立：`随机系统供应商/系统类型` 当前值为 `易迪希`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "26.4",
+      "key": "随机其他系统版本号",
+      "section": "8.1",
+      "topic": "随机系统",
+      "item": "随机其他系统版本号",
+      "granularity": "字段填充",
+      "rule": "当随机系统供应商/系统类型选择其他随机系统时，填充8.1“/模板4/其他随机系统”中的随机系统版本号。",
+      "required_content": "其他随机系统版本号",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否使用随机系统=是;随机系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `是否使用随机系统`: 是",
+        "适用条件 `是否使用随机系统=是` 已满足。",
+        "DM日志字段 `随机系统供应商/系统类型`: 易迪希",
+        "适用条件 `随机系统供应商/系统类型=其他` 不成立：`随机系统供应商/系统类型` 当前值为 `易迪希`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": "26.5",
+      "key": "随机其他系统服务器地址",
+      "section": "8.1",
+      "topic": "随机系统",
+      "item": "随机其他系统服务器地址",
+      "granularity": "字段填充",
+      "rule": "当随机系统供应商/系统类型选择其他随机系统时，填充8.1“/模板4/其他随机系统”中的服务器地址。",
+      "required_content": "其他随机系统服务器地址",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否使用随机系统=是;随机系统供应商/系统类型=其他",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `是否使用随机系统`: 是",
+        "适用条件 `是否使用随机系统=是` 已满足。",
+        "DM日志字段 `随机系统供应商/系统类型`: 易迪希",
+        "适用条件 `随机系统供应商/系统类型=其他` 不成立：`随机系统供应商/系统类型` 当前值为 `易迪希`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": 27,
+      "key": "数据录入和质疑模板",
+      "section": "17 数据录入；18 数据质疑",
+      "topic": "录入/质疑",
+      "item": "数据录入和质疑模板",
+      "granularity": "统一模板选择",
+      "rule": "随EDC/PDC自动选择整段模板；不要逐条确认PDC双人双遍录入、EDC研究者/CRC录入、质疑角色等默认内容。",
+      "required_content": "无额外逐项填写",
+      "source_type": "",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "PDC模板",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `项目数据采集模式：EDC / PDC`: PDC"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 70,
+        "completeness": 65,
+        "hallucination_risk": 5,
+        "overall_confidence": 76,
+        "extraction_method": "derived"
+      }
+    },
+    {
+      "seq": 28,
+      "key": "是否涉及外部数据",
+      "section": "6 项目人员职责；19；25.2；26.1；27；29；30；31",
+      "topic": "外部数据",
+      "item": "是否涉及外部数据",
+      "granularity": "统一模板选择",
+      "rule": "只需判断一次：若涉及外部数据，相关章节保留外部数据内容；若不涉及，相关章节写不适用/删除对应角色和文件。",
+      "required_content": "是/否",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "否",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `是否涉及外部数据`: 否"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 29,
+      "key": "设计的外部数据类型",
+      "section": "19 外部数据管理",
+      "topic": "外部数据",
+      "item": "设计的外部数据类型",
+      "granularity": "字段填充",
+      "rule": "填写本项目涉及的外部数据类型，如核心实验室等。",
+      "required_content": "外部数据类型",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否涉及外部数据=是",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `是否涉及外部数据`: 否",
+        "适用条件 `是否涉及外部数据=是` 不成立：`是否涉及外部数据` 当前值为 `否`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": 30,
+      "key": "是否涉及医学编码",
+      "section": "20 医学编码",
+      "topic": "医学编码",
+      "item": "是否涉及医学编码",
+      "granularity": "字段填充",
+      "rule": "只需判断一次：若涉及医学编码，相关章节保留外部数据内容；若不涉及，相关章节写不适用/删除对应角色和文件。",
+      "required_content": "编码表单",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "是",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `是否涉及医学编码`: 是"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 31,
+      "key": "是否涉及针对有药物警戒系统的项目",
+      "section": "21 SAE一致性核查",
+      "topic": "SAE一致性核查",
+      "item": "是否涉及针对有药物警戒系统的项目",
+      "granularity": "统一模板选择",
+      "rule": "只需判断一次：涉及针对有药物警戒系统的项目则选模板1；否则选模板2；",
+      "required_content": "是/否",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "否",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `是否涉及针对有药物警戒系统的项目`: 否"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 32,
+      "key": "是否有阶段性分析_中期分析",
+      "section": "25；27.2；相关锁库/递交条件",
+      "topic": "阶段性分析",
+      "item": "是否有阶段性分析/中期分析",
+      "granularity": "统一模板选择",
+      "rule": "只需判断一次：有阶段性分析则保留第25章和27.2相关递交内容；无则删除或写不适用。",
+      "required_content": "是/否",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "否",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `是否有阶段性分析/中期分析`: 否"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 33,
+      "key": "阶段性分析目的和阶段要求",
+      "section": "25.1 目的及阶段",
+      "topic": "阶段性分析",
+      "item": "阶段性分析目的和阶段要求",
+      "granularity": "字段填充",
+      "rule": "有阶段性分析时填写方案或项目约定的目的、阶段、触发条件。",
+      "required_content": "目的、阶段、触发时间点",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "是否有阶段性分析/中期分析=是",
+      "status": "not_applicable",
+      "value": null,
+      "source_used": "适用条件",
+      "evidence": [
+        "DM日志字段 `是否有阶段性分析/中期分析`: 否",
+        "适用条件 `是否有阶段性分析/中期分析=是` 不成立：`是否有阶段性分析/中期分析` 当前值为 `否`。"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 0,
+        "completeness": 0,
+        "hallucination_risk": 0,
+        "overall_confidence": 0,
+        "extraction_method": "none",
+        "scoring_note": "不适用"
+      }
+    },
+    {
+      "seq": 34,
+      "key": "是否需要数据管理报告",
+      "section": "28 数据管理报告",
+      "topic": "数据管理报告",
+      "item": "是否需要数据管理报告",
+      "granularity": "适用性判断",
+      "rule": "根据有无此服务范围判断使用模板1还是模板2",
+      "required_content": "是/否",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "是",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `是否需要数据管理报告`: 是"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 35,
+      "key": "是否包含向申办者数据递交服务范围",
+      "section": "29 向申办者数据递交",
+      "topic": "向申办者递交",
+      "item": "是否包含向申办者数据递交服务范围",
+      "granularity": "统一模板选择",
+      "rule": "只需判断一次：有该服务范围则保留适用模板；无则使用不适用模板。",
+      "required_content": "是/否",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "是",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `是否包含向申办者数据递交服务范围`: 是"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 36,
+      "key": "项目质量控制等级_模板",
+      "section": "31 数据质量控制",
+      "topic": "质量控制",
+      "item": "项目质量控制等级/模板",
+      "granularity": "统一模板选择",
+      "rule": "判断项目是高标准/低标准；整体选择数据质量控制模板。",
+      "required_content": "高标准/低标准",
+      "source_type": "DM日志",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "filled",
+      "value": "高标准项目",
+      "source_used": "DM日志",
+      "evidence": [
+        "DM日志字段 `项目质量控制等级/模板`: 高标准项目"
+      ],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 90,
+        "completeness": 90,
+        "hallucination_risk": 5,
+        "overall_confidence": 92,
+        "extraction_method": "dm_lookup"
+      }
+    },
+    {
+      "seq": 37,
+      "key": "AI可自动判断的项目特征",
+      "section": "全文",
+      "topic": "AI判断辅助",
+      "item": "AI可自动判断的项目特征",
+      "granularity": "AI判断",
+      "rule": "AI可基于方案初步判断项目类型、是否随机、是否盲法、是否有阶段性分析、是否涉及外部数据/药物警戒/医学编码，但需输出证据和待确认项。",
+      "required_content": "AI判断结果+证据摘录",
+      "source_type": "",
+      "missing_handling": "NA",
+      "applicability_condition": "",
+      "status": "qc_rule",
+      "value": null,
+      "source_used": "QC规则",
+      "evidence": [],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 50,
+        "completeness": 85,
+        "hallucination_risk": 20,
+        "overall_confidence": 71,
+        "extraction_method": "search"
+      }
+    },
+    {
+      "seq": 38,
+      "key": "方案与DM日志信息冲突",
+      "section": "全文",
+      "topic": "冲突处理",
+      "item": "方案与DM日志信息冲突",
+      "granularity": "质控规则",
+      "rule": "如方案和DM日志冲突，不自动覆盖；列入冲突清单，由DM确认。",
+      "required_content": "冲突字段、两个来源的原文",
+      "source_type": "",
+      "missing_handling": "弹窗给用户确认",
+      "applicability_condition": "",
+      "status": "qc_rule",
+      "value": null,
+      "source_used": "QC规则",
+      "evidence": [],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 50,
+        "completeness": 85,
+        "hallucination_risk": 20,
+        "overall_confidence": 71,
+        "extraction_method": "search"
+      }
+    },
+    {
+      "seq": 39,
+      "key": "方案和DM日志均未提供的信息",
+      "section": "全文",
+      "topic": "缺失处理",
+      "item": "方案和DM日志均未提供的信息",
+      "granularity": "质控规则",
+      "rule": "不得编造；按缺失时处理列输出待确认、使用模板默认值或写NA。",
+      "required_content": "缺失字段清单",
+      "source_type": "",
+      "missing_handling": "NA",
+      "applicability_condition": "",
+      "status": "qc_rule",
+      "value": null,
+      "source_used": "QC规则",
+      "evidence": [],
+      "question": null,
+      "confidence": {
+        "extraction_accuracy": 50,
+        "completeness": 85,
+        "hallucination_risk": 20,
+        "overall_confidence": 71,
+        "extraction_method": "search"
+      }
+    }
+  ],
+  "dm_log_keys": [
+    "CRO审核人",
+    "DMP版本号",
+    "DMP版本日期",
+    "[0].CRO审核人",
+    "[0].DMP版本号",
+    "[0].DMP版本日期",
+    "[0].临床监查方名称",
+    "[0].撰写者/修订者",
+    "[0].数据管理单位审核人",
+    "[0].是否使用登记系统",
+    "[0].是否使用随机系统",
+    "[0].是否包含向申办者数据递交服务范围",
+    "[0].是否有阶段性分析/中期分析",
+    "[0].是否涉及医学编码",
+    "[0].是否涉及外部数据",
+    "[0].是否涉及针对有药物警戒系统的项目",
+    "[0].是否需要数据管理报告",
+    "[0].是否需要预递交",
+    "[0].版本修订记录",
+    "[0].申办者审核人",
+    "[0].统计分析单位审核人",
+    "[0].统计分析方名称",
+    "[0].随机系统供应商/系统类型",
+    "[0].项目数据采集模式：EDC / PDC",
+    "[0].项目类型：药物 / 器械",
+    "[0].项目质量控制等级/模板",
+    "临床监查方名称",
+    "撰写者/修订者",
+    "数据管理单位审核人",
+    "是否使用登记系统",
+    "是否使用随机系统",
+    "是否包含向申办者数据递交服务范围",
+    "是否有阶段性分析/中期分析",
+    "是否涉及医学编码",
+    "是否涉及外部数据",
+    "是否涉及针对有药物警戒系统的项目",
+    "是否需要数据管理报告",
+    "是否需要预递交",
+    "版本修订记录",
+    "申办者审核人",
+    "统计分析单位审核人",
+    "统计分析方名称",
+    "随机系统供应商/系统类型",
+    "项目数据采集模式：EDC / PDC",
+    "项目类型：药物 / 器械",
+    "项目质量控制等级/模板"
+  ]
+}

@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useState, useEffect, ReactNode, useMemo } from "react";
 import { User } from "../types";
 
 interface AuthContextType {
@@ -15,15 +15,27 @@ export const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
 });
 
-export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
+function loadUserFromStorage(): User | null {
+  try {
     const stored = localStorage.getItem("user");
     const token = localStorage.getItem("token");
     if (stored && token) {
-      setUser(JSON.parse(stored));
+      return JSON.parse(stored);
     }
+  } catch {}
+  return null;
+}
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<User | null>(loadUserFromStorage);
+
+  useEffect(() => {
+    const handleForcedLogout = () => {
+      console.log("[auth] forced logout via event");
+      setUser(null);
+    };
+    window.addEventListener("auth:logout", handleForcedLogout);
+    return () => window.removeEventListener("auth:logout", handleForcedLogout);
   }, []);
 
   const login = (user: User) => {
@@ -38,8 +50,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   };
 
+  const value = useMemo(
+    () => ({ user, login, logout, isAuthenticated: !!user }),
+    [user],
+  );
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated: !!user }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

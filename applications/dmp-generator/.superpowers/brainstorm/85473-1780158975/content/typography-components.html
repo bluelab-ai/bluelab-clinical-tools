@@ -1,0 +1,90 @@
+<h2>字体层级 & 组件改造清单</h2>
+<p class="subtitle">在现有 Inter + JetBrains Mono 基础上精细化字号、字重、间距</p>
+
+<div class="section">
+  <h3>字体层级</h3>
+  <div style="display:flex;flex-direction:column;gap:8px;max-width:650px;background:#121216;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:20px;">
+    <div style="font-size:24px;font-weight:700;color:#fafafa;">Heading 1 — 24px / Bold / tracking-tight</div>
+    <div style="font-size:18px;font-weight:600;color:#f4f4f5;">Heading 2 — 18px / Semibold</div>
+    <div style="font-size:15px;font-weight:600;color:#e4e4e7;">Heading 3 — 15px / Semibold</div>
+    <div style="font-size:14px;color:#d4d4d8;margin-top:4px;">Body — 14px / Regular / leading-relaxed</div>
+    <div style="font-size:12px;color:#a1a1aa;">Caption — 12px / Regular</div>
+    <div style="font-size:11px;color:#71717a;font-family:JetBrains Mono,monospace;">Mono — 11px / JetBrains Mono</div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:28px;">
+  <h3>间距尺度（基于 4px 网格）</h3>
+  <div style="display:flex;gap:8px;align-items:flex-end;max-width:650px;">
+    <div style="text-align:center;"><div style="width:4px;height:4px;background:#7c3aed;border-radius:1px;margin:0 auto;"></div><span style="font-size:10px;color:#71717a;">4</span></div>
+    <div style="text-align:center;"><div style="width:8px;height:8px;background:#7c3aed;border-radius:1px;margin:0 auto;"></div><span style="font-size:10px;color:#71717a;">8</span></div>
+    <div style="text-align:center;"><div style="width:12px;height:12px;background:#7c3aed;border-radius:1px;margin:0 auto;"></div><span style="font-size:10px;color:#71717a;">12</span></div>
+    <div style="text-align:center;"><div style="width:16px;height:16px;background:#7c3aed;border-radius:1px;margin:0 auto;"></div><span style="font-size:10px;color:#71717a;">16</span></div>
+    <div style="text-align:center;"><div style="width:24px;height:24px;background:#a78bfa;border-radius:1px;margin:0 auto;"></div><span style="font-size:10px;color:#71717a;">24</span></div>
+    <div style="text-align:center;"><div style="width:32px;height:32px;background:#a78bfa;border-radius:1px;margin:0 auto;"></div><span style="font-size:10px;color:#71717a;">32</span></div>
+    <div style="text-align:center;"><div style="width:48px;height:48px;background:#c4b5fd;border-radius:1px;margin:0 auto;"></div><span style="font-size:10px;color:#71717a;">48</span></div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:28px;">
+  <h3>各组件改造要点</h3>
+  <div style="display:flex;flex-direction:column;gap:10px;max-width:700px;">
+
+    <div style="background:#121216;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 18px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:11px;font-weight:600;color:#c4b5fd;background:rgba(124,58,237,0.1);padding:2px 8px;border-radius:4px;min-width:90px;text-align:center;">ChatPage</span>
+        <span style="font-size:13px;color:#d4d4d8;">顶部栏升级：半透明毛玻璃 + 底部微光边框。状态条改为深色胶囊标签。整体背景 #09090b</span>
+      </div>
+    </div>
+
+    <div style="background:#121216;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 18px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:11px;font-weight:600;color:#c4b5fd;background:rgba(124,58,237,0.1);padding:2px 8px;border-radius:4px;min-width:90px;text-align:center;">ChatMessage</span>
+        <span style="font-size:13px;color:#d4d4d8;">消息气泡微调：角色标签改为细线胶囊。代码块深色底+紫色关键词高亮。blockquote 边框改为紫色渐变</span>
+      </div>
+    </div>
+
+    <div style="background:#121216;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 18px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:11px;font-weight:600;color:#c4b5fd;background:rgba(124,58,237,0.1);padding:2px 8px;border-radius:4px;min-width:90px;text-align:center;">FileSidebar</span>
+        <span style="font-size:13px;color:#d4d4d8;">深色底 #121216 + 微光右边界。文件项 hover 时背景渐变 + 左移 2px。分类标签改为细线分隔</span>
+      </div>
+    </div>
+
+    <div style="background:#121216;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 18px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:11px;font-weight:600;color:#c4b5fd;background:rgba(124,58,237,0.1);padding:2px 8px;border-radius:4px;min-width:90px;text-align:center;">ChatInput</span>
+        <span style="font-size:13px;color:#d4d4d8;">Generate DMP 按钮升级：紫色渐变底 + hover 发光扩散。disabled 态改为半透明</span>
+      </div>
+    </div>
+
+    <div style="background:#121216;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 18px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:11px;font-weight:600;color:#c4b5fd;background:rgba(124,58,237,0.1);padding:2px 8px;border-radius:4px;min-width:90px;text-align:center;">QuestionCard</span>
+        <span style="font-size:13px;color:#d4d4d8;">选项按钮改深色底 + 亮边框，选中态紫色渐变边框 + 微弱发光。输入框聚焦环改用紫色光晕</span>
+      </div>
+    </div>
+
+    <div style="background:#121216;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 18px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:11px;font-weight:600;color:#c4b5fd;background:rgba(124,58,237,0.1);padding:2px 8px;border-radius:4px;min-width:90px;text-align:center;">ReportPanel</span>
+        <span style="font-size:13px;color:#d4d4d8;">独立深色面板 + 左侧紫色竖线标识。拖拽手柄 hover 时紫色发光。内容区自定义滚动条改为紫色调</span>
+      </div>
+    </div>
+
+    <div style="background:#121216;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 18px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:11px;font-weight:600;color:#c4b5fd;background:rgba(124,58,237,0.1);padding:2px 8px;border-radius:4px;min-width:90px;text-align:center;">Login / Register</span>
+        <span style="font-size:13px;color:#d4d4d8;">卡片升级深色底 + 微光边框。输入框深色填充 + 聚焦紫色光晕。按钮紫色渐变。背景加微妙的网格纹理</span>
+      </div>
+    </div>
+
+    <div style="background:#121216;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 18px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:11px;font-weight:600;color:#c4b5fd;background:rgba(124,58,237,0.1);padding:2px 8px;border-radius:4px;min-width:90px;text-align:center;">LogForm / Help</span>
+        <span style="font-size:13px;color:#d4d4d8;">统一深色主题背景 + 卡片式表单区域。帮助页步骤卡片增加 stagger 入场动画</span>
+      </div>
+    </div>
+
+  </div>
+</div>

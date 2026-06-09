@@ -28,9 +28,10 @@ def decode_token(token: str) -> dict:
     return jwt.decode(token, SECRET_KEY, algorithms=[JWT_ALGORITHM])
 
 
-def safe_path(workspace: str, filename: str) -> Path:
+def safe_path(workspace: str, project: str, filename: str) -> Path:
     base = Path(WORKSPACES_DIR).resolve()
-    target = (base / workspace / filename).resolve()
-    if not str(target).startswith(str(base / workspace)):
+    root = (base / workspace / project).resolve()
+    target = (base / workspace / project / filename).resolve()
+    if not str(target).startswith(str(root) + os.sep) and str(target) != str(root):
         raise ValueError("Path traversal detected")
     return target

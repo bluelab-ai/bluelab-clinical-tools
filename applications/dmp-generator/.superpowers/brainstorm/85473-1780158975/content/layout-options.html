@@ -1,0 +1,26 @@
+<h2>主页面布局方案</h2>
+<p class="subtitle">当前是「侧边栏 + 聊天区 + 报告面板」三栏结构。你希望怎么优化？</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>保留现有结构，精致化打磨</h3>
+      <p>三栏布局不变，但在深色主题下重新设计间距、边框、阴影等细节。这是最轻量的改动，风险最低。</p>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>左侧栏可折叠，聊天区居中聚焦</h3>
+      <p>文件边栏默认收起为图标模式，hover 展开。聊天区获得更多空间，视觉重心更集中。类似 IDE 侧边栏的交互模式。</p>
+    </div>
+  </div>
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>顶部导航 + 左侧栏 + 主区域</h3>
+      <p>将顶部栏升级为全局导航（Logo、项目切换、帮助、设置），文件管理仍在左侧，主聊天区更大。结构更清晰，层级更分明。</p>
+    </div>
+  </div>
+</div>
