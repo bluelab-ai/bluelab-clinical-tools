@@ -1,0 +1,65 @@
+<h2>User Auth & Workspace Isolation</h2>
+<p class="subtitle">JWT认证 + SQLite用户表 + 文件系统隔离</p>
+
+<div class="section">
+  <h3>数据模型</h3>
+  <div style="background:var(--bg-secondary);border-radius:8px;padding:16px;font-family:monospace;font-size:13px;line-height:1.6;">
+-- SQLite: users 表<br>
+CREATE TABLE users (<br>
+&nbsp;&nbsp;id         INTEGER PRIMARY KEY,<br>
+&nbsp;&nbsp;username   TEXT UNIQUE NOT NULL,<br>
+&nbsp;&nbsp;password   TEXT NOT NULL,  -- bcrypt hash<br>
+&nbsp;&nbsp;workspace  TEXT UNIQUE NOT NULL,  -- "user_alice"<br>
+&nbsp;&nbsp;created_at TEXT DEFAULT CURRENT_TIMESTAMP<br>
+);<br><br>
+-- 注册时自动生成 workspace = "user_" + username<br>
+-- 同步在文件系统创建 data/workspaces/{workspace}/
+  </div>
+</div>
+
+<div class="section">
+  <h3>认证流程</h3>
+  <div style="display:flex;gap:16px;">
+    <div style="flex:1;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">注册 POST /api/auth/register</div>
+      <ul style="font-size:14px;padding-left:20px;">
+        <li>校验 username 唯一性</li>
+        <li>bcrypt 加密密码</li>
+        <li>写入 users 表</li>
+        <li>创建 data/workspaces/{username}/</li>
+        <li>返回 JWT token（含 user_id + workspace）</li>
+      </ul>
+    </div>
+    <div style="flex:1;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">登录 POST /api/auth/login</div>
+      <ul style="font-size:14px;padding-left:20px;">
+        <li>查询 users 表</li>
+        <li>bcrypt 校验密码</li>
+        <li>返回 JWT token</li>
+        <li>前端存入 localStorage</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>请求鉴权</h3>
+  <div style="background:var(--bg-secondary);border-radius:8px;padding:16px;font-family:monospace;font-size:13px;line-height:1.6;">
+# FastAPI middleware / Depends<br>
+# 每个请求携带 Authorization: Bearer &lt;token&gt;<br>
+# 解析 JWT → 获取 user_id + workspace → 注入 request.state<br>
+# 所有文件操作限定在 data/workspaces/{workspace}/ 内<br><br>
+def get_current_user(token) → UserInfo:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;payload = jwt.decode(token, SECRET_KEY)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return UserInfo(user_id=..., workspace=...)<br><br>
+# 路径安全: 校验所有文件路径是否在用户workspace内<br>
+def safe_path(workspace, filename) → Path:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p = BASE / workspace / filename<br>
+&nbsp;&nbsp;&nbsp;&nbsp;assert p.resolve().is_relative_to(BASE / workspace)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return p
+  </div>
+</div>
+
+<div style="margin-top:16px;padding:12px;border-left:3px solid var(--accent);border-radius:4px;background:var(--bg-secondary);">
+  <strong>安全要点：</strong> 所有文件IO都经过 safe_path 校验，防止路径穿越攻击（如 ../../etc/passwd）
+</div>

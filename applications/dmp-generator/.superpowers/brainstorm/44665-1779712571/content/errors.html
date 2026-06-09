@@ -1,0 +1,73 @@
+<h2>Error Handling & Edge Cases</h2>
+<p class="subtitle">覆盖关键异常场景与防御设计</p>
+
+<div class="section">
+  <h3>关键异常场景</h3>
+  <div style="background:var(--bg-secondary);border-radius:8px;padding:16px;font-size:13px;line-height:1.8;">
+
+<table style="width:100%;border-collapse:collapse;font-size:13px;">
+<tr style="border-bottom:1px solid var(--border);">
+  <th style="text-align:left;padding:8px;">场景</th>
+  <th style="text-align:left;padding:8px;">处理策略</th>
+</tr>
+<tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:8px;vertical-align:top;">Claude SDK 调用失败/超时</td>
+  <td style="padding:8px;">SSE 推送 error 事件，提示用户重试；保留当前 session 上下文，重试不从头开始</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:8px;vertical-align:top;">DMP 生成中用户关闭页面</td>
+  <td style="padding:8px;">后端 session 保留 N 分钟，用户重新打开可恢复；超时后 session 销毁，下次从起点开始</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:8px;vertical-align:top;">工作目录中缺少必要文件（无日志/无方案）</td>
+  <td style="padding:8px;">DMP 生成按钮 disabled，聊天框提示：请先完成日志填写和方案上传</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:8px;vertical-align:top;">方案文档解析失败（加密PDF/损坏docx）</td>
+  <td style="padding:8px;">Claude 读取文件时报错 → SSE error 事件 → 提示用户检查文件格式</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:8px;vertical-align:top;">磁盘空间不足</td>
+  <td style="padding:8px;">文件写入失败 → SSE error 事件 → 提示管理员清理空间</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:8px;vertical-align:top;">并发生成（同一用户重复点击）</td>
+  <td style="padding:8px;">后端检查是否已有进行中的 session，有则拒绝新请求，"已有生成任务进行中"</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:8px;vertical-align:top;">JWT 过期</td>
+  <td style="padding:8px;">前端拦截 401，弹出重新登录提示；token 有效期 24h</td>
+</tr>
+<tr>
+  <td style="padding:8px;vertical-align:top;">多用户同时生成</td>
+  <td style="padding:8px;">每个用户独立 session + 独立工作目录，天然隔离，无需额外处理</td>
+</tr>
+</table>
+  </div>
+</div>
+
+<div class="section">
+  <h3>安全防线清单</h3>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:180px;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">密码</div>
+      <p style="font-size:13px;">bcrypt 哈希存储，前端也做最小长度校验(≥6位)</p>
+    </div>
+    <div style="flex:1;min-width:180px;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">路径</div>
+      <p style="font-size:13px;">所有文件操作经 safe_path 校验，限制在用户工作目录内</p>
+    </div>
+    <div style="flex:1;min-width:180px;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">上传</div>
+      <p style="font-size:13px;">扩展名白名单 + 文件大小上限 + 文件类型魔数校验</p>
+    </div>
+    <div style="flex:1;min-width:180px;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">SQL注入</div>
+      <p style="font-size:13px;">使用 ORM(SQLAlchemy) 参数化查询，不拼接 SQL</p>
+    </div>
+    <div style="flex:1;min-width:180px;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">CORS</div>
+      <p style="font-size:13px;">仅允许前端域名跨域访问，生产环境不开放 *</p>
+    </div>
+  </div>
+</div>

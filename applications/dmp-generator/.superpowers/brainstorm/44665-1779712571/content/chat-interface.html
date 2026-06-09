@@ -1,0 +1,98 @@
+<h2>Chat Interface & Claude SDK Integration</h2>
+<p class="subtitle">类Claude Code体验: 聊天框 + 工作目录侧边栏 + 流式输出 + 交互式提问</p>
+
+<div class="section">
+  <h3>页面布局</h3>
+  <div class="mockup">
+    <div class="mockup-header">DMP生成聊天界面</div>
+    <div class="mockup-body">
+      <div style="display:flex;height:400px;">
+        <!-- Sidebar -->
+        <div style="width:240px;background:#1a1a2e;border-right:1px solid var(--border);padding:12px;overflow-y:auto;">
+          <div class="label" style="margin-bottom:8px;">📁 工作目录</div>
+          <div style="font-size:11px;color:var(--text-secondary);margin-bottom:12px;">user_alice/</div>
+
+          <div style="margin-bottom:8px;">
+            <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase;margin-bottom:4px;">📋 日志文件</div>
+            <div class="file-item" style="font-size:11px;padding:3px 6px;border-radius:3px;cursor:pointer;">📄 dm-log.json</div>
+          </div>
+          <div style="margin-bottom:8px;">
+            <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase;margin-bottom:4px;">📑 方案文档</div>
+            <div class="file-item" style="font-size:11px;padding:3px 6px;border-radius:3px;cursor:pointer;">📄 临床试验方案_v2.docx</div>
+          </div>
+          <div style="margin-bottom:8px;">
+            <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase;margin-bottom:4px;">📤 DMP输出</div>
+            <div class="file-item" style="font-size:11px;padding:3px 6px;border-radius:3px;">📄 DMP-随机系统-初稿.docx</div>
+          </div>
+        </div>
+        <!-- Chat area -->
+        <div style="flex:1;display:flex;flex-direction:column;background:#0d0d1a;">
+          <div style="flex:1;padding:16px;overflow-y:auto;font-family:monospace;font-size:12px;line-height:1.6;">
+            <div style="margin-bottom:12px;">
+              <span style="color:#4ade80;">🤖 Claude</span><br>
+              <span style="color:#ccc;">已加载工作目录中的文件。准备生成DMP，请确认开始。</span>
+            </div>
+            <div style="margin-bottom:12px;padding:8px;background:#1a2a1a;border-radius:4px;border-left:3px solid #fbbf24;">
+              <span style="color:#fbbf24;">⚠️ 需要确认</span><br>
+              <span style="color:#ccc;">是否使用随机系统 和 是否使用登记系统 两项均为"是"，请确认哪个是正确的？</span>
+              <div style="margin-top:8px;display:flex;gap:8px;">
+                <button class="mock-button" style="background:#2a5a3a;font-size:11px;">A: 使用随机系统</button>
+                <button class="mock-button" style="background:#2a5a3a;font-size:11px;">B: 使用登记系统</button>
+                <button class="mock-button" style="background:#3a3a3a;font-size:11px;">手动输入...</button>
+              </div>
+            </div>
+            <div style="margin-bottom:12px;">
+              <span style="color:#60a5fa;">👤 用户</span><br>
+              <span style="color:#ccc;">A: 使用随机系统</span>
+            </div>
+            <div style="margin-bottom:12px;">
+              <span style="color:#4ade80;">🤖 Claude</span><br>
+              <span style="color:#ccc;">已确认。正在运行 build_dmp_trace.py...</span><br>
+              <span style="color:var(--text-secondary);">提取到 23 个字段，其中 4 个需要确认...</span>
+            </div>
+          </div>
+          <!-- Input area -->
+          <div style="border-top:1px solid var(--border);padding:12px;display:flex;gap:8px;">
+            <input class="mock-input" style="flex:1;" placeholder="输入消息或回答...">
+            <button class="mock-button" style="flex-shrink:0;">发送</button>
+            <button class="mock-button" style="flex-shrink:0;background:#2a3a5a;">生成DMP</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>SSE 事件类型设计</h3>
+  <div style="background:var(--bg-secondary);border-radius:8px;padding:16px;font-family:monospace;font-size:12px;line-height:1.6;">
+<span style="color:#4ade80;">event: text</span>           ← Claude流式输出文本<br>
+<span style="color:#fbbf24;">event: question</span>        ← Claude需要用户输入<br>
+data: {questions:[{id,text,type:"choice"|"input",options?}]}<br>
+<span style="color:#60a5fa;">event: tool_use</span>        ← Claude调用脚本(如build_dmp_trace)<br>
+data: {tool, arguments, status: "running"|"done"|"error"}<br>
+<span style="color:#a78bfa;">event: file_update</span>     ← 工作目录文件变化(新DMP生成)<br>
+data: {filename, action: "created"|"modified"}<br>
+<span style="color:#f87171;">event: error</span>          ← 错误信息<br>
+<span style="color:#10b981;">event: done</span>           ← 生成完成<br>
+data: {output_file: "DMP-xxx.docx", report: "..."}
+  </div>
+</div>
+
+<div class="section">
+  <h3>后端 Chat API</h3>
+  <div style="background:var(--bg-secondary);border-radius:8px;padding:16px;font-family:monospace;font-size:13px;line-height:1.6;">
+POST /api/chat/send<br>
+Content-Type: application/json<br>
+{ "message": "用户输入文本" | "选择A" | "填写xxx" }<br>
+→ 返回 SSE 流 (text/event-stream)<br>
+→ 后端持有 Claude SDK session，处理多轮对话<br><br>
+POST /api/chat/start-dmp<br>
+Content-Type: application/json<br>
+{}<br>
+→ 触发 DMP 生成流程<br>
+→ 加载 protocol-to-dmp skill + 工作目录中的日志和方案<br>
+→ Claude 按 skill workflow 执行: trace → review → fill template<br>
+→ 过程中有问题通过 SSE question 事件推送
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<h2>System Architecture — Plan A: Direct Claude SDK</h2>
+<p class="subtitle">React frontend ↔ FastAPI backend ↔ Claude SDK + protocol-to-dmp scripts</p>
+
+<div style="background:var(--bg-secondary);border-radius:12px;padding:24px;margin:16px 0;font-family:monospace;font-size:13px;line-height:1.8;white-space:pre;overflow-x:auto;">
+┌─────────────────────────────────────────────────────────────┐
+│                        BROWSER                              │
+│  ┌──────────┐  ┌──────────┐  ┌───────────┐  ┌───────────┐ │
+│  │ 注册/登录 │  │ 日志表单  │  │ 方案上传  │  │  聊天界面  │ │
+│  └──────────┘  └──────────┘  └───────────┘  └───────────┘ │
+│                       │ SSE Stream                          │
+└───────────────────────┼─────────────────────────────────────┘
+                        │
+┌───────────────────────┼─────────────────────────────────────┐
+│                  FASTAPI SERVER                             │
+│  ┌──────────┐  ┌──────────┐  ┌───────────┐  ┌───────────┐ │
+│  │ Auth API │  │  File API │  │  Chat API  │  │  DMP API  │ │
+│  │ /register│  │ /upload   │  │ /chat      │  │ /download │ │
+│  │ /login   │  │ /files    │  │ (SSE流式)  │  │           │ │
+│  └────┬─────┘  └────┬─────┘  └─────┬─────┘  └─────┬─────┘ │
+│       │             │              │               │       │
+│  ┌────┴─────────────┴──────────────┴───────────────┴─────┐ │
+│  │                  CORE SERVICES                        │ │
+│  │  ┌──────────┐  ┌────────────┐  ┌──────────────────┐  │ │
+│  │  │UserMgr   │  │WorkspaceMgr│  │DMPOrchestrator   │  │ │
+│  │  │SQLite    │  │(目录CRUD)  │  │(Claude SDK+skill)│  │ │
+│  │  └──────────┘  └────────────┘  └──────────────────┘  │ │
+│  └──────────────────────────────────────────────────────┘ │
+└───────────────────────────────────────────────────────────┘
+                        │
+┌───────────────────────┼─────────────────────────────────────┐
+│                  FILE SYSTEM                                │
+│  data/                                                     │
+│  └── workspaces/                                           │
+│      ├── user_alice/                                       │
+│      │   ├── dm-log.json         ← 日志文件                │
+│      │   ├── 方案.pdf/方案.docx   ← 上传的方案文档         │
+│      │   └── DMP-xxx.docx        ← 生成的DMP              │
+│      └── user_bob/                                         │
+│          └── ...                                           │
+└────────────────────────────────────────────────────────────┘
+</div>
+
+<div class="section">
+  <h3>核心数据流</h3>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:220px;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">1. 认证流</div>
+      <p style="font-size:14px;">注册→创建用户+工作目录→登录→返回JWT→前端存储token</p>
+    </div>
+    <div style="flex:1;min-width:220px;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">2. 日志流</div>
+      <p style="font-size:14px;">表单提交→后端检查是否存在dm-log.json→有则追加版本，无则创建→保存至工作目录</p>
+    </div>
+    <div style="flex:1;min-width:220px;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">3. DMP生成流</div>
+      <p style="font-size:14px;">触发生成→Claude SDK加载skill→运行脚本→遇问题通过SSE推送→用户回答→继续→生成docx→提供下载</p>
+    </div>
+  </div>
+</div>

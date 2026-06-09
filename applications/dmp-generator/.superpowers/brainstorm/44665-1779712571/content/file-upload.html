@@ -1,0 +1,61 @@
+<h2>Protocol Upload & File Management</h2>
+<p class="subtitle">上传方案文档到用户工作目录 + 文件浏览/下载</p>
+
+<div class="section">
+  <h3>上传区域设计</h3>
+  <div style="background:var(--bg-secondary);border-radius:8px;padding:24px;margin:16px 0;">
+    <div class="mockup">
+      <div class="mockup-header">方案上传区域</div>
+      <div class="mockup-body" style="text-align:center;padding:40px;">
+        <div class="placeholder" style="height:100px;border:2px dashed var(--border);margin:0 0 16px 0;">
+          拖拽文件到此处 或 点击选择文件<br>
+          <span style="font-size:12px;color:var(--text-secondary);">支持 .docx .pdf .txt .md</span>
+        </div>
+        <div style="text-align:left;font-size:13px;">
+          <div style="padding:8px;background:#1a2a1a;border-radius:4px;margin:4px 0;">
+            ✅ 临床试验方案_v2.docx — 2.3 MB — 已上传
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>API 设计</h3>
+  <div style="background:var(--bg-secondary);border-radius:8px;padding:16px;font-family:monospace;font-size:13px;line-height:1.6;">
+POST /api/files/upload<br>
+&nbsp;&nbsp;→ multipart/form-data, file字段<br>
+&nbsp;&nbsp;→ 保存到 data/workspaces/{workspace}/<br>
+&nbsp;&nbsp;→ 校验扩展名白名单: .docx .pdf .txt .md<br>
+&nbsp;&nbsp;→ 校验文件大小上限: 50MB<br>
+&nbsp;&nbsp;→ 同名文件自动覆盖，旧文件加 .bak 后缀<br>
+&nbsp;&nbsp;→ 返回 {filename, size, uploaded_at}<br><br>
+GET  /api/files/list<br>
+&nbsp;&nbsp;→ 扫描用户工作目录<br>
+&nbsp;&nbsp;→ 返回文件列表 [{name, size, type, modified_at}]<br>
+&nbsp;&nbsp;→ 按类型分类: 方案文档 / 日志文件 / DMP输出<br><br>
+GET  /api/files/download/{filename}<br>
+&nbsp;&nbsp;→ 下载工作目录中的文件<br>
+&nbsp;&nbsp;→ Content-Disposition: attachment<br><br>
+DELETE /api/files/delete/{filename}<br>
+&nbsp;&nbsp;→ 删除指定文件（仅限方案文档，日志和DMP不允许删除）
+  </div>
+</div>
+
+<div class="section">
+  <h3>上传后的流程衔接</h3>
+  <div style="display:flex;align-items:center;gap:12px;font-size:14px;padding:16px;background:var(--bg-secondary);border-radius:8px;">
+    <span style="background:var(--accent);color:#000;padding:4px 12px;border-radius:12px;font-size:12px;">1</span>
+    <span>用户上传方案文档</span>
+    <span style="color:var(--text-secondary);">→</span>
+    <span style="background:var(--accent);color:#000;padding:4px 12px;border-radius:12px;font-size:12px;">2</span>
+    <span>文件保存到工作目录</span>
+    <span style="color:var(--text-secondary);">→</span>
+    <span style="background:var(--accent);color:#000;padding:4px 12px;border-radius:12px;font-size:12px;">3</span>
+    <span>侧边栏文件列表更新</span>
+    <span style="color:var(--text-secondary);">→</span>
+    <span style="background:var(--accent);color:#000;padding:4px 12px;border-radius:12px;font-size:12px;">4</span>
+    <span>可在聊天中引用文件开始DMP生成</span>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<h2>Log Metadata Form & JSON Management</h2>
+<p class="subtitle">表单填Key-Value → 生成/追加 dm-log.json → 保存至工作目录</p>
+
+<div class="section">
+  <h3>表单字段（基于需求中的 JSON 示例）</h3>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:180px;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">文本输入</div>
+      <ul style="font-size:13px;padding-left:20px;color:var(--text-secondary);">
+        <li>DMP版本号</li>
+        <li>DMP版本日期</li>
+        <li>方案定稿日期</li>
+        <li>临床监查方名称</li>
+        <li>统计分析方名称</li>
+        <li>版本修订记录</li>
+        <li>撰写者/修订者</li>
+      </ul>
+    </div>
+    <div style="flex:1;min-width:180px;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">单选/下拉</div>
+      <ul style="font-size:13px;padding-left:20px;color:var(--text-secondary);">
+        <li>项目类型：药物/器械</li>
+        <li>数据采集模式：EDC/PDC</li>
+        <li>是否使用登记系统</li>
+        <li>是否使用随机系统</li>
+        <li>是否涉及外部数据</li>
+        <li>是否涉及医学编码</li>
+        <li>是否有中期分析</li>
+        <li>是否需要预递交</li>
+        <li>...</li>
+      </ul>
+    </div>
+    <div style="flex:1;min-width:180px;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">条件展开</div>
+      <ul style="font-size:13px;padding-left:20px;color:var(--text-secondary);">
+        <li>EDC系统供应商（EDC时显示）</li>
+        <li>随机系统供应商（随机时显示）</li>
+        <li>设计的外部数据类型（外部数据时显示）</li>
+        <li>阶段性分析目的和阶段要求</li>
+        <li>项目质量控制等级/模板</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>核心逻辑：新建 vs 追加版本</h3>
+  <div style="display:flex;gap:16px;">
+    <div style="flex:1;background:#1a3a2a;border-radius:8px;padding:16px;border:1px solid #2a5a3a;">
+      <div class="label" style="color:#4ade80;">首次创建</div>
+      <div style="font-family:monospace;font-size:12px;line-height:1.6;color:#ccc;">
+        工作目录中 无 dm-log.json<br>
+        ↓<br>
+        表单提交 → 创建新文件<br>
+        ↓<br>
+        dm-log.json = [{ entry #1 }]
+      </div>
+    </div>
+    <div style="flex:1;background:#3a2a1a;border-radius:8px;padding:16px;border:1px solid #5a4a2a;">
+      <div class="label" style="color:#fbbf24;">追加版本</div>
+      <div style="font-family:monospace;font-size:12px;line-height:1.6;color:#ccc;">
+        工作目录中 已有 dm-log.json<br>
+        ↓<br>
+        读取现有内容 → 追加新条目<br>
+        ↓<br>
+        dm-log.json = [{...}, {entry #2}]
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>API 设计</h3>
+  <div style="background:var(--bg-secondary);border-radius:8px;padding:16px;font-family:monospace;font-size:13px;line-height:1.6;">
+GET  /api/log/current<br>
+&nbsp;&nbsp;→ 返回 dm-log.json 最新一条数据（用于回填表单/展示当前版本）<br><br>
+POST /api/log/save<br>
+&nbsp;&nbsp;→ 提交表单数据<br>
+&nbsp;&nbsp;→ 如果 dm-log.json 存在，append 到数组末尾<br>
+&nbsp;&nbsp;→ 如果不存在，创建新文件写入 [{...}]<br>
+&nbsp;&nbsp;→ 返回保存后的完整 JSON
+  </div>
+</div>
+
+<div style="margin-top:16px;padding:12px;border-left:3px solid var(--accent);border-radius:4px;background:var(--bg-secondary);">
+  <strong>注意：</strong> 前端表单字段定义应可配置（从 protocol-to-dmp skill 的 DMP非固定内容清单.xlsx 派生出表单字段列表），而非硬编码前端代码，方便后续 checklist 更新后表单自动适配。
+</div>

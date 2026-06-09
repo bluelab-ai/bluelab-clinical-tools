@@ -1,0 +1,92 @@
+<h2>DMP Generation Pipeline</h2>
+<p class="subtitle">Claude SDK + protocol-to-dmp skill 编排 — 从触发到下载的完整流程</p>
+
+<div class="section">
+  <h3>编排流程</h3>
+  <div style="background:var(--bg-secondary);border-radius:12px;padding:24px;margin:16px 0;font-family:monospace;font-size:12px;line-height:1.8;">
+┌─────────────────────────────────────────────────────────┐
+│ 用户点击 "生成DMP"                                       │
+└─────────────────────┬───────────────────────────────────┘
+                      ▼
+┌─────────────────────────────────────────────────────────┐
+│ <b>Step 1: 上下文组装</b>                                    │
+│ 读取 work_dir/dm-log.json + work_dir/方案.*              │
+│ 拼接 system prompt = SKILL.md 完整内容                    │
+│ + assets/DMP非固定内容清单.xlsx (转markdown)              │
+│ + reference/chinese-dmp-generation.md                    │
+│ + assets/fewshot.md                                      │
+└─────────────────────┬───────────────────────────────────┘
+                      ▼
+┌─────────────────────────────────────────────────────────┐
+│ <b>Step 2: 模板选择</b> (Claude 执行)                      │
+│ 读取 dm-log.json → 判断 随机系统/登记系统 字段            │
+│ 选择对应模板: DMP-随机/登记/无随机无登记.docx              │
+│ (二者皆"是" → 通过 SSE question 推送选择)                │
+└─────────────────────┬───────────────────────────────────┘
+                      ▼
+┌─────────────────────────────────────────────────────────┐
+│ <b>Step 3: 证据追溯</b> (Claude tool_use → shell cmd)      │
+│ python build_dmp_trace.py \                             │
+│   --protocol work_dir/方案.docx \                       │
+│   --dm-log   work_dir/dm-log.json \                     │
+│   --template-dir assets/ \                              │
+│   --checklist assets/DMP非固定内容清单.xlsx \            │
+│   --out work_dir/dmp_trace.json \                       │
+│   --questions work_dir/dmp_questions.md                  │
+└─────────────────────┬───────────────────────────────────┘
+                      ▼
+┌─────────────────────────────────────────────────────────┐
+│ <b>Step 4: 语义审查</b> (Claude 执行 review prepare→review)│
+│ python semantic_review.py --mode prepare → review.json  │
+│ Claude 逐字段审查 → 纠正/接受/标记                        │
+│ python semantic_review.py --mode apply → 写回trace       │
+└─────────────────────┬───────────────────────────────────┘
+                      ▼
+┌─────────────────────────────────────────────────────────┐
+│ <b>Step 5: Few-shot格式化</b> (Claude 执行)                 │
+│ python fewshot_format.py --mode prepare → review.json   │
+│ Claude 逐字段对照 fewshot 示例 → 格式化                   │
+│ python fewshot_format.py --mode apply → 写回trace        │
+└─────────────────────┬───────────────────────────────────┘
+                      ▼
+┌─────────────────────────────────────────────────────────┐
+│ <b>Step 6: 提问交互</b> (SSE question 事件推送)             │
+│ 读取 dmp_questions.md 中有 unresolved 的项               │
+│ 逐批推送给用户确认/填写                                   │
+│ 用户回答 → Claude 更新 trace                             │
+└─────────────────────┬───────────────────────────────────┘
+                      ▼
+┌─────────────────────────────────────────────────────────┐
+│ <b>Step 7: 生成DMP</b> (Claude tool_use → shell cmd)       │
+│ python apply_trace_to_template.py \                     │
+│   --trace work_dir/dmp_trace.json \                     │
+│   --out   work_dir/DMP-初稿.docx \                       │
+│   --report work_dir/DMP生成报告.md                        │
+└─────────────────────┬───────────────────────────────────┘
+                      ▼
+┌─────────────────────────────────────────────────────────┐
+│ <b>Step 8: 质量检查 + 完成</b> (Claude 执行 QA)             │
+│ Claude 检查 .docx: 章节/编号/固定文案/未填字段            │
+│ SSE event: done { output_file, report }                 │
+│ 侧边栏文件列表更新，DMP文件可下载                          │
+└─────────────────────────────────────────────────────────┘
+  </div>
+</div>
+
+<div class="section">
+  <h3>关键技术点</h3>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:200px;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">Tool Use 白名单</div>
+      <p style="font-size:13px;">Claude SDK 的 tool_use 限定为 Bash(只允许运行指定脚本) + Read(只允许读工作目录)，保证安全不越权</p>
+    </div>
+    <div style="flex:1;min-width:200px;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">Session 管理</div>
+      <p style="font-size:13px;">每个用户一个 Claude SDK session，保存在后端内存，session 存活期间保持上下文，超时或用户主动重置时销毁</p>
+    </div>
+    <div style="flex:1;min-width:200px;background:var(--bg-secondary);border-radius:8px;padding:16px;">
+      <div class="label">过程可见性</div>
+      <p style="font-size:13px;">所有 tool_use 执行状态通过 SSE 实时推送，用户在聊天框中看到 Claude 正在执行哪个脚本、结果如何</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+{
+  "enabledPlugins": {
+    "finance-market-analysis@finance-skills": true,
+    "finance-social-readers@finance-skills": true,
+    "finance-data-providers@finance-skills": false,
+    "finance-startup-tools@finance-skills": true,
+    "finance-ui-tools@finance-skills": true,
+    "finance-skill-creator@finance-skills": true
+  }
+}

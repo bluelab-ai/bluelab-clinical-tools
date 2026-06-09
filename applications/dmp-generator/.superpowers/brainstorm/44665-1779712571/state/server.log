@@ -1,0 +1,10 @@
+{"type":"server-started","port":64403,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:64403","screen_dir":"/Users/xulei/项目/sdk测试/.superpowers/brainstorm/44665-1779712571/content","state_dir":"/Users/xulei/项目/sdk测试/.superpowers/brainstorm/44665-1779712571/state"}
+{"type":"screen-added","file":"/Users/xulei/项目/sdk测试/.superpowers/brainstorm/44665-1779712571/content/architecture.html"}
+{"type":"screen-added","file":"/Users/xulei/项目/sdk测试/.superpowers/brainstorm/44665-1779712571/content/auth.html"}
+{"type":"screen-added","file":"/Users/xulei/项目/sdk测试/.superpowers/brainstorm/44665-1779712571/content/log-form.html"}
+{"type":"screen-added","file":"/Users/xulei/项目/sdk测试/.superpowers/brainstorm/44665-1779712571/content/file-upload.html"}
+{"type":"screen-added","file":"/Users/xulei/项目/sdk测试/.superpowers/brainstorm/44665-1779712571/content/chat-interface.html"}
+{"type":"screen-added","file":"/Users/xulei/项目/sdk测试/.superpowers/brainstorm/44665-1779712571/content/dmp-pipeline.html"}
+{"type":"screen-added","file":"/Users/xulei/项目/sdk测试/.superpowers/brainstorm/44665-1779712571/content/errors.html"}
+{"type":"screen-added","file":"/Users/xulei/项目/sdk测试/.superpowers/brainstorm/44665-1779712571/content/waiting.html"}
+{"type":"server-stopped","reason":"idle timeout"}
