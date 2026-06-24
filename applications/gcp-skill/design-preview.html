@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GCP 2026 — Design Preview v7 · Notion-inspired</title>
+<style>
+/* ===== Notion Design Tokens ===== */
+:root {
+  --white: #ffffff;
+  --gray-100: #f9f9f8; --gray-200: #f6f5f4; --gray-300: #dfdcd9;
+  --gray-400: #a39e98; --gray-500: #78736f; --gray-600: #615d59;
+  --gray-700: #494744; --gray-800: #31302e; --gray-900: #191918;
+  --text-regular: rgb(4,4,4);
+  --text-medium: rgba(0,0,0,0.6);
+  --text-light: rgba(0,0,0,0.4);
+  --text-xlight: rgba(0,0,0,0.2);
+  --border-light: rgba(0,0,0,0.06);
+  --border-regular: rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.12);
+
+  /* Chapter palettes — each has its own color personality */
+  --blue-100:#eef2ff; --blue-500:#3370ff; --blue-600:#2a5de0;
+  --purple-100:#f5f3ff; --purple-500:#6c5ce7; --purple-600:#5a4bd1;
+  --teal-100:#eaf8f5; --teal-500:#0fa58e; --teal-600:#0d8c78;
+  --orange-100:#fff5ed; --orange-500:#ff6d00; --orange-600:#dd5b00;
+  --brown-100:#fdf7f2; --brown-500:#b85e0c; --brown-600:#9a4e0a;
+  --red-100:#fef3f1; --red-500:#e03e3e; --red-600:#c53030;
+  --yellow-100:#fff8e6; --yellow-500:#e89d01; --yellow-600:#c78600;
+  --green-100:#eaf7f1; --green-500:#2b9c5c; --green-600:#238049;
+
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --nav-height: 64px;
+  --base-padding: 40px;
+}
+@media(min-width:1080px){:root{--base-padding:60px}}
+@media(max-width:600px){:root{--base-padding:20px}}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Microsoft YaHei",sans-serif;
+  font-size:16px;line-height:1.5;color:var(--text-regular);
+  background:var(--white);-webkit-font-smoothing:antialiased;
+  position:relative;
+}
+/* Ambient background glow orbs (from v2, adapted to light) */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse at 15% 25%, rgba(51,112,255,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(108,92,231,0.03) 0%, transparent 45%),
+    radial-gradient(ellipse at 60% 80%, rgba(15,165,142,0.03) 0%, transparent 45%);
+}
+/* Subtle dot grid pattern */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.4;
+  background-image:radial-gradient(circle,rgba(0,0,0,0.025) 1px,transparent 1px);
+  background-size:22px 22px;
+}
+
+/* ===== GLOBAL NAV — 64px, glass, Notion-style ===== */
+.global-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-height);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--base-padding);
+  background:rgba(255,255,255,0.82);backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid transparent;transition:border-color 0.3s;
+}
+.global-nav.scrolled{border-bottom-color:var(--border-light)}
+.nav-left{display:flex;align-items:center;gap:16px}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;text-decoration:none;
+  font-weight:700;font-size:16px;color:var(--text-regular);
+}
+.nav-logo .logo-frame{
+  width:32px;height:32px;border-radius:var(--radius-sm);
+  background:var(--gray-900);color:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:800;
+}
+.nav-breadcrumb{font-size:13px;color:var(--text-light)}
+.nav-breadcrumb span{color:var(--text-medium)}
+.nav-right{display:flex;gap:12px;align-items:center}
+.nav-save{
+  font-size:12px;color:var(--green-500);display:flex;align-items:center;gap:5px;
+}
+.nav-save::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green-500);box-shadow:0 0 6px rgba(43,156,92,0.3)}
+.nav-exit{
+  font-size:12px;color:var(--text-medium);text-decoration:none;
+  padding:5px 14px;border:1px solid var(--border-regular);border-radius:var(--radius-xl);
+  transition:all 0.15s;
+}
+.nav-exit:hover{background:var(--gray-100);color:var(--text-regular)}
+
+/* Gradient progress pill (from v2 dark, adapted light) */
+.progress-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:4px 14px;border-radius:20px;
+  background:var(--gray-100);border:1px solid var(--border-light);
+  font-size:11px;color:var(--text-medium);
+}
+.progress-pill .pill-bar{
+  width:64px;height:3px;background:var(--gray-300);border-radius:2px;overflow:hidden;
+}
+.progress-pill .pill-fill{
+  height:100%;border-radius:2px;
+  background:linear-gradient(90deg,var(--blue-500),var(--purple-500));
+  width:42%;transition:width 0.8s ease;
+}
+
+/* Step dots row */
+.step-dots{display:flex;gap:4px;align-items:center}
+.step-dot{width:6px;height:6px;border-radius:50%;background:var(--gray-300);transition:all 0.3s}
+.step-dot.done{background:var(--green-500);box-shadow:0 0 4px rgba(43,156,92,0.3)}
+.step-dot.active{background:var(--blue-500);box-shadow:0 0 6px rgba(51,112,255,0.4)}
+
+/* Progress indicator (subtle) */
+.nav-progress{height:2px;background:var(--border-light);position:fixed;top:var(--nav-height);left:0;right:0;z-index:99}
+.nav-progress .fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--blue-500),var(--purple-500),var(--teal-500));
+  width:35%;transition:width 0.6s ease;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content{
+  max-width:840px;margin:0 auto;padding:calc(var(--nav-height) + 44px) var(--base-padding) 140px;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header{margin-bottom:36px}
+.page-header .chapter-emoji{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:48px;height:48px;border-radius:var(--radius-sm);
+  font-size:24px;margin-bottom:12px;
+}
+.page-header .chapter-emoji.blue{background:var(--blue-100)}
+.page-header .chapter-emoji.purple{background:var(--purple-100)}
+.page-header .chapter-emoji.orange{background:var(--orange-100)}
+.page-header .chapter-emoji.teal{background:var(--teal-100)}
+.page-header h1{
+  font-size:36px;font-weight:800;letter-spacing:-0.8px;line-height:1.2;
+  background:linear-gradient(135deg,var(--gray-900) 0%,#4a4a5a 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.page-header .meta-row{
+  display:flex;gap:18px;flex-wrap:wrap;margin-top:8px;
+  font-size:14px;color:var(--text-medium);
+}
+
+/* ===== COLORFUL CALLOUT CARDS ===== */
+.callout{
+  display:flex;gap:14px;padding:16px 20px;border-radius:var(--radius-lg);
+  font-size:15px;line-height:1.65;margin-bottom:8px;
+  transition:box-shadow 0.2s,transform 0.15s;
+}
+.callout:hover{box-shadow:0 2px 12px rgba(0,0,0,0.04);transform:translateY(-1px)}
+.callout .emoji-frame{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:5px;font-size:16px;flex-shrink:0;
+}
+.callout-blue  {background:var(--blue-100)}   .callout-blue  .emoji-frame{background:#dbe4ff}
+.callout-purple{background:var(--purple-100)} .callout-purple .emoji-frame{background:#e8e3ff}
+.callout-teal  {background:var(--teal-100)}   .callout-teal  .emoji-frame{background:#d4f0ea}
+.callout-orange{background:var(--orange-100)} .callout-orange .emoji-frame{background:#ffe4cc}
+.callout-brown {background:var(--brown-100)}  .callout-brown .emoji-frame{background:#fce8d4}
+.callout-red   {background:var(--red-100)}    .callout-red   .emoji-frame{background:#fdd8d5}
+.callout-green {background:var(--green-100)}  .callout-green .emoji-frame{background:#d0ebdb}
+.callout-yellow{background:var(--yellow-100)} .callout-yellow .emoji-frame{background:#ffeab3}
+
+.callout .callout-body{color:var(--text-regular)}
+.callout .callout-body strong{display:block;margin-bottom:2px;font-size:13px;color:var(--gray-700)}
+
+/* ===== IMAGE CARD ===== */
+.content-image{
+  border-radius:var(--radius-lg);overflow:hidden;
+  border:1px solid var(--border-light);margin-bottom:8px;
+  transition:box-shadow 0.3s;
+}
+.content-image:hover{box-shadow:0 4px 20px rgba(0,0,0,0.05)}
+.content-image img,.content-image .placeholder{width:100%;display:block}
+
+/* ===== TEXT BLOCKS ===== */
+.text-block{margin-bottom:8px}
+.section-label{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  color:var(--text-light);margin-bottom:6px;
+}
+.flow-text{font-size:15px;line-height:1.7;color:var(--text-regular)}
+.caption-text{
+  font-size:14px;line-height:1.65;color:var(--text-medium);
+  padding:12px 16px;background:var(--gray-100);border-radius:var(--radius);
+}
+
+/* ===== DIVIDER ===== */
+.divider{border:none;border-top:1px solid var(--border-light);margin:24px 0}
+
+/* ===== CHAPTER NAV CARDS — colorful, like Notion menu items ===== */
+.chapter-cards{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:8px;margin-bottom:20px;
+}
+.chapter-card{
+  display:flex;align-items:center;gap:10px;padding:10px 14px;
+  border-radius:var(--radius);font-size:13px;font-weight:500;
+  cursor:default;transition:all 0.15s;color:var(--text-medium);
+}
+.chapter-card:hover{background:var(--gray-100)}
+.chapter-card .card-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:5px;font-size:14px;flex-shrink:0;
+}
+.chapter-card.blue   .card-icon{background:var(--blue-100);color:var(--blue-500)}
+.chapter-card.purple .card-icon{background:var(--purple-100);color:var(--purple-500)}
+.chapter-card.teal   .card-icon{background:var(--teal-100);color:var(--teal-500)}
+.chapter-card.orange .card-icon{background:var(--orange-100);color:var(--orange-500)}
+.chapter-card.brown  .card-icon{background:var(--brown-100);color:var(--brown-500)}
+.chapter-card.red    .card-icon{background:var(--red-100);color:var(--red-500)}
+.chapter-card.yellow .card-icon{background:var(--yellow-100);color:var(--yellow-500)}
+
+.chapter-card.done{color:var(--text-regular)}
+.chapter-card.current{
+  background:var(--gray-100);color:var(--text-regular);font-weight:600;
+  box-shadow:inset 0 0 0 1px var(--border-regular);
+}
+
+/* ===== QUIZ OPTIONS — with colored frames ===== */
+.quiz-option{
+  display:flex;align-items:center;width:100%;text-align:left;
+  padding:13px 16px;margin-bottom:4px;border-radius:var(--radius);
+  border:1px solid var(--border-light);background:var(--white);
+  font-size:15px;cursor:pointer;transition:all 0.15s;
+  font-family:inherit;color:var(--text-regular);
+}
+.quiz-option:hover{
+  border-color:var(--border-strong);background:var(--gray-100);
+  transform:translateX(3px);
+}
+.quiz-option .opt-frame{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:5px;font-size:12px;font-weight:700;
+  margin-right:12px;flex-shrink:0;background:var(--gray-200);color:var(--text-medium);
+  transition:all 0.15s;
+}
+.quiz-option:hover .opt-frame{background:var(--gray-900);color:var(--white)}
+.quiz-option.uncertain{color:var(--purple-500);border-color:rgba(108,92,231,0.12)}
+.quiz-option.uncertain:hover{border-color:rgba(108,92,231,0.25);background:var(--purple-100)}
+.quiz-option.uncertain .opt-frame{background:rgba(108,92,231,0.06);color:var(--purple-500)}
+
+/* ===== REVIEW TOGGLE ===== */
+.review-toggle{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 16px;border-radius:var(--radius);font-size:13px;font-weight:500;
+  cursor:pointer;border:1px solid var(--border-regular);background:var(--white);
+  color:var(--text-regular);transition:all 0.15s;font-family:inherit;
+}
+.review-toggle:hover{background:var(--gray-100);border-color:var(--border-strong)}
+.review-toggle .arr{transition:transform 0.2s;font-size:9px;color:var(--text-light)}
+.review-toggle.open .arr{transform:rotate(90deg)}
+.review-panel{display:none;margin-top:8px}
+.review-panel.open{display:block}
+
+/* ===== SCORE ===== */
+.score-card{text-align:center;padding:32px 20px;border-radius:var(--radius-lg);margin-bottom:8px}
+.score-card.passed{background:var(--green-100)}
+.score-card.failed{background:var(--red-100)}
+.score-card .big{font-size:52px;font-weight:800;letter-spacing:-2px}
+.score-card.passed .big{color:var(--green-500)}
+.score-card.failed .big{color:var(--red-500)}
+.score-pill{display:inline-block;padding:5px 16px;border-radius:var(--radius-xl);font-size:13px;font-weight:700;margin-left:8px}
+.score-pill.good{background:var(--green-500);color:var(--white)}
+.score-pill.bad{background:var(--red-500);color:var(--white)}
+
+/* ===== BUTTONS ===== */
+.btn{
+  display:inline-flex;align-items:center;gap:6px;padding:9px 16px;
+  border-radius:var(--radius);font-size:14px;font-weight:500;
+  cursor:pointer;text-decoration:none;transition:all 0.15s;
+  font-family:inherit;border:none;background:transparent;color:var(--text-medium);
+}
+.btn:hover{background:var(--gray-100);color:var(--text-regular)}
+.btn:active{transform:scale(0.98)}
+.btn-primary{background:var(--blue-500);color:var(--white)}
+.btn-primary:hover{background:var(--blue-600);color:var(--white)}
+.btn-outline{border:1px solid var(--border-regular);background:var(--white)}
+.btn-outline:hover{border-color:var(--border-strong)}
+.btn-purple{color:var(--purple-500)}
+.btn-purple:hover{background:var(--purple-100)}
+.btn-lg{padding:11px 22px;font-size:15px}
+
+/* Tags */
+.tag{
+  display:inline-flex;align-items:center;gap:3px;padding:3px 9px;
+  border-radius:var(--radius-xl);font-size:11px;font-weight:600;
+}
+.tag-red{background:var(--red-100);color:var(--red-500)}
+.tag-green{background:var(--green-100);color:var(--green-500)}
+.tag-orange{background:var(--orange-100);color:var(--orange-500)}
+.tag-purple{background:var(--purple-100);color:var(--purple-500)}
+
+/* Bottom floating nav */
+.bottom-nav{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;gap:6px;padding:6px;background:rgba(255,255,255,0.9);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--border-regular);border-radius:var(--radius-xl);
+  box-shadow:0 2px 24px rgba(0,0,0,0.05),0 0 0 1px rgba(0,0,0,0.03);
+  z-index:80;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeSlide{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.callout,.text-block,.content-image{animation:fadeSlide 0.3s ease both}
+
+@media(max-width:768px){
+  .main-content{padding:calc(var(--nav-height) + 24px) 16px 120px}
+  .page-header h1{font-size:26px}
+  .chapter-cards{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="global-nav scrolled">
+  <div class="nav-left">
+    <a href="#" class="nav-logo">
+      <span class="logo-frame">G</span> GCP 2026
+    </a>
+    <span class="nav-breadcrumb">/ 第三章 / <span>第20条 · PI不可授权事项</span></span>
+  </div>
+  <div class="nav-right">
+    <div class="progress-pill">
+      📊 整体进度
+      <div class="pill-bar"><div class="pill-fill"></div></div>
+      42%
+    </div>
+    <span class="nav-save">已保存</span>
+    <a href="#" class="nav-exit">退出 ↩</a>
+  </div>
+</nav>
+<div class="nav-progress"><div class="fill"></div></div>
+
+<!-- ===== MAIN ===== -->
+<main class="main-content">
+
+  <!-- ===== CHAPTER OVERVIEW (colorful cards) ===== -->
+  <div class="section-label">课程进度</div>
+  <div class="chapter-cards">
+    <div class="chapter-card blue done"><span class="card-icon">📖</span>导论</div>
+    <div class="chapter-card purple done"><span class="card-icon">📋</span>第一章 · 总则</div>
+    <div class="chapter-card teal done"><span class="card-icon">⚖️</span>第二章 · 伦理审查</div>
+    <div class="chapter-card orange current"><span class="card-icon">👨‍⚕️</span>第三章 · PI与机构</div>
+    <div class="chapter-card brown"><span class="card-icon">🏢</span>第四章 · 申办者</div>
+    <div class="chapter-card red"><span class="card-icon">💾</span>第五章 · 数据治理</div>
+    <div class="chapter-card yellow"><span class="card-icon">📎</span>第六章 · 附则</div>
+  </div>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <header class="page-header">
+    <div class="chapter-emoji orange">📜</div>
+    <h1>PI 不可授权事项</h1>
+    <div class="meta-row">
+      <span>第三章 · PI与机构</span>
+      <span>第20条 · 14条中的第3条</span>
+      <span class="tag tag-red">深度讲授</span>
+    </div>
+  </header>
+
+  <!-- ===== CONTENT FLOW ===== -->
+
+  <!-- Scene -->
+  <div class="text-block"><div class="section-label">💡 先想一个场景</div></div>
+  <div class="callout callout-orange">
+    <span class="emoji-frame">💡</span>
+    <div class="callout-body">PI把临床试验的所有工作都授权给研究协调员去做，自己只负责签字，结果协调员在知情同意过程中操作不规范被受试者投诉，PI声称"这事我不知道，不是我做的"。</div>
+  </div>
+
+  <!-- Image -->
+  <div class="content-image">
+    <div class="placeholder" style="background:linear-gradient(135deg,#faf8f3,#f5f1e8,#f7f4ed);height:200px;display:flex;align-items:center;justify-content:center;color:var(--text-light);font-size:13px">
+      🖼️  article-20-scene.webp
+    </div>
+  </div>
+
+  <!-- Law text -->
+  <div class="text-block"><div class="section-label">📜 条文原文</div></div>
+  <div class="callout callout-blue">
+    <span class="emoji-frame">📜</span>
+    <div class="callout-body">主要研究者原则上不得授权以下事项：（一）临床试验的决策；（二）关键确认；（三）向伦理审查委员会、临床试验机构和申办者的正式报告。</div>
+  </div>
+
+  <!-- Explanation -->
+  <div class="text-block"><div class="section-label">🔑 这条在说什么</div></div>
+  <div class="text-block"><p class="flow-text">2026版首次以独立条文明确列举PI不可授权事项，目的是遏制"挂名PI"现象，确保临床试验的医学判断由具备相应资质的人员做出。</p></div>
+
+  <!-- Changes -->
+  <div class="text-block"><div class="section-label">🔄 和旧版（2020）有什么不同</div></div>
+  <div class="text-block"><div class="caption-text">本条为2026版全新独立条文，2020版无对等条款。旧版仅在相关条文中间接提及研究者责任，从未列出明确的不可授权清单。</div></div>
+
+  <!-- Role tip -->
+  <div class="text-block"><div class="section-label">👤 对你的影响</div></div>
+  <div class="callout callout-green">
+    <span class="emoji-frame">👤</span>
+    <div class="callout-body"><strong>PI · 主要研究者</strong>PI 不可将临床试验决策、关键确认和正式报告等核心医学判断授权给他人，必须在机构层面建立明确的授权分工表。</div>
+  </div>
+
+  <!-- Pitfalls -->
+  <div class="text-block"><div class="section-label">⚠️ 容易踩的坑</div></div>
+  <div class="callout callout-red">
+    <span class="emoji-frame">⚠️</span>
+    <div class="callout-body">有些PI觉得"签了授权表就完事了"，但授权只是第一步——你还要监督被授权人干得怎么样。更危险的是把医学判断随手授给住院医，这在2026版原则上不被允许。</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Navigation buttons -->
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <a href="#" class="btn btn-outline">← 上一条（第19条）</a>
+    <div style="display:flex;gap:6px">
+      <a href="#" class="btn btn-purple">🤖 问 AI</a>
+      <a href="#" class="btn btn-primary">继续 → 下一条（第21条）</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== QUIZ ===== -->
+  <div class="section-label">第三章 章节测验</div>
+  <div style="font-size:12px;color:var(--text-light);margin-bottom:6px;display:flex;align-items:center;gap:8px">
+    <div class="step-dots">
+      <span class="step-dot done"></span>
+      <span class="step-dot active"></span>
+      <span class="step-dot"></span>
+    </div>
+    第 2/3 题
+  </div>
+  <div class="text-block"><p class="flow-text" style="font-weight:600;font-size:17px">《药物临床试验质量管理规范》的目的不包括（）。</p></div>
+
+  <button class="quiz-option"><span class="opt-frame">A</span>保证药物临床试验过程规范</button>
+  <button class="quiz-option"><span class="opt-frame">B</span>保护试验参与者的权益和安全</button>
+  <button class="quiz-option"><span class="opt-frame">C</span>保证数据和结果的科学、真实、可靠</button>
+  <button class="quiz-option"><span class="opt-frame">D</span>保护注册申请人权益</button>
+  <button class="quiz-option uncertain"><span class="opt-frame">E</span>💬 我不太确定，请帮我讲解</button>
+
+  <div class="divider"></div>
+
+  <!-- Feedback -->
+  <div class="callout callout-green">
+    <span class="emoji-frame">✅</span><div class="callout-body">回答正确！正确答案是 A。</div>
+  </div>
+  <div class="callout callout-red">
+    <span class="emoji-frame">❌</span><div class="callout-body">回答错误。正确答案是 <strong>A</strong>。你选了 D。</div>
+  </div>
+  <div class="callout callout-purple">
+    <span class="emoji-frame">💬</span><div class="callout-body">没关系，让我们来看看这个知识点。</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Score -->
+  <div class="score-card passed">
+    <div style="font-size:13px;color:var(--text-medium);margin-bottom:4px">第三章 章节测验</div>
+    <span class="big">2/3</span><span class="score-pill good">✅ 已通过</span>
+  </div>
+  <div class="score-card failed">
+    <div style="font-size:13px;color:var(--text-medium);margin-bottom:4px">第三章 章节测验</div>
+    <span class="big">1/3</span><span class="score-pill bad">❌ 未通过</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Collapsible review -->
+  <button class="review-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+    <span class="arr">▶</span> 查看错题详情（1题）
+  </button>
+  <div class="review-panel">
+    <div style="border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:20px;background:var(--white);margin-top:8px">
+      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px">
+        <strong>第1题 · GCP的目的不包括（）。</strong>
+        <span class="tag tag-red">答错</span>
+      </div>
+      <div style="padding:5px 10px;color:var(--text-medium)">A、保证药物临床试验过程规范</div>
+      <div style="padding:5px 10px;color:var(--text-medium)">B、保护试验参与者的权益和安全</div>
+      <div style="padding:5px 10px;color:var(--text-medium)">C、保证数据和结果的科学、真实、可靠</div>
+      <div style="padding:5px 10px;background:var(--red-100);border-radius:var(--radius-sm)"><span class="tag tag-red">你的答案</span> D、保护注册申请人权益</div>
+      <div style="padding:5px 10px;background:var(--green-100);border-radius:var(--radius-sm)"><span class="tag tag-green">正确答案</span> A、保证药物临床试验过程规范</div>
+      <div style="font-size:13px;color:var(--text-medium);margin-top:8px;padding:10px;background:var(--gray-100);border-radius:var(--radius);line-height:1.7">
+        <strong>📖 解析</strong><br>GCP的目的是保证药物临床试验过程规范，保护试验参与者的权益和安全，保证数据和结果的科学、真实、可靠。
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Button gallery -->
+  <div class="section-label">按钮系统</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px">
+    <a href="#" class="btn btn-primary btn-lg">进入章节测验</a>
+    <a href="#" class="btn btn-primary">继续 → 下一条</a>
+    <a href="#" class="btn btn-outline">← 上一条</a>
+    <a href="#" class="btn">💬 提问</a>
+    <a href="#" class="btn btn-purple">🤖 问 AI</a>
+    <span class="tag tag-red">深度</span>
+    <span class="tag tag-orange">标准</span>
+    <span class="tag tag-green">已通过</span>
+    <span class="tag tag-purple">紫色</span>
+  </div>
+
+</main>
+
+<!-- ===== FLOATING BOTTOM NAV ===== -->
+<div class="bottom-nav">
+  <a href="#" class="btn">← 上一条</a>
+  <a href="#" class="btn btn-primary">继续 → 下一条</a>
+</div>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.querySelector('.global-nav').classList.toggle('scrolled',window.scrollY>10);
+});
+</script>
+</body>
+</html>

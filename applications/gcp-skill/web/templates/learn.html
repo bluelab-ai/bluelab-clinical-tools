@@ -1,0 +1,427 @@
+{% extends "base.html" %}
+{% block title %}{% if is_intro %}GCP 2026 修订概览{% else %}{{ chapter_title or module.title }}{% endif %} — GCP 2026 培训{% endblock %}
+
+{% block progress %}
+{% if not is_intro and not is_diff %}
+<div class="nav-progress-pill">
+    📊 整体进度
+    <div class="pill-track"><div class="pill-fill" style="width:{{ (current_overall / total_articles * 100)|int }}%"></div></div>
+    {{ current_overall }}/{{ total_articles }}
+</div>
+{% elif is_diff %}
+<span style="font-size:12px;color:var(--text-medium);">📍 差异速览 · {{ module.index + 1 }}/{{ module.total }}</span>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% if is_diff and diff_modules_data %}
+<!-- SIDEBAR OVERLAY -->
+<div class="sidebar-overlay hidden" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR PANEL -->
+<aside class="learn-sidebar hidden" id="learnSidebar">
+    <div class="sidebar-header">
+        <span>差异速览目录</span>
+        <button class="sidebar-close" onclick="closeSidebar()" title="关闭">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+        {% for mod in diff_modules_data %}
+        <div class="sidebar-chapter">
+            <div class="sidebar-chapter-title {% if not mod.is_current %}collapsed{% endif %}"
+                 {% if mod.is_current %}onclick="this.classList.toggle('collapsed');var n=this.nextElementSibling;n.style.display=n.style.display==='none'?'block':'none';var t=this.querySelector('.ch-toggle');t.textContent=this.classList.contains('collapsed')?'▸':'▾';"{% endif %}>
+                <span class="ch-label">{{ mod.title }}</span>
+                {% if mod.is_current %}
+                <span class="ch-toggle">▾</span>
+                {% endif %}
+            </div>
+            {% if mod.is_current and mod.article_items %}
+            <div class="sidebar-articles">
+                {% for art in mod.article_items %}
+                <a href="#art-{{ art.num }}"
+                   class="sidebar-link"
+                   onclick="closeSidebar()">
+                    <span class="art-dot"></span>
+                    第{{ art.num }}条 · {{ art.title }}
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </nav>
+</aside>
+
+<!-- SIDEBAR TOGGLE BUTTON -->
+<button class="sidebar-toggle-btn" id="sidebarToggleBtn" onclick="openSidebar()" title="差异速览目录">☰</button>
+
+<script>
+function openSidebar() {
+    var s = document.getElementById('learnSidebar');
+    var o = document.getElementById('sidebarOverlay');
+    if (s) s.classList.remove('hidden');
+    if (o) o.classList.remove('hidden');
+}
+function closeSidebar() {
+    var s = document.getElementById('learnSidebar');
+    var o = document.getElementById('sidebarOverlay');
+    if (s) s.classList.add('hidden');
+    if (o) o.classList.add('hidden');
+}
+</script>
+{% endif %}
+
+{% if is_intro %}
+<!-- ===== Introduction / Overview ===== -->
+<header class="page-header" style="text-align:center;">
+    <h1>GCP 2026 修订概览</h1>
+    <div class="meta-row" style="justify-content:center;">
+        <span>开始逐条学习之前，先了解 2026 版的核心变化</span>
+        <span>预计阅读 ~4 分钟</span>
+    </div>
+</header>
+
+<div class="text-block" style="text-align:center;max-width:680px;margin:0 auto 24px;">
+    <p class="flow-text">《药物临床试验质量管理规范（2026年修订）》于 2026 年 9 月 1 日起施行。与 2020 版（9 章 83 条）相比，2026 版<strong>精简为 6 章 54 条</strong>，从「文件清单式合规」转向「原则导向、风险相称」的监管理念，并与 ICH E6(R3) 国际标准结构对齐。</p>
+</div>
+
+{% set intro_colors = ['scene', 'purple', 'green', 'yellow', 'law'] %}
+
+{% for sec in intro_sections %}
+<div class="intro-section">
+    <div class="section-label">{{ sec.title }}</div>
+    <div class="callout callout-{{ intro_colors[loop.index0] }}">
+        <div class="callout-body">
+            <div class="intro-body">{{ sec.body_html|safe }}</div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="content-divider"></div>
+
+<div style="text-align:center;">
+    <p class="flow-text" style="margin-bottom:12px;">接下来，课程将带你<strong>逐条学习全部 54 条法规</strong>，每章学完有章节测验，全部通过后参加结业考试。</p>
+    <form method="post" action="/learn/intro/start">
+        <button type="submit" class="btn btn-primary btn-lg">开始学习 → 第一章 总则</button>
+    </form>
+</div>
+
+{% elif is_diff and module.format == "💬" %}
+<!-- ===== Diff module: direct explanation ===== -->
+<header class="page-header">
+    <h1>{{ module.title }}</h1>
+    <div class="meta-row">
+        <span class="tag tag-blue">直接讲解</span>
+        <span>{{ module.duration }}</span>
+    </div>
+</header>
+<div class="text-block">
+    <p class="caption-text">{{ module.description }}</p>
+</div>
+<div class="content-divider"></div>
+<div style="text-align:center;margin:16px 0;">
+    <p class="flow-text" style="margin-bottom:12px;">关于「{{ module.title }}」有疑问吗？</p>
+    <form method="post" action="/learn/diff/complete" style="display:inline;">
+        <input type="hidden" name="module_idx" value="{{ module.index }}">
+        <button type="submit" class="btn btn-primary btn-lg">继续 →</button>
+    </form>
+</div>
+<div class="content-divider"></div>
+<div style="display:flex;align-items:center;gap:8px;justify-content:center;">
+    <button class="btn btn-purple" onclick="openAiPanel('full')">🤖 问 AI</button>
+</div>
+
+{% elif is_diff %}
+<!-- ===== Diff module with articles ===== -->
+{% set diff_article_ids = module.articles | default([]) | list %}
+
+<header class="page-header">
+    <h1>{{ module.title }}</h1>
+    <div class="meta-row">
+        <span class="tag {% if module.format == '🔴' %}tag-red{% else %}tag-orange{% endif %}">{{ module.format }} {% if module.format == '🔴' %}深度讲授{% else %}标准讲授{% endif %}</span>
+        <span>{{ module.description }}</span>
+        <span>{{ module.duration }}</span>
+    </div>
+</header>
+
+{% for art in articles_data %}
+<div class="card" style="margin-bottom:24px;" id="art-{{ art.id }}">
+    <div class="card-header">
+        <h3>第{{ art.id }}条 · {{ art.title }}</h3>
+        <span class="tag {% if art.change_level == '🔴' %}tag-red{% elif art.change_level == '🟡' %}tag-orange{% else %}tag-green{% endif %}">与2020版相比：{{ art.change_level }} {% if art.change_level == '🔴' %}重大变化{% elif art.change_level == '🟡' %}中等变化{% else %}轻微变化{% endif %}</span>
+    </div>
+
+    <!-- Scenario -->
+    <div class="card-segment" style="animation-delay:0s">
+        <div class="section-label">先想一个场景</div>
+        <div class="callout callout-scene">
+            <div class="callout-emoji">💡</div>
+            <div class="callout-body">
+                {% if module.format == '🔴' %}{{ art.scenario|safe }}{% else %}{{ art.scenario_short|safe }}{% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Image -->
+    <div class="card-segment" style="animation-delay:0.05s;text-align:center;padding-top:8px;padding-bottom:8px;">
+        <div class="content-image">
+            <img src="/article-images/article-{{ art.id }}-scene.webp" loading="lazy" alt="第{{ art.id }}条 场景示意图">
+        </div>
+    </div>
+
+    <!-- Law text -->
+    <div class="card-segment" style="animation-delay:0.1s">
+        <div class="section-label">条文原文</div>
+        <div class="callout callout-law">
+            <div class="callout-body">{{ art.original_text|safe }}</div>
+        </div>
+    </div>
+
+    <!-- Explanation -->
+    <div class="card-segment" style="animation-delay:0.15s">
+        <div class="section-label">这条在说什么</div>
+        <div class="callout callout-yellow">
+            <div class="callout-body">{{ art.plain_explanation|safe }}</div>
+        </div>
+    </div>
+
+    <!-- Changes -->
+    <div class="card-segment" style="animation-delay:0.2s">
+        <div class="section-label">和旧版（2020）有什么不同</div>
+        <p class="caption-text">{{ art.change_note|safe }}</p>
+    </div>
+
+    <!-- Role -->
+    <div class="card-segment" style="animation-delay:0.25s">
+        <div class="section-label">对你的影响</div>
+        <div class="callout callout-green">
+            <div class="callout-body">{{ art.roles_block|safe }}</div>
+        </div>
+    </div>
+
+    <!-- Pitfalls -->
+    <div class="card-segment" style="animation-delay:0.3s">
+        <div class="section-label">容易踩的坑</div>
+        {% if module.format == '🔴' %}
+        <div class="callout callout-red">
+            <div class="callout-emoji">⚠️</div>
+            <div class="callout-body">{{ art.pitfalls|safe }}</div>
+        </div>
+        {% else %}
+        <details class="pitfalls-collapsible">
+            <summary>容易踩的坑（点击展开）</summary>
+            <div class="callout callout-red" style="margin-top:8px;">
+                <div class="callout-emoji">⚠️</div>
+                <div class="callout-body">{{ art.pitfalls|safe }}</div>
+            </div>
+        </details>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+
+<div class="content-divider"></div>
+<div style="text-align:center;margin:16px 0;">
+    <p class="flow-text" style="margin-bottom:12px;">关于「{{ module.title }}」有疑问吗？</p>
+    <form method="post" action="/learn/diff/complete" style="display:inline;">
+        <input type="hidden" name="module_idx" value="{{ module.index }}">
+        <button type="submit" class="btn btn-primary btn-lg">继续 →</button>
+    </form>
+</div>
+
+{% else %}
+<!-- ===== Novice track: single article ===== -->
+
+{% if chapters_data %}
+<!-- SIDEBAR OVERLAY (closes sidebar when clicked) -->
+<div class="sidebar-overlay hidden" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR PANEL -->
+<aside class="learn-sidebar hidden" id="learnSidebar">
+    <div class="sidebar-header">
+        <span>学习目录</span>
+        <button class="sidebar-close" onclick="closeSidebar()" title="关闭">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+        {% for ch in chapters_data %}
+        <div class="sidebar-chapter">
+            <div class="sidebar-chapter-title {% if not ch.is_expanded %}collapsed{% endif %}"
+                 {% if ch.is_current %}onclick="this.classList.toggle('collapsed');var n=this.nextElementSibling;n.style.display=n.style.display==='none'?'block':'none';var t=this.querySelector('.ch-toggle');t.textContent=this.classList.contains('collapsed')?'▸':'▾';"{% endif %}>
+                <span class="ch-label">{{ ch.title }}</span>
+                {% if ch.is_current %}
+                <span class="ch-toggle">{{ '▾' if ch.is_expanded else '▸' }}</span>
+                {% else %}
+                <span class="ch-badge">{{ '✅' if ch.quiz_state == 'passed' else '' }}</span>
+                {% endif %}
+            </div>
+            {% if ch.is_current %}
+            <div class="sidebar-articles" {% if not ch.is_expanded %}style="display:none"{% endif %}>
+                {% for art in ch.article_items %}
+                <a href="/learn/{{ ch.name }}/{{ art.num }}"
+                   class="sidebar-link {{ art.state }}"
+                   {% if art.state == 'future' %}onclick="return false"{% endif %}>
+                    <span class="art-dot"></span>
+                    第{{ art.num }}条 · {{ art.title }}
+                </a>
+                {% endfor %}
+
+                <!-- Quiz entry (current chapter only) -->
+                <a href="/quiz/{{ ch.name }}/start"
+                   class="sidebar-link sidebar-quiz {{ ch.quiz_state }}"
+                   {% if ch.quiz_state == 'future' %}onclick="return false"{% endif %}>
+                    <span class="quiz-icon">{{ '✅' if ch.quiz_state == 'passed' else '📝' }}</span>
+                    章节测验
+                    {% if ch.quiz_state == 'passed' and ch.quiz_score is not none %}
+                    <span class="quiz-score">{{ (ch.quiz_score * 100)|int }}%</span>
+                    {% endif %}
+                </a>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </nav>
+</aside>
+
+<!-- SIDEBAR TOGGLE BUTTON -->
+<button class="sidebar-toggle-btn" id="sidebarToggleBtn" onclick="openSidebar()" title="学习目录">☰</button>
+
+<script>
+function openSidebar() {
+    var sidebar = document.getElementById('learnSidebar');
+    var overlay = document.getElementById('sidebarOverlay');
+    if (sidebar) sidebar.classList.remove('hidden');
+    if (overlay) overlay.classList.remove('hidden');
+    // Scroll current article into view
+    var cur = document.querySelector('.sidebar-link.current');
+    if (cur) setTimeout(function(){ cur.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 300);
+}
+function closeSidebar() {
+    var sidebar = document.getElementById('learnSidebar');
+    var overlay = document.getElementById('sidebarOverlay');
+    if (sidebar) sidebar.classList.add('hidden');
+    if (overlay) overlay.classList.add('hidden');
+}
+</script>
+{% endif %}
+
+<header class="page-header">
+    <h1>第{{ article_num }}条 · {{ article.title }}</h1>
+    <div class="meta-row">
+        <span>{{ chapter_title or chapter }}</span>
+        <span>第{{ article_num }}条</span>
+        <span class="tag {% if article.change_level == '🔴' %}tag-red{% elif article.change_level == '🟡' %}tag-orange{% else %}tag-green{% endif %}">与2020版相比：{{ article.change_level }} {% if article.change_level == '🔴' %}重大变化{% elif article.change_level == '🟡' %}中等变化{% else %}轻微变化{% endif %}</span>
+    </div>
+</header>
+
+<div class="card">
+    <!-- Scenario -->
+    <div class="card-segment" style="animation-delay:0s">
+        <div class="section-label">先想一个场景</div>
+        <div class="callout callout-scene">
+            <div class="callout-emoji">💡</div>
+            <div class="callout-body">{{ article.scenario|safe }}</div>
+        </div>
+    </div>
+
+    <!-- Image -->
+    <div class="card-segment" style="animation-delay:0.05s;text-align:center;padding-top:8px;padding-bottom:8px;">
+        <div class="content-image">
+            <img src="/article-images/article-{{ '%02d'|format(article_num) }}-scene.webp" loading="lazy" alt="第{{ article_num }}条 场景示意图">
+        </div>
+    </div>
+
+    <!-- Law text -->
+    <div class="card-segment" style="animation-delay:0.1s">
+        <div class="section-label">条文原文</div>
+        <div class="callout callout-law">
+            <div class="callout-body">{{ article.original_text|safe }}</div>
+        </div>
+    </div>
+
+    <!-- Explanation -->
+    <div class="card-segment" style="animation-delay:0.15s">
+        <div class="section-label">这条在说什么</div>
+        <div class="callout callout-yellow">
+            <div class="callout-body">{{ article.plain_explanation|safe }}</div>
+        </div>
+    </div>
+
+    <!-- Changes -->
+    {% if article.change_level in ('🔴', '🟡') and article.change_note %}
+    <div class="card-segment" style="animation-delay:0.2s">
+        <div class="section-label">和旧版（2020）有什么不同</div>
+        <p class="caption-text">{{ article.change_note|safe }}</p>
+    </div>
+    {% endif %}
+
+    <!-- Role -->
+    <div class="card-segment" style="animation-delay:0.25s">
+        <div class="section-label">对你的影响</div>
+        <div class="callout callout-green">
+            <div class="callout-body">{{ article.roles_block|safe }}</div>
+        </div>
+    </div>
+
+    <!-- Pitfalls -->
+    <div class="card-segment" style="animation-delay:0.3s">
+        <div class="section-label">容易踩的坑</div>
+        <div class="callout callout-red">
+            <div class="callout-emoji">⚠️</div>
+            <div class="callout-body">{{ article.pitfalls|safe }}</div>
+        </div>
+    </div>
+
+    <!-- Related -->
+    {% if article.related_articles %}
+    <div class="card-segment">
+        <div class="section-label">🔗 关联条文</div>
+        <p class="flow-text" style="font-size:14px;">{{ article.related_articles|safe }}</p>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Navigation -->
+<div class="article-nav">
+    <div>
+        {% if has_prev %}
+        <a href="/learn/{{ chapter }}/{{ prev_article }}" class="btn btn-outline">← 上一条（第{{ prev_article }}条）</a>
+        {% endif %}
+    </div>
+    <div style="display:flex;gap:8px;">
+        <button class="btn btn-purple" onclick="openAiPanel('article', {{ article_num }})">🤖 问 AI（本条）</button>
+        {% if has_next %}
+        <a href="/learn/{{ chapter }}/{{ next_article }}" class="btn btn-primary">继续 → 下一条（第{{ next_article }}条）</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Chapter end -->
+{% if not has_next %}
+<div style="text-align:center;padding:24px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-lg);margin:8px 0 24px;box-shadow:var(--shadow-sm);">
+    <p class="flow-text" style="margin-bottom:12px;">这一章还有疑问吗？</p>
+    <div style="display:flex;gap:10px;justify-content:center;align-items:center;">
+        <a href="/quiz/{{ chapter }}/start" class="btn btn-primary btn-lg">进入章节测验</a>
+        <span style="color:var(--text-light);">或</span>
+        <button class="btn btn-outline" onclick="openAiPanel('chapter')">继续提问</button>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+
+{% endblock %}
+
+{% block bottom_nav %}
+{% if not is_intro and not is_diff %}
+<div class="bottom-nav">
+    {% if has_prev %}
+    <a href="/learn/{{ chapter }}/{{ prev_article }}" class="btn">← 上一条</a>
+    {% endif %}
+    {% if has_next %}
+    <a href="/learn/{{ chapter }}/{{ next_article }}" class="btn btn-primary">继续 → 下一条</a>
+    {% else %}
+    <a href="/quiz/{{ chapter }}/start" class="btn btn-primary">进入章节测验</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

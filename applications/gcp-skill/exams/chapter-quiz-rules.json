@@ -1,0 +1,63 @@
+{
+  "description": "章节测验抽题规则：每章随机抽题，按变化等级加权",
+  "modules": {
+    "导论": {
+      "count": 1,
+      "types": [
+        "verbal"
+      ],
+      "note": "口头确认，不计分，不纳入章节测验通过判断"
+    },
+    "第一章": {
+      "count": 3,
+      "types": [
+        "single-choice"
+      ]
+    },
+    "第二章": {
+      "count": 3,
+      "types": [
+        "single-choice"
+      ]
+    },
+    "第三章": {
+      "count": 3,
+      "types": [
+        "single-choice"
+      ]
+    },
+    "第四章": {
+      "count": 3,
+      "types": [
+        "single-choice"
+      ]
+    },
+    "第五章": {
+      "count": 3,
+      "types": [
+        "single-choice"
+      ]
+    },
+    "第六章": {
+      "count": 3,
+      "types": [
+        "single-choice"
+      ]
+    }
+  },
+  "change_weight": {
+    "🔴": 3,
+    "🟡": 2,
+    "🟢": 1
+  },
+  "pass_threshold": 2,
+  "retry_rules": {
+    "score_1_of_3": "重讲错题关联条文，再测1题",
+    "score_0_of_3": "重讲全部条文，再测3题"
+  },
+  "change_only_filter": {
+    "description": "老手轨B分支（变化题章节测验）：章节测验优先抽🔴🟡变化等级的题目，不足时fallback到🟢",
+    "change_levels": ["🔴", "🟡"],
+    "fallback_on_insufficient": "include_🟢"
+  }
+}

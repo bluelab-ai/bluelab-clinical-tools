@@ -1,0 +1,20 @@
+{
+  "description": "结业考试：每章抽5题，共6章30题，不限制题型比例。按变化等级加权抽题，等级制评分",
+  "total": 30,
+  "per_chapter": 5,
+  "pass_threshold": 0.6,
+  "change_weight": {
+    "🔴": 3,
+    "🟡": 2,
+    "🟢": 1
+  },
+  "grading": {
+    "excellent": { "label": "优秀", "min_rate": 0.9 },
+    "good": { "label": "良好", "min_rate": 0.75 },
+    "pass": { "label": "合格", "min_rate": 0.6 },
+    "fail": { "label": "不合格", "min_rate": 0.0, "action": "重考" }
+  },
+  "review_mapping": {
+    "description": "错题→薄弱章节映射，考试结束后告知学员哪些章节需要加强"
+  }
+}

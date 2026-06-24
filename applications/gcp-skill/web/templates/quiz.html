@@ -1,0 +1,282 @@
+{% extends "base.html" %}
+{% block title %}{{ chapter }} 章节测验 — GCP 2026 培训{% endblock %}
+
+{% block progress %}
+<div class="nav-progress-pill">
+    📊 {{ chapter }}
+    {% if question_index is defined and total_questions is defined %}
+    <div class="pill-track"><div class="pill-fill" style="width:{{ (question_index / total_questions * 100)|int }}%"></div></div>
+    {% elif show_results or show_scorecard %}
+    <div class="pill-track"><div class="pill-fill" style="width:100%"></div></div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block content %}
+
+{% if show_scorecard %}
+<!-- ===== Scorecard View ===== -->
+<header class="page-header">
+    <h1>{{ chapter }} 章节测验 — 成绩单</h1>
+</header>
+
+<div class="score-card {{ 'passed' if passed else 'failed' }}">
+    <div style="font-size:13px;color:var(--text-medium);margin-bottom:4px;">{{ chapter }} 章节测验</div>
+    <span class="big-num">{{ score }}/{{ total }}</span>
+    <span class="score-pill {{ 'good' if passed else 'bad' }}">{{ '✅ 已通过' if passed else '❌ 未通过' }}</span>
+</div>
+
+{% if not passed %}
+<div class="text-block" style="text-align:center;">
+    <p class="flow-text">此章节测验未通过。可以重新测验或先回顾条文再试。</p>
+</div>
+{% endif %}
+
+<!-- Wrong details (collapsible) -->
+{% if wrong_details %}
+<button class="review-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">
+    <span class="arr">▶</span> 查看错题详情（{{ wrong_details|length }}题）
+</button>
+<div class="review-panel">
+    {% for w in wrong_details %}
+    <div class="review-card">
+        <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px;">
+            <strong style="font-size:15px;">第{{ loop.index }}题 · {{ w.question_text }}</strong>
+            <span class="tag {% if w.was_uncertain %}tag-purple{% else %}tag-red{% endif %}">{{ '💬 不确定' if w.was_uncertain else '❌ 答错' }}</span>
+        </div>
+        {% if w.options and w.options|length > 0 %}
+        <div style="margin:10px 0;">
+            {% for opt in w.options %}
+            {% set opt_letter = opt[0] %}
+            <div class="opt-row {{ 'correct' if opt_letter == w.correct_answer else '' }}{{ 'wrong' if opt_letter == w.user_answer and opt_letter != w.correct_answer and not w.was_uncertain else '' }}">
+                {{ opt }}
+                {% if opt_letter == w.correct_answer %}<span class="row-mark">正确答案</span>{% endif %}
+                {% if opt_letter == w.user_answer and opt_letter != w.correct_answer and not w.was_uncertain %}<span class="row-mark">你的答案</span>{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p style="font-size:14px;margin:10px 0;">
+            你的答案：<strong style="color:var(--red);">{{ w.user_answer }}</strong>
+            → 正确答案：<strong style="color:var(--green);">{{ w.correct_answer }}</strong>
+        </p>
+        {% endif %}
+        <div style="font-size:13px;color:var(--text-medium);margin-top:10px;padding:10px;background:var(--bg-hover);border-radius:var(--radius);line-height:1.7;">
+            <strong>📖 解析：</strong>{{ w.explanation|safe }}
+        </div>
+        {% if w.article_num %}
+        <button class="btn btn-purple" style="margin-top:8px;" onclick="openAiPanel('quiz', '{{ w.q_id }}')">🤖 还是不懂？问 AI</button>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="content-divider"></div>
+<div style="text-align:center;">
+    <a href="/quiz/{{ chapter }}/start?{% if is_b_branch %}change_only=1&{% endif %}retake=1" class="btn btn-primary btn-lg">重新测验</a>
+</div>
+
+{% elif show_results %}
+<!-- ===== Results View ===== -->
+<header class="page-header">
+<h1>{{ chapter }} 章节测验 — 结果</h1>
+</header>
+
+<div class="score-card {{ 'passed' if passed else 'failed' }}">
+    <div style="font-size:13px;color:var(--text-medium);margin-bottom:4px;">{{ chapter }} 章节测验</div>
+    <span class="big-num">{{ score }}/{{ total }}</span>
+    <span class="score-pill {{ 'good' if passed else 'bad' }}">{{ '✅ 已通过' if passed else '❌ 未通过' }}</span>
+</div>
+
+{% if not passed %}
+<div class="text-block" style="text-align:center;margin:16px 0;">
+    {% if score == 1 %}
+    <p class="flow-text">需要重讲错题关联条文，再出 1 题。</p>
+    {% elif score == 0 %}
+    <p class="flow-text">需要重讲本章关键条文，再出 3 题。</p>
+    {% endif %}
+    <a href="/quiz/{{ chapter }}/start{% if is_b_branch %}?change_only=1{% endif %}" class="btn btn-primary" style="margin-top:8px;">重新测验</a>
+</div>
+{% endif %}
+
+{% if passed and next_chapter %}
+<div style="text-align:center;margin:16px 0;">
+    {% if is_b_branch %}
+    <a href="/learn/branch" class="btn btn-primary btn-lg">继续下一章测验</a>
+    {% else %}
+    <a href="/learn/{{ next_chapter }}/{{ next_article }}" class="btn btn-primary btn-lg">进入{{ next_chapter }}</a>
+    {% endif %}
+</div>
+{% elif passed and not next_chapter %}
+    {% if not is_b_branch %}
+<div style="text-align:center;margin:16px 0;">
+    <a href="/exam/start" class="btn btn-primary btn-lg">进入结业考试</a>
+</div>
+    {% endif %}
+{% endif %}
+
+<!-- Wrong details (collapsible) -->
+{% if wrong_details %}
+<button class="review-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">
+    <span class="arr">▶</span> 查看错题详情（{{ wrong_details|length }}题）
+</button>
+<div class="review-panel">
+    {% for w in wrong_details %}
+    <div class="review-card" style="{% if w.was_uncertain %}background:var(--purple-bg);{% endif %}">
+        <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px;">
+            <strong style="font-size:15px;">第{{ loop.index }}题 · {{ w.question_text }}</strong>
+            <span class="tag {% if w.was_uncertain %}tag-purple{% else %}tag-red{% endif %}">{{ '💬 不确定' if w.was_uncertain else '❌ 答错' }}</span>
+        </div>
+        {% if w.options and w.options|length > 0 %}
+        <div style="margin:10px 0;">
+            {% for opt in w.options %}
+            {% set opt_letter = opt[0] %}
+            <div class="opt-row {{ 'correct' if opt_letter == w.correct_answer else '' }}{{ 'wrong' if opt_letter == w.user_answer and opt_letter != w.correct_answer and not w.was_uncertain else '' }}">
+                {{ opt }}
+                {% if opt_letter == w.correct_answer %}<span class="row-mark">正确答案</span>{% endif %}
+                {% if opt_letter == w.user_answer and opt_letter != w.correct_answer and not w.was_uncertain %}<span class="row-mark">你的答案</span>{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p style="font-size:14px;margin:10px 0;">
+            你的答案：<strong style="color:{{ 'var(--red)' if not w.was_uncertain else 'var(--text-strong)' }};">{{ w.user_answer }}</strong>
+            {% if not w.was_uncertain %}
+            → 正确答案：<strong style="color:var(--green);">{{ w.correct_answer }}</strong>
+            {% endif %}
+        </p>
+        {% endif %}
+        <div style="font-size:13px;color:var(--text-medium);margin-top:10px;padding:10px;background:var(--bg-hover);border-radius:var(--radius);line-height:1.7;">
+            <strong>📖 解析：</strong>{{ w.explanation|safe }}
+        </div>
+        {% if w.article_num %}
+        <button class="btn btn-purple" style="margin-top:8px;" onclick="openAiPanel('quiz', '{{ w.q_id }}')">🤖 还是不懂？问 AI</button>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if offer_upgrade %}
+<div class="callout callout-purple" style="margin-top:24px;text-align:center;">
+    <div class="callout-body">
+        <strong>你已通过全部六章章节测验。</strong>
+        要升级到 C 参加结业考试拿证吗？
+        <form method="post" action="/learn/branch/upgrade" style="margin-top:10px;">
+            <input type="hidden" name="from_branch" value="B">
+            <input type="hidden" name="to_branch" value="C">
+            <button type="submit" class="btn btn-primary">是，我要参加结业考试</button>
+        </form>
+        <a href="/" class="btn btn-outline" style="margin-top:8px;">否，到此结束</a>
+    </div>
+</div>
+{% endif %}
+
+{% elif show_feedback %}
+<!-- ===== Feedback View ===== -->
+<div class="quiz-card">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:12px;color:var(--text-light);">
+        <span>{{ chapter }} 章节测验</span>
+        <div class="step-dots">
+            {% for i in range(total_questions) %}
+            <span class="step-dot {{ 'done' if i < question_index else 'active' if i == question_index else '' }}"></span>
+            {% endfor %}
+        </div>
+        <span>第 {{ question_index }}/{{ total_questions }} 题</span>
+    </div>
+
+    <div class="flow-text" style="font-size:17px;font-weight:600;margin-bottom:16px;">{{ question.question }}</div>
+
+    <div style="margin-bottom:16px;">
+        {% if question.type == "true-false" %}
+        <div class="quiz-option {{ 'fb-correct' if '对' == correct_answer else '' }}{{ 'fb-wrong' if '对' == selected_answer and not is_correct else '' }}">✓ 对</div>
+        <div class="quiz-option {{ 'fb-correct' if '错' == correct_answer else '' }}{{ 'fb-wrong' if '错' == selected_answer and not is_correct else '' }}">✗ 错</div>
+        {% else %}
+        {% for opt in question.options %}
+        {% set letter = opt[0] %}
+        <div class="quiz-option {{ 'fb-correct' if letter == correct_answer else '' }}{{ 'fb-wrong' if letter == selected_answer and not is_correct else '' }}{{ 'fb-uncertain' if selected_answer == 'E' else '' }}">
+            <span class="opt-badge">{{ letter }}</span>{{ opt }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        <div class="quiz-option uncertain {{ 'fb-uncertain' if selected_answer == 'E' else '' }}">
+            <span class="opt-badge">E</span>💬 我不太确定，请帮我讲解
+        </div>
+    </div>
+
+    <div class="feedback {{ 'correct' if is_correct else 'uncertain' if was_uncertain else 'incorrect' }}">
+        {% if is_correct %}
+        <span>✅</span><div>回答正确！</div>
+        {% elif was_uncertain %}
+        <span>💬</span><div>没关系，让我们来看看这个知识点。</div>
+        {% else %}
+        <span>❌</span><div>回答错误。正确答案是 <strong style="color:var(--green);">{{ correct_answer }}</strong></div>
+        {% endif %}
+    </div>
+
+    <div class="text-block" style="margin-top:8px;">
+        <div class="caption-text"><strong>📖 解析：</strong>{{ explanation|safe }}</div>
+    </div>
+
+    {% if was_uncertain and article_review %}
+    <div class="callout callout-scene" style="margin-top:12px;">
+        <div class="callout-body">
+            <strong>关联条文回顾</strong>
+            {{ article_review.original_text|safe }}
+        </div>
+    </div>
+    {% endif %}
+
+    <div style="text-align:center;margin-top:16px;">
+        {% if not is_last %}
+        <a href="/quiz/{{ chapter }}/next" class="btn btn-primary btn-lg">下一题 →</a>
+        {% else %}
+        <a href="/quiz/{{ chapter }}/next" class="btn btn-primary btn-lg">查看结果</a>
+        {% endif %}
+    </div>
+
+    {% if was_uncertain or not is_correct %}
+    <div style="text-align:center;margin-top:12px;">
+        <button class="btn btn-purple" onclick="openAiPanel('quiz', '{{ question.id }}')">🤖 还是不懂？问 AI</button>
+    </div>
+    {% endif %}
+</div>
+
+{% else %}
+<!-- ===== Question View ===== -->
+<div class="quiz-card">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:12px;color:var(--text-light);">
+        <span>{{ chapter }} 章节测验</span>
+        <div class="step-dots">
+            {% for i in range(total_questions) %}
+            <span class="step-dot {{ 'done' if i + 1 < question_index else 'active' if i + 1 == question_index else '' }}"></span>
+            {% endfor %}
+        </div>
+        <span>第 {{ question_index }}/{{ total_questions }} 题</span>
+    </div>
+
+    <div class="flow-text" style="font-size:17px;font-weight:600;margin-bottom:20px;">{{ question.question }}</div>
+
+    <form method="post" action="/quiz/{{ chapter }}/answer">
+        <input type="hidden" name="question_id" value="{{ question.id }}">
+
+        {% if question.type == "true-false" %}
+        <button type="submit" name="answer" value="对" class="quiz-option"><span class="opt-badge">✓</span>对</button>
+        <button type="submit" name="answer" value="错" class="quiz-option"><span class="opt-badge">✗</span>错</button>
+        {% else %}
+        {% for opt in question.options %}
+        {% set letter = opt[0] %}
+        <button type="submit" name="answer" value="{{ letter }}" class="quiz-option">
+            <span class="opt-badge">{{ letter }}</span>{{ opt }}
+        </button>
+        {% endfor %}
+        {% endif %}
+        <button type="submit" name="answer" value="E" class="quiz-option uncertain">
+            <span class="opt-badge">E</span>💬 我不太确定，请帮我讲解
+        </button>
+    </form>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,23 @@
+# Sensitive config (contains API keys)
+.env
+
+# User data (generated at runtime)
+web/users/
+web/certs/
+
+# Training records (generated at runtime)
+.training-records/
+
+# Python cache
+*.pyc
+__pycache__/
+
+# macOS
+.DS_Store
+
+# Dev-only reference files (not needed for teaching)
+content/old-gcp-2020.md
+
+# Virtual environment
+.venv/
+venv/

@@ -1,0 +1,2719 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "total_questions": 108,
+    "generated_at": "2026-06-14",
+    "coverage": {
+      "by_module": {
+        "第一章": 23,
+        "第六章": 5,
+        "第二章": 11,
+        "第三章": 36,
+        "第四章": 23,
+        "第五章": 10
+      },
+      "by_change_level": {
+        "🟢": 53,
+        "🔴": 24,
+        "🟡": 31
+      },
+      "total_articles_covered": 52
+    },
+    "source_notes": "Adapted from 2020 GCP 100-question bank (GCP精选100真题). Terminology updated to 2026 version (试验参与者, 主要研究者, 伦理审查委员会, 服务供应商, 法定代理人). New questions added for RED articles (6,12,13,20,51,52,53). Audit #1 (2026-06-16): 3 questions corrected (Art 1/3/5 wording), 3 in Ch.2 replaced, 19 removed. Audit #2: Q-M3-023-043 removed 2020 residual; Q-M3-018-034 aligned with Art 18; Q-M3-027-063 fixed; 8 ICH E6(R3) questions deleted. Audit #3: Q-M3-027-051/054 updated 监护人->法定代理人. Audit #4: Q-M3-023-042 explanation fixed; tags 受试者补偿->试验参与者补偿 (Q-M4-045-001/002); tag 监护人->法定代理人 (Q-M3-027-054). Audit #5 (2026-06-16): Q-M2-015-026 ID corrected to Q-M2-014-026; Q-M4-048-081 explanation updated to multi-article (Art 48+51+7); Q-M3-026-047 explanation updated to Art 26(二)+48(三); Q-M1-004-004 世界医学大会->世界医学会 per 2026版第4条. All 108 questions re-verified against 2026 GCP full text — answers correct, explanations aligned with actual article content, terminology consistent."
+  },
+  "questions": [
+    {
+      "id": "Q-M1-001-001",
+      "module": "第一章",
+      "article": "1",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "《药物临床试验质量管理规范》的目的不包括（）。",
+      "options": [
+        "A、保证药物临床试验过程规范",
+        "B、保护试验参与者的权益和安全",
+        "C、保证数据和结果的科学、真实、可靠",
+        "D、保护注册申请人权益"
+      ],
+      "answer": "D",
+      "explanation": "【2026版第1条】GCP的目的是保证药物临床试验过程规范，保护试验参与者的权益和安全，确保数据和结果科学、真实、可靠。保护注册申请人权益不是GCP的目的。",
+      "tags": [
+        "总则",
+        "GCP目的"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-001-002",
+      "module": "第一章",
+      "article": "1",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "《药物临床试验质量管理规范》的制定根据的是《中华人民共和国药品管理法》、《中华人民共和国疫苗管理法》、《中华人民共和国药品管理法实施条例》、《药品注册管理办法》。",
+      "answer": true,
+      "explanation": "【2026版第1条】本规范依据《药品管理法》《疫苗管理法》《药品管理法实施条例》《药品注册管理办法》制定。四项法律依据缺一不可。",
+      "tags": [
+        "总则",
+        "法规依据"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-003-003",
+      "module": "第一章",
+      "article": "3",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "药物临床试验质量管理规范是药物临床试验全过程应当遵循的伦理、科学和质量的标准，全过程包括计划、启动、执行、记录、监督、评估、分析和报告。",
+      "answer": true,
+      "explanation": "【2026版第3条】GCP是药物临床试验全过程应当遵循的伦理、科学和质量的标准（三重标准，非仅质量标准）。全过程包括计划、启动、执行、记录、监督、评估、分析和报告八个阶段。",
+      "tags": [
+        "总则",
+        "GCP定义"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-004-004",
+      "module": "第一章",
+      "article": "4",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "药物临床试验必须遵循《世界医学会赫尔辛基宣言》原则及相关伦理要求，需考虑的首要因素是（）。",
+      "options": [
+        "A、科学获益",
+        "B、试验参与者的权益和安全",
+        "C、社会的获益",
+        "D、保障试验的可靠性"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第4条】试验参与者的权益和安全是首要考虑因素，优先于对科学和社会的获益。",
+      "tags": [
+        "伦理",
+        "试验参与者保护"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-005-005",
+      "module": "第一章",
+      "article": "5",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "临床试验应当权衡试验参与者和社会的预期风险和获益，只有当预期的获益与风险相比合理时，方可启动或者继续临床试验。",
+      "answer": true,
+      "explanation": "【2026版第5条】药物临床试验应当科学合理，权衡试验参与者和社会的预期风险和获益，只有当预期的获益与风险相比合理时，方可启动或者继续临床试验。原文用\"启动\"而非\"实施\"，强调在开始阶段即需权衡获益-风险比。",
+      "tags": [
+        "伦理",
+        "风险管理"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-007-006",
+      "module": "第一章",
+      "article": "7",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "试验方案递交伦理审查委员会备案后即可执行。",
+      "answer": false,
+      "explanation": "【2026版第7条】临床试验方案在获得伦理审查委员会批准后方可执行，备案不等于批准。必须获得书面批准意见后方可执行。",
+      "tags": [
+        "试验方案",
+        "伦理审查"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-008-007",
+      "module": "第一章",
+      "article": "8",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "临床试验期间，研究人员均应遵守试验方案，涉及医学判断或医疗决策应当由（）做出。",
+      "options": [
+        "A、药师",
+        "B、临床医生",
+        "C、申办者",
+        "D、研究护士"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第8条】凡涉及医学判断或者医疗决策应当由有资质的临床医生做出。",
+      "tags": [
+        "人员资质",
+        "医学判断"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-011-008",
+      "module": "第一章",
+      "article": "11",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "药物临床试验质量管理体系应当覆盖临床试验的全过程，除了（）之外，都应该重点关注。",
+      "options": [
+        "A、试验参与者保护",
+        "B、确保试验得出阳性结果",
+        "C、遵守相关法律法规",
+        "D、试验结果可靠"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第11条】质量管理体系的三大目标是保护试验参与者的权益和安全、确保临床试验结果可靠、遵守相关法律法规。确保阳性结果不是GCP的目标。",
+      "tags": [
+        "质量管理",
+        "总则"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-012-009",
+      "module": "第一章",
+      "article": "12",
+      "type": "true-false",
+      "change_level": "🔴",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "临床试验的实施应当遵守利益冲突回避原则。",
+      "answer": true,
+      "explanation": "【2026版第12条】2026版已将利益冲突回避提升为独立条文（原2020版第10条仅为简单提及）。药物临床试验的实施应当遵守利益冲突回避原则，避免对试验参与者权益和安全，以及试验结果的可靠性产生影响。",
+      "tags": [
+        "伦理",
+        "利益冲突"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M6-054-011",
+      "module": "第六章",
+      "article": "54",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "参加一项临床试验，试验用药品的接受者是（）。",
+      "options": [
+        "A、法定代理人",
+        "B、试验参与者家属",
+        "C、试验参与者",
+        "D、公正见证人"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第54条】试验参与者（旧称受试者）指参加药物临床试验的个体，预期将接受试验药物或者纳入对照组。",
+      "tags": [
+        "术语",
+        "定义"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M2-014-020",
+      "module": "第二章",
+      "article": "14",
+      "type": "single-choice",
+      "change_level": "🟡",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "由医学、药学及其他背景人员组成的委员会，其职责是通过独立地审查、同意、跟踪审查试验方案及相关文件、获得和记录试验参与者知情同意所用的方法和材料等，确保试验参与者的权益、安全受到保护。文中描述的组织是（）。",
+      "options": [
+        "A、伦理审查委员会",
+        "B、服务供应商",
+        "C、独立数据监查委员会",
+        "D、申办者"
+      ],
+      "answer": "A",
+      "explanation": "【2026版第14条】伦理审查委员会（2020版称伦理委员会）由医学、药学及其他背景人员组成，职责是保护试验参与者的权益和安全，对临床试验的伦理性和科学性进行审查。",
+      "tags": [
+        "伦理审查委员会",
+        "定义"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M2-014-022",
+      "module": "第二章",
+      "article": "14",
+      "type": "single-choice",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "伦理审查委员会应当审查的文件不包括（）。",
+      "options": [
+        "A、招募试验参与者的方式和信息",
+        "B、试验方案",
+        "C、临床试验协议",
+        "D、包含试验参与者补偿信息的文件"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第14条(一)】伦理审查委员会审查的文件包括试验方案、知情同意书、招募试验参与者的方式和信息、研究者手册、安全性资料、补偿信息文件、主要研究者资质证明文件、方案偏离报告等。临床试验协议不在审查清单中。",
+      "tags": [
+        "伦理审查委员会",
+        "审查文件"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M2-014-023",
+      "module": "第二章",
+      "article": "14",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "伦理审查委员会只需要对试验方案的伦理性进行审查。",
+      "answer": false,
+      "explanation": "【2026版第14条】伦理审查委员会应当对临床试验的伦理性和科学性进行审查，缺一不可。",
+      "tags": [
+        "伦理审查委员会",
+        "审查范围"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M2-015-024",
+      "module": "第二章",
+      "article": "15",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "easy",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第15条，伦理审查委员会应当健全利益冲突管理机制和伦理审查质量控制机制。",
+      "answer": true,
+      "explanation": "【2026版第15条】伦理审查委员会应当建立伦理审查工作制度、标准操作规程，健全利益冲突管理机制和伦理审查质量控制机制，保证伦理审查过程独立、客观、公正。2026版新增了利益冲突管理机制和伦理审查质量控制机制两项要求。",
+      "tags": [
+        "伦理审查",
+        "制度建设",
+        "利益冲突"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M2-015-025",
+      "module": "第二章",
+      "article": "15",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "easy",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第15条，伦理审查委员会应当保证伦理审查过程独立、客观、公正。",
+      "answer": true,
+      "explanation": "【2026版第15条】伦理审查委员会应当建立伦理审查工作制度、标准操作规程，健全利益冲突管理机制和伦理审查质量控制机制，保证伦理审查过程独立、客观、公正。独立、客观、公正是伦理审查的三项基本原则。",
+      "tags": [
+        "伦理审查",
+        "独立性",
+        "公正性"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M2-014-026",
+      "module": "第二章",
+      "article": "14",
+      "type": "single-choice",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第14条，伦理审查委员会的审查意见不包括（）。",
+      "options": [
+        "A、批准",
+        "B、不批准",
+        "C、修改后批准",
+        "D、无条件通过"
+      ],
+      "answer": "D",
+      "explanation": "【2026版第14条(七)】伦理审查委员会的审查意见有：批准、不批准、修改后批准、修改后再审、继续研究、暂停或者终止研究。\"无条件通过\"不是法定审查意见类型。",
+      "tags": [
+        "伦理审查",
+        "审查意见"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M2-014-027",
+      "module": "第二章",
+      "article": "14",
+      "type": "single-choice",
+      "change_level": "🟡",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "伦理审查委员会应当对正在实施的临床试验定期跟踪审查，审查的频率应当根据试验参与者的风险程度而定，但（）。",
+      "options": [
+        "A、至少3个月审查一次",
+        "B、至少两年审查一次",
+        "C、至少半年审查一次",
+        "D、至少一年审查一次"
+      ],
+      "answer": "D",
+      "explanation": "【2026版第14条(六)】伦理审查委员会对正在实施的临床试验定期跟踪审查，审查频率应当根据试验的风险程度而定，时间间隔不超过12个月（即至少一年一次）。",
+      "tags": [
+        "伦理审查委员会",
+        "跟踪审查"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M2-017-028",
+      "module": "第二章",
+      "article": "17",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "药品监督管理部门不可以要求伦理审查委员会提供其标准操作规程和伦理审查委员名单。",
+      "answer": false,
+      "explanation": "【2026版第17条】必要时，主要研究者、申办者或者药品监督管理部门可以要求伦理审查委员会提供其标准操作规程。",
+      "tags": [
+        "伦理审查委员会",
+        "SOP"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M2-014-029",
+      "module": "第二章",
+      "article": "14",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "伦理审查委员会书面同意的文件不包括招募试验参与者的方式和信息。",
+      "answer": false,
+      "explanation": "【2026版第14条(一)】招募试验参与者的方式和信息属于伦理审查委员会应当审查的文件之一。该说法错误。",
+      "tags": [
+        "伦理审查委员会",
+        "审查文件"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-031-030",
+      "module": "第三章",
+      "article": "31",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "主要研究者和临床试验机构应当接受申办者组织的监查和稽查，以及药品监督管理部门的检查。",
+      "answer": true,
+      "explanation": "【2026版第31条】主要研究者和临床试验机构应当接受申办者组织的监查和稽查，以及药品监督管理部门的检查，并配合提供所需的与临床试验有关的记录。",
+      "tags": [
+        "PI职责",
+        "监查稽查"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-019-031",
+      "module": "第三章",
+      "article": "19",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "以下（）是主要研究者和临床试验机构应当具备的资格和要求。",
+      "options": [
+        "A、具有在临床试验机构的执业资格",
+        "B、以上均是",
+        "C、具备临床试验所需的专业知识、培训经历和能力",
+        "D、熟悉并遵守本规范和临床试验相关的法律法规"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第19条】主要研究者应当具有在临床试验机构的相应执业资格，具备教育背景、培训经历和实践经验，熟悉方案和GCP及相关法律法规。",
+      "tags": [
+        "PI职责",
+        "资质"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-020-032",
+      "module": "第三章",
+      "article": "20",
+      "type": "single-choice",
+      "change_level": "🔴",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "关于主要研究者和临床试验机构授权个人或者单位承担临床试验相关的职责和功能，以下（）是错误的。",
+      "options": [
+        "A、无需获得申办者同意",
+        "B、应当获得申办者同意",
+        "C、应当确保其具备相应资质",
+        "D、应当建立完整的程序以确保其执行临床试验相关职责和功能，产生可靠的数据"
+      ],
+      "answer": "A",
+      "explanation": "【2026版第20条】委托临床试验机构以外的单位承担临床试验相关职责和功能，应当事先获得申办者同意。2026版新增了建立完整的工作制度和不得授权的关键事项清单要求。",
+      "tags": [
+        "授权",
+        "PI职责"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-021-033",
+      "module": "第三章",
+      "article": "21",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "主要研究者应具备临床试验所需的专业知识、培训经历和能力，在完成诊疗工作的同时有足够的时间实施和完成临床试验。",
+      "answer": true,
+      "explanation": "【2026版第21条】主要研究者有足够的时间和能力组织、实施临床试验，在临床试验合同约定的期限内入组足够数量且符合试验方案的试验参与者。",
+      "tags": [
+        "PI职责",
+        "时间要求"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-018-034",
+      "module": "第三章",
+      "article": "18",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "药物临床试验机构开展药物临床试验，应当建立药物临床试验质量管理体系，并确保其有效运行。",
+      "answer": true,
+      "explanation": "【2026版第18条】药物临床试验机构开展药物临床试验，应当建立药物临床试验质量管理体系，并确保其有效运行。这是对临床试验机构的总体要求。",
+      "tags": [
+        "机构管理",
+        "质量管理体系"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-021-037",
+      "module": "第三章",
+      "article": "21",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "主要研究者有权支配参与临床试验的人员，具有使用临床试验所需医疗设施的权限。",
+      "answer": true,
+      "explanation": "【2026版第21条(二)】主要研究者具有使用临床试验所需设施的权限，有权支配并监管参与临床试验的研究人员，正确、安全地实施临床试验。",
+      "tags": [
+        "PI职责",
+        "资源"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-027-039",
+      "module": "第三章",
+      "article": "27",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "试验参与者可以无理由退出临床试验。",
+      "answer": true,
+      "explanation": "【2026版第27条】试验参与者有权自愿参加或退出临床试验。2026版强调知情同意是自愿的，试验参与者可随时退出。",
+      "tags": [
+        "知情同意",
+        "参与者权利"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-022-040",
+      "module": "第三章",
+      "article": "22",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "未获得伦理审查委员会书面同意前，可以先进行试验参与者的筛选。",
+      "answer": false,
+      "explanation": "【2026版第22条】临床试验启动前，主要研究者应当获得伦理审查委员会对临床试验项目的批准。未获得书面同意前，不能筛选试验参与者。",
+      "tags": [
+        "伦理审批",
+        "试验启动"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-023-041",
+      "module": "第三章",
+      "article": "23",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "主要研究者修改试验方案，需要经过申办者同意，不需要提交伦理审查委员会审查。",
+      "answer": false,
+      "explanation": "【2026版第23条】主要研究者修改或偏离试验方案通常需经申办者和伦理审查委员会同意，并遵循方案修订流程。",
+      "tags": [
+        "试验方案",
+        "方案修改"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-023-042",
+      "module": "第三章",
+      "article": "23",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "hard",
+      "source": "adapted-from-2020",
+      "question": "以下（）说法不准确。",
+      "options": [
+        "A、主要研究者应当采取措施，避免使用试验方案禁用的合并用药",
+        "B、主要研究者应详细阅读和遵守试验方案",
+        "C、未经申办者和伦理审查委员会的同意，主要研究者绝对不得修改或者偏离试验方案",
+        "D、为了消除对试验参与者的紧急危害，在未获得伦理审查委员会同意的情况下，主要研究者允许修改或者偏离试验方案"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第23条】为及时消除对试验参与者的紧急危害，可以在未获得伦理审查委员会同意的情况下偏离试验方案。选项C使用了'绝对'一词，表述不准确。",
+      "tags": [
+        "试验方案",
+        "方案偏离"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-023-043",
+      "module": "第三章",
+      "article": "23",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "未经申办者和伦理审查委员会的同意，主要研究者不得修改或者偏离试验方案，但不包括为了及时消除对试验参与者的紧急危害的情形。",
+      "answer": true,
+      "explanation": "【2026版第23条(二)】为消除对试验参与者的紧急危害，在未获得伦理审查委员会同意的情况下可以偏离试验方案，但应当及时向伦理审查委员会、申办者报告并说明理由。注意：2020版中'更换监查员、电话号码等仅涉及临床试验管理方面的改动'的豁免在2026版已删除，紧急危害是唯一的法定例外。",
+      "tags": [
+        "试验方案",
+        "方案偏离"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-028-045",
+      "module": "第三章",
+      "article": "28",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "对于试验用药品的管理，主要研究者和临床试验机构应做到，试验用药品在临床试验机构的接收、贮存、分发、回收、退还及未使用的处置等管理应当遵守相应的规定并保存记录。",
+      "answer": true,
+      "explanation": "【2026版第28条】临床试验机构接收、处理、贮存、分发、使用、回收、退还及销毁临床试验用药品应当遵守相应的规定并保存记录。",
+      "tags": [
+        "药品管理",
+        "记录"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-028-046",
+      "module": "第三章",
+      "article": "28",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "对于生物等效性试验的临床试验用药品，临床试验机构至少保存留样（）。",
+      "options": [
+        "A、至药品上市后3年",
+        "B、至试验结束后2年",
+        "C、至药品上市后2年",
+        "D、至试验结束后3年"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第28条(二)】主要研究者应当对生物等效性试验的临床试验用药品进行随机抽取留样，至少保存留样至药品上市后2年。",
+      "tags": [
+        "药品管理",
+        "生物等效性"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-026-047",
+      "module": "第三章",
+      "article": "26",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "当主要研究者向申办者提供的严重不良事件报告和随访报告，不应出现（）。",
+      "options": [
+        "A、试验参与者的性别",
+        "B、试验参与者的诊断和合并用药情况",
+        "C、试验参与者鉴认代码",
+        "D、试验参与者的真实姓名"
+      ],
+      "answer": "D",
+      "explanation": "【2026版第26条(二)+第48条(三)】主要研究者应在获知后立即向申办者和伦理审查委员会书面报告所有严重不良事件（第26条(二)）。申办者应当使用试验参与者鉴认代码识别每一位试验参与者的所有临床试验数据（第48条(三)），SAE报告中不得出现试验参与者真实姓名等身份信息，以保护参与者隐私。",
+      "tags": [
+        "安全性报告",
+        "SAE"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-029-048",
+      "module": "第三章",
+      "article": "29",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "关于临床试验记录说法不正确的是（）。",
+      "options": [
+        "A、能够被准确的解释和确认",
+        "B、应保护试验参与者隐私",
+        "C、有纸质和电子两种形式",
+        "D、修改时覆盖原始痕迹"
+      ],
+      "answer": "D",
+      "explanation": "【2026版第29条】源记录的修改应当可追溯，不能掩盖原始记录，并需记录修改的理由。修改时覆盖原始痕迹违反ALCOA+原则。",
+      "tags": [
+        "数据管理",
+        "记录修改"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-048-050",
+      "module": "第四章",
+      "article": "48",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "申办者应当有书面程序确保其对病例报告表的改动是必要的、被记录的，可以不得到主要研究者的同意。",
+      "answer": false,
+      "explanation": "【2026版第48条(二)】申办者不得更改主要研究者及其授权的研究人员或者试验参与者录入的数据，除非有正当理由，且应当在修改前获得主要研究者的书面同意，并进行记录。",
+      "tags": [
+        "数据管理",
+        "数据修改"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-027-051",
+      "module": "第三章",
+      "article": "27",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "hard",
+      "source": "adapted-from-2020",
+      "question": "紧急情况下，试验参与者没有能力给予知情同意，其法定代理人也不在场时，试验参与者的入组方式应当在经伦理审查委员会书面批准的试验方案以及其他文件中清楚表述，同时应尽快告知试验参与者或者其法定代理人试验信息，并适时获得知情同意。",
+      "answer": true,
+      "explanation": "【2026版第27条(十)】紧急情况下无法取得知情同意时，其法定代理人可以代表试验参与者知情同意；法定代理人也不在场时，入组方式应当在经伦理审查委员会书面批准的试验方案及其他文件中清楚表述，并应尽快告知试验参与者或其法定代理人试验信息，适时获得知情同意。2026版使用'法定代理人'替代旧版'监护人'。",
+      "tags": [
+        "知情同意",
+        "紧急情况"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-027-052",
+      "module": "第三章",
+      "article": "27",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "hard",
+      "source": "adapted-from-2020",
+      "question": "当试验参与者参加非治疗性临床试验，必须由试验参与者本人在知情同意书上签字同意并注明日期。",
+      "answer": false,
+      "explanation": "【2026版第27条(十一)】试验参与者参加没有预期获益的临床试验，原则上应当由试验参与者本人签署知情同意书。但非绝对必须，在满足特定条件时可由法定代理人代签。",
+      "tags": [
+        "知情同意",
+        "非治疗性"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-027-053",
+      "module": "第三章",
+      "article": "27",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "试验参与者无民事行为能力的，应当取得试验参与者的法定代理人的书面知情同意。",
+      "answer": true,
+      "explanation": "【2026版第27条(九)】试验参与者为无民事行为能力人的，应当取得其法定代理人的书面知情同意。",
+      "tags": [
+        "知情同意",
+        "弱势群体"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-027-054",
+      "module": "第三章",
+      "article": "27",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "法定代理人代表试验参与者知情同意时，应当在试验参与者可理解的范围内告知试验参与者临床试验的相关信息，并尽量让试验参与者亲自签署知情同意书并注明日期。",
+      "answer": true,
+      "explanation": "【2026版第27条(九)】当法定代理人代表试验参与者知情同意时，应当在试验参与者可理解的范围内告知相关信息，并尽量让试验参与者亲自签署知情同意书并注明日期。2026版使用'法定代理人'替代旧版'监护人'。",
+      "tags": [
+        "知情同意",
+        "法定代理人"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-027-055",
+      "module": "第三章",
+      "article": "27",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "知情同意书如非试验参与者本人签署，应当注明关系。",
+      "answer": true,
+      "explanation": "【2026版第27条(六)】如非试验参与者本人签署，应当注明关系。",
+      "tags": [
+        "知情同意",
+        "签署要求"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-027-056",
+      "module": "第三章",
+      "article": "27",
+      "type": "single-choice",
+      "change_level": "🟡",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "主要研究者应当使用经（）同意的最新版的知情同意书和其他提供给试验参与者的信息。",
+      "options": [
+        "A、申办者",
+        "B、服务供应商",
+        "C、伦理审查委员会",
+        "D、临床试验机构"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第27条(一)】使用经伦理审查委员会批准的最新版知情同意书和其他提供给试验参与者的信息。",
+      "tags": [
+        "知情同意",
+        "文件版本"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-027-057",
+      "module": "第三章",
+      "article": "27",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "为鼓励试验参与者参加试验，招募材料以醒目字体等方式强调给予试验参与者的补偿。",
+      "answer": false,
+      "explanation": "【2026版第27条(三)】主要研究者及其授权的研究人员不得采用强迫、利诱等不正当的方式影响试验参与者参加或者继续参加临床试验。以醒目字体强调补偿属于不当利诱。",
+      "tags": [
+        "知情同意",
+        "招募"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-027-058",
+      "module": "第三章",
+      "article": "27",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "为鼓励试验参与者完成试验，招募材料将补偿表述为额外的奖励。",
+      "answer": false,
+      "explanation": "【2026版第27条(三)】招募材料不得将补偿表述为额外奖励来鼓励试验参与者完成试验，这属于以利诱等不正当方式影响参与者。",
+      "tags": [
+        "知情同意",
+        "招募"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-027-059",
+      "module": "第三章",
+      "article": "27",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "为保证足够数量的试验参与者，研究人员可以采用利诱等方式影响试验参与者参加或者继续临床试验。",
+      "answer": false,
+      "explanation": "【2026版第27条(三)】研究人员不得采用利诱等方式影响试验参与者参加或继续试验。",
+      "tags": [
+        "知情同意",
+        "招募"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-027-060",
+      "module": "第三章",
+      "article": "27",
+      "type": "single-choice",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "知情同意时，（）内容不必需向试验参与者告知。",
+      "options": [
+        "A、重要的潜在获益和风险",
+        "B、需要遵守的试验步骤",
+        "C、试验药物的价格",
+        "D、其他可选的药物和治疗方法"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第27条】知情同意资料应包括风险获益、试验步骤、可选治疗等内容。试验参与者免费获得试验用药品，价格不是必需告知事项。",
+      "tags": [
+        "知情同意",
+        "内容"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-049-061",
+      "module": "第四章",
+      "article": "49",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "在不违反保密原则和相关法规的情况下，哪些人员可以查阅试验参与者的原始医学记录，以核实临床试验的过程和数据。",
+      "options": [
+        "A、稽查员",
+        "B、伦理审查委员会和药品监督管理部门检查人员",
+        "C、以上三项均是",
+        "D、监查员"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第49条】监查员、稽查员、伦理审查委员会的审查者及药品监督管理部门的检查人员，能够直接查阅临床试验相关的源记录。",
+      "tags": [
+        "源记录",
+        "查阅权限"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-027-062",
+      "module": "第三章",
+      "article": "27",
+      "type": "single-choice",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "（）不是试验参与者的应有权利。",
+      "options": [
+        "A、参与研究方案的讨论",
+        "B、无需任何理由随时退出试验",
+        "C、愿意或不愿意参加试验",
+        "D、要求研究中个人资料的保密"
+      ],
+      "answer": "A",
+      "explanation": "【2026版第27条】试验参与者有拒绝参加、随时退出和身份信息保密等权利，但无参与研究方案讨论的当然权利。",
+      "tags": [
+        "知情同意",
+        "参与者权利"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-027-063",
+      "module": "第三章",
+      "article": "27",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "当存在试验信息和试验参与者权益的相关问题时，或发生试验相关损害时，试验参与者可联系主要研究者和伦理审查委员会。",
+      "answer": true,
+      "explanation": "【2026版第27条】知情同意书等提供给试验参与者的资料中应列明当存在试验参与者权益相关问题、试验相关损害时的联系对象——主要研究者和伦理审查委员会及其联系方式。申办者非本条款明确列出的直接联系对象。",
+      "tags": [
+        "知情同意",
+        "联系信息"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-004-064",
+      "module": "第一章",
+      "article": "4",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "保障试验参与者的权益是申办者、伦理审查委员会和主要研究者的共同职责。",
+      "answer": true,
+      "explanation": "【2026版第4条+第14条+第32条】保障试验参与者的权益和安全是伦理审查委员会、申办者和主要研究者等临床试验相关方共同承担的核心责任。",
+      "tags": [
+        "伦理",
+        "共同职责"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-040-065",
+      "module": "第四章",
+      "article": "40",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "申办者的临床试验的质量管理体系应当涵盖（）内容。",
+      "options": [
+        "A、试验设计",
+        "B、试验实施",
+        "C、结果报告",
+        "D、以上都是"
+      ],
+      "answer": "D",
+      "explanation": "【2026版第40条】申办者应当基于风险，采用适合的体系，对临床试验全过程进行质量管理，有效设计和实施临床试验。涵盖设计、实施、结果报告等全过程。",
+      "tags": [
+        "质量管理",
+        "申办者"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-042-066",
+      "module": "第四章",
+      "article": "42",
+      "type": "single-choice",
+      "change_level": "🟡",
+      "difficulty": "hard",
+      "source": "adapted-from-2020",
+      "question": "申办者进行基于风险的质量管理时的正确做法是（）。",
+      "options": [
+        "A、以上均对",
+        "B、预先设定质量风险的容忍度时，应当考虑变量的医学和统计学特点及统计设计，以鉴别影响试验参与者安全和数据可靠的系统性问题",
+        "C、风险评估应当考虑在现有风险控制下发生差错的可能性",
+        "D、应当识别可减少或者可被接受的风险"
+      ],
+      "answer": "A",
+      "explanation": "【2026版第42条】申办者应当对临床试验进行风险管理。所有选项均为风险管理的正确做法。2026版扩展了风险管理为完整五条款框架。",
+      "tags": [
+        "风险管理",
+        "申办者"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-034-067",
+      "module": "第四章",
+      "article": "34",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "申办者应当指定有能力的医学专家及时对临床试验的相关医学问题进行咨询。",
+      "answer": true,
+      "explanation": "【2026版第34条】申办者应当配备医学人员，及时解答与临床试验相关的医学问题。",
+      "tags": [
+        "申办者",
+        "医学支持"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-036-068",
+      "module": "第四章",
+      "article": "36",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "关于申办者委托服务供应商开展临床试验，（）说法是错误的。",
+      "options": [
+        "A、申办者是临床试验数据质量和可靠性的最终责任人",
+        "B、申办者有权确认被委托工作执行标准操作规程的情况",
+        "C、申办者应当监督服务供应商承担的各项工作",
+        "D、因为申办者已经委托服务供应商，所以服务供应商是临床试验数据质量和可靠性的最终责任人"
+      ],
+      "answer": "D",
+      "explanation": "【2026版第32条+第36条】申办者委托服务供应商（旧称合同研究组织）后，仍是临床试验数据质量和可靠性的最终责任人。2026版第32条明确申办者是最终责任人。",
+      "tags": [
+        "申办者",
+        "服务供应商"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M5-053-070",
+      "module": "第五章",
+      "article": "53",
+      "type": "true-false",
+      "change_level": "🔴",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "临床试验中，未经授权的人员可以访问电子数据管理系统。",
+      "answer": false,
+      "explanation": "【2026版第53条】计算机化系统应当具备完善的用户管理、权限管理和稽查轨迹，确保只有经授权的用户方可访问和使用系统。2026版大幅扩展了计算机化系统要求。",
+      "tags": [
+        "数据管理",
+        "系统安全"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-044-072",
+      "module": "第四章",
+      "article": "44",
+      "type": "single-choice",
+      "change_level": "🟡",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "（）负责将可疑且非预期严重不良反应快速报告给所有参加临床试验的主要研究者。",
+      "options": [
+        "A、主要研究者",
+        "B、伦理审查委员会",
+        "C、申办者",
+        "D、监查员"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第44条(三)】负责将SUSAR快速报告给所有参加临床试验主要研究者的是申办者。",
+      "tags": [
+        "安全性报告",
+        "SUSAR"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-043-078",
+      "module": "第四章",
+      "article": "43",
+      "type": "single-choice",
+      "change_level": "🟡",
+      "difficulty": "hard",
+      "source": "adapted-from-2020",
+      "question": "主要研究者在临床试验中不遵从方案、药物临床试验质量管理规范或其他法律法规时，申办者应该（）。",
+      "options": [
+        "A、申办者应当立即采取措施予以纠正",
+        "B、如情况严重或劝阻不改的不依从问题，申办者应终止该主要研究者继续参加进行临床试验",
+        "C、申办者应及时书面报告药品监督管理部门",
+        "D、以上均对"
+      ],
+      "answer": "D",
+      "explanation": "【2026版第43条】发现不依从时，申办者应纠正；显著影响需根因分析并采取CAPA并报告伦理；严重持续问题应终止合作并报告药监部门。以上均对。",
+      "tags": [
+        "依从性",
+        "申办者"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-050-079",
+      "module": "第四章",
+      "article": "50",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "申办者提前终止或者暂停临床试验，仅需要告知药品监督管理部门，并说明理由。",
+      "answer": false,
+      "explanation": "【2026版第50条】申办者提前终止或暂停临床试验，应立即告知主要研究者、临床试验机构和伦理审查委员会并说明理由。",
+      "tags": [
+        "试验终止",
+        "申办者"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-050-080",
+      "module": "第四章",
+      "article": "50",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "总结报告是指临床试验完成或提前终止，申办者应当按照相关法律法规要求向药品监督管理部门提交一份能全面、完整、准确反映临床试验结果，且所包含的安全性、有效性数据应当与临床试验源数据一致的文件。",
+      "answer": true,
+      "explanation": "【2026版第50条】临床试验报告应当全面、完整、准确反映临床试验结果，临床试验数据应当与源记录一致。",
+      "tags": [
+        "试验报告",
+        "申办者"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-048-081",
+      "module": "第四章",
+      "article": "48",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "申办者若需要主要研究者增加收集试验数据，在试验方案中应当表明此内容，申办者向主要研究者提供附加的病例报告表。",
+      "answer": true,
+      "explanation": "【2026版第48条+第51条(五)】申办者应当履行数据治理责任，确保数据采集、核对、验证、审核流程可靠（第48条）。申办者应当界定符合质量标准的数据，采取及时且可靠的流程进行数据采集、核对、验证、审核和错误更正（第51条(五)）。方案应清晰、可操作（第7条），如需增加数据收集，应在方案中明确并相应提供数据采集工具。",
+      "tags": [
+        "数据管理",
+        "CRF"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-029-095",
+      "module": "第三章",
+      "article": "29",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "（）应当确保有临床试验必备文件的保存场所和条件。",
+      "options": [
+        "A、临床试验机构",
+        "B、以上均是",
+        "C、申办者",
+        "D、主要研究者"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第29条(三)】申办者、主要研究者和临床试验机构均应妥善保存试验文档。各方均有责任确保必备文件的保存场所和条件。",
+      "tags": [
+        "必备文件",
+        "保存"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-029-097",
+      "module": "第三章",
+      "article": "29",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "未用于申请药品注册的临床试验，必备文件应当至少保存至（）。",
+      "options": [
+        "A、临床试验终止后10年",
+        "B、试验药物被批准上市后5年",
+        "C、临床试验终止后5年",
+        "D、临床试验完成后10年"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第29条(三)】未用于申请药品注册的临床试验，必备记录应当至少保存至临床试验终止后5年。",
+      "tags": [
+        "必备文件",
+        "保存期限"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-029-098",
+      "module": "第三章",
+      "article": "29",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "adapted-from-2020",
+      "question": "用于申请药品注册的临床试验，必备文件应当至少保存至试验药物被批准上市后2年。",
+      "answer": false,
+      "explanation": "【2026版第29条(三)】用于申请药品注册的临床试验，必备记录应当至少保存至试验药物被批准上市后5年，不是2年。",
+      "tags": [
+        "必备文件",
+        "保存期限"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-048-099",
+      "module": "第四章",
+      "article": "48",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "adapted-from-2020",
+      "question": "申办者控制病例报告表中的数据，主要研究者未经允许不得查阅。",
+      "answer": false,
+      "explanation": "【2026版第48条(二)】申办者不得更改主要研究者录入的数据，除非有正当理由且获得书面同意。申办者应确保主要研究者可查阅、录入和更正病例报告表数据。",
+      "tags": [
+        "数据管理",
+        "数据控制"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-006-001",
+      "module": "第一章",
+      "article": "6",
+      "type": "single-choice",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "2026版GCP首次引入质量源于设计（QbD）理念，以下关于QbD的理解正确的是（）。",
+      "options": [
+        "A、QbD是指在试验结束后进行全面的数据清理和质量检查",
+        "B、QbD要求在试验设计阶段即纳入质量考量、识别关键质量因素和相关风险",
+        "C、QbD仅适用于申办者的方案设计环节，与主要研究者和CRC无关",
+        "D、QbD的核心是建立更严格的稽查制度"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第6条】QbD要求在试验设计阶段就识别关键质量因素和风险，采取相称的风险控制措施。核心是从事后检查转变为事前预防。",
+      "tags": [
+        "QbD",
+        "质量管理"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-006-002",
+      "module": "第一章",
+      "article": "6",
+      "type": "true-false",
+      "change_level": "🔴",
+      "difficulty": "medium",
+      "source": "new",
+      "question": "2026版GCP中，质量源于设计（QbD）方法要求质量是检查出来的，而不是设计出来的。",
+      "answer": false,
+      "explanation": "【2026版第6条】QbD的核心正是质量不是检查出来的，是设计出来的。要求在设计阶段构建质量，而非事后补救。",
+      "tags": [
+        "QbD",
+        "质量管理"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-006-003",
+      "module": "第一章",
+      "article": "6",
+      "type": "single-choice",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "根据2026版GCP第6条关于质量源于设计的要求，以下哪项是识别关键质量因素的正确做法？",
+      "options": [
+        "A、等到试验执行中发现问题后再追溯关键质量因素",
+        "B、由申办者单独确定所有关键质量因素，无需主要研究者参与",
+        "C、在试验方案设计阶段系统性地识别可能影响试验参与者安全和数据可靠性的关键因素",
+        "D、关键质量因素一旦确定在整个试验过程中不可调整"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第6条】QbD要求在方案设计阶段就系统性地识别关键质量因素和相关风险。PI的医学判断是QbD的核心输入，且风险管理应在试验过程中持续审查。",
+      "tags": [
+        "QbD",
+        "关键质量因素"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-012-001",
+      "module": "第一章",
+      "article": "12",
+      "type": "single-choice",
+      "change_level": "🔴",
+      "difficulty": "medium",
+      "source": "new",
+      "question": "根据2026版GCP关于利益冲突回避的规定，以下哪种情况应当主动进行利益冲突申报？",
+      "options": [
+        "A、主要研究者持有申办者公司的股票",
+        "B、主要研究者所在的科室参与了试验方案的设计",
+        "C、CRC因工作认真获得申办者表扬",
+        "D、监查员在试验机构有亲属从事其他科室工作"
+      ],
+      "answer": "A",
+      "explanation": "【2026版第12条】主要研究者持有申办者公司的股票属于潜在经济利益冲突，应当主动申报。参与方案设计是PI的职责，不构成利益冲突。",
+      "tags": [
+        "利益冲突",
+        "伦理"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-012-002",
+      "module": "第一章",
+      "article": "12",
+      "type": "true-false",
+      "change_level": "🔴",
+      "difficulty": "medium",
+      "source": "new",
+      "question": "2026版GCP第12条要求所有试验参与方遵守利益冲突回避原则，但申办者作为最终责任人不受此原则约束。",
+      "answer": false,
+      "explanation": "【2026版第12条】利益冲突回避原则适用于所有试验参与方，包括申办者在内。2026版将其从旧版的间接提及提升为独立强制性条文。",
+      "tags": [
+        "利益冲突",
+        "申办者"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-012-003",
+      "module": "第一章",
+      "article": "12",
+      "type": "true-false",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "根据2026版GCP，主要研究者仅需在试验启动前申报一次利益冲突，试验过程中如未发生变化无需更新。",
+      "answer": false,
+      "explanation": "【2026版第12条】利益冲突回避要求贯穿临床试验实施全过程。利益关系可能随时间变化（如新获股权、咨询费），PI应持续关注并及时更新申报。",
+      "tags": [
+        "利益冲突",
+        "PI职责"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-013-001",
+      "module": "第一章",
+      "article": "13",
+      "type": "single-choice",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "2026版GCP新增了关于应用新技术、新方法开展药物临床试验的规定，以下说法正确的是（）。",
+      "options": [
+        "A、国外已使用的新技术可以直接用于国内临床试验，无需额外验证",
+        "B、应用新技术开展药物临床试验应符合伦理、科学和相关法律法规要求",
+        "C、新技术仅指数字化工具，不包括AI辅助工具",
+        "D、使用新技术不需要经过伦理审查委员会批准"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第13条】应用新技术、新方法开展药物临床试验，应当符合伦理、科学和相关法律法规要求。无论来源如何，新技术均须在具体试验环境和法规框架下重新验证并经伦理审查。",
+      "tags": [
+        "新技术",
+        "DCT"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-013-002",
+      "module": "第一章",
+      "article": "13",
+      "type": "true-false",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "根据2026版GCP第13条，在临床试验中应用电子知情同意、远程监查等新技术时，可以豁免常规的伦理审查要求。",
+      "answer": false,
+      "explanation": "【2026版第13条】新技术不意味着可以豁免伦理、科学和法规要求。新技术无论是否便利，都必须经过充分验证和伦理审查，符合伦理、科学和相关法律法规三项基本要求。",
+      "tags": [
+        "新技术",
+        "伦理审查"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-013-003",
+      "module": "第一章",
+      "article": "13",
+      "type": "single-choice",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "某临床试验计划引入AI辅助阅片系统进行影像学终点评价，根据2026版GCP第13条，申办者和主要研究者应首先（）。",
+      "options": [
+        "A、直接使用国外已验证的AI系统，无需额外验证",
+        "B、确保AI系统已经过充分验证，符合伦理、科学和法规要求，并经伦理审查委员会批准",
+        "C、只要AI系统比人类医生阅片效率高就可以直接使用",
+        "D、AI辅助阅片不属于GCP管辖范围"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第13条】引入AI等新技术前，必须确保经过充分验证、符合伦理和科学要求，并经伦理审查委员会批准。即使国外已使用，仍需在具体试验环境下重新验证。",
+      "tags": [
+        "新技术",
+        "AI"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-020-001",
+      "module": "第三章",
+      "article": "20",
+      "type": "true-false",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "根据2026版GCP第20条，主要研究者可以将临床试验中的医学判断和正式报告等核心职责授权给有资质的研究人员，自己不再承担相关责任。",
+      "answer": false,
+      "explanation": "【2026版第20条】临床试验决策、关键确认，以及向伦理审查委员会、临床试验机构和申办者的正式报告原则上不得授权。PI即使授权仍承担最终责任，不知情不是免责理由。",
+      "tags": [
+        "授权",
+        "PI职责"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-020-002",
+      "module": "第三章",
+      "article": "20",
+      "type": "single-choice",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "2026版GCP关于主要研究者授权管理的规定，以下说法错误的是（）。",
+      "options": [
+        "A、PI可授权有资质的研究人员承担部分试验相关职责",
+        "B、PI委托临床试验机构以外的单位承担职责应事先获得申办者同意",
+        "C、PI可以授权研究人员代其做出入排标准的医学判断",
+        "D、PI应对授权事项建立完整的工作制度并实施有效监督管理"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第20条】医学判断属于临床决策，原则上不得授权。PI负责的临床试验决策、关键确认必须亲自完成。授权不等于可以转移核心责任。",
+      "tags": [
+        "授权",
+        "PI职责"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-020-003",
+      "module": "第三章",
+      "article": "20",
+      "type": "true-false",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "2026版GCP新增要求：主要研究者和临床试验机构如委托临床试验机构以外的单位承担临床试验相关职责和功能，应事先获得申办者同意。",
+      "answer": true,
+      "explanation": "【2026版第20条】委托机构外单位承担试验职责需事先获得申办者同意，这是2026版新增的程序性要求。同时PI和机构仍需建立完整工作制度并承担最终责任。",
+      "tags": [
+        "授权",
+        "申办者同意"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M5-051-001",
+      "module": "第五章",
+      "article": "51",
+      "type": "single-choice",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "2026版GCP新增数据治理章节，以下关于数据治理责任的说法正确的是（）。",
+      "options": [
+        "A、数据治理仅是申办者的责任，与主要研究者和临床试验机构无关",
+        "B、数据治理仅适用于电子数据，不适用于纸质源文件",
+        "C、申办者、主要研究者和临床试验机构应在各自职责范围内承担数据治理责任",
+        "D、数据治理仅适用于试验锁库后的数据管理"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第51条】数据治理责任由申办者、主要研究者和临床试验机构共同承担，贯穿临床试验数据全生命周期。所有数据（包括纸质和电子）均须附带元数据和稽查轨迹。",
+      "tags": [
+        "数据治理",
+        "元数据"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M5-051-002",
+      "module": "第五章",
+      "article": "51",
+      "type": "true-false",
+      "change_level": "🔴",
+      "difficulty": "medium",
+      "source": "new",
+      "question": "根据2026版GCP第51条，从任何来源获取的临床试验数据，包括直接在计算机化系统中采集的数据，应当附带相应的元数据，包括稽查轨迹。",
+      "answer": true,
+      "explanation": "【2026版第51条(一)】所有数据均须附带元数据（含稽查轨迹），确保数据可追溯。这是2026版新增的系统性数据治理要求。",
+      "tags": [
+        "数据治理",
+        "元数据"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M5-051-003",
+      "module": "第五章",
+      "article": "51",
+      "type": "single-choice",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "临床试验数据治理要求中，关于数据更正的流程，以下哪项符合2026版GCP第51条的规定？",
+      "options": [
+        "A、发现数据错误后可直接在后台修改，不影响已分析的数据集",
+        "B、申办者和主要研究者应及时更正可能影响结果可靠性的数据错误，并确保更正过程可追溯",
+        "C、数据更正只需要CRA确认即可，无需记录更正理由",
+        "D、统计分析前发现的数据错误可以统一在锁库后一次性修正"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第51条(三)】申办者和主要研究者应及时更正可能影响试验结果可靠性的数据错误，并确保更正过程可追溯（包括稽查轨迹）。",
+      "tags": [
+        "数据治理",
+        "数据更正"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M5-052-001",
+      "module": "第五章",
+      "article": "52",
+      "type": "true-false",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "2026版GCP第52条要求，盲法试验中所有揭盲或意外破盲事件均需记录并评估其对试验结果的影响，无论破盲影响大小。",
+      "answer": true,
+      "explanation": "【2026版第52条】盲法试验全过程中应当记录揭盲或者意外破盲的情况，评估其对试验结果的影响，并采取相应必要的措施。不做记录的破盲会被视为系统性盲态管理缺陷。",
+      "tags": [
+        "盲法",
+        "数据完整性"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M5-052-002",
+      "module": "第五章",
+      "article": "52",
+      "type": "single-choice",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "根据2026版GCP关于盲法数据完整性的要求，以下哪项是试验启动前必须完成的？",
+      "options": [
+        "A、确定所有试验参与者的分组信息以提前准备揭盲",
+        "B、确定访问非盲信息的角色、职责和流程，并做好记录",
+        "C、将揭盲信封交给所有研究团队成员以便紧急使用",
+        "D、直接进行揭盲演练以确保流程熟悉"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第52条】在临床试验开始实施前，所有相关方应当确定访问非盲信息的角色、职责和流程，并做好记录。这是预防意外破盲的基础工作。",
+      "tags": [
+        "盲法",
+        "非盲信息"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M5-052-003",
+      "module": "第五章",
+      "article": "52",
+      "type": "true-false",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "2026版GCP将盲态管理纳入数据治理体系，要求盲法试验在数据全生命周期中防范破盲对数据完整性的影响。",
+      "answer": true,
+      "explanation": "【2026版第52条】2026版首次将盲态完整性从试验方案设计问题提升为数据治理核心要求，强调在数据全生命周期中防范破盲对数据完整性的影响。",
+      "tags": [
+        "盲法",
+        "数据治理"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M5-053-001",
+      "module": "第五章",
+      "article": "53",
+      "type": "single-choice",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "2026版GCP第53条对计算机化系统提出了多项要求，以下（）不属于该条要求的内容。",
+      "options": [
+        "A、应当制定计算机化系统设置、安装和使用的标准操作规程",
+        "B、所有使用计算机化系统的人员应当经过培训",
+        "C、计算机化系统可以不具备稽查轨迹功能",
+        "D、计算机化系统应当通过可靠的系统验证"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第53条(五)】计算机化系统应当具备完善的用户管理、权限管理和稽查轨迹。不具备稽查轨迹功能的系统不符合GCP要求。",
+      "tags": [
+        "计算机化系统",
+        "系统验证"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M5-053-002",
+      "module": "第五章",
+      "article": "53",
+      "type": "true-false",
+      "change_level": "🔴",
+      "difficulty": "hard",
+      "source": "new",
+      "question": "根据2026版GCP第53条，计算机化系统只需在首次投入使用时进行验证，后续使用过程中无需保持验证有效状态。",
+      "answer": false,
+      "explanation": "【2026版第53条(三)】临床试验各方使用的计算机化系统应当通过可靠的系统验证，并保证在整个试验过程中系统始终处于验证有效的状态。系统升级或变更后需重新验证。",
+      "tags": [
+        "计算机化系统",
+        "系统验证"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M5-053-003",
+      "module": "第五章",
+      "article": "53",
+      "type": "true-false",
+      "change_level": "🔴",
+      "difficulty": "medium",
+      "source": "new",
+      "question": "2026版GCP要求临床试验各方应当对计算机化系统产生的试验数据充分备份，并在系统故障时采取应急措施，防止数据发生丢失或者无法访问。",
+      "answer": true,
+      "explanation": "【2026版第53条(二)】数据安全管理要求对计算机化系统产生的试验数据充分备份，并制定系统故障时的应急措施，防止数据丢失或无法访问。",
+      "tags": [
+        "计算机化系统",
+        "数据备份"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-002-001",
+      "module": "第一章",
+      "article": "2",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第2条，以下哪项关于GCP适用范围的说法是正确的？",
+      "options": [
+        "A、仅适用于申请药品注册的III期确证性临床试验",
+        "B、适用于经国家药品监督管理部门批准或备案，为研制药品而进行的药物临床试验及相关活动",
+        "C、仅适用于I期和II期早期临床试验",
+        "D、仅适用于上市后研究，不适用于上市前试验"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第2条】适用范围包括所有经NMPA批准或备案的药物临床试验及相关活动，并非仅限于特定阶段或类型的试验。2026版将适用范围从传统注册申报扩展到了整个药品研制过程。",
+      "tags": [
+        "适用范围",
+        "法规衔接"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-009-001",
+      "module": "第一章",
+      "article": "9",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第9条关于数据记录和隐私保护的要求，以下说法正确的是（）。",
+      "options": [
+        "A、纸质资料和电子资料可以不被记录和处理，只要结果正确即可",
+        "B、保护试验参与者隐私和个人信息安全的要求仅限于纸质文件",
+        "C、用于数据采集、管理和分析的系统应经过验证，并与试验参与者的风险和所采集数据的重要性相称",
+        "D、系统验证仅在试验结束时进行一次即可"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第9条】所有临床试验的纸质和电子资料应当被妥善记录、处理和保存，保证数据的可靠性和可追溯性。用于数据采集、管理、分析的系统和流程应当符合预期目的，与风险和数据重要性相称。2026版新增了系统验证和个保法要求。",
+      "tags": [
+        "数据管理",
+        "隐私",
+        "系统验证"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-009-002",
+      "module": "第一章",
+      "article": "9",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第9条，保护试验参与者的隐私和个人信息安全应当符合我国关于个人信息保护的有关规定。",
+      "answer": true,
+      "explanation": "【2026版第9条】所有临床试验的纸质和电子资料应当被妥善记录、处理和保存。应当保护试验参与者的隐私和个人信息的安全，符合我国关于个人信息保护的有关要求。2026版新增了个人信息保护要求。",
+      "tags": [
+        "数据管理",
+        "隐私"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M1-010-001",
+      "module": "第一章",
+      "article": "10",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第10条，临床试验用药品可以与普通药品放置在同一储存区域，只要储存条件相同。",
+      "answer": false,
+      "explanation": "【2026版第10条】临床试验用药品的制备应当符合临床试验用药品生产质量管理相关要求，使用和管理应当遵守法律法规并符合试验方案及其相关文件要求。不能与普通药品混放，存储和使用须有完整记录。",
+      "tags": [
+        "药品管理",
+        "GCP基本要求"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M2-016-001",
+      "module": "第二章",
+      "article": "16",
+      "type": "single-choice",
+      "change_level": "🟡",
+      "difficulty": "easy",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第16条，关于伦理审查委员会记录保存期限的说法正确的是（）。",
+      "options": [
+        "A、所有记录应当至少保存至试验药物被批准上市后2年",
+        "B、用于申请药品注册的临床试验，记录应当至少保存至试验药物被批准上市后5年",
+        "C、未用于申请药品注册的临床试验，记录应当至少保存至临床试验终止后2年",
+        "D、所有记录仅需保存至临床试验完成后1年"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第16条】用于申请药品注册的临床试验，所有伦理审查记录应当至少保存至试验药物被批准上市后5年；未获批准的或未用于注册的试验，至少保存至临床试验终止后5年。2026版新增了明确的记录类型清单和期限要求。",
+      "tags": [
+        "伦理审查",
+        "记录保存"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M2-016-002",
+      "module": "第二章",
+      "article": "16",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "new-for-2026",
+      "question": "2026版GCP第16条规定，伦理审查委员会应当保留的全部记录包括伦理审查的书面记录、委员信息、递交的文件、会议记录和相关往来记录。",
+      "answer": true,
+      "explanation": "【2026版第16条】伦理审查委员会应当保留的伦理审查全部记录包括书面记录、委员信息、递交的文件、会议记录和相关往来记录等。2026版相较于2020版明确列出了记录类型清单。",
+      "tags": [
+        "伦理审查",
+        "记录保存"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-024-001",
+      "module": "第三章",
+      "article": "24",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "new-for-2026",
+      "question": "临床试验被申办者提前终止后，主要研究者应当首先（）。",
+      "options": [
+        "A、整理试验文件归档",
+        "B、通知试验参与者并给予其适当的治疗和随访",
+        "C、回收试验用药品",
+        "D、向药品监督管理部门报告"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第24条】临床试验提前终止或者暂停，主要研究者应当及时通知试验参与者，并给予试验参与者适当的治疗和随访。同时向申办者、伦理审查委员会中的非发起方报告，并提供书面说明。通知试验参与者是PI的首要义务。",
+      "tags": [
+        "PI职责",
+        "试验参与者保护"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-024-002",
+      "module": "第三章",
+      "article": "24",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "new-for-2026",
+      "question": "临床试验提前终止或暂停时，如果是申办者发起的终止，主要研究者只需向伦理审查委员会报告即可，无需向临床试验机构报告。",
+      "answer": false,
+      "explanation": "【2026版第24条】试验提前终止或暂停时，无论由哪一方发起，主要研究者应当立即向申办者、伦理审查委员会中的非发起方报告，同时报告临床试验机构，并提供书面说明。向机构报告是不可缺少的环节。",
+      "tags": [
+        "PI职责",
+        "试验参与者保护"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M3-030-001",
+      "module": "第三章",
+      "article": "30",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第30条，主要研究者在临床试验完成后应当向（）提交书面报告。",
+      "options": [
+        "A、仅向申办者报告即可",
+        "B、仅向伦理审查委员会报告即可",
+        "C、向临床试验机构书面报告",
+        "D、无需提交任何报告"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第30条】主要研究者有三方面报告义务：按伦理审查委员会要求提交进展和结题报告；临床试验完成后及时向临床试验机构书面报告；向申办者提供药品监督管理部门所需要的临床试验相关报告。向机构书面报告是最容易被忽略的义务。",
+      "tags": [
+        "PI职责",
+        "试验报告"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-032-001",
+      "module": "第四章",
+      "article": "32",
+      "type": "single-choice",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "new-for-2026",
+      "question": "2026版GCP第32条首次明确申办者是临床试验相关活动的（），这一变化的意义是（）。",
+      "options": [
+        "A、协调人；申办者负责召集各方开会",
+        "B、最终责任人；否定了申办者以“外包”为借口转移责任的可能性",
+        "C、监督者；申办者只需监督服务供应商即可",
+        "D、出资人；申办者仅承担经费提供责任"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第32条】2026版新增“最终责任人”表述，在法律层面确立了申办者的终极兜底责任。即使申办者将工作委托给服务供应商，监管问责的终点始终是申办者本身。",
+      "tags": [
+        "申办者职责",
+        "最终责任"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-032-002",
+      "module": "第四章",
+      "article": "32",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "new-for-2026",
+      "question": "申办者将临床试验的数据管理和统计分析等工作全部委托给CRO后，申办者不再对数据质量和可靠性承担最终责任。",
+      "answer": false,
+      "explanation": "【2026版第32条】无论申办者将多少工作委托给服务供应商，申办者始终是临床试验全链条的最终责任人。外包不转移最终责任。2026版第36条也明确申办者委托服务供应商后仍承担最终责任。",
+      "tags": [
+        "申办者职责",
+        "最终责任"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-033-001",
+      "module": "第四章",
+      "article": "33",
+      "type": "single-choice",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "new-for-2026",
+      "question": "2026版GCP第33条首次将“质量源于设计（QbD）”引入方案设计要求，以下关于QbD的理解正确的是（）。",
+      "options": [
+        "A、QbD意味着方案越详细越好，每个细节都同等重要",
+        "B、QbD的核心是识别对参与者安全和数据可靠性最关键的质量因素，将资源集中在这些因素上",
+        "C、QbD仅是为了满足法规要求的书面形式",
+        "D、QbD只适用于申办者，与PI和CRC无关"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第33条】QbD的核心是识别关键质量因素，将资源集中在这些因素上，而非追求每个细节完美但每个细节都失控。2026版标志中国GCP从“监查驱动质量”向“设计驱动质量”的理念转变。",
+      "tags": [
+        "申办者职责",
+        "QbD",
+        "方案设计"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-033-002",
+      "module": "第四章",
+      "article": "33",
+      "type": "true-false",
+      "change_level": "🟡",
+      "difficulty": "medium",
+      "source": "new-for-2026",
+      "question": "2026版GCP第33条要求申办者设计临床试验方案时应当纳入质量源于设计（QbD）的方法，确保临床试验的科学性、可靠性和可操作性。",
+      "answer": true,
+      "explanation": "【2026版第33条】申办者设计临床试验方案应当基于足够的安全性和有效性数据，纳入质量源于设计的方法，确保临床试验的科学性、可靠性和可操作性。这是2026版相比2020版的实质性修订。",
+      "tags": [
+        "申办者职责",
+        "QbD",
+        "方案设计"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-035-001",
+      "module": "第四章",
+      "article": "35",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第35条，申办者在选择主要研究者和药物临床试验机构时应当（）。",
+      "options": [
+        "A、仅根据PI的学术地位决定即可",
+        "B、事先评估，选择符合要求的主要研究者和药物临床试验机构",
+        "C、仅查看机构的资质证书即可完成筛选",
+        "D、直接选择之前合作过的机构，无需重新评估"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第35条】申办者应当事先评估，选择符合要求的主要研究者和药物临床试验机构，以满足开展临床试验的需要。中心筛选需实地评估机构硬件配置、研究团队、伦理流程、药物管理能力等。",
+      "tags": [
+        "申办者职责",
+        "机构选择"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-037-001",
+      "module": "第四章",
+      "article": "37",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "new-for-2026",
+      "question": "申办者和实验室可以对临床试验中采集的生物样品在方案范围外增加基因检测，只要不额外增加试验参与者的风险即可。",
+      "answer": false,
+      "explanation": "【2026版第37条】禁止实施与伦理审查委员会批准的试验方案无关的生物样品检测（如基因检测等）。任何超范围检测，特别是不在知情同意范围内的基因检测，是对试验参与者权益的严重侵犯。",
+      "tags": [
+        "申办者职责",
+        "实验室管理"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-038-001",
+      "module": "第四章",
+      "article": "38",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第38条，临床试验开始前申办者必须完成以下哪项前置条件？",
+      "options": [
+        "A、仅需获得伦理审查委员会批准即可",
+        "B、仅需完成生物等效性试验备案即可",
+        "C、获得药品监督管理部门临床试验许可或完成生物等效性试验备案，并获取伦理审查委员会相关记录",
+        "D、无需任何前置审批"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第38条】临床试验启动前置条件有两个：获得药监部门的临床试验许可（或完成BE备案），以及获取伦理审查委员会的相关记录并执行其审查意见。两者缺一不可，是试验合法启动的法定前提。",
+      "tags": [
+        "申办者职责",
+        "注册",
+        "备案"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-045-001",
+      "module": "第四章",
+      "article": "45",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第45条，关于申办者补偿和保险责任的描述，正确的是（）。",
+      "options": [
+        "A、申办者不需要向试验参与者免费提供试验用药品",
+        "B、申办者提供的保险应当覆盖所有损害，包括主要研究者和临床试验机构自身过失所致的损害",
+        "C、申办者应当承担试验参与者参加临床试验相关损害的诊疗费用以及相应的补偿或赔偿",
+        "D、申办者可以延迟支付给予试验参与者的补偿或赔偿"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第45条】申办者应当免费提供试验用药品、支付医学检测费，承担试验参与者相关损害的诊疗费用和补偿或赔偿。但保险不包括PI和机构自身过失所致的损害，补偿应及时兑付。",
+      "tags": [
+        "申办者职责",
+        "试验参与者补偿",
+        "保险"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-045-002",
+      "module": "第四章",
+      "article": "45",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "new-for-2026",
+      "question": "申办者提供的临床试验保险应当覆盖与临床试验风险性质和风险程度相适应的损害，包括主要研究者和临床试验机构自身过失所致的损害。",
+      "answer": false,
+      "explanation": "【2026版第45条】申办者应当提供与临床试验风险性质和风险程度相适应的保险或者保证，但不包括主要研究者和临床试验机构自身的过失所致的损害。PI或机构自身过失造成的损害不在保险覆盖范围内。",
+      "tags": [
+        "申办者职责",
+        "试验参与者补偿",
+        "保险"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-046-001",
+      "module": "第四章",
+      "article": "46",
+      "type": "true-false",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第46条，申办者应制定试验用药品的供应和管理规程，从试验参与者处回收以及临床试验机构内未使用的试验用药品应当返还申办者，或者采用由申办者授权的其他方式处置。",
+      "answer": true,
+      "explanation": "【2026版第46条(四)】申办者应当制定试验用药品的供应和管理规程，包括接收、处理、贮存、分发、使用及回收、销毁等。回收和未使用的药品应当返还申办者或按授权方式处置，且全过程需有书面记录和计数。",
+      "tags": [
+        "申办者职责",
+        "药品管理"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M4-047-001",
+      "module": "第四章",
+      "article": "47",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第47条关于盲法保持的要求，以下说法正确的是（）。",
+      "options": [
+        "A、申办者无需对盲法试验的盲态保持建立制度",
+        "B、申办者应当建立工作制度以确保盲法试验各阶段保持盲态，并预防和识别破盲",
+        "C、盲态保持仅需在试验启动时注意即可，试验过程中无需持续关注",
+        "D、意外破盲无需记录，只要不影响试验结果即可"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第47条】在盲法试验中，申办者应当建立工作制度以确保临床试验适用的各阶段保持盲态，并预防和识别破盲。任何破盲（包括意外破盲）都必须记录并评估影响，不能因为“小破盲”就不报告。",
+      "tags": [
+        "申办者职责",
+        "盲法"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M6-054-022",
+      "module": "第六章",
+      "article": "54",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "easy",
+      "source": "new-for-2026",
+      "question": "《药物临床试验质量管理规范（2026年修订）》的施行日期是（）。",
+      "options": [
+        "A、2025年7月1日",
+        "B、2026年9月1日",
+        "C、2026年1月1日",
+        "D、2026年12月1日"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第54条】本规范自2026年9月1日起施行。2020年第57号公告（2003版GCP）同时废止。",
+      "tags": [
+        "附则",
+        "施行日期"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M6-054-023",
+      "module": "第六章",
+      "article": "54",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第54条，主要研究者是指（）。",
+      "options": [
+        "A、药物临床试验机构的法定代表人",
+        "B、药物临床试验机构临床试验研究团队的负责人，对试验现场试验参与者的权益、安全及临床试验数据可靠性负责",
+        "C、申办者委派到试验机构的监查人员",
+        "D、伦理审查委员会指定的项目审查负责人"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第54条(二)】主要研究者是药物临床试验机构临床试验研究团队的负责人，对临床试验实施过程中试验现场试验参与者的权益、安全及临床试验数据可靠性负责。",
+      "tags": [
+        "附则",
+        "术语定义",
+        "主要研究者"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M6-054-024",
+      "module": "第六章",
+      "article": "54",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第54条，「其他潜在的严重安全性风险信息」是指（）。",
+      "options": [
+        "A、所有试验期间发生的不良事件",
+        "B、明显影响药物获益风险评估、可能改变药物用法或者影响总体药物研发进程的信息",
+        "C、试验参与者自行报告的任何不适症状",
+        "D、试验用药品说明书已列明的已知不良反应"
+      ],
+      "answer": "B",
+      "explanation": "【2026版第54条(三)】其他潜在的严重安全性风险信息，指明显影响药物获益风险评估、可能改变药物用法或者影响总体药物研发进程的信息。区别于已知不良反应和普通不良事件，这类信息具有改变研发决策的潜在影响。",
+      "tags": [
+        "附则",
+        "术语定义",
+        "安全性"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    },
+    {
+      "id": "Q-M6-054-025",
+      "module": "第六章",
+      "article": "54",
+      "type": "single-choice",
+      "change_level": "🟢",
+      "difficulty": "medium",
+      "source": "new-for-2026",
+      "question": "根据2026版GCP第54条，药物临床试验质量管理体系的核心是（）。",
+      "options": [
+        "A、以加快试验进度和提高入组速度为核心",
+        "B、以降低试验成本和简化流程为核心",
+        "C、以试验参与者保护与数据可靠性为核心，基于风险，持续改进",
+        "D、以满足申办者商业需求为核心"
+      ],
+      "answer": "C",
+      "explanation": "【2026版第54条(五)】药物临床试验质量管理体系，是指对临床试验实施全过程进行质量管理的机制，以试验参与者保护与数据可靠性为核心，明确职责、标准和程序，基于风险，预防、识别和处理异常事件，持续改进，实现设定的质量管理目标。",
+      "tags": [
+        "附则",
+        "术语定义",
+        "质量管理"
+      ],
+      "roles": [
+        "PI",
+        "CRA",
+        "CRC",
+        "student"
+      ]
+    }
+  ]
+}

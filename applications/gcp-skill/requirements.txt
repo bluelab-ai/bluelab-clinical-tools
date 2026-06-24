@@ -1,0 +1,10 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.0
+jinja2==2.11.3
+markupsafe==2.0.1
+python-multipart==0.0.12
+python-dotenv==1.2.1
+anthropic==0.40.0
+starlette==0.38.6
+pydantic==2.10.6
+pydantic-core==2.27.2

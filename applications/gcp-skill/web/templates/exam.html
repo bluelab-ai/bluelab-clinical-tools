@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% block title %}结业考试 — GCP 2026 培训{% endblock %}
+
+{% block progress %}
+<div class="nav-progress-pill">
+    🏆 结业考试
+    {% if question_num is defined and total %}
+    <div class="pill-track"><div class="pill-fill" style="width:{{ (question_num / total * 100)|int }}%"></div></div>
+    {% else %}
+    <div class="pill-track"><div class="pill-fill" style="width:100%"></div></div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block content %}
+
+{% if show_scorecard %}
+<!-- ===== Scorecard View ===== -->
+<header class="page-header">
+<h1>结业考试 — 成绩单</h1>
+</header>
+
+<div class="score-card {{ 'passed' if passed else 'failed' }}">
+    <div style="font-size:13px;color:var(--text-medium);margin-bottom:4px;">结业考试</div>
+    <span class="big-num">{{ rate }}%</span>
+    <span class="score-pill {{ 'good' if passed else 'bad' }}">{{ grade }}</span>
+</div>
+
+<p class="flow-text" style="text-align:center;margin:12px 0 24px;">{{ grade_msg }}</p>
+
+<h3 style="font-size:18px;margin-bottom:12px;">各章节得分：</h3>
+<div class="chapter-scores-grid">
+    {% for ch, r in ch_rates.items() %}
+    <div class="chapter-score-card">
+        <div class="ch-label">{{ ch }}</div>
+        <div class="score-bar-track"><div class="score-bar-fill" style="width:{{ r }}%"></div></div>
+        <div class="ch-pct">{{ r }}%</div>
+    </div>
+    {% endfor %}
+</div>
+
+{% if passed %}
+<div class="cert-action">
+    <p class="flow-text" style="margin-bottom:12px;">你已经通过了结业考试。</p>
+    <a href="/cert/generate" class="btn btn-primary btn-lg">查看 / 生成证书</a>
+</div>
+{% else %}
+<div class="retry-info">
+    <p>本次考试未达到合格标准。</p>
+    <p>薄弱章节：{{ weak_chapters|join('、') }}</p>
+    {% if offer_b_downgrade %}
+    <p>建议先去 B 分支做章节测验巩固知识点。</p>
+    <form method="post" action="/learn/branch/upgrade" style="margin-top:8px;">
+        <input type="hidden" name="from_branch" value="C">
+        <input type="hidden" name="to_branch" value="B">
+        <button type="submit" class="btn btn-primary">去 B 分支巩固</button>
+    </form>
+    {% endif %}
+</div>
+{% endif %}
+
+<!-- Wrong details -->
+{% if wrong_details %}
+<button class="review-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">
+    <span class="arr">▶</span> 查看错题详情（{{ wrong_details|length }}题）
+</button>
+<div class="review-panel">
+    {% for w in wrong_details %}
+    <div class="review-card">
+        <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px;">
+            <strong style="font-size:15px;">第{{ loop.index }}题 · {{ w.question_text }}</strong>
+            <span class="tag tag-red">❌ 答错</span>
+        </div>
+        {% if w.options and w.options|length > 0 %}
+        <div style="margin:10px 0;">
+            {% for opt in w.options %}
+            {% set opt_letter = opt[0] %}
+            <div class="opt-row {{ 'correct' if opt_letter == w.correct_answer else '' }}{{ 'wrong' if opt_letter == w.user_answer else '' }}">
+                {{ opt }}
+                {% if opt_letter == w.correct_answer %}<span class="row-mark">正确答案</span>{% endif %}
+                {% if opt_letter == w.user_answer %}<span class="row-mark">你的答案</span>{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p style="font-size:14px;margin:10px 0;">
+            你的答案：<strong style="color:var(--red);">{{ w.user_answer }}</strong>
+            → 正确答案：<strong style="color:var(--green);">{{ w.correct_answer }}</strong>
+        </p>
+        {% endif %}
+        <div style="font-size:13px;color:var(--text-medium);margin-top:10px;padding:10px;background:var(--bg-hover);border-radius:var(--radius);line-height:1.7;">
+            <strong>📖 解析：</strong>{{ w.explanation }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="content-divider"></div>
+<div style="text-align:center;">
+    <a href="/exam/start?retake=1" class="btn btn-primary btn-lg">重新考试</a>
+</div>
+
+{% elif show_results %}
+<!-- ===== Results View (just completed) ===== -->
+<header class="page-header">
+<h1>结业考试 — 成绩</h1>
+</header>
+
+<div class="score-card {{ 'passed' if passed else 'failed' }}">
+    <div style="font-size:13px;color:var(--text-medium);margin-bottom:4px;">结业考试</div>
+    <span class="big-num">{{ rate }}%</span>
+    <span class="score-pill {{ 'good' if passed else 'bad' }}">{{ grade }}</span>
+</div>
+
+<p class="flow-text" style="text-align:center;margin:12px 0 24px;">{{ grade_msg }}</p>
+
+<h3 style="font-size:18px;margin-bottom:12px;">各章节得分：</h3>
+<div class="chapter-scores-grid">
+    {% for ch, r in ch_rates.items() %}
+    <div class="chapter-score-card">
+        <div class="ch-label">{{ ch }}</div>
+        <div class="score-bar-track"><div class="score-bar-fill" style="width:{{ r }}%"></div></div>
+        <div class="ch-pct">{{ r }}%</div>
+    </div>
+    {% endfor %}
+</div>
+
+{% if passed %}
+<div class="cert-action">
+    <p class="flow-text" style="margin-bottom:12px;">恭喜通过结业考试！</p>
+    <a href="/cert/generate" class="btn btn-primary btn-lg">生成证书</a>
+</div>
+{% else %}
+<div class="retry-info">
+    <p>很遗憾，本次考试未达到合格标准。</p>
+    <p>你的薄弱章节是：{{ weak_chapters|join('、') }}</p>
+    {% if offer_b_downgrade %}
+    <p>建议你先去 B 分支做章节测验巩固知识点，有信心了再回 C 重考。</p>
+    <form method="post" action="/learn/branch/upgrade" style="margin-top:8px;">
+        <input type="hidden" name="from_branch" value="C">
+        <input type="hidden" name="to_branch" value="B">
+        <button type="submit" class="btn btn-primary">去 B 分支巩固</button>
+    </form>
+    {% endif %}
+    <a href="/exam/start" class="btn btn-primary" style="margin-top:12px;">重新考试</a>
+</div>
+{% endif %}
+
+<!-- Wrong details -->
+{% if wrong_details %}
+<button class="review-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">
+    <span class="arr">▶</span> 查看错题详情（{{ wrong_details|length }}题）
+</button>
+<div class="review-panel">
+    {% for w in wrong_details %}
+    <div class="review-card">
+        <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px;">
+            <strong style="font-size:15px;">第{{ loop.index }}题 · {{ w.question_text }}</strong>
+            <span class="tag tag-red">❌ 答错</span>
+        </div>
+        {% if w.options and w.options|length > 0 %}
+        <div style="margin:10px 0;">
+            {% for opt in w.options %}
+            {% set opt_letter = opt[0] %}
+            <div class="opt-row {{ 'correct' if opt_letter == w.correct_answer else '' }}{{ 'wrong' if opt_letter == w.user_answer else '' }}">
+                {{ opt }}
+                {% if opt_letter == w.correct_answer %}<span class="row-mark">正确答案</span>{% endif %}
+                {% if opt_letter == w.user_answer %}<span class="row-mark">你的答案</span>{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p style="font-size:14px;margin:10px 0;">
+            你的答案：<strong style="color:var(--red);">{{ w.user_answer }}</strong>
+            → 正确答案：<strong style="color:var(--green);">{{ w.correct_answer }}</strong>
+        </p>
+        {% endif %}
+        <div style="font-size:13px;color:var(--text-medium);margin-top:10px;padding:10px;background:var(--bg-hover);border-radius:var(--radius);line-height:1.7;">
+            <strong>📖 解析：</strong>{{ w.explanation }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% else %}
+<!-- ===== Question View ===== -->
+<div class="exam-progress">
+    <h3>结业考试 · 第 {{ question_num }}/{{ total }} 题</h3>
+    <p class="exam-warning">⚠️ 每题答完不显示对错，全部完成后统一出结果</p>
+</div>
+
+<div class="quiz-card">
+    <div class="flow-text" style="font-size:17px;font-weight:600;margin-bottom:20px;">{{ question.question }}</div>
+
+    <form method="post" action="/exam/answer">
+        <input type="hidden" name="question_id" value="{{ question.id }}">
+
+        {% if question.type == "true-false" %}
+        <div style="display:flex;gap:12px;justify-content:center;">
+            <button type="submit" name="answer" value="对" class="quiz-option" style="flex:1;max-width:200px;text-align:center;font-size:18px;">
+                <span class="opt-badge">✓</span>对
+            </button>
+            <button type="submit" name="answer" value="错" class="quiz-option" style="flex:1;max-width:200px;text-align:center;font-size:18px;">
+                <span class="opt-badge">✗</span>错
+            </button>
+        </div>
+        {% else %}
+        {% for opt in question.options %}
+        {% set letter = opt[0] %}
+        <button type="submit" name="answer" value="{{ letter }}" class="quiz-option">
+            <span class="opt-badge">{{ letter }}</span>{{ opt }}
+        </button>
+        {% endfor %}
+        {% endif %}
+    </form>
+</div>
+{% endif %}
+
+{% endblock %}

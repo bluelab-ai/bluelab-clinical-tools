@@ -1,0 +1,78 @@
+{
+  "learner_name": "",
+  "learner_role": "",
+  "learner_track": "novice",
+  "experienced_branch": null,
+  "has_old_gcp_basis": false,
+  "chapters": {
+    "导论": {
+      "title": "导论",
+      "status": "idle",
+      "started": null,
+      "completed": null,
+      "quiz_score": null,
+      "quiz_skipped": false
+    },
+    "第一章": {
+      "title": "第一章 总则",
+      "status": "idle",
+      "started": null,
+      "completed": null,
+      "quiz_score": null,
+      "quiz_skipped": false
+    },
+    "第二章": {
+      "title": "第二章 伦理审查委员会",
+      "status": "idle",
+      "started": null,
+      "completed": null,
+      "quiz_score": null,
+      "quiz_skipped": false
+    },
+    "第三章": {
+      "title": "第三章 主要研究者与药物临床试验机构",
+      "status": "idle",
+      "started": null,
+      "completed": null,
+      "quiz_score": null,
+      "quiz_skipped": false
+    },
+    "第四章": {
+      "title": "第四章 申办者",
+      "status": "idle",
+      "started": null,
+      "completed": null,
+      "quiz_score": null,
+      "quiz_skipped": false
+    },
+    "第五章": {
+      "title": "第五章 数据治理",
+      "status": "idle",
+      "started": null,
+      "completed": null,
+      "quiz_score": null,
+      "quiz_skipped": false
+    },
+    "第六章": {
+      "title": "第六章 附则",
+      "status": "idle",
+      "started": null,
+      "completed": null,
+      "quiz_score": null,
+      "quiz_skipped": false
+    }
+  },
+  "current_chapter": "导论",
+  "last_article": null,
+  "first_session": "",
+  "last_session": "",
+  "total_minutes": 0,
+  "study_mode": "full",
+  "final_score": null,
+  "final_grade": "",
+  "chapter_scores": {},
+  "certificate_issued": false,
+  "certificate_id": "",
+  "gcp_version": "2026",
+  "notes": "status: idle（待学）→ active（在学）→ passed（已通过）"
+}

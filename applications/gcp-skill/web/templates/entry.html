@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+{% block title %}GCP 2026 培训 — 入口{% endblock %}
+
+{% block content %}
+<div class="entry-wrap">
+    <img src="/static/images/logo.png" alt="Logo" style="height:110px;margin-bottom:28px;">
+    <h2>药物临床试验质量管理规范（2026年修订）</h2>
+    <p class="subtitle">交互式法规培训课程 · 约 90 分钟</p>
+
+    {% if step == "login" %}
+    <!-- ===== Login / Register ===== -->
+    <div class="entry-card">
+        <h3>登录或注册</h3>
+
+        {% if error %}
+        <div class="error-msg">{{ error }}</div>
+        {% endif %}
+
+        <!-- Login form -->
+        <form method="post" action="/login" class="entry-form">
+            <label for="login-user" style="font-size:14px;font-weight:500;">用户名</label>
+            <input type="text" id="login-user" name="username" required class="input-field"
+                   placeholder="请输入用户名" autofocus>
+            <label for="login-pass" style="font-size:14px;font-weight:500;">密码</label>
+            <input type="password" id="login-pass" name="password" required class="input-field"
+                   placeholder="请输入密码">
+            <button type="submit" class="btn btn-primary btn-lg">登录</button>
+        </form>
+
+        <hr class="divider">
+        <p class="note">还没有账号？下方注册：</p>
+
+        <!-- Register form -->
+        <form method="post" action="/register" class="entry-form">
+            <label for="reg-user" style="font-size:14px;font-weight:500;">新用户名</label>
+            <input type="text" id="reg-user" name="username" required class="input-field"
+                   placeholder="请选择用户名（字母或中文）" minlength="2">
+            <label for="reg-pass" style="font-size:14px;font-weight:500;">密码</label>
+            <input type="password" id="reg-pass" name="password" required class="input-field"
+                   placeholder="请设置密码" minlength="4">
+
+            <p class="note" style="margin-top:12px;font-size:11px;color:var(--text-light);">
+                📊 以下信息仅用于帮助开发者了解用户构成、优化产品体验，不作其他用途。
+            </p>
+
+            <label for="reg-org" style="font-size:14px;font-weight:500;">工作单位性质</label>
+            <select id="reg-org" name="org_type" class="input-field" required>
+                <option value="" disabled selected>请选择…</option>
+                <option value="高校">高校</option>
+                <option value="药企">药企</option>
+                <option value="CRO">CRO</option>
+                <option value="医院">医院</option>
+                <option value="其他">其他</option>
+            </select>
+
+            <label for="reg-role" style="font-size:14px;font-weight:500;">当前角色</label>
+            <select id="reg-role" name="job_role" class="input-field" required>
+                <option value="" disabled selected>请选择…</option>
+                <option value="医生">医生</option>
+                <option value="CRC">CRC</option>
+                <option value="CRA">CRA</option>
+                <option value="学生">学生</option>
+                <option value="教师">教师</option>
+                <option value="其他">其他</option>
+            </select>
+
+            <button type="submit" class="btn btn-outline btn-lg" style="width:100%;">注册新账号</button>
+        </form>
+    </div>
+
+    {% elif step == "real_name" %}
+    <!-- ===== Real Name Input ===== -->
+    <div class="entry-card">
+        <h3>你好，{{ username }}！</h3>
+        <p class="note">请先告诉我你的真实姓名。</p>
+        <form method="post" action="/entry/name" class="entry-form">
+            <label for="real_name" style="font-size:14px;font-weight:500;">姓名（将印在培训证书上）</label>
+            <input type="text" id="real_name" name="real_name" required class="input-field"
+                   placeholder="请输入你的姓名" autofocus>
+            <button type="submit" class="btn btn-primary btn-lg">下一步：选择角色</button>
+        </form>
+    </div>
+
+    {% elif step == "role_select" %}
+    <!-- ===== Role + Experience Selection ===== -->
+    <div class="entry-card">
+        <h3>{{ learner_name }}，选择学习角色</h3>
+        <form method="post" action="/entry/role" class="entry-form">
+            <div style="margin-bottom:8px;">
+                <label style="font-weight:600;display:block;margin-bottom:8px;">1. 你的角色：</label>
+                {% for key, info in roles.items() %}
+                <label class="option-card">
+                    <input type="radio" name="role" value="{{ key }}" required>
+                    <span class="opt-icon">{{ info.emoji }}</span>
+                    <span class="opt-text">{{ role_display[key] }}</span>
+                </label>
+                {% endfor %}
+            </div>
+
+            <div style="margin-bottom:8px;">
+                <label style="font-weight:600;display:block;margin-bottom:8px;">2. 你是否有旧版（2020版）GCP 的学习基础？</label>
+                <label class="option-card">
+                    <input type="radio" name="has_basis" value="yes" required>
+                    <span class="opt-text">A. 有，我学过旧版</span>
+                </label>
+                <label class="option-card">
+                    <input type="radio" name="has_basis" value="no">
+                    <span class="opt-text">B. 没有，我是第一次学</span>
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg">开始学习</button>
+        </form>
+    </div>
+
+    {% elif step == "dashboard" %}
+    <!-- ===== Dashboard: existing records ===== -->
+    {% set letters = ['A', 'B', 'C', 'D', 'E', 'F'] %}
+    {% set rec_count = records|length %}
+    <div class="entry-card">
+        <h3>{{ learner_name }}，欢迎回来！</h3>
+        <p class="note" style="margin-bottom:16px;">找到以下学习记录：</p>
+        <form method="post" action="/entry/resume" class="entry-form">
+            {% for rec in records %}
+            <label class="option-card">
+                <input type="radio" name="role" value="{{ rec.learner_role }}" required>
+                <span class="opt-text" style="font-weight:600;">
+                    {{ letters[loop.index0] }}. {{ role_display[rec.learner_role] }}
+                </span>
+                <span class="opt-extra">
+                    {% if rec.certificate_issued %}✅ 已完成{% else %}{{ rec.progress_summary }}{% endif %}
+                </span>
+            </label>
+            {% endfor %}
+
+            <label class="option-card">
+                <input type="radio" name="role" value="__new__">
+                <span class="opt-text">{{ letters[rec_count] }}. 新开一个角色学习</span>
+            </label>
+
+            <button type="submit" class="btn btn-primary btn-lg">继续</button>
+        </form>
+
+        <p class="note" style="margin-top:1rem;">
+            <a href="/">{{ letters[rec_count + 1] }}. 切换账号，重新登录</a>
+        </p>
+    </div>
+    <script>
+    // Warn when selecting "new role" — choosing an existing role name will overwrite old record
+    document.querySelector('form[action="/entry/resume"]').addEventListener('submit', function(e) {
+        var selected = this.querySelector('input[name="role"]:checked');
+        if (selected && selected.value === '__new__') {
+            var confirmed = confirm(
+                '⚠️ 新开角色\n\n' +
+                '即将进入角色选择环节，若选取记录内已存在的角色，\n' +
+                '该角色过往全部进程数据会被本次任务覆盖，\n' +
+                '请谨慎操作。\n\n' +
+                '确认继续？'
+            );
+            if (!confirmed) {
+                e.preventDefault();
+            }
+        }
+    });
+    </script>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GCP 2026 培训{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css?v=18">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+</head>
+<body>
+
+    <!-- ===== GLOBAL NAVIGATION ===== -->
+    <nav class="global-nav" id="globalNav">
+        <div class="nav-left">
+            <a href="/" class="nav-logo">
+                <img src="/static/images/logo.png" alt="Logo" style="height:42px;">
+            </a>
+            {% if learner_name %}
+            <span class="nav-breadcrumb">
+                <span class="sep">/</span>
+                <span class="current">{{ learner_name }} · {{ learner_role }}</span>
+            </span>
+            {% endif %}
+        </div>
+        <div class="nav-center">
+            <img src="/article-images/header-tagline-clinical-ai-minimal.webp" alt="Clinical AI" class="nav-tagline-img">
+        </div>
+        <div class="nav-right">
+            {% block progress %}{% endblock %}
+            {% if learner_name %}
+            <span class="nav-save" title="学习进度已自动保存">已保存</span>
+            <a href="/" class="nav-exit" title="保存并退出">退出</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Gradient progress bar -->
+    <div class="nav-progress-bar"><div class="fill" id="navProgressFill"></div></div>
+
+    <!-- Header disclaimer (all pages) -->
+    <div class="header-disclaimer">⚠️ 免责声明：本页面内容仅供行业内部学术交流与学习参考，不构成任何专业建议及官方依据；具体合规问题请咨询机构法务部门或药监部门。</div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ===== FLOATING AI BUTTON (left side) ===== -->
+    <button class="ai-float-btn" id="aiFloatBtn" onclick="openFloatAi()" title="问 AI" style="width:auto;padding:0 16px;border-radius:22px;gap:6px;font-size:13px;font-weight:600;">
+        🤖 问 AI
+    </button>
+
+    <!-- ===== FLOATING BOTTOM NAV (injected by page templates as needed) ===== -->
+    {% block bottom_nav %}{% endblock %}
+
+    <!-- ===== AI CHAT PANEL ===== -->
+    {% include "ai_panel.html" %}
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="/static/app.js?v=7"></script>
+    {% block scripts %}{% endblock %}
+
+    <!-- Scroll-to-top for bottom nav avoidance -->
+    <script>
+    // Nav border on scroll
+    window.addEventListener('scroll', function(){
+        document.getElementById('globalNav').classList.toggle('scrolled', window.scrollY > 10);
+    });
+    </script>
+</body>
+</html>

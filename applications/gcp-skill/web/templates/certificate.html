@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}培训证书 — GCP 2026 培训{% endblock %}
+
+{% block content %}
+<div class="certificate-container">
+    <h2>证书已生成</h2>
+
+    <div class="certificate-preview">
+        <div class="cert-border">
+            <h3>药物临床试验质量管理规范（2026年修订）</h3>
+            <h2>培训合格证书</h2>
+
+            <div class="cert-body">
+                <p>学员：<strong>{{ learner_name }}</strong></p>
+                <p>角色：{{ learner_role }} | 学习模式：{{ track_label }}</p>
+                <p>成绩等级：<strong>{{ final_grade }}</strong></p>
+                <p>正确率：{{ final_score }}%</p>
+
+                <table class="cert-chapter-scores">
+                    <tr><th>章节</th><th>正确率</th></tr>
+                    {% for ch, rate in chapter_scores.items() %}
+                    <tr><td>{{ ch }}</td><td>{{ rate }}%</td></tr>
+                    {% endfor %}
+                </table>
+
+                <p class="cert-id">证书编号：{{ cert_id }}</p>
+                <p class="cert-date">发证日期：{{ today }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cert-actions">
+        <a href="/cert/download" class="btn btn-primary">📥 下载证书</a>
+        <button class="btn btn-secondary" onclick="window.print()">🖨 打印证书</button>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}选择学习路径 — GCP 2026 培训{% endblock %}
+
+{% block content %}
+<div class="branch-wrap">
+    <header class="page-header" style="text-align:center;">
+<h1>差异速览完成！请选择后续路径</h1>
+        <p class="meta-row" style="justify-content:center;">以上是 2026 版 GCP 的所有关键变化。现在请选择：</p>
+    </header>
+
+    {% if offer_upgrade %}
+    <!-- ===== B branch: all chapter quizzes passed → offer C upgrade ===== -->
+    <div style="text-align:center;padding:24px;">
+        <p class="flow-text">✅ 你已通过全部六章变化题章节测验。</p>
+        <form method="post" action="/learn/branch/upgrade" style="margin-top:20px;">
+            <input type="hidden" name="from_branch" value="B">
+            <input type="hidden" name="to_branch" value="C">
+            <p class="flow-text" style="margin-bottom:12px;">要升级到 C 参加结业考试拿证吗？</p>
+            <button type="submit" class="btn btn-primary btn-lg">是，我要参加结业考试</button>
+            <a href="/" class="btn btn-outline" style="margin-left:8px;">否，到此结束</a>
+        </form>
+    </div>
+
+    {% elif offer_exam %}
+    <!-- ===== C branch already selected → start/resume exam ===== -->
+    <div style="text-align:center;padding:24px;">
+        <p class="flow-text">你已选择 C 分支：直接结业考试。</p>
+        <p class="note" style="margin-top:4px;">不做章节测验，直接参加 30 题结业考试，≥60% 合格即可获得证书。</p>
+        <div style="margin-top:20px;">
+            <a href="/exam/start" class="btn btn-primary btn-lg">开始 / 继续结业考试</a>
+        </div>
+    </div>
+
+    {% elif not done %}
+    <!-- ===== First time: A/B/C selection ===== -->
+    <form method="post" action="/learn/branch/select">
+        <div class="branch-cards">
+            <label class="branch-card">
+                <input type="radio" name="branch" value="A" required>
+                <h3>A. 只看差异，不做题</h3>
+                <p>仅仅了解变化，不需要验证。不发证。</p>
+            </label>
+            <label class="branch-card">
+                <input type="radio" name="branch" value="B">
+                <h3>B. 仅变化题章节测验</h3>
+                <p>只做变化题的章节测验（六章各3题），不做结业考试。不发证。</p>
+            </label>
+            <label class="branch-card">
+                <input type="radio" name="branch" value="C">
+                <h3>C. 直接结业考试</h3>
+                <p>不做章节测验，直接参加 30 题结业考试。≥60% 合格即可获得证书。</p>
+            </label>
+        </div>
+        <div style="text-align:center;">
+            <button type="submit" class="btn btn-primary btn-lg">确认选择</button>
+        </div>
+    </form>
+
+    {% elif branch == "A" %}
+    <!-- ===== A branch completed: offer upgrade to B ===== -->
+    <div style="text-align:center;padding:24px;">
+        <p class="flow-text">✅ 差异速览已完成。随时欢迎回来复习或做题。祝你工作顺利！</p>
+        <form method="post" action="/learn/branch/upgrade" style="margin-top:20px;">
+            <input type="hidden" name="from_branch" value="A">
+            <input type="hidden" name="to_branch" value="B">
+            <p class="flow-text" style="margin-bottom:12px;">要升级到 B 做变化题章节测验验证一下吗？</p>
+            <button type="submit" class="btn btn-primary btn-lg">是，升级到 B</button>
+            <a href="/" class="btn btn-outline" style="margin-left:8px;">否，结束</a>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

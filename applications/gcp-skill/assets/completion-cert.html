@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GCP 2026 培训证书</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; background: #f5f5f5;
+  }
+  .certificate {
+    width: 800px; padding: 60px 80px;
+    background: white;
+    border: 3px solid #1a3a5c;
+    border-radius: 4px;
+    position: relative;
+  }
+  .certificate::before {
+    content: ''; position: absolute;
+    top: 12px; left: 12px; right: 12px; bottom: 12px;
+    border: 1px solid #c9a962;
+    pointer-events: none;
+  }
+  .header { text-align: center; margin-bottom: 40px; }
+  .header h1 { font-size: 28px; color: #1a3a5c; font-weight: 700; letter-spacing: 2px; }
+  .header .subtitle { font-size: 14px; color: #666; margin-top: 8px; }
+  .body { text-align: center; line-height: 2.2; }
+  .body .name { font-size: 24px; font-weight: 700; color: #c9a962; margin: 20px 0; }
+  .body .info { font-size: 16px; color: #333; }
+  .body .info strong { color: #1a3a5c; }
+  .scores { margin: 30px 0; }
+  .scores table { margin: 0 auto; border-collapse: collapse; }
+  .scores th, .scores td { padding: 6px 16px; text-align: center; font-size: 14px; }
+  .scores th { background: #1a3a5c; color: white; }
+  .scores td { border-bottom: 1px solid #eee; }
+  .footer { margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .footer .cert-id { font-size: 12px; color: #999; }
+  .footer .date { font-size: 14px; color: #333; }
+  .stamp {
+    position: absolute; bottom: 80px; right: 100px;
+    width: 100px; height: 100px;
+    border: 2px solid rgba(201, 169, 98, 0.5);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transform: rotate(-15deg);
+    color: rgba(201, 169, 98, 0.6);
+    font-size: 14px; font-weight: 700;
+  }
+  @media print {
+    body { background: white; }
+    .certificate { border: 3px solid #1a3a5c; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="certificate">
+  <div class="header">
+    <h1>培训证书</h1>
+    <div class="subtitle">《药物临床试验质量管理规范（2026年修订）》</div>
+  </div>
+  <div class="body">
+    <div class="info">兹证明</div>
+    <div class="name">{{learner_name}}</div>
+    <div class="info">
+      已完成<strong>《药物临床试验质量管理规范（2026年修订）》</strong>交互式培训课程<br>
+      学习模式：<strong>{{track_label}}</strong><br>
+      培训学时：<strong>1.5 小时</strong><br>
+      结业考试成绩：<strong>{{grade}}</strong>（正确率 {{score_rate}}%）
+    </div>
+    <div class="scores">
+      <table>
+        <tr><th>章节</th><th>正确率</th></tr>
+        <tr><td>第一章 总则</td><td>{{ch1_rate}}</td></tr>
+        <tr><td>第二章 伦理审查委员会</td><td>{{ch2_rate}}</td></tr>
+        <tr><td>第三章 主要研究者与药物临床试验机构</td><td>{{ch3_rate}}</td></tr>
+        <tr><td>第四章 申办者</td><td>{{ch4_rate}}</td></tr>
+        <tr><td>第五章 数据治理</td><td>{{ch5_rate}}</td></tr>
+        <tr><td>第六章 附则</td><td>{{ch6_rate}}</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="cert-id">证书编号：{{certificate_id}}</div>
+    <div class="date">发证日期：{{issue_date}}</div>
+  </div>
+  <div class="stamp">培训完成</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<div id="ai-panel" class="ai-panel hidden">
+    <div class="ai-panel-header">
+        <span id="ai-panel-title">🤖 AI 助教</span>
+        <button id="ai-panel-close" class="ai-panel-close" title="关闭">✕</button>
+    </div>
+    <div class="ai-scope-bar" id="ai-scope-bar">
+        <button class="scope-btn" onclick="selectScope('article')" data-scope="article">📄 本条答疑</button>
+        <button class="scope-btn" onclick="selectScope('chapter')" data-scope="chapter">📚 本章答疑</button>
+        <button class="scope-btn" onclick="selectScope('full')" data-scope="full">📖 GCP全法问答</button>
+    </div>
+    <div id="ai-messages" class="ai-messages"></div>
+    <div class="ai-panel-footer">
+        <input type="text" id="ai-input" placeholder="请先选择问答范围…" class="ai-input" disabled>
+        <button id="ai-send" class="btn btn-primary" disabled>发送</button>
+    </div>
+    <div class="ai-scope-hint" id="ai-scope-hint"></div>
+</div>
