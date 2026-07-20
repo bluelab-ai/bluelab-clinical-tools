@@ -1,0 +1,32 @@
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: "/api",
+  headers: { "Content-Type": "application/json" },
+});
+
+// Attach JWT token from localStorage if present
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Handle 401 by redirecting to login
+api.interceptors.response.use(
+  (res) => res,
+  (err) => {
+    if (err.response?.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      sessionStorage.setItem("auth_expired", "登录已过期，请重新登录");
+      window.dispatchEvent(new Event("auth:logout"));
+      window.location.href = "/login";
+    }
+    return Promise.reject(err);
+  },
+);
+
+export default api;

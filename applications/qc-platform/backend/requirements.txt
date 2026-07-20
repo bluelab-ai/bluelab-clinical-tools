@@ -1,0 +1,41 @@
+# ═══════════════════════════════════════════════════════════════════
+# TFL QC Platform — Python 后端依赖
+# ═══════════════════════════════════════════════════════════════════
+# 安装: pip install -r requirements.txt
+# Python 版本要求: >= 3.10
+
+# ── Web 框架 ──
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9       # FastAPI 文件上传必需
+
+# ── 认证 ──
+bcrypt>=4.0.0
+pyjwt>=2.8.0
+
+# ── 数据库 ──
+sqlalchemy>=2.0.0
+
+# ── 文档解析 ──
+python-docx>=1.1.0             # Word .docx 读取
+openpyxl>=3.1.0                # Excel .xlsx 读写
+lxml>=5.0.0                    # XML 解析（Word TOC 字段码检测）
+pdfplumber>=0.10.0             # PDF 表格提取
+
+# ── LLM API（Anthropic 兼容协议，指向 DeepSeek）──
+anthropic>=0.34.0              # Anthropic SDK (tool-use loop)
+openai>=1.30.0                 # OpenAI SDK (deepseek_match 兼容端点)
+
+# ── 工作流编排 ──
+langgraph>=0.2.0               # LangGraph StateGraph + MemorySaver
+
+# ── 语义匹配（cross_qc 表格-清单配对）──
+sentence-transformers>=3.0.0   # BGE 模型嵌入（需要预下载模型，见下方说明）
+numpy>=1.26.0
+scikit-learn>=1.4.0
+
+# ── 报告生成 ──
+markdown>=3.5.0                # .md → HTML 转换（build_qc_viewer）
+
+# ── 类型校验（FastAPI 依赖）──
+pydantic>=2.5.0
