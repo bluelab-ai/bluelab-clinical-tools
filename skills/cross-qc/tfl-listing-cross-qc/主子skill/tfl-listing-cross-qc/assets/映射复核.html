@@ -1,0 +1,462 @@
+<!-- TFL-LISTING-CROSS-QC 映射复核模板 v2.0 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>表格-清单 映射复核</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f5f5; color: #333; }
+.header { background: #fff; border-bottom: 1px solid #e0e0e0; padding: 16px 24px; position: sticky; top: 0; z-index: 10; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.header h1 { font-size: 20px; margin-bottom: 4px; }
+.header .subtitle { font-size: 13px; color: #888; }
+
+.instructions { background: #e8f4fd; border-left: 4px solid #2196F3; padding: 12px 16px; margin: 16px 24px 0; border-radius: 0 4px 4px 0; font-size: 13px; line-height: 1.7; }
+.instructions strong { color: #1565C0; }
+
+.summary-bar { display: flex; gap: 12px; padding: 16px 24px; flex-wrap: wrap; align-items: center; }
+.summary-card { background: #fff; border-radius: 8px; padding: 12px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); text-align: center; min-width: 100px; }
+.summary-card .num { font-size: 28px; font-weight: 700; }
+.summary-card .label { font-size: 12px; color: #888; margin-top: 2px; }
+.summary-card.kw .num { color: #2e7d32; }
+.summary-card.review .num { color: #e65100; }
+.summary-card.qc .num { color: #1565C0; }
+.summary-card.total .num { color: #333; }
+
+.actions { display: flex; gap: 8px; padding: 0 24px 12px; flex-wrap: wrap; align-items: center; }
+.actions button, .actions .btn { padding: 8px 16px; border: 1px solid #ccc; border-radius: 6px; background: #fff; cursor: pointer; font-size: 13px; white-space: nowrap; }
+.actions button:hover { background: #f0f0f0; }
+.actions button.primary { background: #1976D2; color: #fff; border-color: #1976D2; }
+.actions button.primary:hover { background: #1565C0; }
+.actions button.danger { background: #d32f2f; color: #fff; border-color: #d32f2f; }
+.actions button.danger:hover { background: #b71c1c; }
+.actions .filter-group { display: flex; gap: 4px; }
+.actions .filter-btn { padding: 6px 12px; border-radius: 20px; font-size: 12px; }
+.actions .filter-btn.active { background: #1976D2; color: #fff; border-color: #1976D2; }
+
+.table-wrap { margin: 0 24px 24px; background: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 1200px; }
+th { background: #fafafa; border-bottom: 2px solid #e0e0e0; padding: 10px 12px; text-align: left; font-weight: 600; position: sticky; top: 0; }
+td { border-bottom: 1px solid #f0f0f0; padding: 8px 12px; vertical-align: middle; }
+tr.kw-match { background: #e8f5e9; }
+tr.cos-match { background: #fffde7; }
+tr.needs-review { background: #ffebee; }
+tr.man-match { background: #e3f2fd; }
+tr:hover { filter: brightness(0.97); }
+
+select, input[type="text"] { padding: 4px 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px; font-family: inherit; }
+
+/* Multi-select checkbox group */
+.listing-checkbox-group { max-height: 140px; overflow-y: auto; border: 1px solid #ddd; border-radius: 4px; padding: 4px 6px; background: #fafafa; min-width: 300px; }
+.listing-checkbox-group label { display: flex; align-items: center; gap: 5px; font-size: 11px; padding: 3px 2px; cursor: pointer; white-space: nowrap; border-radius: 2px; }
+.listing-checkbox-group label:hover { background: #e3f2fd; }
+.listing-checkbox-group label.selected { background: #e8f5e9; font-weight: 500; }
+.listing-checkbox-group input[type="checkbox"] { margin: 0; width: 13px; height: 13px; flex-shrink: 0; }
+.listing-selected-count { font-size: 11px; color: #1976D2; font-weight: 600; margin-bottom: 2px; }
+
+.toggle-switch { position: relative; display: inline-block; width: 40px; height: 22px; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #ccc; border-radius: 22px; transition: 0.2s; }
+.toggle-slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.2s; }
+input:checked + .toggle-slider { background: #4CAF50; }
+input:checked + .toggle-slider:before { transform: translateX(18px); }
+
+.legend { display: flex; gap: 16px; padding: 8px 24px; font-size: 12px; color: #888; align-items: center; }
+.legend-dot { display: inline-block; width: 14px; height: 14px; border-radius: 3px; margin-right: 4px; vertical-align: middle; border: 1px solid #ddd; }
+
+.modified { outline: 2px solid #FF9800; outline-offset: -2px; }
+
+.listing-pop-cell { font-size: 12px; max-width: 120px; word-break: break-all; }
+
+.footer { text-align: center; color: #aaa; font-size: 12px; padding: 24px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>表格-清单 映射复核</h1>
+  <div class="subtitle">v2.0 — 每张表格可关联一个或多个清单进行QC核查</div>
+</div>
+
+<div class="instructions">
+  <strong>使用说明：</strong><br>
+  1. <strong>对应清单（可多选）</strong>：勾选此表格需要QC比对的所有清单。一张表格可对应多个清单（如不良事件表可同时核对AE清单和SAE清单）。<br>
+  2. <strong>匹配方法</strong>：关键字匹配(绿色)=高置信度自动 | 余弦相似度(黄色)=AI语义 | 人工指定(蓝色)=人工确认后纳入QC。<br>
+  3. <strong>是否QC</strong>开关：关键字匹配和人工指定默认开启；余弦相似度和直接匹配默认关闭，需人工确认后切换为人工指定并开启QC。<br>
+  4. 修改过的行高亮橙框。核对完成后点击<strong>「导出修改」</strong>下载复核后的JSON文件。
+</div>
+
+<div class="summary-bar" id="summary"></div>
+
+<div class="legend">
+  颜色图例：
+  <span><span class="legend-dot" style="background:#e8f5e9"></span>关键字匹配</span>
+  <span><span class="legend-dot" style="background:#fffde7"></span>余弦相似度匹配</span>
+  <span><span class="legend-dot" style="background:#e3f2fd"></span>人工指定</span>
+  <span><span class="legend-dot" style="background:#ffebee"></span>需人工审核</span>
+  <span style="margin-left:8px">🟠 橙框 = 已修改</span>
+</div>
+
+<div class="actions" id="actions">
+  <div class="filter-group">
+    <button class="filter-btn active" data-filter="all">全部</button>
+    <button class="filter-btn" data-filter="kw">关键字匹配</button>
+    <button class="filter-btn" data-filter="review">需人工审核</button>
+    <button class="filter-btn" data-filter="qc">是否QC=是</button>
+  </div>
+  <span style="flex:1"></span>
+  <button onclick="selectAllQC()">全选QC</button>
+  <button onclick="deselectAllQC()">取消全部QC</button>
+  <button onclick="resetAll()">重置</button>
+  <button class="primary" onclick="exportModified()">导出修改</button>
+</div>
+
+<div class="table-wrap">
+  <table id="table">
+    <thead>
+      <tr>
+        <th>序号</th>
+        <th>表格名称</th>
+        <th>表格人群</th>
+        <th>对应清单（可多选）</th>
+        <th>清单人群</th>
+        <th>匹配方法</th>
+        <th>余弦相似度</th>
+        <th>人工审核</th>
+        <th>是否QC</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+
+<div class="footer">表格-清单 交互式映射复核工具 v2.0</div>
+
+<script>
+// ===== DATA =====
+const MAPPING_DATA = __MAPPING_DATA__;
+
+// ALL_LISTINGS: array of all unique listing names (sorted)
+const ALL_LISTINGS = __LISTINGS_DATA__;
+
+// ===== BUILD COMPLETE LISTING INFO =====
+// Scan all items to build name → {num, population} lookup
+const LISTING_INFO = {};
+MAPPING_DATA.forEach(item => {
+  const bm = item['最佳匹配'];
+  if (!LISTING_INFO[bm['清单名称']]) {
+    LISTING_INFO[bm['清单名称']] = { num: bm['清单编号'], pop: bm['清单人群'] };
+  }
+  (item['候选匹配'] || []).forEach(c => {
+    if (!LISTING_INFO[c['清单名称']]) {
+      // Try to extract population from listing name (e.g. "xxx清单（FAS）")
+      const popMatch = c['清单名称'].match(/（(.+?)）$/);
+      LISTING_INFO[c['清单名称']] = { num: c['清单编号'], pop: popMatch ? popMatch[1] : '未知' };
+    }
+  });
+});
+// Fill any remaining listings (from ALL_LISTINGS that might not be in any mapping)
+ALL_LISTINGS.forEach(name => {
+  if (!LISTING_INFO[name]) {
+    const popMatch = name.match(/（(.+?)）$/);
+    LISTING_INFO[name] = { num: null, pop: popMatch ? popMatch[1] : '未知' };
+  }
+});
+
+// ===== STATE =====
+let currentFilter = 'all';
+let modifiedRows = new Set();
+
+// ===== RENDER =====
+function updateSummary() {
+  const rows = document.querySelectorAll('#tbody tr');
+  let total = 0, kw = 0, man = 0, review = 0, qcYes = 0;
+  let totalPairs = 0;
+  rows.forEach(r => {
+    if (r.style.display === 'none') return;
+    total++;
+    if (r.classList.contains('kw-match')) kw++;
+    if (r.classList.contains('man-match')) man++;
+    if (r.classList.contains('needs-review')) review++;
+    if (r.querySelector('.qc-toggle input').checked) qcYes++;
+    const checks = r.querySelectorAll('.listing-checkbox-group input:checked');
+    totalPairs += checks.length;
+  });
+  document.getElementById('summary').innerHTML = `
+    <div class="summary-card total"><div class="num">${total}</div><div class="label">表格数</div></div>
+    <div class="summary-card" style="background:#f3e5f5"><div class="num">${totalPairs}</div><div class="label">表格×清单配对</div></div>
+    <div class="summary-card kw"><div class="num">${kw}</div><div class="label">关键字匹配</div></div>
+    <div class="summary-card" style="background:#e3f2fd"><div class="num">${man}</div><div class="label">人工指定</div></div>
+    <div class="summary-card review"><div class="num">${review}</div><div class="label">需人工审核</div></div>
+    <div class="summary-card qc"><div class="num">${qcYes}</div><div class="label">是否QC=是</div></div>
+    <div class="summary-card" style="background:#fff3e0"><div class="num">${modifiedRows.size}</div><div class="label">已修改行</div></div>
+  `;
+}
+
+function buildTable() {
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+  MAPPING_DATA.forEach((item, idx) => {
+    const tr = document.createElement('tr');
+    tr.dataset.index = idx;
+
+    // Row class
+    if (item['匹配方法'] === '关键字匹配') tr.classList.add('kw-match');
+    else if (item['匹配方法'] === '余弦相似度匹配') tr.classList.add('cos-match');
+    else if (item['匹配方法'] === '人工指定') tr.classList.add('man-match');
+    if (item['是否需要人工审核'] === '是') tr.classList.add('needs-review');
+
+    // Col 0: 序号
+    const tdIdx = document.createElement('td');
+    tdIdx.textContent = idx + 1;
+    tr.appendChild(tdIdx);
+
+    // Col 1: 表格名称
+    const tdTbl = document.createElement('td');
+    tdTbl.textContent = item['表格名称'];
+    tdTbl.style.maxWidth = '220px';
+    tdTbl.style.overflow = 'hidden';
+    tdTbl.style.textOverflow = 'ellipsis';
+    tdTbl.title = item['表格名称'];
+    tr.appendChild(tdTbl);
+
+    // Col 2: 表格人群
+    const tdPop = document.createElement('td');
+    tdPop.textContent = item['表格人群'];
+    tr.appendChild(tdPop);
+
+    // Col 3: 对应清单 (multi-select checkboxes)
+    const tdList = document.createElement('td');
+    const countBadge = document.createElement('div');
+    countBadge.className = 'listing-selected-count';
+    const group = document.createElement('div');
+    group.className = 'listing-checkbox-group';
+    group.dataset.idx = idx;
+
+    const bestName = item['最佳匹配']['清单名称'];
+    ALL_LISTINGS.forEach(name => {
+      const info = LISTING_INFO[name] || {};
+      const label = document.createElement('label');
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.value = name;
+      cb.dataset.num = info.num || '';
+      cb.dataset.pop = info.pop || '未知';
+      if (name === bestName) {
+        cb.checked = true;
+        label.classList.add('selected');
+      }
+      cb.addEventListener('change', () => {
+        onModify(idx);
+        updateListingPop(tr);
+        updateRowClassBySelection(tr);
+        label.classList.toggle('selected', cb.checked);
+        updateCountBadge(group, countBadge);
+        updateSummary();
+      });
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(name));
+      group.appendChild(label);
+    });
+
+    updateCountBadge(group, countBadge);
+    tdList.appendChild(countBadge);
+    tdList.appendChild(group);
+    tr.appendChild(tdList);
+
+    // Col 4: 清单人群 (dynamically computed from selected listings)
+    const tdLPop = document.createElement('td');
+    tdLPop.className = 'listing-pop-cell';
+    tdLPop.textContent = item['最佳匹配']['清单人群'];
+    tr.appendChild(tdLPop);
+
+    // Col 5: 匹配方法 (dropdown)
+    const tdMethod = document.createElement('td');
+    const mSel = document.createElement('select');
+    mSel.className = 'method-select';
+    ['关键字匹配', '余弦相似度匹配', '直接匹配', '人工指定'].forEach(m => {
+      const opt = document.createElement('option');
+      opt.value = m;
+      opt.textContent = m;
+      if (m === item['匹配方法']) opt.selected = true;
+      mSel.appendChild(opt);
+    });
+    mSel.addEventListener('change', () => {
+      onModify(idx);
+      updateRowClass(tr, idx);
+      const reviewCol = tr.querySelector('.review-col');
+      const newMethod = mSel.value;
+      if (newMethod !== '关键字匹配') {
+        reviewCol.textContent = '是';
+        tr.classList.add('needs-review');
+      } else {
+        reviewCol.textContent = '否';
+        tr.classList.remove('needs-review');
+      }
+      // Update 人工指定 row class
+      tr.classList.remove('man-match');
+      if (newMethod === '人工指定') tr.classList.add('man-match');
+    });
+    tdMethod.appendChild(mSel);
+    tr.appendChild(tdMethod);
+
+    // Col 6: 余弦相似度
+    const tdCos = document.createElement('td');
+    tdCos.textContent = item['余弦相似度'] != null ? item['余弦相似度'].toFixed(4) : '-';
+    tdCos.style.textAlign = 'center';
+    tr.appendChild(tdCos);
+
+    // Col 7: 人工审核 (auto-computed)
+    const tdReview = document.createElement('td');
+    tdReview.className = 'review-col';
+    tdReview.textContent = item['是否需要人工审核'] === '是' ? '是' : '否';
+    tdReview.style.textAlign = 'center';
+    tr.appendChild(tdReview);
+
+    // Col 8: 是否QC (toggle)
+    const tdQc = document.createElement('td');
+    tdQc.style.textAlign = 'center';
+    const label = document.createElement('label');
+    label.className = 'toggle-switch';
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.className = 'qc-toggle';
+    cb.checked = item['匹配方法'] === '关键字匹配' || item['匹配方法'] === '人工指定';
+    cb.addEventListener('change', () => { onModify(idx); updateSummary(); });
+    const span = document.createElement('span');
+    span.className = 'toggle-slider';
+    label.appendChild(cb);
+    label.appendChild(span);
+    tdQc.appendChild(label);
+    tr.appendChild(tdQc);
+
+    tbody.appendChild(tr);
+  });
+
+  updateSummary();
+}
+
+function updateCountBadge(group, badge) {
+  const count = group.querySelectorAll('input:checked').length;
+  badge.textContent = '已选 ' + count + ' / ' + ALL_LISTINGS.length + ' 个清单';
+}
+
+function updateListingPop(tr) {
+  const popCell = tr.querySelector('.listing-pop-cell');
+  const checks = tr.querySelectorAll('.listing-checkbox-group input:checked');
+  const pops = new Set();
+  checks.forEach(cb => {
+    if (cb.dataset.pop && cb.dataset.pop !== '未知') pops.add(cb.dataset.pop);
+  });
+  popCell.textContent = pops.size > 0 ? [...pops].join(', ') : '—';
+}
+
+function updateRowClassBySelection(tr) {
+  // If all selected listings were originally keyword-matched, keep green; otherwise adjust
+  // For simplicity, row class is driven by the method-select value
+}
+
+function updateRowClass(tr, idx) {
+  const mSel = tr.querySelector('.method-select');
+  tr.classList.remove('kw-match', 'cos-match', 'man-match');
+  if (mSel.value === '关键字匹配') tr.classList.add('kw-match');
+  else if (mSel.value === '余弦相似度匹配') tr.classList.add('cos-match');
+  else if (mSel.value === '人工指定') tr.classList.add('man-match');
+}
+
+function onModify(idx) {
+  modifiedRows.add(idx);
+  const tr = document.querySelector(`#tbody tr[data-index="${idx}"]`);
+  if (tr) tr.classList.add('modified');
+}
+
+// ===== FILTER =====
+function applyFilter(filter) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.filter-btn[data-filter="${filter}"]`).classList.add('active');
+  const rows = document.querySelectorAll('#tbody tr');
+  rows.forEach(r => {
+    const isKW = r.classList.contains('kw-match');
+    const isReview = r.classList.contains('needs-review');
+    const qcOn = r.querySelector('.qc-toggle')?.checked || false;
+    if (filter === 'all') r.style.display = '';
+    else if (filter === 'kw') r.style.display = isKW ? '' : 'none';
+    else if (filter === 'review') r.style.display = isReview ? '' : 'none';
+    else if (filter === 'qc') r.style.display = qcOn ? '' : 'none';
+  });
+  updateSummary();
+}
+
+document.querySelectorAll('.filter-btn').forEach(b => {
+  b.addEventListener('click', () => applyFilter(b.dataset.filter));
+});
+
+// ===== ACTIONS =====
+function selectAllQC() {
+  document.querySelectorAll('.qc-toggle').forEach(cb => { cb.checked = true; });
+  document.querySelectorAll('#tbody tr').forEach((tr, i) => onModify(i));
+  updateSummary();
+}
+
+function deselectAllQC() {
+  document.querySelectorAll('.qc-toggle').forEach(cb => { cb.checked = false; });
+  document.querySelectorAll('#tbody tr').forEach((tr, i) => onModify(i));
+  updateSummary();
+}
+
+function resetAll() {
+  modifiedRows.clear();
+  document.querySelectorAll('#tbody tr').forEach(r => r.classList.remove('modified'));
+  buildTable();
+}
+
+function exportModified() {
+  const output = MAPPING_DATA.map((item, idx) => {
+    const tr = document.querySelector(`#tbody tr[data-index="${idx}"]`);
+    const checks = tr.querySelectorAll('.listing-checkbox-group input:checked');
+    const methodSel = tr.querySelector('.method-select');
+    const qcToggle = tr.querySelector('.qc-toggle');
+
+    // Build 匹配清单列表 from checked items
+    const matchList = [];
+    checks.forEach(cb => {
+      matchList.push({
+        '清单编号': parseInt(cb.dataset.num) || null,
+        '清单名称': cb.value,
+        '清单人群': cb.dataset.pop || '未知'
+      });
+    });
+
+    return {
+      '表格编号': item['表格编号'],
+      '表格名称': item['表格名称'],
+      '表格人群': item['表格人群'],
+      '匹配清单列表': matchList,
+      '匹配方法': methodSel.value,
+      '余弦相似度': item['余弦相似度'],
+      '是否需要人工审核': methodSel.value !== '关键字匹配' ? '是' : '否',
+      '是否QC': qcToggle.checked ? '是' : '否'
+    };
+  });
+
+  const blob = new Blob([JSON.stringify(output, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = '表格-清单-映射表-已复核.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  // Count total table-listing pairs
+  const totalPairs = output.reduce((sum, row) => sum + row['匹配清单列表'].length, 0);
+  alert(`已导出 ${output.length} 张表格 → ${totalPairs} 对表格-清单映射到「表格-清单-映射表-已复核.json」`);
+}
+
+// ===== INIT =====
+buildTable();
+</script>
+</body>
+</html>
