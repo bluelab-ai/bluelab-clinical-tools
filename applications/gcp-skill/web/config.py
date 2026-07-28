@@ -15,6 +15,7 @@ SCRIPTS_DIR = SKILL_ROOT / "scripts"
 ASSETS_DIR = SKILL_ROOT / "assets"
 RECORDS_DIR = SKILL_ROOT / ".training-records"  # legacy, kept for skill compatibility
 USERS_DIR = SKILL_ROOT / "web" / "users"       # per-user isolated accounts
+FEEDBACK_DIR = SKILL_ROOT / "web" / "feedback"  # user-submitted feedback / bug reports
 DIFF_GUIDE_PATH = SKILL_ROOT / "content" / "diff-guide.md"
 BANK_PATH = EXAMS_DIR / "bank.json"
 CHAPTER_RULES_PATH = EXAMS_DIR / "chapter-quiz-rules.json"
@@ -23,6 +24,7 @@ FINAL_RULES_PATH = EXAMS_DIR / "final-exam-rules.json"
 # Ensure directories exist
 RECORDS_DIR.mkdir(parents=True, exist_ok=True)
 USERS_DIR.mkdir(parents=True, exist_ok=True)
+FEEDBACK_DIR.mkdir(parents=True, exist_ok=True)
 
 # ---- Chapter order ----
 CHAPTERS = ["导论", "第一章", "第二章", "第三章", "第四章", "第五章", "第六章"]
@@ -67,3 +69,6 @@ ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "deepseek-v4-pro")
 
 # ---- Session secret ----
 SESSION_SECRET = os.getenv("SESSION_SECRET", "gcp-training-dev-secret-change-in-prod")
+
+# ---- Admin ----
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "")

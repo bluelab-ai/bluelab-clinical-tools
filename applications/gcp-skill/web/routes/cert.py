@@ -47,13 +47,14 @@ def _build_cert_html(record: dict, cert_id: str) -> str:
 
     learner_name = record.get("learner_name", "")
     track = record.get("learner_track", "novice")
-    grade_key = record.get("final_grade", "")
+    grade_key = record.get("best_grade") or record.get("final_grade", "")
     grade = GRADE_LABELS.get(grade_key, grade_key)
-    score_rate = round((record.get("final_score") or 0) * 100)
+    best_score = record.get("best_score") or record.get("final_score") or 0
+    score_rate = round(best_score * 100)
     issue_date = date.today().strftime("%Y年%m月%d日")
     track_label = TRACK_LABELS.get(track, track)
 
-    chapter_scores = record.get("chapter_scores", {})
+    chapter_scores = record.get("best_chapter_scores") or record.get("chapter_scores", {})
     ch_rates = {}
     for ch, placeholder in zip(CHAPTER_KEYS, CHAPTER_PLACEHOLDERS):
         score = chapter_scores.get(ch)
@@ -100,8 +101,9 @@ async def cert_generate(request: Request,
             status_code=403
         )
 
-    final_score = record.get("final_score")
-    if final_score is None:
+    # Use best score (backwards compat: fallback to final_score)
+    best_score = record.get("best_score") or record.get("final_score")
+    if best_score is None:
         return HTMLResponse(
             "<h2>请先完成结业考试</h2><p>完成全部六章并通过结业考试后可获证。</p>"
             "<a href='/exam/start'>去考试</a>",
@@ -109,9 +111,9 @@ async def cert_generate(request: Request,
         )
 
     # Check pass (>=60%)
-    if (final_score or 0) < 0.6:
+    if best_score < 0.6:
         return HTMLResponse(
-            f"<h2>结业考试未通过</h2><p>正确率 {round(final_score * 100)}%，需 ≥60%。</p>"
+            f"<h2>结业考试未通过</h2><p>最佳成绩正确率 {round(best_score * 100)}%，需 ≥60%。</p>"
             "<a href='/exam/start'>重新考试</a>",
             status_code=403
         )

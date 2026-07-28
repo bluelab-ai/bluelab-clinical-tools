@@ -32,6 +32,9 @@
         </div>
         <div class="nav-right">
             {% block progress %}{% endblock %}
+            <button onclick="openFeedbackModal()" class="nav-feedback-btn" title="问题反馈" style="background:#f59e0b;color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .15s;" onmouseenter="this.style.background='#d97706'" onmouseleave="this.style.background='#f59e0b'">
+                💬 反馈
+            </button>
             {% if learner_name %}
             <span class="nav-save" title="学习进度已自动保存">已保存</span>
             <a href="/" class="nav-exit" title="保存并退出">退出</a>
@@ -55,6 +58,74 @@
         🤖 问 AI
     </button>
 
+    <!-- ===== FLOATING ADMIN BUTTON (right side) ===== -->
+    <button onclick="openAdminModal()" title="后台管理" style="position:fixed;bottom:24px;right:24px;z-index:30;width:48px;height:48px;border-radius:50%;background:#1e293b;color:#fff;border:none;box-shadow:0 4px 12px rgba(0,0,0,.25);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;transition:all .15s;" onmouseenter="this.style.transform='scale(1.08)'" onmouseleave="this.style.transform='scale(1)'">
+        📂
+    </button>
+
+    <!-- ===== FEEDBACK MODAL ===== -->
+    <div id="feedback-modal" style="display:none;position:fixed;inset:0;z-index:55;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,.3);" onclick="closeFeedbackModal()"></div>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:420px;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.2);padding:24px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:36px;height:36px;border-radius:10px;background:#f59e0b;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;">💬</div>
+                    <div>
+                        <h3 style="font-size:15px;font-weight:700;margin:0;color:#0f172a;">问题反馈</h3>
+                        <p style="font-size:12px;color:#64748b;margin:0;">遇到问题或有建议？请告诉我们</p>
+                    </div>
+                </div>
+                <button onclick="closeFeedbackModal()" style="width:32px;height:32px;border-radius:8px;border:none;background:#f1f5f9;color:#64748b;cursor:pointer;font-size:16px;">✕</button>
+            </div>
+
+            <p id="feedback-error" style="display:none;font-size:12px;color:#ef4444;background:#fef2f2;padding:10px 12px;border-radius:10px;margin:0 0 12px;"></p>
+            <p id="feedback-success" style="display:none;font-size:13px;color:#16a34a;background:#f0fdf4;padding:12px;border-radius:10px;margin:0 0 12px;text-align:center;line-height:1.5;"></p>
+
+            <div id="feedback-form-fields">
+                <input type="text" id="feedback-title" placeholder="问题标题（必填）" maxlength="100" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px;outline:none;margin-bottom:10px;">
+                <textarea id="feedback-content" placeholder="详细描述你遇到的问题或建议…（必填）" rows="4" maxlength="2000" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px;outline:none;resize:vertical;margin-bottom:10px;font-family:inherit;"></textarea>
+                <input type="text" id="feedback-contact" placeholder="联系方式（选填，方便我们回复）" maxlength="100" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px;outline:none;margin-bottom:14px;">
+                <button onclick="submitFeedback()" id="feedback-submit-btn" style="width:100%;padding:12px;border-radius:12px;border:none;background:#f59e0b;color:#fff;font-size:14px;font-weight:600;cursor:pointer;">提交反馈</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ADMIN MODAL ===== -->
+    <div id="admin-modal" style="display:none;position:fixed;inset:0;z-index:50;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,.3);" onclick="closeAdminModal()"></div>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:380px;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.2);padding:24px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:36px;height:36px;border-radius:10px;background:#1e293b;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;" id="admin-modal-icon">🔒</div>
+                    <div>
+                        <h3 style="font-size:15px;font-weight:700;margin:0;color:#0f172a;" id="admin-modal-title">管理员验证</h3>
+                        <p style="font-size:12px;color:#64748b;margin:0;" id="admin-modal-sub">请输入管理员密码以继续</p>
+                    </div>
+                </div>
+                <button onclick="closeAdminModal()" style="width:32px;height:32px;border-radius:8px;border:none;background:#f1f5f9;color:#64748b;cursor:pointer;font-size:16px;">✕</button>
+            </div>
+
+            <!-- password step -->
+            <div id="admin-step-password">
+                <p style="font-size:13px;color:#475569;margin:0 0 16px;line-height:1.5;">此功能包含敏感操作，需要管理员密码验证。</p>
+                <p id="admin-error" style="display:none;font-size:12px;color:#ef4444;background:#fef2f2;padding:10px 12px;border-radius:10px;margin:0 0 12px;"></p>
+                <input type="password" id="admin-password-input" placeholder="请输入管理员密码" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px;outline:none;margin-bottom:14px;" onkeydown="if(event.key==='Enter')verifyAdmin()">
+                <button onclick="verifyAdmin()" id="admin-verify-btn" style="width:100%;padding:12px;border-radius:12px;border:none;background:#1e293b;color:#fff;font-size:14px;font-weight:600;cursor:pointer;">验证</button>
+            </div>
+
+            <!-- unlocked step -->
+            <div id="admin-step-unlocked" style="display:none;">
+                <p style="font-size:13px;color:#475569;margin:0 0 16px;line-height:1.5;">管理后端数据。</p>
+                <div id="admin-user-count" style="display:none;padding:12px;border-radius:12px;background:#f8fafc;border:1px solid #e2e8f0;font-size:13px;color:#334155;margin-bottom:14px;"></div>
+                <p id="admin-action-error" style="display:none;font-size:12px;color:#ef4444;background:#fef2f2;padding:10px 12px;border-radius:10px;margin:0 0 12px;"></p>
+                <div style="display:flex;gap:10px;">
+                    <button onclick="clearArchive()" id="admin-clear-btn" style="flex:1;padding:12px;border-radius:12px;border:1px solid #fca5a5;background:#fff;color:#dc2626;font-size:13px;font-weight:600;cursor:pointer;">🗑 清空记录</button>
+                    <button onclick="downloadArchive()" id="admin-download-btn" style="flex:1;padding:12px;border-radius:12px;border:none;background:#1e293b;color:#fff;font-size:13px;font-weight:600;cursor:pointer;">📥 打包下载</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== FLOATING BOTTOM NAV (injected by page templates as needed) ===== -->
     {% block bottom_nav %}{% endblock %}
 
@@ -62,7 +133,7 @@
     {% include "ai_panel.html" %}
 
     <!-- ===== SCRIPTS ===== -->
-    <script src="/static/app.js?v=7"></script>
+    <script src="/static/app.js?v=8"></script>
     {% block scripts %}{% endblock %}
 
     <!-- Scroll-to-top for bottom nav avoidance -->

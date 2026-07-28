@@ -38,6 +38,8 @@ def find_records(username: str) -> list[dict]:
             "certificate_issued": data.get("certificate_issued", False),
             "final_score": data.get("final_score"),
             "final_grade": data.get("final_grade"),
+            "best_score": data.get("best_score") or data.get("final_score"),
+            "exam_attempts": data.get("exam_attempts", 0),
             "data": data,
         })
     return results
@@ -132,9 +134,11 @@ def get_progress_summary(record: dict) -> str:
     if passed >= total:
         if record.get("final_exam_in_progress"):
             return "新手轨 — 全部章节已通过 — 结业考试进行中"
-        if record.get("final_score") is not None:
+        best = record.get("best_score") or record.get("final_score")
+        if best is not None:
             grade_map = {"excellent": "优秀", "good": "良好", "pass": "合格", "fail": "不合格"}
-            grade = grade_map.get(record.get("final_grade", ""), "")
+            best_grade = record.get("best_grade") or record.get("final_grade", "")
+            grade = grade_map.get(best_grade, "")
             grade_str = f" — {grade}" if grade else ""
             return f"新手轨 — 全部章节已通过 — 考试已完成{grade_str}"
         return "新手轨 — 全部章节已通过 — 待参加结业考试"

@@ -26,16 +26,15 @@ async def exam_start(request: Request,
     real_name = account.get("real_name", username) if account else username
 
     # If exam already completed and not explicitly retaking, show scorecard
-    if record.get("final_score") is not None and not record.get("final_exam_in_progress") and not retake:
+    has_completed = record.get("best_score") or record.get("final_score")
+    if has_completed is not None and not record.get("final_exam_in_progress") and not retake:
         return _exam_scorecard(request, record, username, real_name, learner_role)
 
-    # If retaking or starting fresh, clear old exam state and results
+    # If retaking or starting fresh, clear old in-progress exam only.
+    # final_score / best_score / certificate are preserved across retakes.
     if retake:
         if record.get("final_exam_in_progress"):
             del record["final_exam_in_progress"]
-        # Clear old final results so new exam can set fresh ones
-        for key in ("final_score", "final_grade", "chapter_scores"):
-            record.pop(key, None)
         save_record(username, learner_role, record)
 
     # Check for in-progress exam (resume)
@@ -186,7 +185,14 @@ def _exam_results(request, record, username, learner_role):
         else:
             ch_rates[ch] = 0
 
-    # Save results (before deleting exam state so we can save answers)
+    new_score = rate / 100
+
+    # Read old best BEFORE overwriting final_score (backwards compat)
+    old_best = record.get("best_score")
+    if old_best is None:
+        old_best = record.get("final_score")
+
+    # Save latest attempt answers
     record["last_exam_answers"] = {
         q_id: {
             "selected": ans,
@@ -197,9 +203,20 @@ def _exam_results(request, record, username, learner_role):
     }
     if "final_exam_in_progress" in record:
         del record["final_exam_in_progress"]
-    record["final_score"] = rate / 100
+
+    record["exam_attempts"] = record.get("exam_attempts", 0) + 1
+    record["final_score"] = new_score
     record["final_grade"] = grade
     record["chapter_scores"] = ch_rates
+
+    # Update best if this attempt is better (or first attempt)
+    if old_best is None or new_score >= old_best:
+        record["best_score"] = new_score
+        record["best_grade"] = grade
+        record["best_chapter_scores"] = ch_rates
+        record["best_exam_answers"] = record["last_exam_answers"]
+    is_new_best = old_best is None or new_score >= old_best
+
     save_record(username, learner_role, record)
 
     passed = rate >= 60
@@ -238,6 +255,11 @@ def _exam_results(request, record, username, learner_role):
             "options": question.get("options", []),
         })
 
+    # Best-score display data
+    best_rate = int((record.get("best_score") or new_score) * 100)
+    best_grade_key = record.get("best_grade", grade)
+    best_grade_label = {"excellent": "优秀", "good": "良好", "pass": "合格", "fail": "不合格"}.get(best_grade_key, "")
+
     return request.app.state.templates.TemplateResponse("exam.html", {
         "request": request,
         "learner_name": real_name,
@@ -253,33 +275,48 @@ def _exam_results(request, record, username, learner_role):
         "weak_chapters": weak_chapters,
         "wrong_details": wrong_details,
         "offer_b_downgrade": offer_b_downgrade,
+        "is_new_best": is_new_best,
+        "best_rate": best_rate,
+        "best_grade": best_grade_label,
+        "show_best_hint": not is_new_best and old_best is not None,
+        "best_passed": best_rate >= 60,
     })
 
 
 def _exam_scorecard(request, record, username, real_name, learner_role):
     """Show the completed exam scorecard with option to retake."""
-    rate = round((record.get("final_score") or 0) * 100)
-    grade_key = record.get("final_grade", "")
     grade_labels = {"excellent": "优秀", "good": "良好", "pass": "合格", "fail": "不合格"}
-    grade_label = grade_labels.get(grade_key, grade_key)
 
-    if rate >= 90:
+    # Primary display: best score (backwards compat: fallback to final_score)
+    best_score = record.get("best_score") or record.get("final_score") or 0
+    best_rate = round(best_score * 100)
+    best_grade_key = record.get("best_grade") or record.get("final_grade", "")
+    best_grade_label = grade_labels.get(best_grade_key, best_grade_key)
+
+    # Latest attempt (may differ from best)
+    latest_score = record.get("final_score") or 0
+    latest_rate = round(latest_score * 100)
+    latest_grade_key = record.get("final_grade", "")
+    latest_grade_label = grade_labels.get(latest_grade_key, latest_grade_key)
+    show_latest_hint = latest_rate != best_rate and record.get("exam_attempts", 1) > 1
+
+    if best_rate >= 90:
         grade_msg = "非常出色！你对新规的理解相当扎实。"
-    elif rate >= 75:
+    elif best_rate >= 75:
         grade_msg = "不错，核心要点都掌握了。"
-    elif rate >= 60:
+    elif best_rate >= 60:
         grade_msg = "基本掌握，建议再回顾一下薄弱章节。"
     else:
         grade_msg = "需要加强。建议回到薄弱章节重新学习后再考一次。"
 
-    passed = rate >= 60
-    ch_rates = record.get("chapter_scores", {})
+    passed = best_rate >= 60
+    ch_rates = record.get("best_chapter_scores") or record.get("chapter_scores", {})
     weak_chapters = [ch for ch, r in ch_rates.items() if r < 60]
 
     is_c_branch = record.get("experienced_branch") == "C"
     offer_b_downgrade = is_c_branch and not passed
 
-    # Build wrong details from saved exam answers
+    # Build wrong details from last exam answers
     bank = load_json(BANK_PATH)
     tf_display = {"True": "对", "False": "错", True: "对", False: "错"}
     wrong_details = []
@@ -316,12 +353,17 @@ def _exam_scorecard(request, record, username, real_name, learner_role):
         "learner_name": real_name,
         "learner_role": learner_role,
         "show_scorecard": True,
-        "rate": rate,
-        "grade": grade_label,
+        "show_scorecard": True,
+        "rate": best_rate,
+        "grade": best_grade_label,
         "grade_msg": grade_msg,
         "passed": passed,
         "ch_rates": ch_rates,
         "weak_chapters": weak_chapters,
         "wrong_details": wrong_details,
         "offer_b_downgrade": offer_b_downgrade,
+        "show_best_hint": False,
+        "show_latest_hint": show_latest_hint,
+        "latest_rate": latest_rate,
+        "latest_grade": latest_grade_label,
     })

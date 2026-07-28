@@ -38,8 +38,8 @@ function openAiPanel(scenario, id, extraIds) {
         input.disabled = false;
         input.placeholder = '输入你的问题…';
         sendBtn.disabled = false;
-        // Highlight matching button
-        var scopeKey = (scenario === 'quiz') ? 'chapter' : scenario;
+        // Highlight matching scope button
+        var scopeKey = (scenario === 'quiz') ? 'full' : scenario;
         var btn = scopeBar ? scopeBar.querySelector('[data-scope="' + scopeKey + '"]') : null;
         if (btn) btn.classList.add('active');
         // Title & hint
@@ -62,7 +62,6 @@ function openAiPanel(scenario, id, extraIds) {
         panel.dataset.extraIds = '';
         if (scopeBar) {
             scopeBar.style.display = 'flex';
-            // Determine which scopes are valid for the current URL
             var pathParts = window.location.pathname.match(/\/learn\/([^/]+)(?:\/(\d+))?/);
             var pathChapter = pathParts ? decodeURIComponent(pathParts[1]) : null;
             var pathArticle = pathParts ? pathParts[2] : null;
@@ -72,7 +71,7 @@ function openAiPanel(scenario, id, extraIds) {
             var chapterBtn = scopeBar.querySelector('[data-scope="chapter"]');
             // Article scope: only on /learn/有效章节/数字
             if (articleBtn) articleBtn.disabled = !(isRealChapter && pathArticle);
-            // Chapter scope: only on a page under a real chapter
+            // Chapter scope: only on a page under a real chapter (disabled on diff pages)
             if (chapterBtn) chapterBtn.disabled = !isRealChapter;
             // Full scope: always enabled
         }
@@ -166,7 +165,7 @@ async function sendAiMessage() {
     let endpoint, body;
     if (scenario === 'article') {
         if (!id || isNaN(parseInt(id))) {
-            addAiMessage('assistant', '本条答疑需要在具体条文页面使用。请先进入学习页面，或在下方切换「本章答疑」或「GCP全法问答」。');
+            addAiMessage('assistant', '本条答疑需要在具体条文页面使用。请先进入学习页面，或切换「GCP全法问答」。');
             input.disabled = false;
             document.getElementById('ai-send').disabled = false;
             return;
@@ -244,6 +243,157 @@ function getCurrentChapter() {
     return match ? decodeURIComponent(match[1]) : '';
 }
 
+// ---- Feedback Modal ----
+
+function openFeedbackModal() {
+    document.getElementById('feedback-modal').style.display = 'block';
+    document.getElementById('feedback-error').style.display = 'none';
+    document.getElementById('feedback-success').style.display = 'none';
+    document.getElementById('feedback-form-fields').style.display = 'block';
+    document.getElementById('feedback-title').value = '';
+    document.getElementById('feedback-content').value = '';
+    document.getElementById('feedback-contact').value = '';
+    setTimeout(function() { document.getElementById('feedback-title').focus(); }, 100);
+}
+
+function closeFeedbackModal() {
+    document.getElementById('feedback-modal').style.display = 'none';
+}
+
+async function submitFeedback() {
+    var title = document.getElementById('feedback-title').value.trim();
+    var content = document.getElementById('feedback-content').value.trim();
+    var contact = document.getElementById('feedback-contact').value.trim();
+
+    if (!title || !content) {
+        var err = document.getElementById('feedback-error');
+        err.textContent = '请填写标题和内容';
+        err.style.display = 'block';
+        return;
+    }
+
+    var btn = document.getElementById('feedback-submit-btn');
+    btn.textContent = '提交中…';
+    btn.disabled = true;
+    document.getElementById('feedback-error').style.display = 'none';
+
+    try {
+        var resp = await fetch('/feedback/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: title,
+                content: content,
+                contact: contact,
+                page: window.location.href,
+            }),
+        });
+        if (resp.ok) {
+            document.getElementById('feedback-form-fields').style.display = 'none';
+            var ok = document.getElementById('feedback-success');
+            ok.innerHTML = '✅ 感谢反馈！<br>我们会尽快处理。';
+            ok.style.display = 'block';
+            setTimeout(closeFeedbackModal, 2000);
+        } else {
+            var data = await resp.json();
+            document.getElementById('feedback-error').textContent = data.detail || '提交失败';
+            document.getElementById('feedback-error').style.display = 'block';
+        }
+    } catch {
+        document.getElementById('feedback-error').textContent = '网络错误，请重试';
+        document.getElementById('feedback-error').style.display = 'block';
+    } finally {
+        btn.textContent = '提交反馈';
+        btn.disabled = false;
+    }
+}
+
+// ---- Admin Panel ----
+
+function openAdminModal() {
+    document.getElementById('admin-modal').style.display = 'block';
+    document.getElementById('admin-step-password').style.display = 'block';
+    document.getElementById('admin-step-unlocked').style.display = 'none';
+    document.getElementById('admin-error').style.display = 'none';
+    document.getElementById('admin-password-input').value = '';
+    document.getElementById('admin-modal-icon').textContent = '🔒';
+    document.getElementById('admin-modal-title').textContent = '管理员验证';
+    document.getElementById('admin-modal-sub').textContent = '请输入管理员密码以继续';
+    setTimeout(function() { document.getElementById('admin-password-input').focus(); }, 100);
+}
+
+function closeAdminModal() {
+    document.getElementById('admin-modal').style.display = 'none';
+}
+
+async function verifyAdmin() {
+    var pw = document.getElementById('admin-password-input').value;
+    if (!pw) return;
+    var btn = document.getElementById('admin-verify-btn');
+    btn.textContent = '验证中…';
+    btn.disabled = true;
+    try {
+        var resp = await fetch('/admin/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: pw }),
+        });
+        if (resp.ok) {
+            document.getElementById('admin-step-password').style.display = 'none';
+            document.getElementById('admin-step-unlocked').style.display = 'block';
+            document.getElementById('admin-modal-icon').textContent = '📂';
+            document.getElementById('admin-modal-title').textContent = '后台管理';
+            document.getElementById('admin-modal-sub').textContent = '管理后端数据';
+            fetchUserCount();
+        } else {
+            var data = await resp.json();
+            var err = document.getElementById('admin-error');
+            err.textContent = data.detail || '密码错误';
+            err.style.display = 'block';
+        }
+    } catch {
+        document.getElementById('admin-error').textContent = '网络错误，请重试';
+        document.getElementById('admin-error').style.display = 'block';
+    } finally {
+        btn.textContent = '验证';
+        btn.disabled = false;
+    }
+}
+
+async function fetchUserCount() {
+    try {
+        var resp = await fetch('/admin/users/count');
+        var data = await resp.json();
+        var el = document.getElementById('admin-user-count');
+        el.innerHTML = '<span style="font-size:16px;">👥</span> 当前系统已注册 <b>' + data.count + '</b> 位用户';
+        el.style.display = 'block';
+    } catch {}
+}
+
+async function clearArchive() {
+    var btn = document.getElementById('admin-clear-btn');
+    btn.textContent = '清空中…';
+    btn.disabled = true;
+    try {
+        await fetch('/admin/archive/clear', { method: 'POST' });
+        btn.textContent = '✅ 已清空';
+    } catch {
+        document.getElementById('admin-action-error').textContent = '清空失败，请重试';
+        document.getElementById('admin-action-error').style.display = 'block';
+        btn.textContent = '🗑 清空记录';
+    }
+    btn.disabled = false;
+}
+
+function downloadArchive() {
+    var a = document.createElement('a');
+    a.href = '/admin/archive/download';
+    a.download = 'gcp_training_data.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
 // ---- Event Listeners ----
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -266,6 +416,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'Enter') sendAiMessage();
         });
     }
+
+    // Admin modal: close on Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeAdminModal();
+            closeFeedbackModal();
+        }
+    });
 
     // Quiz form: prevent double submission using a hidden field,
     // NOT by disabling buttons (disabled button values are not sent!)

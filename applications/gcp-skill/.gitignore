@@ -4,6 +4,7 @@
 # User data (generated at runtime)
 web/users/
 web/certs/
+web/feedback/
 
 # Training records (generated at runtime)
 .training-records/

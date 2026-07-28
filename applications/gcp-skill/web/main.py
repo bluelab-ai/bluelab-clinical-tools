@@ -53,6 +53,9 @@ app.include_router(exam_router, prefix="/exam", tags=["exam"])
 app.include_router(cert_router, prefix="/cert", tags=["cert"])
 app.include_router(ask_router, prefix="/ask", tags=["ask"])
 
+from web.routes import admin_router
+app.include_router(admin_router, prefix="", tags=["admin"])
+
 
 @app.get("/health")
 async def health():

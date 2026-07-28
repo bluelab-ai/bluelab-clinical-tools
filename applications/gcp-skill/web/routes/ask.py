@@ -19,7 +19,7 @@ SYSTEM_PROMPT_ARTICLE = """你是 GCP 2026 培训 AI 助教。你正在帮助一
 2. 条文有明确答案 → 引用原文，标注条文号。
 3. 条文没有直接覆盖 → 说清一般原则，强调"具体以机构 SOP 为准"。不得编造不存在的条文。
 4. 问题与当前条文完全无关 → 只回复："你问的问题和这一段无关。关于 GCP 其他条文的问题，可以在学到对应章节时再问。"
-5. 回答简洁，不超过 150 字。
+5. **严格控制字数：不超过 150 字。** 直击要点，禁止铺垫、客套、总结升华。
 6. 语气友好，用中文。禁止提供合规法律意见。"""
 
 SYSTEM_PROMPT_CHAPTER = """你是 GCP 2026 培训 AI 助教。学员正在学习某一章，有一个跨条文的问题。
@@ -29,7 +29,7 @@ SYSTEM_PROMPT_CHAPTER = """你是 GCP 2026 培训 AI 助教。学员正在学习
 2. 有明确答案 → 引用原文，标注条文号。
 3. 不确定 → 说"建议对照官方文本确认"。
 4. 本章未涉及此内容 → 回复："本章未涉及此内容，建议学完后续章节再问。"
-5. 回答简洁，不超过 200 字。
+5. **严格控制字数：不超过 200 字。** 直击要点，禁止铺垫、客套、总结升华。
 6. 语气友好，用中文。禁止提供合规法律意见。"""
 
 SYSTEM_PROMPT_QUIZ = """你是 GCP 2026 培训 AI 助教。学员刚做了一道测验题，看了预写解析后仍然不理解，需要你进一步讲解。
@@ -39,8 +39,8 @@ SYSTEM_PROMPT_QUIZ = """你是 GCP 2026 培训 AI 助教。学员刚做了一道
 2. 在预写解析的基础上深入展开：解释为什么对、为什么错、背后的法规逻辑。
 3. 如果预写解析已经足够清晰，简要补充即可，不要重复。
 4. 不得编造条文或给出与 2026 版 GCP 不一致的信息。
-5. 回答控制在 200 字以内。语气耐心、友好。
-6. 禁止提供合规法律意见。"""
+5. **严格控制字数：不超过 200 字。** 直击要点，禁止铺垫、客套、总结升华。
+6. 语气耐心、友好。禁止提供合规法律意见。"""
 
 SYSTEM_PROMPT_FULL = """你是 GCP 2026 培训 AI 助教。学员正在学习《药物临床试验质量管理规范（2026年修订）》，需要你基于全部54条法规回答一个综合性问题。
 
@@ -49,7 +49,7 @@ SYSTEM_PROMPT_FULL = """你是 GCP 2026 培训 AI 助教。学员正在学习《
 2. 引用条文时标注条文号（如"根据第6条…"），方便学员查阅。
 3. 条文中没有直接覆盖的内容 → 说清一般原则，强调"具体以机构 SOP 为准"。不得编造不存在的条文。
 4. 不确定的地方 → 说"建议对照官方文本确认"。
-5. 回答简洁有条理，不超过 300 字。
+5. **严格控制字数：不超过 300 字。** 直击要点，禁止铺垫、客套、总结升华。避免堆砌术语。
 6. 语气友好，用中文。禁止提供合规法律意见。"""
 
 
@@ -111,7 +111,7 @@ async def ask_article(request: Request,
 原文：{article.get('original_text', '')}
 白话解读：{article.get('plain_explanation', '')}"""
 
-    return _call_ai(SYSTEM_PROMPT_ARTICLE, context, question)
+    return _call_ai(SYSTEM_PROMPT_ARTICLE, context, question, max_tokens=400)
 
 
 @router.post("/chapter")
@@ -146,7 +146,7 @@ async def ask_chapter(request: Request,
 **相关条文：**
 {articles_text if articles_text else '（无特定条文，请根据GCP常识简要回答）'}"""
 
-    return _call_ai(SYSTEM_PROMPT_CHAPTER, context, question)
+    return _call_ai(SYSTEM_PROMPT_CHAPTER, context, question, max_tokens=500)
 
 
 @router.post("/quiz")
@@ -183,7 +183,7 @@ async def ask_quiz(request: Request,
 原文：{article.get('original_text', '') if article else ''}
 白话解读：{article.get('plain_explanation', '') if article else ''}"""
 
-    return _call_ai(SYSTEM_PROMPT_QUIZ, context, question)
+    return _call_ai(SYSTEM_PROMPT_QUIZ, context, question, max_tokens=500)
 
 
 @router.post("/full")
@@ -197,7 +197,7 @@ async def ask_full(request: Request,
     question = body.get("question", "")
 
     context = f"**学员角色：**{learner_role}\n\n**GCP 2026 全部条文（共54条）：**\n{_build_full_context()}"
-    return _call_ai(SYSTEM_PROMPT_FULL, context, question)
+    return _call_ai(SYSTEM_PROMPT_FULL, context, question, max_tokens=800)
 
 
 def _md_to_html(text: str) -> str:
@@ -238,13 +238,13 @@ def _md_to_html(text: str) -> str:
     return text
 
 
-def _call_ai(system_prompt: str, context: str, user_question: str) -> JSONResponse:
+def _call_ai(system_prompt: str, context: str, user_question: str,
+             max_tokens: int = 600) -> JSONResponse:
     """Call DeepSeek via Anthropic-compatible API endpoint."""
     if not ANTHROPIC_API_KEY:
         return JSONResponse({"reply": "AI 服务未配置。请联系管理员设置 API Key。"})
 
     try:
-        # Use a custom httpx client that bypasses system proxy (avoid socks5 issues)
         http_client = httpx.Client(proxy=None)
         client = Anthropic(
             api_key=ANTHROPIC_API_KEY,
@@ -253,14 +253,14 @@ def _call_ai(system_prompt: str, context: str, user_question: str) -> JSONRespon
         )
         message = client.messages.create(
             model=ANTHROPIC_MODEL,
-            max_tokens=600,
+            max_tokens=max_tokens,
             system=system_prompt,
             messages=[
                 {"role": "user", "content": f"{context}\n\nUSER QUESTION:\n{user_question}"}
             ],
         )
-        # DeepSeek may return content as a string (not list), or as a list of
-        # thinking/redacted/text blocks. Handle all cases.
+
+        # Extract text blocks only (deepseek-chat returns clean text)
         reply = ""
         content = message.content
         if isinstance(content, str):
@@ -268,18 +268,16 @@ def _call_ai(system_prompt: str, context: str, user_question: str) -> JSONRespon
         elif isinstance(content, list):
             text_parts = []
             for block in content:
-                block_type = getattr(block, "type", None)
-                block_text = getattr(block, "text", None)
-                if block_type == "text" and block_text:
-                    text = block_text.strip()
-                    if text:
-                        text_parts.append(text)
+                if getattr(block, "type", None) == "text":
+                    t = (getattr(block, "text", None) or "").strip()
+                    if t:
+                        text_parts.append(t)
             reply = "\n\n".join(text_parts)
+
         if not reply:
-            # Debug: log what we received
-            print(f"[AI empty reply] content type={type(content).__name__}, value={str(content)[:200]}", flush=True)
+            print(f"[AI empty reply] content={str(content)[:300]}", flush=True)
             reply = "AI 返回了空回复，请稍后重试。"
-        # Convert Markdown to HTML before returning
+
         reply = _md_to_html(reply)
         return JSONResponse({"reply": reply})
     except Exception as e:
