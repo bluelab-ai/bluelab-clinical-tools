@@ -59,14 +59,17 @@ ANTHROPIC_API_KEY=sk-your-deepseek-api-key-here
 # DeepSeek 的 Anthropic 兼容接口（一般不需要改）
 ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
 
-# 模型名称（可选：deepseek-v4-pro / deepseek-chat 等）
-ANTHROPIC_MODEL=deepseek-v4-pro
+# 模型名称（推荐 deepseek-chat，也可用 deepseek-v4-pro）
+ANTHROPIC_MODEL=deepseek-chat
 
 # 【必改】Session 加密密钥 — 生产环境请改为随机字符串
 SESSION_SECRET=请改成你的随机字符串
+
+# 【必改】管理员密码 — 用于后台管理面板
+ADMIN_PASSWORD=请改成你的管理员密码
 ```
 
-> ⚠️ `SESSION_SECRET` 用于加密 Cookie 中的用户会话，**生产环境务必改掉默认值**。可以这样生成：`python -c "import secrets; print(secrets.token_hex(32))"`
+> ⚠️ `SESSION_SECRET` 用于加密 Cookie 中的用户会话，`ADMIN_PASSWORD` 用于后台管理面板验证，**生产环境务必改掉默认值**。可以这样生成随机串：`python -c "import secrets; print(secrets.token_hex(32))"`
 
 ### 2.4 启动应用
 
