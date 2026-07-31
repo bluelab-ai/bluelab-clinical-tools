@@ -1,0 +1,19 @@
+[Unit]
+Description=BZP Phase III Planning Explorer
+After=network.target
+
+[Service]
+Type=simple
+User=__SERVICE_USER__
+Group=__SERVICE_GROUP__
+WorkingDirectory=__INSTALL_DIR__
+EnvironmentFile=__ENV_FILE__
+ExecStart=__VENV_DIR__/bin/python scripts/run_streamlit_stable.py run sponsor_demo_app.py --server.address 127.0.0.1 --server.port 8517 --server.headless true --browser.gatherUsageStats false
+Restart=always
+RestartSec=5
+TimeoutStopSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

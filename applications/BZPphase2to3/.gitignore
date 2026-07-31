@@ -1,0 +1,27 @@
+# Secrets and environment-specific configuration
+.env
+.env.*
+!config/production.env.example
+*.pem
+*.key
+*.token
+
+# Private runtime model and source assets: deliver outside GitHub.
+clinical_trial_sim_engine/assets/private/*
+!clinical_trial_sim_engine/assets/private/.gitkeep
+outputs/step18_full_preweb_package/step18a_specs/*
+!outputs/step18_full_preweb_package/step18a_specs/.gitkeep
+outputs/step19_dynamic_chinese_mvp/model_assets/*
+!outputs/step19_dynamic_chinese_mvp/model_assets/.gitkeep
+outputs/step23_sponsor_demo/center_mapping/*
+!outputs/step23_sponsor_demo/center_mapping/.gitkeep
+
+# Runtime state and generated files
+data/feedback/
+data/changelog/media/.DS_Store
+outputs/step19_dynamic_chinese_mvp/engine_cache/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.log
