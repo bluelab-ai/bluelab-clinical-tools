@@ -1,0 +1,50 @@
+trial:
+  protocol_id: BZP2607
+  indication: 急性缺血性卒中
+  dose: BZP 400mg BID
+  comparator: placebo
+  allocation: '1:1'
+  total_n: 1200
+  population: phase2_2026_allcomers
+  eligibility_enrichment: false
+  custom_subgroup_search: false
+endpoint:
+  primary_endpoint: day90_mrs01
+  endpoint_hierarchy: mrs_primary_nihss_supportive
+  supportive_endpoint: day14_nihss_response
+  key_secondary_endpoint: day90_mrs_ordinal
+  co_primary_endpoint: null
+  formal_success_endpoint: day90_mrs01
+success_criterion:
+  primary_type: risk_difference
+  confidence_level: 0.95
+  rule: ci_lower_gt_0
+  pvalue_alpha: 0.05
+  analysis_method: unadjusted_newcombe_wilson_rd
+  multiplicity_strategy: supportive_not_formally_tested
+  bayesian_threshold: 0.975
+  center_adjustment: excluded_sparse
+effect:
+  effect_source: phase2_2026_observed_400mg_vs_placebo
+  shrinkage: 0.5
+  borrowing_weight_2022: 0
+  prior_type: none
+  prior_strength: 0
+missing_death:
+  death_before_day90_rule: mrs6_nonresponder
+  death_rule_sap_confirmed: false
+  unresolved_mrs_missing_rule: nonresponder
+  missing_rule_sap_confirmed: false
+  sensitivity_rule: death6_conservative_nonresponder
+simulation:
+  method_type: monte_carlo
+  n_simulations: 10000
+  random_seed: 20260715
+  mc_se_threshold: 0.01
+reporting:
+  language: zh-CN
+  output_level: sponsor_planning
+  assumption_traceability: true
+  warning_labels: true
+  sponsor_ready_language: false
+  status: exploratory_planning_stage

@@ -1,0 +1,9 @@
+streamlit==1.46.1
+pandas==2.3.0
+numpy==2.2.6
+scipy==1.15.3
+statsmodels==0.14.4
+pyarrow==20.0.0
+PyYAML==6.0.2
+plotly==6.1.2
+Pillow==11.3.0
