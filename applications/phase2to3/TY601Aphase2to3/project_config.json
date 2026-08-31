@@ -1,0 +1,203 @@
+{
+  "project": {
+    "project_id": "Project4_Tapgrel",
+    "study_id": "TY601A-P2-01",
+    "indication": "轻型缺血性卒中或高危短暂性脑缺血发作后的缺血性卒中二级预防",
+    "phase2_data_version": "正式递交包 2026-06-29；盲态审核与锁库资料 2026-06-24；伴发事件清单 2026-07-02；按用户指示暂视为最终版",
+    "planning_stage": "exploratory",
+    "phase1_status": "complete",
+    "phase2_primary_data_status": "constructed_and_independently_accepted",
+    "phase2_mrs01_evidence_status": "constructed_estimated_and_independently_accepted"
+  },
+  "sources": {
+    "protocol": [
+      "Phase II protocol supplied privately"
+    ],
+    "sap": [
+      "Phase II SAP and TFL framework supplied privately"
+    ],
+    "crf": [
+      "Phase II eCRF and aCRF supplied privately"
+    ],
+    "define_xml": [
+      "Phase II Define-XML supplied privately"
+    ],
+    "adam_directories": [],
+    "sdtm_directories": [
+      "Phase II SDTM package supplied privately"
+    ],
+    "other_data": [
+      "Phase II reports, listings, and lock documentation supplied privately"
+    ]
+  },
+  "design": {
+    "phase3_sample_size": null,
+    "arms": [],
+    "allocation": [],
+    "alpha": 0.05,
+    "success_rule": "planning assumption selected by user: two-sided 95% Newcombe hybrid-score/Wilson risk-difference CI lower bound > 0",
+    "multiplicity": null,
+    "interim_analysis": null,
+    "phase3_protocol_status": "not_supplied",
+    "success_rule_status": "exploratory planning only; formal Phase III confirmation pending"
+  },
+  "primary_endpoint": {
+    "endpoint_id": "phase3_mrs01_day90_planning",
+    "name": "治疗第90天mRS 0–1应答率",
+    "type": "binary",
+    "direction": "higher",
+    "timepoint": "D90±5d；记录选择规则待锁定",
+    "analysis_population": "Phase III主分析人群待定义",
+    "treatment_contrast": "Phase III治疗组和对照待锁定",
+    "effect_scale": "risk_difference",
+    "effect_scale_status": "current exploratory planning scale selected by user; formal Phase III confirmation pending",
+    "missing_rule": "current planning: D90 death and non-death missing treated as nonresponse; formal Phase III rule pending",
+    "intercurrent_event_strategy": "死亡作为复合策略未应答；其他ICE待定义",
+    "success_criterion": "planning only: active-control RD two-sided 95% Newcombe hybrid-score/Wilson CI lower bound > 0",
+    "multiplicity": null,
+    "phase2_status": "mRS≤1 constructed and independently accepted as post-hoc exploratory evidence; Phase II SAP formal mRS analysis was shift",
+    "phase3_status": "planning_assumption_selected_by_user_2026-08-10",
+    "interpretation_warning": "旧BZP使用mRS≤1仅用于交叉核对，不能作为本试验统计规则来源"
+  },
+  "candidate_endpoints": [
+    {
+      "endpoint_id": "phase3_mrs01_day90_planning",
+      "name": "治疗第90天mRS 0–1应答率",
+      "type": "binary",
+      "direction": "higher",
+      "timepoint": "D90±5d",
+      "phase3_status": "selected_current_planning_primary"
+    },
+    {
+      "endpoint_id": "candidate_ischemic_stroke_day21",
+      "name": "治疗21天内缺血性卒中发生率",
+      "type": "binary",
+      "direction": "lower",
+      "timepoint": "D1-D21",
+      "phase3_status": "candidate_only"
+    },
+    {
+      "endpoint_id": "candidate_mrs_ordinal_day90",
+      "name": "治疗第90天mRS有序分布",
+      "type": "ordinal",
+      "direction": "lower",
+      "timepoint": "D90±5d",
+      "phase3_status": "deferred_candidate_add_if_requested"
+    },
+    {
+      "endpoint_id": "candidate_severe_ischemic_composite_day90",
+      "name": "治疗90天内严重缺血性复合事件",
+      "type": "binary",
+      "direction": "lower",
+      "timepoint": "D1-D90",
+      "phase3_status": "candidate_only_protocol_inconsistency_requires_confirmation"
+    },
+    {
+      "endpoint_id": "candidate_major_bleeding_day90",
+      "name": "治疗90天内大出血或重度出血安全性终点",
+      "type": "binary",
+      "direction": "lower",
+      "timepoint": "D1-D90",
+      "phase3_status": "candidate_safety_only"
+    }
+  ],
+  "baseline_covariates": [
+    "年龄",
+    "性别",
+    "基线NIHSS",
+    "发病前mRS",
+    "轻型缺血性卒中或高危TIA类型",
+    "单发梗死伴责任动脉狭窄或多发梗死类型",
+    "ABCD2评分（仅TIA）",
+    "中心"
+  ],
+  "candidate_enrichment_variables": [
+    "年龄、性别、基线NIHSS、发病前mRS",
+    "基线SBP连续值（支持<、≤、≥、>；SAP 6.3.3界值140 mmHg）",
+    "入组时疾病/影像类型、高血压病史、糖尿病史、血脂异常病史（已与SAR人数核对）",
+    "CYP2C19代谢分型（已与SAR核对，但存在稀疏分层）",
+    "既往卒中/TIA病史（MH关键词代理；与SAR各治疗组有1、1、0例差异，待官方规则/旗标）"
+  ],
+  "simulation": {
+    "mode": "dynamic_composable_exploratory_planning",
+    "endpoint": "D90 mRS 0-1 response",
+    "success_rule": "active-control RD two-sided 95% Newcombe hybrid-score/Wilson CI lower bound > 0",
+    "total_n_range": [
+      200,
+      5000
+    ],
+    "active_allocation_range": [
+      0.3,
+      0.7
+    ],
+    "control_response_rate_range": [
+      0.2,
+      0.95
+    ],
+    "control_response_rate_default": "selected Phase II control observation",
+    "effect_multiplier_range": [
+      0.5,
+      1.5
+    ],
+    "effect_multiplier_default": 1.0,
+    "effect_multiplier_definition": "100%=selected Phase II observed risk difference",
+    "n_simulations_options": [
+      1000,
+      5000,
+      20000
+    ],
+    "default_n_simulations": 5000,
+    "default_seed": 20260810,
+    "bayesian_prior": {
+      "status": "fixed_weak_beta11_no_user_selector",
+      "analysis_priors": [
+        "weak_beta11"
+      ],
+      "hidden_backend_sensitivity_priors": [
+        "skeptical_equal_ess20",
+        "discounted_phase2_10pct"
+      ],
+      "posterior_threshold": 0.975
+    },
+    "legacy_fixed_grid_status": "historical_validation_reference_only",
+    "status": "dynamic_engine_implemented_and_statistically_validated",
+    "n_simulations": 5000,
+    "seed": 20260810,
+    "effect_transport_scenarios": [
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5
+    ]
+  },
+  "website": {
+    "language": "zh-CN",
+    "enable_login": true,
+    "enable_changelog": true,
+    "enable_feedback": true,
+    "status": "old_site_aligned_workflow_validated_for_internal_exploratory_planning",
+    "delivery": "delivery/Tapgrel_PhaseIII",
+    "validation_status": "unit_17_engine_28_skill_browser_35_delivery_24_pass"
+  },
+  "phase2_evidence_endpoints": [
+    {
+      "endpoint_id": "phase2_cec_ischemic_stroke_day90",
+      "role": "Phase II primary",
+      "data_status": "constructed_and_accepted"
+    },
+    {
+      "endpoint_id": "phase2_mrs_ordinal_day90",
+      "role": "Phase II secondary",
+      "analysis": "ordinal shift with ordered logistic regression",
+      "data_status": "source_available_endpoint_dataset_not_yet_constructed"
+    },
+    {
+      "endpoint_id": "phase2_mrs01_day90_posthoc",
+      "role": "Phase III planning evidence",
+      "analysis": "binary mRS 0-1; death/non-death missing as nonresponse; sensitivity scenarios",
+      "data_status": "constructed_estimated_and_independently_accepted",
+      "interpretation": "post-hoc exploratory; not Phase III prediction"
+    }
+  ]
+}

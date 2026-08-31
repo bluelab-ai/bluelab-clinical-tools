@@ -1,0 +1,206 @@
+{
+  "status": "exploratory_dynamic_parameter_contract_user_approved",
+  "endpoint": "user-selected single primary endpoint scenario",
+  "primary_endpoints": {
+    "cec_ischemic_stroke_d90": {"label": "D1-D90 CEC-adjudicated ischemic stroke", "kind": "binary", "direction": "lower", "success_rule": "active-control RD two-sided 95% interval upper bound < 0"},
+    "mrs_ordinal_day90": {"label": "D90 ordinal mRS 0-6", "kind": "ordinal", "direction": "lower score", "success_rule": "proportional-odds common OR two-sided 95% Wald interval lower bound > 1"},
+    "mrs01_day90": {"label": "D90 mRS <=1", "kind": "binary", "direction": "higher", "success_rule": "active-control RD two-sided 95% interval lower bound > 0"},
+    "mrs02_day90": {"label": "D90 mRS <=2", "kind": "binary", "direction": "higher", "success_rule": "active-control RD two-sided 95% interval lower bound > 0"}
+  },
+  "dose_regimens": {
+    "泰普格雷低剂量组": {
+      "display": "低剂量方案",
+      "tooltip": "D1泰普格雷60mg+阿司匹林100–300mg；D2–21泰普格雷10mg+阿司匹林100mg QD；D22–90泰普格雷5mg+阿司匹林100mg QD",
+      "phase2_support_n": 202
+    },
+    "泰普格雷高剂量组": {
+      "display": "高剂量方案",
+      "tooltip": "D1泰普格雷90mg+阿司匹林100–300mg；D2–21泰普格雷15mg+阿司匹林100mg QD；D22–90泰普格雷10mg+阿司匹林100mg QD",
+      "phase2_support_n": 202
+    }
+  },
+  "basic_parameters": {
+    "active_arm": {
+      "type": "enum",
+      "values": [
+        "泰普格雷低剂量组",
+        "泰普格雷高剂量组"
+      ]
+    },
+    "total_n": {
+      "type": "integer",
+      "minimum": 200,
+      "maximum": 5000,
+      "default": 800,
+      "step": 2
+    },
+    "control_response_rate": {
+      "type": "number",
+      "minimum": 0.2,
+      "maximum": 0.95,
+      "default_source": "selected Phase II source scenario",
+      "step": 0.005
+    },
+    "effect_multiplier": {
+      "type": "number",
+      "minimum": 0.5,
+      "maximum": 1.5,
+      "default": 1.0,
+      "step": 0.05,
+      "definition": "100%=selected Phase II observed RD"
+    }
+  },
+  "advanced_parameters": {
+    "source_scenario": {
+      "type": "enum",
+      "values": [
+        "nominal_v8_missing_nonresponder",
+        "available_case",
+        "strict_d85_d95_missing_nonresponder",
+        "locf_like_through_d95"
+      ]
+    },
+    "active_allocation": {
+      "type": "number",
+      "minimum": 0.3,
+      "maximum": 0.7,
+      "default": 0.5,
+      "step": 0.05
+    },
+    "analysis_prior": {
+      "type": "enum",
+      "values": [
+        "weak_beta11",
+        "skeptical_equal_ess20",
+        "discounted_phase2_10pct"
+      ]
+    },
+    "n_simulations": {
+      "type": "enum",
+      "values": [
+        1000,
+        5000,
+        20000
+      ],
+      "default": 5000
+    },
+    "random_seed": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2147483647,
+      "default": 20260810
+    }
+  },
+  "transport_rule": "p3_control=user input; p3_active=p3_control+effect_multiplier*(phase2_active_rate-phase2_control_rate)",
+  "unsupported_rule": "return explicit reason when transported rate is outside (0,1) or input is outside the validated range",
+  "interpretation": "all outputs are exploratory scenario guidance, not a prediction of final Phase III success",
+  "population_parameters": {
+    "scope": "randomization-prebaseline only",
+    "nihss_range": {
+      "minimum": 0,
+      "maximum": 5,
+      "default": [
+        0,
+        5
+      ]
+    },
+    "age_range": {
+      "minimum": 18,
+      "maximum": 92,
+      "default": [
+        18,
+        92
+      ]
+    },
+    "sex": {
+      "values": [
+        1,
+        2
+      ]
+    },
+    "baseline_mrs": {
+      "values": [
+        0,
+        1,
+        2
+      ]
+    },
+    "indication_backend_compatibility": {
+      "values": [
+        "轻型缺血性卒中",
+        "高危TIA"
+      ],
+      "ui_exposed": false
+    },
+    "baseline_sbp": {
+      "minimum": 98,
+      "maximum": 179,
+      "operators": ["all", "lt", "le", "ge", "gt"],
+      "default_operator": "all",
+      "default_threshold": 140,
+      "definition": "latest valid SBP before first dose; SAP 6.3.3 anchor is 140 mmHg"
+    },
+    "presentation_group": {
+      "values": ["高危TIA", "单发梗死且责任动脉狭窄≥50%", "多发梗死"],
+      "status": "SAR reconciled; high-risk TIA n=8 is sparse"
+    },
+    "history_hypertension": {
+      "values": [0, 1],
+      "status": "SAR reconciled"
+    },
+    "history_diabetes": {
+      "values": [0, 1],
+      "status": "SAR reconciled"
+    },
+    "history_dyslipidemia": {
+      "values": [0, 1],
+      "status": "SAR reconciled"
+    },
+    "cyp2c19_group": {
+      "values": ["慢代谢", "中间代谢", "正常代谢", "快代谢", "缺失"],
+      "status": "SAR reconciled but sparse levels; advanced exploratory use"
+    },
+    "prior_stroke_tia_proxy": {
+      "values": [0, 1],
+      "status": "MH keyword proxy; not reconciled to SAR 14.2.3.1",
+      "required_warning": "official derivation specification or final patient-level flag is pending"
+    },
+    "site_mitt_n_min": {
+      "minimum": 0,
+      "maximum": 51,
+      "role": "Phase II source-site sensitivity only; not an enrollment criterion"
+    }
+  },
+  "population_evidence_rule": "filtered Phase II mITT observed active-control RD; descriptive exploratory subgroup transport; minimum 20 endpoint-evaluable subjects per compared arm",
+  "warning_rules": {
+    "effect_multiplier_above_100": "caution/strong",
+    "control_rate_gap_5pp": "caution",
+    "control_rate_gap_10pp": "strong",
+    "retention_below_50pct": "caution",
+    "retention_below_20pct": "strong",
+    "source_arm_below_40": "strong",
+    "source_arm_below_20": "unsupported",
+    "stacked_extrapolation": "strong",
+    "prior_stroke_tia_proxy_active": "strong",
+    "high_risk_tia_selected": "strong_or_unsupported",
+    "cyp2c19_selected": "caution"
+  },
+  "ui_contract": {
+    "workflow": [
+      "scenario exploration",
+      "Phase II population insights",
+      "scenario comparison and management",
+      "instructions",
+      "changelog",
+      "feedback"
+    ],
+    "saved_scenario_loading": "selection_applies_parameters_without_run_button",
+    "comparison_reference": true,
+    "default_scenario_label": "全人群（默认）",
+    "maximum_optional_population_factors": 2,
+    "comparison_selection_independent_of_deletion": true,
+    "motion_toggle": true,
+    "one_click_presets": false,
+    "heatmap": false
+  }
+}

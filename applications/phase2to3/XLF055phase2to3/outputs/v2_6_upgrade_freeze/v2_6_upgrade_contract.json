@@ -1,0 +1,167 @@
+{
+  "identity": {
+    "name": "XLF055 V2.6 risk-factor, arm-scenario and early Phase III validation upgrade",
+    "version": "2.6.0",
+    "freeze_date": "2026-08-14",
+    "status": "frozen_before_new_derivation_or_outcome_scoring",
+    "planning_stage_only": true
+  },
+  "scope": {
+    "model_development": "P2 only",
+    "p3_use": "blinded transport and provisional early external consistency check only",
+    "backend_target": "2.3.0",
+    "frontend_target": "2.6.0",
+    "phase3_pos_or_assurance": "out of scope and blocked"
+  },
+  "governance": {
+    "allowed_p3_root": "p2p3AE/p3/核力欣健/data",
+    "prohibited_path_tokens": [
+      "盲底",
+      "第四次风险探测",
+      "风险展示",
+      "疗效数据集",
+      "summary.xlsx",
+      "data2_2.xlsx"
+    ],
+    "actual_randomized_arm": "prohibited",
+    "unblinded_outputs": "prohibited without explicit sponsor and statistician authorization",
+    "p3_training_or_tuning": false,
+    "patient_level_output_or_persistence": false
+  },
+  "risk_feature_policy": {
+    "derivation_spec": "outputs/v2_6_upgrade_freeze/risk_factor_derivation_spec_v2_6.csv",
+    "outcome_driven_screening": false,
+    "interactions": false,
+    "abortion_count_p2_model": "unsupported"
+  },
+  "candidate_model_policy": {
+    "benchmark": "intercept prevalence and frozen V2.1 limited scenario model",
+    "eligible_new_family": "ultra-parsimonious strong-shrinkage Bayesian logistic",
+    "firth": "sensitivity only if a verified local implementation passes numerical tests",
+    "complex_ml": "prohibited at current information size",
+    "resampling": "repeated stratified 3-fold cross-validation with fold-local preprocessing",
+    "original_acceptance_thresholds_not_lowered": true,
+    "failed_candidate_action": "retain V2.1 limited scenario engine and report descriptive risk-factor support"
+  },
+  "p3_validation_policy": {
+    "data_cut_source": "canonical EDC export timestamp 2026-07-13 09:01:13",
+    "target": "D104 recurrence conditional on protocol-defined D21 cure",
+    "layers": [
+      "baseline transport and model support",
+      "D44/D74 early outcome directional concordance",
+      "D104 mature-window direct descriptive check"
+    ],
+    "primary_metrics_when_estimable": [
+      "Brier",
+      "log loss",
+      "calibration in the large",
+      "observed-to-expected"
+    ],
+    "secondary_metrics_when_estimable": [
+      "ROC AUC",
+      "time-dependent concordance"
+    ],
+    "small_sample_rule": "Unavailable metrics remain unavailable; no coercion to zero and no accuracy claim",
+    "allowed_conclusions": [
+      "no obvious early transport mismatch",
+      "uncertain due to maturity",
+      "obvious mismatch"
+    ],
+    "prohibited_conclusion": "validated accuracy or successful external validation"
+  },
+  "arm_output_policy": {
+    "main": "treatment-blind 1:1 standardized exploratory scenario",
+    "detail": [
+      "test-arm hypothetical scenario",
+      "control-arm hypothetical scenario",
+      "test-minus-control percentage-point difference",
+      "95% intervals"
+    ],
+    "observed_p2_direct_pair": {
+      "test": "2/7 (28.6%)",
+      "control": "6/10 (60.0%)"
+    },
+    "protocol_planning_assumptions": {
+      "test": "33%",
+      "control": "55%",
+      "status": "assumption_not_observed"
+    },
+    "actual_arm_input": false,
+    "causal_or_treatment_recommendation_claim": false
+  },
+  "source_register": {
+    "p2_adsl": {
+      "relative_path": "p2p3AE/p2/XLF-XLF055-201_ADaM/adsl.xpt",
+      "bytes": 189760,
+      "sha256": "83f78f29175da69509087e0903091caf51e5a9137abff86561ad46f9a51c3856"
+    },
+    "p2_adcm": {
+      "relative_path": "p2p3AE/p2/XLF-XLF055-201_ADaM/adcm.xpt",
+      "bytes": 467840,
+      "sha256": "a30ba72f3b81b39e10952a1f38dc6f03b5eaf70ec57ca83724a8f0bf544ff1fb"
+    },
+    "p2_adpr": {
+      "relative_path": "p2p3AE/p2/XLF-XLF055-201_ADaM/adpr.xpt",
+      "bytes": 50240,
+      "sha256": "9450f4f3067d7144284f681501ff186843bec28b0b2011c7b6e7bc389d1a779b"
+    },
+    "p2_recurrence": {
+      "relative_path": "outputs/analysis_datasets/phase2_recurrence_analysis.parquet",
+      "bytes": 15511,
+      "sha256": "7c89eb2957ff357ee3f3c04259bda3a5cc0ce90b74de0640ba20e720e73f152f"
+    },
+    "p2_model_payload": {
+      "relative_path": "outputs/model_development/v2_1_bayesian_model_fit/restricted/candidate_model_payload.json",
+      "bytes": 13029,
+      "sha256": "94ac317179c90446df919a36bc9e42022c4cdf2ee0d63a78e334cd3272ba5701"
+    },
+    "p2_posterior_draws": {
+      "relative_path": "outputs/model_development/v2_1_bayesian_model_fit/restricted/primary_posterior_draws.npz",
+      "bytes": 2297794,
+      "sha256": "936ac3329584bca171d085293a5480cd6a08bfb86ebd67c41f508ff5d4b44c92"
+    },
+    "p3_dm": {
+      "relative_path": "p2p3AE/p3/核力欣健/data/prod_xlf-xlf055-301_odm_datasets_sas_site-all_zh-cn_sas_xpt_20260713090113/SAS/dm.sas7bdat",
+      "bytes": 409600,
+      "sha256": "7c39b0bd13220de1a944b6fe83c51c8ebaecb15178cbfeaed0c5d48fe724cdf9"
+    },
+    "p3_av": {
+      "relative_path": "p2p3AE/p3/核力欣健/data/prod_xlf-xlf055-301_odm_datasets_sas_site-all_zh-cn_sas_xpt_20260713090113/SAS/av.sas7bdat",
+      "bytes": 847872,
+      "sha256": "7a4f53d40c1b0659f7838de16b488384d244c06d8e5f918ae38333c9e8f24f40"
+    },
+    "p3_mh": {
+      "relative_path": "p2p3AE/p3/核力欣健/data/prod_xlf-xlf055-301_odm_datasets_sas_site-all_zh-cn_sas_xpt_20260713090113/SAS/mh.sas7bdat",
+      "bytes": 393216,
+      "sha256": "e37433db26a5575ddf0ff7ff26396fe5156a4c00d6dd2d8187facecfad9ab15f"
+    },
+    "p3_int": {
+      "relative_path": "p2p3AE/p3/核力欣健/data/prod_xlf-xlf055-301_odm_datasets_sas_site-all_zh-cn_sas_xpt_20260713090113/SAS/int.sas7bdat",
+      "bytes": 311296,
+      "sha256": "bd43766846e124f406c592b799c57842e83a9b26d512ca031a8e8d59ac2e4d7c"
+    },
+    "p3_mh6": {
+      "relative_path": "p2p3AE/p3/核力欣健/data/prod_xlf-xlf055-301_odm_datasets_sas_site-all_zh-cn_sas_xpt_20260713090113/SAS/mh6.sas7bdat",
+      "bytes": 294912,
+      "sha256": "0ae2c31578ac483b9945dcaa3491d5e89bb1206a5a8f5d08318bab8e58fff3ba"
+    },
+    "p3_ha": {
+      "relative_path": "p2p3AE/p3/核力欣健/data/prod_xlf-xlf055-301_odm_datasets_sas_site-all_zh-cn_sas_xpt_20260713090113/SAS/ha.sas7bdat",
+      "bytes": 221184,
+      "sha256": "06812fb65a10ab12b9ba659315faa4c562a114ff892a3653d35ae4489dc03bfe"
+    },
+    "p3_ha2": {
+      "relative_path": "p2p3AE/p3/核力欣健/data/prod_xlf-xlf055-301_odm_datasets_sas_site-all_zh-cn_sas_xpt_20260713090113/SAS/ha2.sas7bdat",
+      "bytes": 221184,
+      "sha256": "673df498b7d483bda3a756852a90c611d44245414022a3fab83d809427c1e341"
+    }
+  },
+  "human_stop_conditions": [
+    "Need to access blind key or unblinded Phase III outcomes",
+    "Need to bind a website result to actual assigned treatment",
+    "D21 or D104 cannot be uniquely reproduced from permitted sources",
+    "Six-month treatment derivations materially disagree",
+    "Model validation or numerical integrity fails and no frozen fallback is available",
+    "Source hashes change during execution"
+  ]
+}

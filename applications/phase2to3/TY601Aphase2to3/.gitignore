@@ -1,0 +1,25 @@
+# Secrets and environment-specific configuration
+.env
+.env.*
+!config/production.env.example
+*.pem
+*.key
+*.token
+*password*
+
+# Private Phase II patient-level dataset
+data/phase2_mrs01_web_dataset.csv
+
+# Runtime state and generated files
+runtime/
+reports/
+backups/
+outputs/
+*.log
+
+# Local Python/tooling artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.DS_Store

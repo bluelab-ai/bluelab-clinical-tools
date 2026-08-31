@@ -1,0 +1,101 @@
+{
+  "identity": {
+    "name": "XLF055 V2.2 frontend-ready limited exploratory D104 recurrence scenario engine",
+    "version": "2.2.0",
+    "registered_at": "2026-08-05T17:01:43.634000+08:00"
+  },
+  "status": "registered_frontend_ready_limited_scenario_engine",
+  "evidence_status": "limited_scenario_only",
+  "engine_version": "2.2.0",
+  "model_version": "2.1.0",
+  "model_reuse": "Registered V2.1 model and posterior draws; no refit.",
+  "model_payload": "outputs/model_development/v2_1_bayesian_model_fit/restricted/candidate_model_payload.json",
+  "posterior_draws": "outputs/model_development/v2_1_bayesian_model_fit/restricted/primary_posterior_draws.npz",
+  "direction_evidence": "outputs/model_development/v2_1_bayesian_model_fit/directional_evidence.csv",
+  "cv_summary": "outputs/model_development/v2_1_bayesian_model_fit/cv_summary.csv",
+  "sha256": {
+    "model_payload": "94ac317179c90446df919a36bc9e42022c4cdf2ee0d63a78e334cd3272ba5701",
+    "posterior_draws": "936ac3329584bca171d085293a5480cd6a08bfb86ebd67c41f508ff5d4b44c92",
+    "direction_evidence": "51afc187232982af7c7f3f90aa96735dbadcb54a37dedbc10aaf5dbc44f8309d",
+    "cv_summary": "4d8e9bb814cd37355b563f407066237d6e5b13e9000c5b9147e8bbc301620a6c"
+  },
+  "source_data": {
+    "relative_path": "outputs/analysis_datasets/phase2_recurrence_analysis.parquet",
+    "sha256": "7c89eb2957ff357ee3f3c04259bda3a5cc0ce90b74de0640ba20e720e73f152f",
+    "observed_labels": 31,
+    "events": 16,
+    "non_events": 15
+  },
+  "support_reference": {
+    "relative_path": "outputs/model_development/v2_2_backend_extension/support_reference_v2_2.json",
+    "sha256": "55a37d28ea90d31f044c23cd264ba5bfce9c586efcca4bbf6620b764429136dc",
+    "reference_n": 31,
+    "events": 16,
+    "grade_a_threshold_q75": 0.15036710908886186,
+    "runtime_access": "restricted server-side only; never returned as rows"
+  },
+  "warning_catalog": {
+    "relative_path": "outputs/frontend_freeze_v2_2/warning_catalog_v2_2.csv",
+    "sha256": "8562af8dbad564860172890fa716076fc2fbbb12c5b840118e0c1af5b4fc5f58",
+    "warning_count": 14
+  },
+  "contracts": {
+    "backend_extension": {
+      "relative_path": "outputs/model_development/v2_2_backend_extension/backend_extension_contract_v2_2.json",
+      "sha256": "218387748e3d1f23a4aad50bed9fbe485fe1f126af4747df71caac2bf72898f5"
+    },
+    "frontend_product": {
+      "relative_path": "outputs/frontend_freeze_v2_2/website_product_contract_v2_2.json",
+      "sha256": "b26717bb234203b17d6dacb42e7183d751ccb66b04756f5cb0bd05f85c64590b"
+    }
+  },
+  "backend": {
+    "relative_path": "backend/recurrence_scenario_engine_v2_2.py",
+    "sha256": "1f55d79c725f927a12896b8347056019d2c0d32653093cfcf3a5cd9fd1a87ebe",
+    "unit_tests_relative_path": "tests/test_recurrence_scenario_engine_v2_2.py",
+    "unit_tests_sha256": "8ab4e6deb394ebe2a087251456471fde402637704179769b20c11b01748b0430",
+    "unit_tests": "48/48 pass before registration",
+    "interface": "local Python JSON-compatible engine",
+    "production_service": false,
+    "patient_input_persistence": false,
+    "input_echo": false
+  },
+  "internal_validation": {
+    "intercept_brier": 0.2502947350716451,
+    "model_brier": 0.2580558899062578,
+    "intercept_log_loss": 0.6937372262397276,
+    "model_log_loss": 0.7095154632476206,
+    "model_auc": 0.4445833333333333,
+    "conclusion": "Weak and worse than the intercept benchmark; no accuracy or ranking claim."
+  },
+  "allowed_outputs": [
+    "Observed 16/31 cohort anchor",
+    "Observed-sensitivity 19/34 composite anchor",
+    "Exploratory posterior scenario estimate and 95% interval",
+    "Posterior probability above and below the observed anchor",
+    "Three-state relative scenario position",
+    "Four-state direction stability",
+    "A/B/C/unavailable data-support grade",
+    "Age-only explicit exploratory extrapolation inside Phase III 18-55",
+    "Thresholded exploratory feature-direction panel",
+    "Versioned warning IDs and reason codes"
+  ],
+  "prohibited": [
+    "Validated individual recurrence probability",
+    "High/medium/low patient risk classification",
+    "Risk ranking",
+    "Clinical diagnosis or treatment recommendation",
+    "Eligibility or enrichment",
+    "Reduced standard follow-up",
+    "Phase III success probability",
+    "Treatment-arm-specific site output",
+    "Ongoing Phase III outcome training"
+  ],
+  "release_conditions": {
+    "frontend_development": "authorized after independent V2.2 backend validation",
+    "website_numeric_exposure": "blocked pending frontend implementation and full browser/privacy acceptance",
+    "clinical_use": "unsupported",
+    "production_deployment": "not_authorized",
+    "external_validation": "pending"
+  }
+}

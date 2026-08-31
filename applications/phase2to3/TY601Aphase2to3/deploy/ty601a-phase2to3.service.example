@@ -1,0 +1,17 @@
+[Unit]
+Description=TY601A Phase II-to-III planning explorer
+After=network-online.target
+
+[Service]
+Type=simple
+User=replace-with-service-user
+WorkingDirectory=/opt/bluelab-clinical-tools/applications/phase2to3/TY601Aphase2to3
+EnvironmentFile=/etc/bluelab/ty601a-phase2to3.env
+ExecStart=/opt/bluelab-clinical-tools/applications/phase2to3/TY601Aphase2to3/.venv/bin/streamlit run app.py --server.address=127.0.0.1 --server.port=8526 --server.headless=true
+Restart=on-failure
+RestartSec=5
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

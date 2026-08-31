@@ -1,0 +1,17 @@
+[Unit]
+Description=XLF055 Phase II-to-III planning explorer
+After=network-online.target
+
+[Service]
+Type=simple
+User=replace-with-service-user
+WorkingDirectory=/opt/bluelab-clinical-tools/applications/phase2to3/XLF055phase2to3
+EnvironmentFile=/etc/bluelab/xlf055-phase2to3.env
+ExecStart=/opt/bluelab-clinical-tools/applications/phase2to3/XLF055phase2to3/.venv/bin/python scripts/run_streamlit_v26.py
+Restart=on-failure
+RestartSec=5
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

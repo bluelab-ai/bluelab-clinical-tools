@@ -1,0 +1,219 @@
+{
+  "project": {
+    "project_id": "project3_p2_p3_ae",
+    "study_id": "XLF-XLF055-201_to_XLF-XLF055-301",
+    "indication": "bacterial vaginosis recurrence prevention",
+    "phase2_data_version": "locked ADaM package created 2024-07-09",
+    "planning_stage": "exploratory",
+    "status": "frontend_v2_6_local_validated_running",
+    "frontend_version": "2.6.0",
+    "backend_version": "2.3.0",
+    "model_version": "2.1.0",
+    "active_product_scope": "limited D104 recurrence scenario explorer"
+  },
+  "sources": {
+    "protocol": [
+      "Phase II and Phase III protocols supplied privately"
+    ],
+    "sap": [],
+    "crf": [
+      "Phase II and Phase III CRFs supplied privately"
+    ],
+    "define_xml": [
+      "Phase II Define-XML supplied privately"
+    ],
+    "adam_directories": [
+      "Phase II ADaM package supplied privately"
+    ],
+    "sdtm_directories": [],
+    "other_data": [
+      "Supplementary Phase II data supplied privately"
+    ]
+  },
+  "design": {
+    "phase3_sample_size": 440,
+    "arms": [
+      "XLF055 plus metronidazole",
+      "XLF055 placebo plus metronidazole"
+    ],
+    "allocation": [
+      1,
+      1
+    ],
+    "alpha": 0.025,
+    "alpha_sidedness": "one-sided",
+    "success_rule": "Upper bound of the 95% Miettinen-Nurminen confidence interval for risk difference (test minus control) is below 0",
+    "multiplicity": "single protocol-defined primary endpoint; confirm in SAP",
+    "interim_analysis": "not applicable per protocol V1.2",
+    "primary_analysis": "center-adjusted CMH test with Miettinen-Nurminen risk-difference confidence interval"
+  },
+  "primary_endpoint": {
+    "endpoint_id": "bv_recurrence_d104",
+    "name": "BV recurrence within 90 days",
+    "type": "binary",
+    "direction": "lower",
+    "timepoint": "D104 plus or minus 5 days",
+    "analysis_population": "protocol-defined FAS: randomized, treated, post-treatment data available, and cured at D21 plus or minus 3 days",
+    "effect_scale": "risk_difference_test_minus_control",
+    "missing_rule": "Missing D104 without previously observed recurrence is counted as recurrence",
+    "intercurrent_event_strategy": "treatment policy for poor adherence, prohibited therapy, and other relevant reproductive infection; composite for missing D104",
+    "success_criterion": "one-sided alpha 0.025 and upper 95% confidence limit for test-minus-control risk difference below 0",
+    "status": "candidate_contract_pending_sap_and_estimand_review"
+  },
+  "candidate_endpoints": [
+    {
+      "endpoint_id": "bv_recurrence_d44",
+      "name": "BV recurrence within 30 days",
+      "type": "binary",
+      "direction": "lower",
+      "timepoint": "D44 plus or minus 3 days",
+      "effect_scale": "risk_difference"
+    },
+    {
+      "endpoint_id": "bv_recurrence_d74",
+      "name": "BV recurrence within 60 days",
+      "type": "binary",
+      "direction": "lower",
+      "timepoint": "D74 plus or minus 4 days",
+      "effect_scale": "risk_difference"
+    },
+    {
+      "endpoint_id": "bv_cure_d21",
+      "name": "BV cure after 7 days",
+      "type": "binary",
+      "direction": "higher",
+      "timepoint": "D21 plus or minus 3 days",
+      "effect_scale": "risk_difference"
+    },
+    {
+      "endpoint_id": "time_to_first_bv_recurrence",
+      "name": "Time from cure to first BV recurrence",
+      "type": "time_to_event",
+      "direction": "longer",
+      "timepoint": "through D104 plus or minus 5 days",
+      "effect_scale": "hazard_ratio_and_rmst_sensitivity"
+    }
+  ],
+  "baseline_covariates": [
+    "age_years",
+    "baseline_bmi",
+    "baseline_vaginal_ph",
+    "baseline_nugent_score",
+    "baseline_av_score",
+    "any_medical_history",
+    "baseline_lactobacillus_grade"
+  ],
+  "candidate_enrichment_variables": [],
+  "simulation": {
+    "n_simulations": 10000,
+    "seed": 20260803,
+    "effect_transport_scenarios": [
+      1.0
+    ],
+    "effect_transport_status": "placeholder_only_not_authorized_for_simulation",
+    "bayesian_prior": null,
+    "execution_status": "blocked_pending_estimand_anchor_scenario_contract_sap_and_prior_review"
+  },
+  "website": {
+    "language": "zh-CN",
+    "enable_login": true,
+    "enable_changelog": true,
+    "enable_feedback": true,
+    "frontend_version": "2.6.0",
+    "backend_version": "2.3.0",
+    "navigation": [
+      "情景探索",
+      "二期人群洞察",
+      "情景对比",
+      "使用说明",
+      "更新日志",
+      "问题反馈"
+    ],
+    "scenario_persistence": "session_memory_only",
+    "patient_input_persistence": false,
+    "default_inputs": "explicit_opt_in_synthetic_example_only",
+    "feedback": {
+      "notify_to": "configured through the runtime environment",
+      "local_storage": "private SQLite",
+      "email_delivery": "background outbox using environment-provided SMTP credentials",
+      "automatic_receipt": "sent only when contact email is provided and SMTP succeeds",
+      "attachments": "up to 3 verified PNG/JPEG files, 5 MB each"
+    },
+    "local_runtime": {
+      "address": "127.0.0.1",
+      "port": 8520,
+      "cloudflare_deployment": false,
+      "health_url": "http://127.0.0.1:8520/_stcore/health",
+      "validation_status": "pass",
+      "service_unit": "xlf055-phase3-v26.service"
+    },
+    "login": {
+      "mode": "environment_configured_local_access_control",
+      "username_default": "BlueBalloon",
+      "password_storage": "environment_only_not_in_source",
+      "session_minutes_default": 480,
+      "max_failures_default": 5,
+      "lock_seconds_default": 60
+    },
+    "status": "local_v2_6_accepted"
+  },
+  "governance": {
+    "phase3_ongoing_data_use": "canonical blinded current cut permitted only for aggregate early consistency; never model training, variable selection, or tuning",
+    "unblinded_derivatives": "not permitted for confirmatory planning evidence",
+    "post_randomization_cure_not_baseline_enrichment": true,
+    "definitive_phase3_success_claim_allowed": false
+  },
+  "readiness_assessment": {
+    "assessment_date": "2026-08-06",
+    "overall_backend_design": "conditional_go",
+    "phase3_planning_design": "conditional_go",
+    "phase3_numeric_pos_or_assurance": "blocked",
+    "individual_any_teae_design_and_exploratory_fit": "go_exploratory",
+    "individual_related_or_grade2_teae": "limited_secondary",
+    "individual_sae_discontinuation_or_specific_pt": "unsupported_for_numeric_v1",
+    "backend_design_started": true,
+    "model_fit_performed": true,
+    "simulation_performed": false,
+    "gate_artifact": "outputs/readiness_assessment/backend_readiness_gate.json",
+    "registered_limited_scenario_backend": true,
+    "frontend_development_started": true,
+    "frontend_local_validation": "passed",
+    "phase3_numeric_pos_or_assurance_exposed_in_active_site": false,
+    "frontend_development_completed": true,
+    "active_site_release": "local_exploratory_only",
+    "frontend_delivery_validation": "outputs/validation/v2_6_frontend_delivery_validation.json"
+  },
+  "recurrence_scenario_engine": {
+    "target": "D104 recurrence conditional on protocol-defined D21 cure",
+    "source_target_proxy": "observed D104 recurrence among Phase II D24 cured participants",
+    "source_observed_n": 31,
+    "source_event_n": 16,
+    "primary_observed_anchor": 0.5161290322580645,
+    "missing_as_recurrence_sensitivity_anchor": 0.5588235294117647,
+    "method": "strongly regularized Bayesian logistic scenario model",
+    "frontend_contract_version": "2.3.0",
+    "registered_backend": "outputs/model_registry/v2_3/registered_arm_scenario_backend_candidate.json",
+    "intended_use": "exploratory planning and directional hypothesis generation",
+    "unsupported_uses": [
+      "validated individual recurrence probability",
+      "patient ranking or high-medium-low risk classification",
+      "clinical treatment or enrollment decisions",
+      "reduced protocol follow-up",
+      "Phase III probability of success or Bayesian assurance",
+      "Actual randomized treatment-arm input or display",
+      "Individual treatment-effect or causal-effect claim",
+      "Using ongoing Phase III outcomes for training, variable selection, or tuning"
+    ],
+    "performance": {
+      "brier": 0.2581,
+      "intercept_benchmark_brier": 0.2503,
+      "log_loss": 0.7095,
+      "intercept_benchmark_log_loss": 0.6937,
+      "roc_auc": 0.445,
+      "interpretation": "weak internal validation; not suitable for individual prediction or ranking"
+    },
+    "model_version": "2.1.0",
+    "hypothetical_arm_output": "simultaneous test and control regimen scenarios plus draw-wise test-minus-control; never actual randomized arm or individual treatment effect",
+    "phase3_early_consistency_artifact": "outputs/model_development/v2_6_p3_early_validation/p3_blinded_early_validation_aggregate.json"
+  }
+}

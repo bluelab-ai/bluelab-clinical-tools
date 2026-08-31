@@ -1,0 +1,155 @@
+{
+  "identity": {
+    "name": "XLF055 V2.3 registered hypothetical-arm scenario backend candidate",
+    "version": "2.3.0",
+    "registered_at": "2026-08-14T11:51:47.845854+08:00"
+  },
+  "status": "registered_backend_candidate_for_frontend_v2_6",
+  "evidence_status": "limited_scenario_only",
+  "engine_version": "2.3.0",
+  "model_version": "2.1.0",
+  "model_reuse": "Registered V2.1 model, preprocessor and 20,000 posterior draws; no refit.",
+  "model_payload": "outputs/model_development/v2_1_bayesian_model_fit/restricted/candidate_model_payload.json",
+  "posterior_draws": "outputs/model_development/v2_1_bayesian_model_fit/restricted/primary_posterior_draws.npz",
+  "direction_evidence": "outputs/model_development/v2_1_bayesian_model_fit/directional_evidence.csv",
+  "cv_summary": "outputs/model_development/v2_1_bayesian_model_fit/cv_summary.csv",
+  "sha256": {
+    "model_payload": "94ac317179c90446df919a36bc9e42022c4cdf2ee0d63a78e334cd3272ba5701",
+    "posterior_draws": "936ac3329584bca171d085293a5480cd6a08bfb86ebd67c41f508ff5d4b44c92",
+    "direction_evidence": "51afc187232982af7c7f3f90aa96735dbadcb54a37dedbc10aaf5dbc44f8309d",
+    "cv_summary": "4d8e9bb814cd37355b563f407066237d6e5b13e9000c5b9147e8bbc301620a6c"
+  },
+  "source_data": {
+    "relative_path": "outputs/analysis_datasets/phase2_recurrence_analysis.parquet",
+    "sha256": "7c89eb2957ff357ee3f3c04259bda3a5cc0ce90b74de0640ba20e720e73f152f",
+    "observed_labels": 31,
+    "events": 16,
+    "non_events": 15
+  },
+  "support_reference": {
+    "relative_path": "outputs/model_development/v2_2_backend_extension/support_reference_v2_2.json",
+    "sha256": "55a37d28ea90d31f044c23cd264ba5bfce9c586efcca4bbf6620b764429136dc",
+    "reference_n": 31,
+    "events": 16,
+    "grade_a_threshold_q75": 0.15036710908886186,
+    "runtime_access": "restricted server-side only; never returned as rows"
+  },
+  "warning_catalog": {
+    "relative_path": "outputs/frontend_freeze_v2_2/warning_catalog_v2_2.csv",
+    "sha256": "8562af8dbad564860172890fa716076fc2fbbb12c5b840118e0c1af5b4fc5f58",
+    "warning_count": 14
+  },
+  "contracts": {
+    "backend_extension": {
+      "relative_path": "outputs/model_development/v2_2_backend_extension/backend_extension_contract_v2_2.json",
+      "sha256": "218387748e3d1f23a4aad50bed9fbe485fe1f126af4747df71caac2bf72898f5"
+    },
+    "frontend_product": {
+      "relative_path": "outputs/frontend_freeze_v2_2/website_product_contract_v2_2.json",
+      "sha256": "b26717bb234203b17d6dacb42e7183d751ccb66b04756f5cb0bd05f85c64590b"
+    }
+  },
+  "backend": {
+    "relative_path": "backend/recurrence_scenario_engine_v2_3.py",
+    "sha256": "cd4b6c6d2981dd249c3d11101cd1a65a1455044951338d88f34dc51b8e1c6746",
+    "unit_tests_relative_path": "tests/test_recurrence_scenario_engine_v2_3.py",
+    "unit_tests_sha256": "cedd3100f8506ca787262172a249473a7436e74b2124add3e328ab6d0d25a55d",
+    "interface": "local Python JSON-compatible candidate engine",
+    "production_service": false,
+    "frontend_activated": false,
+    "patient_input_persistence": false,
+    "input_echo": false
+  },
+  "internal_validation": {
+    "intercept_brier": 0.2502947350716451,
+    "model_brier": 0.2580558899062578,
+    "intercept_log_loss": 0.6937372262397276,
+    "model_log_loss": 0.7095154632476206,
+    "model_auc": 0.4445833333333333,
+    "conclusion": "Weak and worse than the intercept benchmark; no accuracy or ranking claim."
+  },
+  "allowed_outputs": [
+    "Observed 16/31 cohort anchor",
+    "Observed-sensitivity 19/34 composite anchor",
+    "Exploratory posterior scenario estimate and 95% interval",
+    "Posterior probability above and below the observed anchor",
+    "Three-state relative scenario position",
+    "Four-state direction stability",
+    "A/B/C/unavailable data-support grade",
+    "Age-only explicit exploratory extrapolation inside Phase III 18-55",
+    "Thresholded exploratory feature-direction panel",
+    "Versioned warning IDs and reason codes",
+    "Simultaneous hypothetical test- and control-regimen posterior scenario summaries",
+    "Draw-wise 1:1 standardized summary",
+    "Draw-wise test-minus-control posterior risk-difference interval",
+    "Sparse observed Phase II direct-pair context: 2/7 and 6/10",
+    "Separate Phase III protocol planning assumptions: 33% and 55%"
+  ],
+  "prohibited": [
+    "Validated individual recurrence probability",
+    "High/medium/low patient risk classification",
+    "Risk ranking",
+    "Clinical diagnosis or treatment recommendation",
+    "Eligibility or enrichment",
+    "Reduced standard follow-up",
+    "Phase III success probability",
+    "Ongoing Phase III outcome training",
+    "Actual randomized treatment-arm input, inference, lookup or display",
+    "Displaying only one hypothetical regimen",
+    "Individual treatment-effect or causal-effect claim",
+    "Using ongoing Phase III outcomes for training or tuning"
+  ],
+  "release_conditions": {
+    "frontend_development": "authorized after independent V2.2 backend validation",
+    "website_numeric_exposure": "blocked pending frontend implementation and full browser/privacy acceptance",
+    "clinical_use": "unsupported",
+    "production_deployment": "not_authorized",
+    "external_validation": "pending separate blinded early-consistency artifact",
+    "frontend_integration": "pending V2.6 implementation and browser acceptance",
+    "active_site": "V2.2 remains active until V2.6 frontend acceptance"
+  },
+  "base_backend": {
+    "engine_version": "2.2.0",
+    "registry_relative_path": "outputs/model_registry/v2_2/registered_frontend_ready_limited_scenario_engine.json",
+    "sha256": "73a8b09861367ca834c370c96f52167f7664a76077b9f7ded4e9bbf2ae0f007c"
+  },
+  "upgrade_contract": {
+    "relative_path": "outputs/v2_6_upgrade_freeze/v2_6_upgrade_contract.json",
+    "sha256": "c1d4a3c3c42a4b65487dba7831355b6b512ac3655c7f3de63dd2fba3f180320d",
+    "validation_relative_path": "outputs/validation/v2_6_upgrade_freeze_validation.json",
+    "validation_sha256": "720692e58464602d0b1653f8529c32d7a54f4c97d32fc4d1562c392d71fd4b12",
+    "validation_status": "pass"
+  },
+  "arm_context": {
+    "phase2_direct_observed": {
+      "status": "observed_sparse",
+      "population": "Phase II D24-cured FAS with observed D104 classification, restricted to the two Phase III-aligned regimens",
+      "outcome": "observed recurrence through D104",
+      "missing_rule": "Observed-label primary; unknown D104 is not non-recurrence.",
+      "test": {
+        "regimen": "XLF055+甲硝唑片",
+        "events": 2,
+        "n": 7,
+        "rate": 0.2857142857142857
+      },
+      "control": {
+        "regimen": "XLF055模拟剂+甲硝唑片",
+        "events": 6,
+        "n": 10,
+        "rate": 0.6
+      },
+      "interpretation": "Observed sparse Phase II evidence; not a stable treatment effect."
+    },
+    "phase3_protocol_planning_assumptions": {
+      "status": "planning_assumption_not_observed",
+      "test": {
+        "rate": 0.33
+      },
+      "control": {
+        "rate": 0.55
+      },
+      "denominator_reconciliation": "pending sponsor/statistical review",
+      "interpretation": "Protocol planning assumptions are kept separate from observed Phase II evidence."
+    }
+  }
+}

@@ -1,0 +1,28 @@
+# Secrets and environment-specific configuration
+.env
+.env.*
+!config/production.env.example
+*.pem
+*.key
+*.token
+*password*
+
+# Private Phase II data and fitted-model assets
+outputs/analysis_datasets/*
+!outputs/analysis_datasets/.gitkeep
+outputs/model_development/*
+!outputs/model_development/.gitkeep
+
+# Runtime state and generated files
+app/runtime/feedback/
+app/runtime/*.db*
+app/runtime/uploads/
+reports/
+*.log
+
+# Local Python/tooling artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.DS_Store
