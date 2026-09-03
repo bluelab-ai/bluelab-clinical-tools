@@ -1,0 +1,167 @@
+{
+  "code": "D_G2_ST",
+  "name": "各分析集受试者分布表（两组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "中心编号",
+      "description": "临床试验中心的编号标识"
+    },
+    {
+      "index": 1,
+      "name": "FAS-试验组",
+      "description": "全分析集（FAS）中试验组的受试者例数"
+    },
+    {
+      "index": 2,
+      "name": "FAS-对照组",
+      "description": "全分析集（FAS）中对照组的受试者例数"
+    },
+    {
+      "index": 3,
+      "name": "FAS-合计",
+      "description": "全分析集（FAS）中两组合计的受试者例数"
+    },
+    {
+      "index": 4,
+      "name": "PPS-试验组",
+      "description": "符合方案集（PPS）中试验组的受试者例数"
+    },
+    {
+      "index": 5,
+      "name": "PPS-对照组",
+      "description": "符合方案集（PPS）中对照组的受试者例数"
+    },
+    {
+      "index": 6,
+      "name": "PPS-合计",
+      "description": "符合方案集（PPS）中两组合计的受试者例数"
+    },
+    {
+      "index": 7,
+      "name": "SS-试验组",
+      "description": "安全性分析集（SS）中试验组的受试者例数"
+    },
+    {
+      "index": 8,
+      "name": "SS-对照组",
+      "description": "安全性分析集（SS）中对照组的受试者例数"
+    },
+    {
+      "index": 9,
+      "name": "SS-合计",
+      "description": "安全性分析集（SS）中两组合计的受试者例数"
+    }
+  ],
+  "sections": [
+    {
+      "type": "header",
+      "description": "表头行，采用两层合并结构：第一行为分析集名称，第二行为组别名称",
+      "rows": [
+        {
+          "level": 1,
+          "label": "中心编号",
+          "merged_columns": [0],
+          "sub_headers": [
+            {
+              "label": "FAS",
+              "merged_columns": [1, 2, 3]
+            },
+            {
+              "label": "PPS",
+              "merged_columns": [4, 5, 6]
+            },
+            {
+              "label": "SS",
+              "merged_columns": [7, 8, 9]
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "label": "中心编号",
+          "column": 0,
+          "sub_labels": [
+            { "label": "试验组", "column": 1 },
+            { "label": "对照组", "column": 2 },
+            { "label": "合计", "column": 3 },
+            { "label": "试验组", "column": 4 },
+            { "label": "对照组", "column": 5 },
+            { "label": "合计", "column": 6 },
+            { "label": "试验组", "column": 7 },
+            { "label": "对照组", "column": 8 },
+            { "label": "合计", "column": 9 }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "center_data",
+      "description": "各中心受试者入组数据行，按中心编号逐行列出",
+      "rows": [
+        {
+          "row_label": "中心编号",
+          "placeholder": "c1",
+          "data_values": [
+            "n1",
+            "n1",
+            "n1",
+            "n1",
+            "n1",
+            "n1",
+            "n1",
+            "n1",
+            "n1"
+          ],
+          "applies_to": [
+            "FAS-试验组",
+            "FAS-对照组",
+            "FAS-合计",
+            "PPS-试验组",
+            "PPS-对照组",
+            "PPS-合计",
+            "SS-试验组",
+            "SS-对照组",
+            "SS-合计"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "summary",
+      "description": "所有中心的合计行",
+      "rows": [
+        {
+          "row_label": "合计",
+          "data_values": [
+            "n1",
+            "n1",
+            "n1",
+            "n1",
+            "n1",
+            "n1",
+            "n1",
+            "n1",
+            "n1"
+          ],
+          "applies_to": [
+            "FAS-试验组",
+            "FAS-对照组",
+            "FAS-合计",
+            "PPS-试验组",
+            "PPS-对照组",
+            "PPS-合计",
+            "SS-试验组",
+            "SS-对照组",
+            "SS-合计"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "按中心编号重复数据行，每个中心占一行",
+    "variable_slots": ["中心编号"],
+    "rows_per_center": 1
+  }
+}

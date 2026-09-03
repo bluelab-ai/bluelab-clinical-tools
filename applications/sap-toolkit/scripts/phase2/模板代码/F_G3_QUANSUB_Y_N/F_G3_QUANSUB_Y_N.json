@@ -1,0 +1,153 @@
+{
+  "code": "F_G3_QUANSUB_Y_N",
+  "name": "定量指标亚组描述表（三组-有缺失）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "亚组",
+      "description": "亚组分类标识"
+    },
+    {
+      "index": 1,
+      "name": "项目",
+      "description": "指标名称（含单位）"
+    },
+    {
+      "index": 2,
+      "name": "指标",
+      "description": "描述性统计量"
+    },
+    {
+      "index": 3,
+      "name": "试验组A (N=n1)",
+      "description": "试验组A数据值"
+    },
+    {
+      "index": 4,
+      "name": "试验组B (N=n2)",
+      "description": "试验组B数据值"
+    },
+    {
+      "index": 5,
+      "name": "对照组 (N=n3)",
+      "description": "对照组数据值"
+    }
+  ],
+  "sections": [
+    {
+      "type": "subgroup_indicator_group",
+      "rows": [
+        {
+          "label_values": [
+            "XX亚组",
+            "指标XXX (单位)",
+            "例数(缺失)"
+          ],
+          "data_values": [
+            "n4 (n5)",
+            "n6 (n7)",
+            "n8 (n9)"
+          ],
+          "applies_to": [
+            "试验组A (N=n1)",
+            "试验组B (N=n2)",
+            "对照组 (N=n3)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "均值(标准差)"
+          ],
+          "data_values": [
+            "x.xx (x.xxx)",
+            "x.xx (x.xxx)",
+            "x.xx (x.xxx)"
+          ],
+          "applies_to": [
+            "试验组A (N=n1)",
+            "试验组B (N=n2)",
+            "对照组 (N=n3)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "中位数"
+          ],
+          "data_values": [
+            "x.xx",
+            "x.xx",
+            "x.xx"
+          ],
+          "applies_to": [
+            "试验组A (N=n1)",
+            "试验组B (N=n2)",
+            "对照组 (N=n3)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "第25%分位数,第75%分位数"
+          ],
+          "data_values": [
+            "x.xx, x.xx",
+            "x.xx, x.xx",
+            "x.xx, x.xx"
+          ],
+          "applies_to": [
+            "试验组A (N=n1)",
+            "试验组B (N=n2)",
+            "对照组 (N=n3)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "最小值,最大值"
+          ],
+          "data_values": [
+            "x.x, x.x",
+            "x.x, x.x",
+            "x.x, x.x"
+          ],
+          "applies_to": [
+            "试验组A (N=n1)",
+            "试验组B (N=n2)",
+            "对照组 (N=n3)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "缺失"
+          ],
+          "data_values": [
+            "n",
+            "n",
+            "n"
+          ],
+          "applies_to": [
+            "试验组A (N=n1)",
+            "试验组B (N=n2)",
+            "对照组 (N=n3)"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "按亚组分组，每个亚组内为多个指标重复此结构，每个指标占6行",
+    "variable_slots": [
+      "XX亚组",
+      "指标XXX (单位)"
+    ],
+    "rows_per_indicator": 6
+  }
+}

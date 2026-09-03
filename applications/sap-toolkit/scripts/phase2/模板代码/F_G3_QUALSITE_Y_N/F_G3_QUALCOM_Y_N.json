@@ -1,0 +1,167 @@
+{
+  "code": "F_G3_QUALCOM_Y_N",
+  "name": "定性指标比较表（多组-有缺失）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "组别1 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "组别2 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
+      "name": "…… (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 5,
+      "name": "合计 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_group",
+      "rows": [
+        {
+          "label_values": [
+            "指标XXX",
+            "例数(缺失)"
+          ],
+          "data_values": [
+            "n3 (n4)",
+            "n3 (n4)",
+            "n3 (n4)",
+            "n3 (n4)"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "分类1 n(%)"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "分类1的双侧95% CI(%)"
+          ],
+          "data_values": [
+            "x.x %, x.x %",
+            "x.x %, x.x %",
+            "x.x %, x.x %",
+            "x.x %, x.x %"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "分类2 n(%)"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "统计方法"
+          ],
+          "data_values": [
+            "xxx",
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "检验统计量"
+          ],
+          "data_values": [
+            "x.xxx",
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "P值"
+          ],
+          "data_values": [
+            "x.xxx",
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，每个指标占一组行",
+    "variable_slots": [
+      "指标XXX"
+    ],
+    "rows_per_indicator": 7
+  }
+}

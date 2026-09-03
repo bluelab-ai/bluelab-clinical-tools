@@ -1,0 +1,9 @@
+{
+  "table_name": "定性指标比较表",
+  "projects": [
+    {
+      "name": "性别",
+      "categories": ["男", "女"]
+    }
+  ]
+}

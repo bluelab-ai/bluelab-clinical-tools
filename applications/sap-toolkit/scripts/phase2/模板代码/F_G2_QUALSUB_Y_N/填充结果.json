@@ -1,0 +1,306 @@
+{
+  "code": "F_G2_QUALSUB_Y_N",
+  "name": "定性指标亚组分析表（两组-有缺失-有亚组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "亚组",
+      "description": "亚组分类标识"
+    },
+    {
+      "index": 1,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 3,
+      "name": "试验组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 5,
+      "name": "合计 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "indicators": [
+    {
+      "name": "头痛",
+      "display": "头痛",
+      "categories": [
+        "轻度",
+        "中度"
+      ],
+      "subgroups": [
+        {
+          "name": "年龄<65岁",
+          "rows": [
+            {
+              "metric": "例数(缺失)",
+              "placeholder": "n3 (n4)",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "轻度 n(%)",
+              "placeholder": "n2(x.x %)",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "轻度的双侧95% CI(%)",
+              "placeholder": "x.x %, x.x %",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "中度 n(%)",
+              "placeholder": "n2(x.x %)",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "统计方法",
+              "placeholder": "xxx",
+              "applies_to": [
+                "试验组 (N=n1)"
+              ]
+            },
+            {
+              "metric": "检验统计量",
+              "placeholder": "x.xxx",
+              "applies_to": [
+                "试验组 (N=n1)"
+              ]
+            },
+            {
+              "metric": "P值",
+              "placeholder": "x.xxx",
+              "applies_to": [
+                "试验组 (N=n1)"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "年龄≥65岁",
+          "rows": [
+            {
+              "metric": "例数(缺失)",
+              "placeholder": "n3 (n4)",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "轻度 n(%)",
+              "placeholder": "n2(x.x %)",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "轻度的双侧95% CI(%)",
+              "placeholder": "x.x %, x.x %",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "中度 n(%)",
+              "placeholder": "n2(x.x %)",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "统计方法",
+              "placeholder": "xxx",
+              "applies_to": [
+                "试验组 (N=n1)"
+              ]
+            },
+            {
+              "metric": "检验统计量",
+              "placeholder": "x.xxx",
+              "applies_to": [
+                "试验组 (N=n1)"
+              ]
+            },
+            {
+              "metric": "P值",
+              "placeholder": "x.xxx",
+              "applies_to": [
+                "试验组 (N=n1)"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "恶心",
+      "display": "恶心",
+      "categories": [
+        "轻度",
+        "中度"
+      ],
+      "subgroups": [
+        {
+          "name": "年龄<65岁",
+          "rows": [
+            {
+              "metric": "例数(缺失)",
+              "placeholder": "n3 (n4)",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "轻度 n(%)",
+              "placeholder": "n2(x.x %)",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "轻度的双侧95% CI(%)",
+              "placeholder": "x.x %, x.x %",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "中度 n(%)",
+              "placeholder": "n2(x.x %)",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "统计方法",
+              "placeholder": "xxx",
+              "applies_to": [
+                "试验组 (N=n1)"
+              ]
+            },
+            {
+              "metric": "检验统计量",
+              "placeholder": "x.xxx",
+              "applies_to": [
+                "试验组 (N=n1)"
+              ]
+            },
+            {
+              "metric": "P值",
+              "placeholder": "x.xxx",
+              "applies_to": [
+                "试验组 (N=n1)"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "年龄≥65岁",
+          "rows": [
+            {
+              "metric": "例数(缺失)",
+              "placeholder": "n3 (n4)",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "轻度 n(%)",
+              "placeholder": "n2(x.x %)",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "轻度的双侧95% CI(%)",
+              "placeholder": "x.x %, x.x %",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "中度 n(%)",
+              "placeholder": "n2(x.x %)",
+              "applies_to": [
+                "试验组 (N=n1)",
+                "对照组 (N=n1)",
+                "合计 (N=n1)"
+              ]
+            },
+            {
+              "metric": "统计方法",
+              "placeholder": "xxx",
+              "applies_to": [
+                "试验组 (N=n1)"
+              ]
+            },
+            {
+              "metric": "检验统计量",
+              "placeholder": "x.xxx",
+              "applies_to": [
+                "试验组 (N=n1)"
+              ]
+            },
+            {
+              "metric": "P值",
+              "placeholder": "x.xxx",
+              "applies_to": [
+                "试验组 (N=n1)"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

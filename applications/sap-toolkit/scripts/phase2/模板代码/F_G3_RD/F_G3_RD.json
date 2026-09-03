@@ -1,0 +1,109 @@
+{
+  "code": "F_G3_RD",
+  "name": "率差比较表（多组vs对照）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "指标分类标识，纵向合并同类指标行"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "具体统计指标描述"
+    },
+    {
+      "index": 2,
+      "name": "组别1 (N=n1)",
+      "description": "治疗组占位列，实际数据中按组别数量重复此列"
+    },
+    {
+      "index": 3,
+      "name": "对照组 (N=n1)",
+      "description": "对照组数据，率差行中此列留空"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_group",
+      "rows": [
+        {
+          "label_values": [
+            "指标XXX",
+            "XX分类n(%)"
+          ],
+          "data_values": [
+            "n(x.x %)",
+            "n(x.x %)"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "对照组 (N=n1)"
+          ],
+          "metric": "各组例数及百分比"
+        },
+        {
+          "label_values": [
+            "",
+            "XX分类的双侧95% CI(%)"
+          ],
+          "data_values": [
+            "x.x %, x.x %",
+            "x.x %, x.x %"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "对照组 (N=n1)"
+          ],
+          "metric": "各组率的双侧95%置信区间"
+        },
+        {
+          "label_values": [
+            "",
+            ""
+          ],
+          "data_values": [
+            "",
+            ""
+          ],
+          "applies_to": [],
+          "metric": "空行分隔"
+        },
+        {
+          "label_values": [
+            "",
+            "两组XX分类的率差(%)"
+          ],
+          "data_values": [
+            "x.x %"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)"
+          ],
+          "metric": "各治疗组与对照组的率差"
+        },
+        {
+          "label_values": [
+            "",
+            "两组XX分类的率差双侧95% CI(%)"
+          ],
+          "data_values": [
+            "x.x %, x.x %"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)"
+          ],
+          "metric": "各治疗组与对照组率差的双侧95%置信区间"
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "为每个指标重复此5行结构；组别1列按实际治疗组数量重复展开，对照组列始终为最后一列",
+    "variable_slots": [
+      "指标XXX",
+      "XX分类"
+    ],
+    "rows_per_indicator": 5
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "code": "F_G3_CROSS",
+  "name": "交叉表（治疗前与治疗后状态交叉）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "组别",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "治疗前",
+      "description": "分类标识"
+    },
+    {
+      "index": 3,
+      "name": "正常",
+      "description": "治疗后分组数据"
+    },
+    {
+      "index": 4,
+      "name": "异常无临床意义",
+      "description": "治疗后分组数据"
+    },
+    {
+      "index": 5,
+      "name": "异常有临床意义",
+      "description": "治疗后分组数据"
+    },
+    {
+      "index": 6,
+      "name": "未查",
+      "description": "治疗后分组数据"
+    },
+    {
+      "index": 7,
+      "name": "缺失",
+      "description": "治疗后分组数据"
+    },
+    {
+      "index": 8,
+      "name": "合计",
+      "description": "治疗后分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_header",
+      "rows": [
+        {
+          "label_values": [
+            "指标XXX",
+            "指标XXX",
+            "指标XXX",
+            "指标XXX",
+            "指标XXX",
+            "指标XXX",
+            "指标XXX",
+            "指标XXX",
+            "指标XXX"
+          ],
+          "metric": "指标XXX",
+          "placeholder": "指标XXX",
+          "applies_to": ["项目"]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "XX组(N=n1)",
+            "正常",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "metric": "治疗前状态",
+          "placeholder": "正常",
+          "applies_to": ["组别", "治疗前"]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "异常无临床意义",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "metric": "治疗前状态",
+          "placeholder": "异常无临床意义",
+          "applies_to": ["组别", "治疗前"]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "异常有临床意义",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "metric": "治疗前状态",
+          "placeholder": "异常有临床意义",
+          "applies_to": ["组别", "治疗前"]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "未查",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "metric": "治疗前状态",
+          "placeholder": "未查",
+          "applies_to": ["组别", "治疗前"]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "缺失",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "metric": "治疗前状态",
+          "placeholder": "缺失",
+          "applies_to": ["组别", "治疗前"]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "合计",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "metric": "治疗前状态",
+          "placeholder": "合计",
+          "applies_to": ["组别", "治疗前"]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "每个指标下按组别重复，每个组别包含治疗前各分类行；末尾追加合计组",
+    "variable_slots": [
+      "指标XXX",
+      "XX组(N=n1)"
+    ],
+    "rows_per_indicator_header": 1,
+    "rows_per_group": 6,
+    "baseline_categories": [
+      "正常",
+      "异常无临床意义",
+      "异常有临床意义",
+      "未查",
+      "缺失",
+      "合计"
+    ],
+    "post_treatment_columns": [
+      "正常",
+      "异常无临床意义",
+      "异常有临床意义",
+      "未查",
+      "缺失",
+      "合计"
+    ],
+    "data_format": "n2(x.x %)"
+  }
+}

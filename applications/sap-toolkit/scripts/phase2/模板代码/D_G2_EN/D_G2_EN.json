@@ -1,0 +1,166 @@
+{
+  "code": "D_G2_EN",
+  "name": "受试者入组与完成情况表（两组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "",
+      "description": "行分类分组标识（随机入组情况/试验完成情况/提前中止退出）"
+    },
+    {
+      "index": 1,
+      "name": "项目",
+      "description": "具体统计项目名称"
+    },
+    {
+      "index": 2,
+      "name": "试验组 (N=n1)",
+      "description": "试验组数据，格式为 n2(x.x %)"
+    },
+    {
+      "index": 3,
+      "name": "对照组 (N=n1)",
+      "description": "对照组数据，格式为 n2(x.x %)"
+    },
+    {
+      "index": 4,
+      "name": "合计 (N=n1)",
+      "description": "合计数据，格式为 n2(x.x %)"
+    }
+  ],
+  "sections": [
+    {
+      "type": "category_header",
+      "label": "随机入组情况",
+      "rows": [
+        {
+          "label_values": [
+            "随机入组"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category_header",
+      "label": "试验完成情况",
+      "rows": [
+        {
+          "label_values": [
+            "未完成研究"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "完成研究"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category_header",
+      "label": "提前中止退出",
+      "rows": [
+        {
+          "label_values": [
+            "原因1"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "原因2"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "原因3"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "……"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "提前中止退出原因为可变行数，可根据实际中止原因数量动态扩展",
+    "variable_slots": [
+      "原因1",
+      "原因2",
+      "原因3",
+      "……"
+    ],
+    "rows_per_reason": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "table_name": "交叉表",
+  "projects": [
+    {
+      "name": "收缩压",
+      "unit": "mmHg",
+      "groups": ["试验组", "对照组"]
+    }
+  ]
+}

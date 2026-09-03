@@ -1,0 +1,264 @@
+{
+  "code": "F_G2_QUANCOM_Y_N",
+  "name": "定量指标比较表（两组-有缺失）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "试验组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
+      "name": "合计 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_group",
+      "metric": "例数",
+      "placeholder": "n3 (n4)",
+      "rows": [
+        {
+          "label_values": [
+            "指标XXX (单位)",
+            "例数(缺失)"
+          ],
+          "data_values": [
+            "n3 (n4)",
+            "n3 (n4)",
+            "n3 (n4)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "indicator_group",
+      "metric": "均值(标准差)",
+      "placeholder": "x.xx (x.xxx)",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "均值(标准差)"
+          ],
+          "data_values": [
+            "x.xx (x.xxx)",
+            "x.xx (x.xxx)",
+            "x.xx (x.xxx)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "indicator_group",
+      "metric": "均值的双侧95% CI",
+      "placeholder": "x.xx,x.xx",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "均值的双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx,x.xx",
+            "x.xx,x.xx",
+            "x.xx,x.xx"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "indicator_group",
+      "metric": "中位数",
+      "placeholder": "x.xx",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "中位数"
+          ],
+          "data_values": [
+            "x.xx",
+            "x.xx",
+            "x.xx"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "indicator_group",
+      "metric": "中位数的双侧95% CI",
+      "placeholder": "x.xx,x.xx",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "中位数的双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx,x.xx",
+            "x.xx,x.xx",
+            "x.xx,x.xx"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "indicator_group",
+      "metric": "第25%分位数,第75%分位数",
+      "placeholder": "x.xx, x.xx",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "第25%分位数,第75%分位数"
+          ],
+          "data_values": [
+            "x.xx, x.xx",
+            "x.xx, x.xx",
+            "x.xx, x.xx"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "indicator_group",
+      "metric": "最小值,最大值",
+      "placeholder": "x.x, x.x",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "最小值,最大值"
+          ],
+          "data_values": [
+            "x.x, x.x",
+            "x.x, x.x",
+            "x.x, x.x"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "indicator_group",
+      "metric": "统计方法",
+      "placeholder": "xxx",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "统计方法"
+          ],
+          "data_values": [
+            "xxx",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "indicator_group",
+      "metric": "检验统计量",
+      "placeholder": "x.xxx",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "检验统计量"
+          ],
+          "data_values": [
+            "x.xxx",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "indicator_group",
+      "metric": "P值",
+      "placeholder": "x.xxx",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "P值"
+          ],
+          "data_values": [
+            "x.xxx",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，每个指标占一组行",
+    "variable_slots": [
+      "指标XXX (单位)"
+    ],
+    "rows_per_indicator": 10
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "code": "F_G1_QUANSUB_N_N",
+  "name": "定量指标亚组描述表（单组-无缺失）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "亚组",
+      "description": "亚组分类标识"
+    },
+    {
+      "index": 1,
+      "name": "项目",
+      "description": "指标名称（含单位）"
+    },
+    {
+      "index": 2,
+      "name": "指标",
+      "description": "描述性统计量"
+    },
+    {
+      "index": 3,
+      "name": "结果 (N=n1)",
+      "description": "数据值"
+    }
+  ],
+  "indicators": [
+    {
+      "name": "白细胞",
+      "unit": "10^9/L",
+      "display": "白细胞 (10^9/L)",
+      "subgroups": [
+        {
+          "name": "年龄<65岁",
+          "rows": [
+            {
+              "metric": "例数(缺失)",
+              "placeholder": "n3 (n4)",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "均值(标准差)",
+              "placeholder": "x.xx (x.xxx)",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "中位数",
+              "placeholder": "x.xx",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "第25%分位数,第75%分位数",
+              "placeholder": "x.xx, x.xx",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "最小值,最大值",
+              "placeholder": "x.x, x.x",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "年龄≥65岁",
+          "rows": [
+            {
+              "metric": "例数(缺失)",
+              "placeholder": "n3 (n4)",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "均值(标准差)",
+              "placeholder": "x.xx (x.xxx)",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "中位数",
+              "placeholder": "x.xx",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "第25%分位数,第75%分位数",
+              "placeholder": "x.xx, x.xx",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "最小值,最大值",
+              "placeholder": "x.x, x.x",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "红细胞",
+      "unit": "10^12/L",
+      "display": "红细胞 (10^12/L)",
+      "subgroups": [
+        {
+          "name": "年龄<65岁",
+          "rows": [
+            {
+              "metric": "例数(缺失)",
+              "placeholder": "n3 (n4)",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "均值(标准差)",
+              "placeholder": "x.xx (x.xxx)",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "中位数",
+              "placeholder": "x.xx",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "第25%分位数,第75%分位数",
+              "placeholder": "x.xx, x.xx",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "最小值,最大值",
+              "placeholder": "x.x, x.x",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "年龄≥65岁",
+          "rows": [
+            {
+              "metric": "例数(缺失)",
+              "placeholder": "n3 (n4)",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "均值(标准差)",
+              "placeholder": "x.xx (x.xxx)",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "中位数",
+              "placeholder": "x.xx",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "第25%分位数,第75%分位数",
+              "placeholder": "x.xx, x.xx",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "metric": "最小值,最大值",
+              "placeholder": "x.x, x.x",
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

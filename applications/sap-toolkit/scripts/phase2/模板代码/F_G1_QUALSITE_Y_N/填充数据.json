@@ -1,0 +1,9 @@
+{
+  "table_name": "人口学信息（FAS）",
+  "projects": [
+    {
+      "name": "性别",
+      "categories": ["男", "女"]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "code": "F_G3_QUANCOM_N_N",
+  "name": "定量指标比较表（多组-无缺失）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "组别1 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "组别2 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": -1,
+      "name": "…… (N=n1)",
+      "description": "分组数据（重复列）"
+    },
+    {
+      "index": -2,
+      "name": "合计 (N=n1)",
+      "description": "汇总数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "placeholder",
+      "label": "组别列",
+      "description": "动态生成的组别列，数量由实际分组决定",
+      "applies_to": ["组别1", "组别2", "……"]
+    },
+    {
+      "type": "metric",
+      "label": "例数(缺失)",
+      "data_template": "n3 (n4)",
+      "applies_to": ["组别1", "组别2", "……", "合计"]
+    },
+    {
+      "type": "metric",
+      "label": "均值(标准差)",
+      "data_template": "x.xx (x.xxx)",
+      "applies_to": ["组别1", "组别2", "……", "合计"]
+    },
+    {
+      "type": "metric",
+      "label": "中位数",
+      "data_template": "x.xx",
+      "applies_to": ["组别1", "组别2", "……", "合计"]
+    },
+    {
+      "type": "metric",
+      "label": "第25%分位数,第75%分位数",
+      "data_template": "x.xx, x.xx",
+      "applies_to": ["组别1", "组别2", "……", "合计"]
+    },
+    {
+      "type": "metric",
+      "label": "最小值,最大值",
+      "data_template": "x.x, x.x",
+      "applies_to": ["组别1", "组别2", "……", "合计"]
+    },
+    {
+      "type": "metric",
+      "label": "统计方法",
+      "data_template": "xxx",
+      "applies_to": ["合计"]
+    },
+    {
+      "type": "metric",
+      "label": "检验统计量",
+      "data_template": "x.xxx",
+      "applies_to": ["合计"]
+    },
+    {
+      "type": "metric",
+      "label": "P值",
+      "data_template": "x.xxx",
+      "applies_to": ["合计"]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "每个指标重复一组描述统计和检验统计行",
+    "variable_slots": ["指标XXX (单位)"],
+    "rows_per_indicator": 8
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "code": "F_G3_LOGISTIC",
+  "name": "Logistic回归分析表（多组-对照）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "组别1 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "组别2 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
+      "name": "…… (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 5,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_group",
+      "label": "分类统计",
+      "rows": [
+        {
+          "label_values": [
+            "指标XXX",
+            "XX分类n(%)"
+          ],
+          "data_values": [
+            "n(x.x %)",
+            "n(x.x %)",
+            "n(x.x %)",
+            "n(x.x %)"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "XX分类的双侧95% CI(%)"
+          ],
+          "data_values": [
+            "x.x %, x.x %",
+            "x.x %, x.x %",
+            "x.x %, x.x %",
+            "x.x %, x.x %"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "检验统计量"
+          ],
+          "data_values": [
+            "x.xxx",
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "P值"
+          ],
+          "data_values": [
+            "x.xxx",
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "separator",
+      "rows": [
+        {
+          "label_values": ["", ""],
+          "data_values": ["", "", "", ""],
+          "applies_to": []
+        }
+      ]
+    },
+    {
+      "type": "comparison_group",
+      "label": "OR比较（vs对照组）",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "比值比OR"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx",
+            "x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "比值比OR的双侧95% CI"
+          ],
+          "data_values": [
+            "x.xxx, x.xxx",
+            "x.xxx, x.xxx",
+            "x.xxx, x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "检验统计量"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx",
+            "x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "P值"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx",
+            "x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，每个指标占一组行",
+    "variable_slots": [
+      "指标XXX"
+    ],
+    "rows_per_indicator": 10
+  }
+}

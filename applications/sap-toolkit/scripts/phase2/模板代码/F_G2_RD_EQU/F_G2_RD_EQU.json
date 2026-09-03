@@ -1,0 +1,177 @@
+{
+  "code": "F_G2_RD_EQU",
+  "name": "率差等效性分析表（两组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "试验组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_group",
+      "rows": [
+        {
+          "metric": "XX分类频数和百分比",
+          "placeholder": [
+            "指标XXX",
+            "XX分类n(%)"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "metric": "XX分类的双侧95% CI",
+          "placeholder": [
+            "",
+            "XX分类的双侧95% CI(%)"
+          ],
+          "data_values": [
+            "x.x %, x.x %",
+            "x.x %, x.x %"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "metric": "空行分隔",
+          "placeholder": [
+            "",
+            ""
+          ],
+          "data_values": [
+            "",
+            ""
+          ],
+          "applies_to": []
+        },
+        {
+          "metric": "组间率差",
+          "placeholder": [
+            "",
+            "组间率差(%)"
+          ],
+          "data_values": [
+            "x.x %",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "metric": "组间率差的双侧95% CI",
+          "placeholder": [
+            "",
+            "组间率差的双侧95% CI(%)"
+          ],
+          "data_values": [
+            "x.x %, x.x %",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "metric": "空行分隔",
+          "placeholder": [
+            "",
+            ""
+          ],
+          "data_values": [
+            "",
+            ""
+          ],
+          "applies_to": []
+        },
+        {
+          "metric": "等效性界值",
+          "placeholder": [
+            "",
+            "等效性界值"
+          ],
+          "data_values": [
+            "下限 VS. -x.x %",
+            "上限 VS. x.x %"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "metric": "检验统计量",
+          "placeholder": [
+            "",
+            "检验统计量"
+          ],
+          "data_values": [
+            "x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "metric": "P值（单侧）",
+          "placeholder": [
+            "",
+            "P值(单侧)"
+          ],
+          "data_values": [
+            "x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "metric": "空行分隔",
+          "placeholder": [
+            "",
+            ""
+          ],
+          "data_values": [
+            "",
+            ""
+          ],
+          "applies_to": []
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，每个指标占一组行",
+    "variable_slots": [
+      "指标XXX"
+    ],
+    "rows_per_indicator": 10
+  }
+}

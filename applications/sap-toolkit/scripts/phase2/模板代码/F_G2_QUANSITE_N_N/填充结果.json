@@ -1,0 +1,217 @@
+{
+  "code": "F_G2_QUANCOM_N_N",
+  "name": "定量指标比较表（两组-无缺失）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "试验组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
+      "name": "合计 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "indicators": [
+    {
+      "name": "收缩压",
+      "unit": "mmHg",
+      "display": "收缩压 (mmHg)",
+      "rows": [
+        {
+          "metric": "例数(缺失)",
+          "placeholder": "n3 (n4)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": "收缩压 (mmHg)",
+          "center": "中心01"
+        },
+        {
+          "metric": "均值(标准差)",
+          "placeholder": "x.xx (x.xxx)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": "",
+          "center": ""
+        },
+        {
+          "metric": "中位数",
+          "placeholder": "x.xx",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": "",
+          "center": ""
+        },
+        {
+          "metric": "第25%分位数,第75%分位数",
+          "placeholder": "x.xx, x.xx",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": "",
+          "center": ""
+        },
+        {
+          "metric": "最小值,最大值",
+          "placeholder": "x.x, x.x",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": "",
+          "center": ""
+        },
+        {
+          "metric": "统计方法",
+          "placeholder": "xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ],
+          "indicator": "",
+          "center": ""
+        },
+        {
+          "metric": "检验统计量",
+          "placeholder": "x.xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ],
+          "indicator": "",
+          "center": ""
+        },
+        {
+          "metric": "P值",
+          "placeholder": "x.xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ],
+          "indicator": "",
+          "center": ""
+        }
+      ],
+      "centers": [
+        "中心01"
+      ]
+    },
+    {
+      "name": "舒张压",
+      "unit": "mmHg",
+      "display": "舒张压 (mmHg)",
+      "rows": [
+        {
+          "metric": "例数(缺失)",
+          "placeholder": "n3 (n4)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": "舒张压 (mmHg)",
+          "center": "中心01"
+        },
+        {
+          "metric": "均值(标准差)",
+          "placeholder": "x.xx (x.xxx)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": "",
+          "center": ""
+        },
+        {
+          "metric": "中位数",
+          "placeholder": "x.xx",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": "",
+          "center": ""
+        },
+        {
+          "metric": "第25%分位数,第75%分位数",
+          "placeholder": "x.xx, x.xx",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": "",
+          "center": ""
+        },
+        {
+          "metric": "最小值,最大值",
+          "placeholder": "x.x, x.x",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": "",
+          "center": ""
+        },
+        {
+          "metric": "统计方法",
+          "placeholder": "xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ],
+          "indicator": "",
+          "center": ""
+        },
+        {
+          "metric": "检验统计量",
+          "placeholder": "x.xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ],
+          "indicator": "",
+          "center": ""
+        },
+        {
+          "metric": "P值",
+          "placeholder": "x.xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ],
+          "indicator": "",
+          "center": ""
+        }
+      ],
+      "centers": [
+        "中心01"
+      ]
+    }
+  ]
+}

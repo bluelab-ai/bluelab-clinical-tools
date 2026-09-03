@@ -1,0 +1,513 @@
+{
+  "code": "E_G3_FREQ1",
+  "name": "不良事件频率表（多组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "事件分类标识，支持多级缩进表示层级关系"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "统计指标类型（例次/人数(%)）"
+    },
+    {
+      "index": 2,
+      "name": "组别1 例次",
+      "description": "第一治疗组事件发生例次"
+    },
+    {
+      "index": 3,
+      "name": "组别1 人数(%)",
+      "description": "第一治疗组发生事件的受试者人数及占该组总人数的百分比"
+    },
+    {
+      "index": 4,
+      "name": "组别2 例次",
+      "description": "第二治疗组事件发生例次"
+    },
+    {
+      "index": 5,
+      "name": "组别2 人数(%)",
+      "description": "第二治疗组发生事件的受试者人数及占该组总人数的百分比"
+    },
+    {
+      "index": 6,
+      "name": "合计 例次",
+      "description": "全部受试者事件发生例次合计"
+    },
+    {
+      "index": 7,
+      "name": "合计 人数(%)",
+      "description": "全部受试者发生事件的人数及占总人数的百分比"
+    },
+    {
+      "index": 8,
+      "name": "P值",
+      "description": "各治疗组间频率比较的统计检验P值"
+    }
+  ],
+  "sections": [
+    {
+      "type": "summary",
+      "label_values": [
+        "所有XXX事件",
+        "例次"
+      ],
+      "data_values": [
+        "x",
+        "x",
+        "x"
+      ],
+      "applies_to": [
+        "组别1 例次",
+        "组别2 例次",
+        "合计 例次"
+      ]
+    },
+    {
+      "type": "summary",
+      "label_values": [
+        "",
+        "人数(%)"
+      ],
+      "data_values": [
+        "n2(x.x %)",
+        "n2(x.x %)",
+        "n2(x.x %)"
+      ],
+      "applies_to": [
+        "组别1 人数(%)",
+        "组别2 人数(%)",
+        "合计 人数(%)"
+      ]
+    },
+    {
+      "type": "summary",
+      "label_values": [
+        "",
+        "P值"
+      ],
+      "data_values": [
+        "x.xxx"
+      ],
+      "applies_to": [
+        "P值"
+      ]
+    },
+    {
+      "type": "category",
+      "label_values": [
+        "A分类",
+        "例次"
+      ],
+      "data_values": [
+        "x",
+        "x",
+        "x"
+      ],
+      "applies_to": [
+        "组别1 例次",
+        "组别2 例次",
+        "合计 例次"
+      ]
+    },
+    {
+      "type": "category",
+      "label_values": [
+        "",
+        "人数(%)"
+      ],
+      "data_values": [
+        "n2(x.x %)",
+        "n2(x.x %)",
+        "n2(x.x %)"
+      ],
+      "applies_to": [
+        "组别1 人数(%)",
+        "组别2 人数(%)",
+        "合计 人数(%)"
+      ]
+    },
+    {
+      "type": "category",
+      "label_values": [
+        "",
+        "P值"
+      ],
+      "data_values": [
+        "x.xxx"
+      ],
+      "applies_to": [
+        "P值"
+      ]
+    },
+    {
+      "type": "category",
+      "label_values": [
+        "B分类",
+        "例次"
+      ],
+      "data_values": [
+        "x",
+        "x",
+        "x"
+      ],
+      "applies_to": [
+        "组别1 例次",
+        "组别2 例次",
+        "合计 例次"
+      ]
+    },
+    {
+      "type": "category",
+      "label_values": [
+        "",
+        "人数(%)"
+      ],
+      "data_values": [
+        "n2(x.x %)",
+        "n2(x.x %)",
+        "n2(x.x %)"
+      ],
+      "applies_to": [
+        "组别1 人数(%)",
+        "组别2 人数(%)",
+        "合计 人数(%)"
+      ]
+    },
+    {
+      "type": "category",
+      "label_values": [
+        "",
+        "P值"
+      ],
+      "data_values": [
+        "x.xxx"
+      ],
+      "applies_to": [
+        "P值"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "B分类",
+      "label_values": [
+        "B分类子类1",
+        "例次"
+      ],
+      "data_values": [
+        "x",
+        "x",
+        "x"
+      ],
+      "applies_to": [
+        "组别1 例次",
+        "组别2 例次",
+        "合计 例次"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "B分类",
+      "label_values": [
+        "",
+        "人数(%)"
+      ],
+      "data_values": [
+        "n2(x.x %)",
+        "n2(x.x %)",
+        "n2(x.x %)"
+      ],
+      "applies_to": [
+        "组别1 人数(%)",
+        "组别2 人数(%)",
+        "合计 人数(%)"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "B分类",
+      "label_values": [
+        "",
+        "P值"
+      ],
+      "data_values": [
+        "x.xxx"
+      ],
+      "applies_to": [
+        "P值"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "B分类",
+      "label_values": [
+        "B分类子类2",
+        "例次"
+      ],
+      "data_values": [
+        "x",
+        "x",
+        "x"
+      ],
+      "applies_to": [
+        "组别1 例次",
+        "组别2 例次",
+        "合计 例次"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "B分类",
+      "label_values": [
+        "",
+        "人数(%)"
+      ],
+      "data_values": [
+        "n2(x.x %)",
+        "n2(x.x %)",
+        "n2(x.x %)"
+      ],
+      "applies_to": [
+        "组别1 人数(%)",
+        "组别2 人数(%)",
+        "合计 人数(%)"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "B分类",
+      "label_values": [
+        "",
+        "P值"
+      ],
+      "data_values": [
+        "x.xxx"
+      ],
+      "applies_to": [
+        "P值"
+      ]
+    },
+    {
+      "type": "category",
+      "label_values": [
+        "C分类",
+        "例次"
+      ],
+      "data_values": [
+        "x",
+        "x",
+        "x"
+      ],
+      "applies_to": [
+        "组别1 例次",
+        "组别2 例次",
+        "合计 例次"
+      ]
+    },
+    {
+      "type": "category",
+      "label_values": [
+        "",
+        "人数(%)"
+      ],
+      "data_values": [
+        "n2(x.x %)",
+        "n2(x.x %)",
+        "n2(x.x %)"
+      ],
+      "applies_to": [
+        "组别1 人数(%)",
+        "组别2 人数(%)",
+        "合计 人数(%)"
+      ]
+    },
+    {
+      "type": "category",
+      "label_values": [
+        "",
+        "P值"
+      ],
+      "data_values": [
+        "x.xxx"
+      ],
+      "applies_to": [
+        "P值"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "C分类",
+      "label_values": [
+        "C分类子类1",
+        "例次"
+      ],
+      "data_values": [
+        "x",
+        "x",
+        "x"
+      ],
+      "applies_to": [
+        "组别1 例次",
+        "组别2 例次",
+        "合计 例次"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "C分类",
+      "label_values": [
+        "",
+        "人数(%)"
+      ],
+      "data_values": [
+        "n2(x.x %)",
+        "n2(x.x %)",
+        "n2(x.x %)"
+      ],
+      "applies_to": [
+        "组别1 人数(%)",
+        "组别2 人数(%)",
+        "合计 人数(%)"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "C分类",
+      "label_values": [
+        "",
+        "P值"
+      ],
+      "data_values": [
+        "x.xxx"
+      ],
+      "applies_to": [
+        "P值"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "C分类",
+      "label_values": [
+        "C分类子类2",
+        "例次"
+      ],
+      "data_values": [
+        "x",
+        "x",
+        "x"
+      ],
+      "applies_to": [
+        "组别1 例次",
+        "组别2 例次",
+        "合计 例次"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "C分类",
+      "label_values": [
+        "",
+        "人数(%)"
+      ],
+      "data_values": [
+        "n2(x.x %)",
+        "n2(x.x %)",
+        "n2(x.x %)"
+      ],
+      "applies_to": [
+        "组别1 人数(%)",
+        "组别2 人数(%)",
+        "合计 人数(%)"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "C分类",
+      "label_values": [
+        "",
+        "P值"
+      ],
+      "data_values": [
+        "x.xxx"
+      ],
+      "applies_to": [
+        "P值"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "C分类",
+      "label_values": [
+        "C分类子类3",
+        "例次"
+      ],
+      "data_values": [
+        "x",
+        "x",
+        "x"
+      ],
+      "applies_to": [
+        "组别1 例次",
+        "组别2 例次",
+        "合计 例次"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "C分类",
+      "label_values": [
+        "",
+        "人数(%)"
+      ],
+      "data_values": [
+        "n2(x.x %)",
+        "n2(x.x %)",
+        "n2(x.x %)"
+      ],
+      "applies_to": [
+        "组别1 人数(%)",
+        "组别2 人数(%)",
+        "合计 人数(%)"
+      ]
+    },
+    {
+      "type": "subcategory",
+      "parent": "C分类",
+      "label_values": [
+        "",
+        "P值"
+      ],
+      "data_values": [
+        "x.xxx"
+      ],
+      "applies_to": [
+        "P值"
+      ]
+    },
+    {
+      "type": "placeholder",
+      "label_values": [
+        "……",
+        ""
+      ],
+      "data_values": [],
+      "applies_to": []
+    }
+  ],
+  "repeat_pattern": {
+    "description": "治疗组列（例次+人数(%)）可按实际组数重复，最后一个重复组后紧跟合计列和P值列",
+    "variable_slots": [
+      "组别名称",
+      "n1（组内样本量）",
+      "n2（发生事件人数）",
+      "x.x（百分比）",
+      "x（例次数）",
+      "x.xxx（P值）"
+    ],
+    "columns_per_group": 2,
+    "rows_per_category": 3
+  }
+}

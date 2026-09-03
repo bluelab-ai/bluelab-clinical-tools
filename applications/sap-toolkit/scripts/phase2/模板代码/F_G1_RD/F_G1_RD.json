@@ -1,0 +1,60 @@
+{
+  "code": "F_G1_RD",
+  "name": "率差比较表（单组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "结果 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_group",
+      "rows": [
+        {
+          "label_values": [
+            "指标XXX",
+            "XX分类n(%)"
+          ],
+          "data_values": [
+            "n(x.x %)"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "XX分类的双侧95% CI(%)"
+          ],
+          "data_values": [
+            "x.x %, x.x %"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，每个指标占一组行",
+    "variable_slots": [
+      "指标XXX",
+      "XX分类"
+    ],
+    "rows_per_indicator": 2
+  }
+}

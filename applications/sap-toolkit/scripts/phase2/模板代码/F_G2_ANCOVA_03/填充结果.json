@@ -1,0 +1,121 @@
+{
+  "code": "F_G2_ANCOVA_03",
+  "name": "组间修正均数描述及比较（两组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "指标名称标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "统计项标识"
+    },
+    {
+      "index": 2,
+      "name": "组别1 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "组别2 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
+      "name": "检验统计量",
+      "description": "F值或t值"
+    },
+    {
+      "index": 5,
+      "name": "P值",
+      "description": "显著性检验P值"
+    }
+  ],
+  "indicators": [
+    {
+      "name": "吻/缝合口漏气持续时间",
+      "unit": "天",
+      "display": "吻/缝合口漏气持续时间 (天)",
+      "rows": [
+        {
+          "label_values": [
+            "吻/缝合口漏气持续时间 (天)",
+            "最小二乘均数(标准误)"
+          ],
+          "data_values": [
+            "x.xx(x.xxx)",
+            "x.xx(x.xxx)"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "最小二乘均数双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx,x.xx",
+            "x.xx,x.xx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "组间比较"
+          ],
+          "data_values": [
+            "",
+            "",
+            "x.xxx",
+            "x.xxx"
+          ],
+          "applies_to": [
+            "检验统计量",
+            "P值"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "两组最小二乘均数差值"
+          ],
+          "data_values": [
+            "x.xx",
+            "",
+            "x.xxx",
+            "x.xxx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "检验统计量",
+            "P值"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "两组最小二乘均数差值双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx,x.xx",
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)"
+          ]
+        }
+      ]
+    }
+  ]
+}

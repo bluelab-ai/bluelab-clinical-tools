@@ -1,0 +1,9 @@
+{
+  "table_name": "相对危险度表",
+  "projects": [
+    {
+      "name": "性别",
+      "categories": ["男", "女"]
+    }
+  ]
+}

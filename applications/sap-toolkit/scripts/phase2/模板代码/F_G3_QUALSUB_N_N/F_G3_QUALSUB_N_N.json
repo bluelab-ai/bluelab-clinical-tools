@@ -1,0 +1,175 @@
+{
+  "code": "F_G3_QUALSUB_N_N",
+  "name": "定性指标亚组分析表（多组-无缺失）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "亚组",
+      "description": "亚组分类标识"
+    },
+    {
+      "index": 1,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 3,
+      "name": "组别1 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
+      "name": "组别2 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 5,
+      "name": "…… (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 6,
+      "name": "合计 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "subgroup_indicator_block",
+      "rows": [
+        {
+          "label_values": [
+            "XX亚组",
+            "指标XXX",
+            "例数(缺失)"
+          ],
+          "data_values": [
+            "n3 (n4)",
+            "n3 (n4)",
+            "n3 (n4)",
+            "n3 (n4)"
+          ],
+          "metric": "例数(缺失)",
+          "placeholder": "n3 (n4)",
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "分类1 n(%)"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "metric": "分类n(%)",
+          "placeholder": "n2(x.x %)",
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "分类2 n(%)"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "metric": "分类n(%)",
+          "placeholder": "n2(x.x %)",
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "统计方法"
+          ],
+          "data_values": [
+            "xxx",
+            "",
+            "",
+            ""
+          ],
+          "metric": "统计方法",
+          "placeholder": "xxx",
+          "applies_to": [
+            "组别1 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "检验统计量"
+          ],
+          "data_values": [
+            "x.xxx",
+            "",
+            "",
+            ""
+          ],
+          "metric": "检验统计量",
+          "placeholder": "x.xxx",
+          "applies_to": [
+            "组别1 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "",
+            "P值"
+          ],
+          "data_values": [
+            "x.xxx",
+            "",
+            "",
+            ""
+          ],
+          "metric": "P值",
+          "placeholder": "x.xxx",
+          "applies_to": [
+            "组别1 (N=n1)"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "按亚组和指标重复此结构，每个亚组-指标组合占一组行；每个指标的分类数可变",
+    "variable_slots": [
+      "XX亚组",
+      "指标XXX",
+      "分类1",
+      "分类2"
+    ],
+    "rows_per_block": 6
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "code": "D_G0_SC",
+  "name": "受试者筛选情况汇总表",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "筛选流程分类标识"
+    },
+    {
+      "index": 1,
+      "name": "合计 (N=n1)",
+      "description": "合计人数及百分比"
+    }
+  ],
+  "sections": [
+    {
+      "type": "header",
+      "rows": [
+        {
+          "label_values": [
+            "筛选受试者"
+          ],
+          "data_values": [
+            "N=n1"
+          ],
+          "applies_to": [
+            "合计 (N=n1)"
+          ],
+          "metric": "筛选总人数",
+          "placeholder": "n1"
+        }
+      ]
+    },
+    {
+      "type": "outcome_group",
+      "rows": [
+        {
+          "label_values": [
+            "筛选成功"
+          ],
+          "data_values": [
+            "n2 (x.x %)"
+          ],
+          "applies_to": [
+            "合计 (N=n1)"
+          ],
+          "metric": "筛选成功人数及占比",
+          "placeholder": "n2 (x.x %)"
+        },
+        {
+          "label_values": [
+            "随机入组"
+          ],
+          "data_values": [
+            "n2 (x.x %)"
+          ],
+          "applies_to": [
+            "合计 (N=n1)"
+          ],
+          "metric": "随机入组人数及占比",
+          "placeholder": "n2 (x.x %)"
+        },
+        {
+          "label_values": [
+            "未随机入组"
+          ],
+          "data_values": [
+            "n2 (x.x %)"
+          ],
+          "applies_to": [
+            "合计 (N=n1)"
+          ],
+          "metric": "未随机入组人数及占比",
+          "placeholder": "n2 (x.x %)"
+        }
+      ]
+    },
+    {
+      "type": "failure_group",
+      "rows": [
+        {
+          "label_values": [
+            "筛选失败"
+          ],
+          "data_values": [
+            "n2 (x.x %)"
+          ],
+          "applies_to": [
+            "合计 (N=n1)"
+          ],
+          "metric": "筛选失败总人数及占比",
+          "placeholder": "n2 (x.x %)"
+        },
+        {
+          "label_values": [
+            "失败原因1"
+          ],
+          "data_values": [
+            "n2 (x.x %)"
+          ],
+          "applies_to": [
+            "合计 (N=n1)"
+          ],
+          "metric": "各失败原因人数及占比",
+          "placeholder": "n2 (x.x %)"
+        },
+        {
+          "label_values": [
+            "失败原因2"
+          ],
+          "data_values": [
+            "n2 (x.x %)"
+          ],
+          "applies_to": [
+            "合计 (N=n1)"
+          ],
+          "metric": "各失败原因人数及占比",
+          "placeholder": "n2 (x.x %)"
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "失败原因行可按实际原因数量重复，每个失败原因占一行",
+    "variable_slots": [
+      "失败原因N"
+    ],
+    "rows_per_failure_reason": 1,
+    "parent_section": "failure_group",
+    "start_after": "筛选失败"
+  }
+}

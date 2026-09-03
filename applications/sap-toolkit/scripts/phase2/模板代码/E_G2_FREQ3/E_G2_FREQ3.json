@@ -1,0 +1,146 @@
+{
+  "code": "E_G2_FREQ3",
+  "name": "按MedDRA编码的不良事件频次表（三组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "SOC/PT",
+      "description": "MedDRA系统器官分类/首选术语"
+    },
+    {
+      "index": 1,
+      "name": "组别1 (N=n1)",
+      "description": "分组数据-例次"
+    },
+    {
+      "index": 2,
+      "name": "组别1 (N=n1)",
+      "description": "分组数据-人数(%)"
+    },
+    {
+      "index": 3,
+      "name": "组别2 (N=n1)",
+      "description": "分组数据-例次"
+    },
+    {
+      "index": 4,
+      "name": "组别2 (N=n1)",
+      "description": "分组数据-人数(%)"
+    },
+    {
+      "index": 5,
+      "name": "合计 (N=n1)",
+      "description": "分组数据-例次"
+    },
+    {
+      "index": 6,
+      "name": "合计 (N=n1)",
+      "description": "分组数据-人数(%)"
+    },
+    {
+      "index": 7,
+      "name": "P值",
+      "description": "统计检验P值"
+    }
+  ],
+  "sections": [
+    {
+      "type": "soc_group",
+      "rows": [
+        {
+          "level": "SOC",
+          "label_values": [
+            "SOC名称"
+          ],
+          "data_values": [
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x.xxx"
+          ],
+          "metric": [
+            "例次",
+            "人数(%)",
+            "例次",
+            "人数(%)",
+            "例次",
+            "人数(%)",
+            "P值"
+          ],
+          "placeholder": [
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x.xxx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "组别2 (N=n1)",
+            "合计 (N=n1)",
+            "合计 (N=n1)",
+            "P值"
+          ]
+        },
+        {
+          "level": "PT",
+          "label_values": [
+            "PT名称"
+          ],
+          "data_values": [
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x.xxx"
+          ],
+          "metric": [
+            "例次",
+            "人数(%)",
+            "例次",
+            "人数(%)",
+            "例次",
+            "人数(%)",
+            "P值"
+          ],
+          "placeholder": [
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x.xxx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "组别2 (N=n1)",
+            "合计 (N=n1)",
+            "合计 (N=n1)",
+            "P值"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "按SOC分组，每个SOC下包含若干PT行；可为多个SOC/PT重复此结构",
+    "variable_slots": [
+      "SOC名称",
+      "PT名称"
+    ],
+    "rows_per_soc": 2,
+    "hierarchy": "SOC -> PT（SOC为父级，PT为子级缩进行）"
+  }
+}

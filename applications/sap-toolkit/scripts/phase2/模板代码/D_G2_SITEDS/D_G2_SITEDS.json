@@ -1,0 +1,87 @@
+{
+  "code": "D_G2_SITEDS",
+  "name": "各中心受试者分布表（两组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "中心编号",
+      "description": "临床试验参与中心的编号，按数字顺序排列"
+    },
+    {
+      "index": 1,
+      "name": "中心名称",
+      "description": "临床试验参与中心的名称"
+    },
+    {
+      "index": 2,
+      "name": "组别",
+      "description": "受试者分组标识，含试验组、对照组和合计"
+    },
+    {
+      "index": 3,
+      "name": "入组数",
+      "description": "各中心各组入组的受试者例数"
+    },
+    {
+      "index": 4,
+      "name": "脱落人数(%)",
+      "description": "各中心各组脱落的受试者人数及其占入组数的百分比"
+    },
+    {
+      "index": 5,
+      "name": "完成人数(%)",
+      "description": "各中心各组完成试验的受试者人数及其占入组数的百分比"
+    }
+  ],
+  "sections": [
+    {
+      "type": "center_block",
+      "description": "按中心重复的数据块，每个中心包含3行（试验组、对照组、小计）",
+      "rows": [
+        {
+          "label_values": ["{{中心编号}}", "{{中心名称}}", "试验组"],
+          "data_values": ["n1", "n2(x.x %)", "n2(x.x %)"],
+          "applies_to": ["组别", "入组数", "脱落人数(%)", "完成人数(%)"]
+        },
+        {
+          "label_values": ["", "", "对照组"],
+          "data_values": ["n1", "n2(x.x %)", "n2(x.x %)"],
+          "applies_to": ["组别", "入组数", "脱落人数(%)", "完成人数(%)"]
+        },
+        {
+          "label_values": ["", "", "合计"],
+          "data_values": ["n1", "n2(x.x %)", "n2(x.x %)"],
+          "applies_to": ["组别", "入组数", "脱落人数(%)", "完成人数(%)"]
+        }
+      ]
+    },
+    {
+      "type": "total_block",
+      "description": "全部中心汇总数据，结构与单个中心相同",
+      "rows": [
+        {
+          "label_values": ["合计", "", "试验组"],
+          "data_values": ["n1", "n2(x.x %)", "n2(x.x %)"],
+          "applies_to": ["组别", "入组数", "脱落人数(%)", "完成人数(%)"]
+        },
+        {
+          "label_values": ["", "", "对照组"],
+          "data_values": ["n1", "n2(x.x %)", "n2(x.x %)"],
+          "applies_to": ["组别", "入组数", "脱落人数(%)", "完成人数(%)"]
+        },
+        {
+          "label_values": ["", "", "合计"],
+          "data_values": ["n1", "n2(x.x %)", "n2(x.x %)"],
+          "applies_to": ["组别", "入组数", "脱落人数(%)", "完成人数(%)"]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "center_block 按实际中心数量重复，每个中心生成3行；total_block 固定出现在末尾",
+    "variable_slots": ["中心编号", "中心名称"],
+    "rows_per_center": 3,
+    "groups": ["试验组", "对照组", "合计"],
+    "total_block_rows": 3
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "code": "F_G1_TTE",
+  "name": "生存分析表（Time-to-Event）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "结果 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_group",
+      "rows": [
+        {
+          "label_values": [
+            "指标XXX",
+            "例数(缺失)"
+          ],
+          "data_values": [
+            "n3 (n4)"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "事件数"
+          ],
+          "data_values": [
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "删失数"
+          ],
+          "data_values": [
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            ""
+          ],
+          "data_values": [
+            ""
+          ],
+          "applies_to": [],
+          "note": "空行分隔"
+        },
+        {
+          "label_values": [
+            "",
+            "XXX（天/月/年）"
+          ],
+          "data_values": [
+            ""
+          ],
+          "applies_to": [],
+          "metric": "time_unit",
+          "note": "时间单位标题行"
+        },
+        {
+          "label_values": [
+            "",
+            "第25%分位数"
+          ],
+          "data_values": [
+            "x.xx"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "第25%分位数双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx, x.xx"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "中位数"
+          ],
+          "data_values": [
+            "x.xx"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "中位数的双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx, x.xx"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "第75%分位数"
+          ],
+          "data_values": [
+            "x.xx"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "第75%分位数双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx, x.xx"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "均值(标准误)"
+          ],
+          "data_values": [
+            "x.xx (x.xxx)"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，每个指标占一组行",
+    "variable_slots": [
+      "指标XXX",
+      "XXX（天/月/年）"
+    ],
+    "rows_per_indicator": 13
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "code": "F_G2_RD_SUP",
+  "name": "率差优效性检验表（两组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "试验组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_group",
+      "rows": [
+        {
+          "label_values": [
+            "指标XXX",
+            "XX分类n(%)"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "XX分类的双侧95% CI(%)"
+          ],
+          "data_values": [
+            "x.x %, x.x %",
+            "x.x %, x.x %"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            ""
+          ],
+          "data_values": [
+            "",
+            ""
+          ],
+          "applies_to": []
+        },
+        {
+          "label_values": [
+            "",
+            "组间率差(%)"
+          ],
+          "data_values": [
+            "x.x %",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "组间率差的双侧95% CI(%)"
+          ],
+          "data_values": [
+            "x.x %, x.x %",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            ""
+          ],
+          "data_values": [
+            "",
+            ""
+          ],
+          "applies_to": []
+        },
+        {
+          "label_values": [
+            "",
+            "优效界值"
+          ],
+          "data_values": [
+            "x.x %",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "检验统计量"
+          ],
+          "data_values": [
+            "x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "P值(单侧)"
+          ],
+          "data_values": [
+            "x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，每个指标占一组行",
+    "variable_slots": [
+      "指标XXX"
+    ],
+    "rows_per_indicator": 11
+  }
+}

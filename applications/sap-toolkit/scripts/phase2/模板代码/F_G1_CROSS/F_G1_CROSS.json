@@ -1,0 +1,118 @@
+{
+  "code": "F_G1_CROSS",
+  "name": "交叉表（治疗前×治疗后）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "组别",
+      "description": "分组标识"
+    },
+    {
+      "index": 2,
+      "name": "治疗前",
+      "description": "治疗前分类"
+    },
+    {
+      "index": 3,
+      "name": "治疗后-正常",
+      "description": "治疗后分类"
+    },
+    {
+      "index": 4,
+      "name": "治疗后-异常无临床意义",
+      "description": "治疗后分类"
+    },
+    {
+      "index": 5,
+      "name": "治疗后-异常有临床意义",
+      "description": "治疗后分类"
+    },
+    {
+      "index": 6,
+      "name": "治疗后-未查",
+      "description": "治疗后分类"
+    },
+    {
+      "index": 7,
+      "name": "治疗后-缺失",
+      "description": "治疗后分类"
+    },
+    {
+      "index": 8,
+      "name": "合计",
+      "description": "汇总"
+    }
+  ],
+  "sections": [
+    {
+      "type": "header",
+      "rows": [
+        {
+          "label_values": ["", "组别", "", "治疗后", "治疗后", "治疗后", "治疗后", "治疗后", ""],
+          "merge": [
+            {"start": 3, "end": 8, "label": "治疗后"}
+          ]
+        },
+        {
+          "label_values": ["项目", "组别", "治疗前", "正常", "异常无临床意义", "异常有临床意义", "未查", "缺失", "合计"]
+        }
+      ]
+    },
+    {
+      "type": "indicator_group",
+      "rows": [
+        {
+          "label_values": ["指标XXX", "指标XXX", "指标XXX", "指标XXX", "指标XXX", "指标XXX", "指标XXX", "指标XXX", "指标XXX"],
+          "data_values": [],
+          "applies_to": []
+        }
+      ],
+      "repeat_pattern": {
+        "description": "每个治疗组重复一组治疗前分类行",
+        "rows_per_group": 6,
+        "group_rows": [
+          {
+            "label_values": ["", "{group_label}", "正常", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)"],
+            "data_values": ["n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)"],
+            "applies_to": ["治疗后-正常", "治疗后-异常无临床意义", "治疗后-异常有临床意义", "治疗后-未查", "治疗后-缺失", "合计"]
+          },
+          {
+            "label_values": ["", "", "异常无临床意义", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)"],
+            "data_values": ["n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)"],
+            "applies_to": ["治疗后-正常", "治疗后-异常无临床意义", "治疗后-异常有临床意义", "治疗后-未查", "治疗后-缺失", "合计"]
+          },
+          {
+            "label_values": ["", "", "异常有临床意义", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)"],
+            "data_values": ["n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)"],
+            "applies_to": ["治疗后-正常", "治疗后-异常无临床意义", "治疗后-异常有临床意义", "治疗后-未查", "治疗后-缺失", "合计"]
+          },
+          {
+            "label_values": ["", "", "未查", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)"],
+            "data_values": ["n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)"],
+            "applies_to": ["治疗后-正常", "治疗后-异常无临床意义", "治疗后-异常有临床意义", "治疗后-未查", "治疗后-缺失", "合计"]
+          },
+          {
+            "label_values": ["", "", "缺失", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)"],
+            "data_values": ["n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)"],
+            "applies_to": ["治疗后-正常", "治疗后-异常无临床意义", "治疗后-异常有临床意义", "治疗后-未查", "治疗后-缺失", "合计"]
+          },
+          {
+            "label_values": ["", "", "合计", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)"],
+            "data_values": ["n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)", "n2(x.x %)"],
+            "applies_to": ["治疗后-正常", "治疗后-异常无临床意义", "治疗后-异常有临床意义", "治疗后-未查", "治疗后-缺失", "合计"]
+          }
+        ]
+      }
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，每个指标内按治疗组数重复治疗前分类行组",
+    "variable_slots": ["指标XXX", "{group_label}"],
+    "rows_per_indicator": "2(header) + 1(label) + 6 * n_groups"
+  }
+}

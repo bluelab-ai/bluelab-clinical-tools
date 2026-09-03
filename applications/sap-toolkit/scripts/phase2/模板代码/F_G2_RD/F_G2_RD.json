@@ -1,0 +1,116 @@
+{
+  "code": "F_G2_RD",
+  "name": "率差比较表（两组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "指标分组标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类与统计量标识"
+    },
+    {
+      "index": 2,
+      "name": "试验组 (N=n1)",
+      "description": "试验组数据"
+    },
+    {
+      "index": 3,
+      "name": "对照组 (N=n1)",
+      "description": "对照组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_group",
+      "label_values": [
+        "指标XXX",
+        "XX分类n(%)"
+      ],
+      "data_values": [
+        "n2(x.x %)",
+        "n2(x.x %)"
+      ],
+      "metric": "率",
+      "placeholder": "n2(x.x %)",
+      "applies_to": [
+        "试验组 (N=n1)",
+        "对照组 (N=n1)"
+      ]
+    },
+    {
+      "type": "indicator_group",
+      "label_values": [
+        "",
+        "XX分类的双侧95% CI(%)"
+      ],
+      "data_values": [
+        "x.x %, x.x %",
+        "x.x %, x.x %"
+      ],
+      "metric": "率的95%CI",
+      "placeholder": "x.x %, x.x %",
+      "applies_to": [
+        "试验组 (N=n1)",
+        "对照组 (N=n1)"
+      ]
+    },
+    {
+      "type": "separator",
+      "label_values": [
+        "",
+        ""
+      ],
+      "data_values": [
+        "",
+        ""
+      ],
+      "metric": "间隔行",
+      "placeholder": "",
+      "applies_to": []
+    },
+    {
+      "type": "indicator_group",
+      "label_values": [
+        "",
+        "组间率差(%)"
+      ],
+      "data_values": [
+        "x.x %",
+        ""
+      ],
+      "metric": "率差",
+      "placeholder": "x.x %",
+      "applies_to": [
+        "试验组 (N=n1)"
+      ]
+    },
+    {
+      "type": "indicator_group",
+      "label_values": [
+        "",
+        "组间率差的双侧95% CI(%)"
+      ],
+      "data_values": [
+        "x.x %, x.x %",
+        ""
+      ],
+      "metric": "率差的95%CI",
+      "placeholder": "x.x %, x.x %",
+      "applies_to": [
+        "试验组 (N=n1)"
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，每个指标占5行（含间隔行）",
+    "variable_slots": [
+      "指标XXX",
+      "XX分类"
+    ],
+    "rows_per_indicator": 5
+  }
+}

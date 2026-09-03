@@ -1,0 +1,252 @@
+{
+  "code": "E_G3_FREQ3",
+  "name": "不良事件发生情况表（多组-SOC/PT）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "SOC/PT",
+      "description": "分类标识（系统器官分类/首选术语）"
+    },
+    {
+      "index": 1,
+      "name": "组别1 (N=n1)",
+      "description": "分组数据（例次）"
+    },
+    {
+      "index": 2,
+      "name": "组别1 (N=n1)",
+      "description": "分组数据（人数%）"
+    },
+    {
+      "index": 3,
+      "name": "组别2 (N=n1)",
+      "description": "分组数据（例次）"
+    },
+    {
+      "index": 4,
+      "name": "组别2 (N=n1)",
+      "description": "分组数据（人数%）"
+    },
+    {
+      "index": 5,
+      "name": "组别3 (N=n1)",
+      "description": "分组数据（例次）"
+    },
+    {
+      "index": 6,
+      "name": "组别3 (N=n1)",
+      "description": "分组数据（人数%）"
+    },
+    {
+      "index": 7,
+      "name": "合计 (N=n1)",
+      "description": "分组数据（例次）"
+    },
+    {
+      "index": 8,
+      "name": "合计 (N=n1)",
+      "description": "分组数据（人数%）"
+    },
+    {
+      "index": 9,
+      "name": "P值",
+      "description": "组间比较P值"
+    }
+  ],
+  "sections": [
+    {
+      "type": "fixed_rows",
+      "label": "表头",
+      "rows": [
+        {
+          "label_values": [
+            "SOC/PT"
+          ],
+          "data_values": [
+            "例次",
+            "人数(%)",
+            "例次",
+            "人数(%)",
+            "例次",
+            "人数(%)",
+            "例次",
+            "人数(%)",
+            "P值"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)_例次",
+            "组别1 (N=n1)_人数%",
+            "组别2 (N=n1)_例次",
+            "组别2 (N=n1)_人数%",
+            "组别3 (N=n1)_例次",
+            "组别3 (N=n1)_人数%",
+            "合计 (N=n1)_例次",
+            "合计 (N=n1)_人数%",
+            "P值"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "indicator_group",
+      "label": "不良事件分层数据",
+      "rows": [
+        {
+          "level": "SOC",
+          "label_values": [
+            "SOC"
+          ],
+          "data_values": [
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x.xxx"
+          ],
+          "metric": {
+            "name": "事件例次与发生率",
+            "placeholders": [
+              { "token": "x", "meaning": "事件例次数" },
+              { "token": "n2(x.x %)", "meaning": "发生例数(发生率)" }
+            ]
+          },
+          "applies_to": [
+            "组别1 (N=n1)_例次",
+            "组别1 (N=n1)_人数%",
+            "组别2 (N=n1)_例次",
+            "组别2 (N=n1)_人数%",
+            "组别3 (N=n1)_例次",
+            "组别3 (N=n1)_人数%",
+            "合计 (N=n1)_例次",
+            "合计 (N=n1)_人数%",
+            "P值"
+          ]
+        },
+        {
+          "level": "PT",
+          "label_values": [
+            "PT"
+          ],
+          "data_values": [
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x.xxx"
+          ],
+          "metric": {
+            "name": "事件例次与发生率",
+            "placeholders": [
+              { "token": "x", "meaning": "事件例次数" },
+              { "token": "n2(x.x %)", "meaning": "发生例数(发生率)" }
+            ]
+          },
+          "applies_to": [
+            "组别1 (N=n1)_例次",
+            "组别1 (N=n1)_人数%",
+            "组别2 (N=n1)_例次",
+            "组别2 (N=n1)_人数%",
+            "组别3 (N=n1)_例次",
+            "组别3 (N=n1)_人数%",
+            "合计 (N=n1)_例次",
+            "合计 (N=n1)_人数%",
+            "P值"
+          ]
+        },
+        {
+          "level": "子类目",
+          "label_values": [
+            "........"
+          ],
+          "data_values": [
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x.xxx"
+          ],
+          "metric": {
+            "name": "事件例次与发生率",
+            "placeholders": [
+              { "token": "x", "meaning": "事件例次数" },
+              { "token": "n2(x.x %)", "meaning": "发生例数(发生率)" }
+            ]
+          },
+          "applies_to": [
+            "组别1 (N=n1)_例次",
+            "组别1 (N=n1)_人数%",
+            "组别2 (N=n1)_例次",
+            "组别2 (N=n1)_人数%",
+            "组别3 (N=n1)_例次",
+            "组别3 (N=n1)_人数%",
+            "合计 (N=n1)_例次",
+            "合计 (N=n1)_人数%",
+            "P值"
+          ]
+        },
+        {
+          "level": "明细",
+          "label_values": [
+            "......"
+          ],
+          "data_values": [
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x",
+            "n2(x.x %)",
+            "x.xxx"
+          ],
+          "metric": {
+            "name": "事件例次与发生率",
+            "placeholders": [
+              { "token": "x", "meaning": "事件例次数" },
+              { "token": "n2(x.x %)", "meaning": "发生例数(发生率)" }
+            ]
+          },
+          "applies_to": [
+            "组别1 (N=n1)_例次",
+            "组别1 (N=n1)_人数%",
+            "组别2 (N=n1)_例次",
+            "组别2 (N=n1)_人数%",
+            "组别3 (N=n1)_例次",
+            "组别3 (N=n1)_人数%",
+            "合计 (N=n1)_例次",
+            "合计 (N=n1)_人数%",
+            "P值"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "组别列可按实际分组数重复，每个分组包含例次和人数(%)两列",
+    "variable_slots": [
+      "组别N (N=n1)_例次",
+      "组别N (N=n1)_人数%"
+    ],
+    "fixed_columns": [
+      "SOC/PT",
+      "合计 (N=n1)_例次",
+      "合计 (N=n1)_人数%",
+      "P值"
+    ],
+    "data_columns_per_group": 2,
+    "example_group_count": 3
+  }
+}

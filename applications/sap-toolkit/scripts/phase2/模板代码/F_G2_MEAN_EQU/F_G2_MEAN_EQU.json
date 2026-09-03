@@ -1,0 +1,146 @@
+{
+  "code": "F_G2_MEAN_EQU",
+  "name": "均值等效性检验表（两组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "试验组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "descriptive_statistics",
+      "rows": [
+        {
+          "label_values": [
+            "指标XXX (单位)",
+            "均值(标准差)"
+          ],
+          "data_values": [
+            "x.xx (x.xxx)",
+            "x.xx (x.xxx)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "均值的双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx,x.xx",
+            "x.xx,x.xx"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "mean_difference",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "两组均值差值"
+          ],
+          "data_values": [
+            "x.xx",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "两组均值差值的双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx,x.xx",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "equivalence_test",
+      "rows": [
+        {
+          "label_values": [
+            "TOST",
+            "等效性界值"
+          ],
+          "data_values": [
+            "下限 VS. -x.x",
+            "上限 VS. x.x"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "检验统计量"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "P值(单侧)"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，每个指标占一组行",
+    "variable_slots": [
+      "指标XXX (单位)"
+    ],
+    "rows_per_indicator": 7
+  }
+}

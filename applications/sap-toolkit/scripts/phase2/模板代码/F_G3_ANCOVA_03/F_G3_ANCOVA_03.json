@@ -1,0 +1,124 @@
+{
+  "code": "F_G3_ANCOVA_03",
+  "name": "协方差分析表（ANCOVA）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "指标名称标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "统计项标识"
+    },
+    {
+      "index": 2,
+      "name": "检验统计量",
+      "description": "F值或t值"
+    },
+    {
+      "index": 3,
+      "name": "P值",
+      "description": "显著性检验P值"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_group",
+      "label": "主效应及协变量",
+      "rows": [
+        {
+          "label_values": [
+            "指标XXX (单位)",
+            "组别间比较"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx"
+          ],
+          "applies_to": [
+            "检验统计量",
+            "P值"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "协变量1"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx"
+          ],
+          "applies_to": [
+            "检验统计量",
+            "P值"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "协变量2"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx"
+          ],
+          "applies_to": [
+            "检验统计量",
+            "P值"
+          ]
+        }
+      ],
+      "repeatable": true,
+      "repeat_label": "可为多个协变量重复此行"
+    },
+    {
+      "type": "separator",
+      "label": "分隔行",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "组别间比较"
+          ],
+          "data_values": [
+            "",
+            ""
+          ],
+          "applies_to": []
+        }
+      ]
+    },
+    {
+      "type": "center_effect",
+      "label": "中心效应",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "中心间比较"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx"
+          ],
+          "applies_to": [
+            "检验统计量",
+            "P值"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，每个指标占一组行；协变量行数可变",
+    "variable_slots": [
+      "指标XXX (单位)",
+      "协变量1",
+      "协变量2"
+    ],
+    "rows_per_indicator": "4 + N（N为协变量个数）"
+  }
+}

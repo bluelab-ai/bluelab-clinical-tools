@@ -1,0 +1,106 @@
+{
+  "code": "F_G2_ANCOVA_02",
+  "name": "协方差分析表（两组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "试验组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_group",
+      "rows": [
+        {
+          "label_values": [
+            "指标XXX (单位)",
+            "最小二乘均数(标准误)"
+          ],
+          "data_values": [
+            "x.xx(x.xxx)",
+            "x.xx(x.xxx)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "最小二乘均数双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx,x.xx",
+            "x.xx,x.xx"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            ""
+          ],
+          "data_values": [
+            "",
+            ""
+          ],
+          "applies_to": [],
+          "is_separator": true
+        },
+        {
+          "label_values": [
+            "",
+            "两组最小二乘均数差值"
+          ],
+          "data_values": [
+            "x.xx",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "两组最小二乘均数差值双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx,x.xx",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，每个指标占一组行",
+    "variable_slots": [
+      "指标XXX (单位)"
+    ],
+    "rows_per_indicator": 5
+  }
+}

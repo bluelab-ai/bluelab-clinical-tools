@@ -1,0 +1,99 @@
+{
+  "code": "F_G1_QUALSUB_Y_N",
+  "name": "定性指标（单组-有缺失-有亚组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "亚组",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 3,
+      "name": "结果 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "亚组",
+      "rows": [],
+      "sections": [
+        {
+          "type": "指标_group",
+          "rows": [
+            {
+              "label_values": [
+                "XX亚组",
+                "指标XXX",
+                "例数(缺失)"
+              ],
+              "data_values": [
+                "n3 (n4)"
+              ],
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "label_values": [
+                "",
+                "",
+                "分类1 n(%)"
+              ],
+              "data_values": [
+                "n2(x.x %)"
+              ],
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "label_values": [
+                "",
+                "",
+                "分类1的双侧95% CI(%)"
+              ],
+              "data_values": [
+                "(x.x, x.x)"
+              ],
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            },
+            {
+              "label_values": [
+                "",
+                "",
+                "分类2 n(%)"
+              ],
+              "data_values": [
+                "n2(x.x %)"
+              ],
+              "applies_to": [
+                "结果 (N=n1)"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "每个亚组包含多个指标，每个指标占4行（例数(缺失)、分类1 n(%)、分类1的双侧95% CI(%)、分类2 n(%)）；亚组结构整体重复",
+    "variable_slots": [
+      "XX亚组",
+      "指标XXX"
+    ],
+    "rows_per_indicator": 4
+  }
+}

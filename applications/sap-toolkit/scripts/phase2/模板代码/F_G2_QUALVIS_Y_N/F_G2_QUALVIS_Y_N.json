@@ -1,0 +1,294 @@
+{
+  "code": "F_G2_QUALVIS_Y_N",
+  "name": "定性指标访视比较表（两组-有缺失）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "指标名称标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "访视/统计行标识"
+    },
+    {
+      "index": 2,
+      "name": "试验组 (N=n1)",
+      "description": "试验组数据"
+    },
+    {
+      "index": 3,
+      "name": "对照组 (N=n1)",
+      "description": "对照组数据"
+    },
+    {
+      "index": 4,
+      "name": "合计 (N=n1)",
+      "description": "合计数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_group",
+      "description": "单个指标下按访视依次排列的数据块，每个访视包含分类频次、95%CI 和统计检验结果",
+      "rows": [
+        {
+          "label_values": [
+            "指标XXX",
+            "基线"
+          ],
+          "data_values": [
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "例数(缺失)"
+          ],
+          "data_values": [
+            "n3 (n4)",
+            "n3 (n4)",
+            "n3 (n4)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "分类1 n(%)"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "分类1的双侧95% CI(%)"
+          ],
+          "data_values": [
+            "x.x %, x.x %",
+            "x.x %, x.x %",
+            "x.x %, x.x %"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "分类2 n(%)"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "统计方法"
+          ],
+          "data_values": [
+            "xxx",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "检验统计量"
+          ],
+          "data_values": [
+            "x.xxx",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "P值"
+          ],
+          "data_values": [
+            "x.xxx",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "XX访视"
+          ],
+          "data_values": [
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "例数(缺失)"
+          ],
+          "data_values": [
+            "n3 (n4)",
+            "n3 (n4)",
+            "n3 (n4)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "分类1 n(%)"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "分类1的双侧95% CI(%)"
+          ],
+          "data_values": [
+            "x.x %, x.x %",
+            "x.x %, x.x %",
+            "x.x %, x.x %"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "分类2 n(%)"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "统计方法"
+          ],
+          "data_values": [
+            "xxx",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "检验统计量"
+          ],
+          "data_values": [
+            "x.xxx",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "P值"
+          ],
+          "data_values": [
+            "x.xxx",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构；每个指标下按访视依次排列，每个访视占一组行（访视头+分类数据+统计检验）",
+    "variable_slots": [
+      "指标XXX",
+      "基线",
+      "分类1",
+      "分类2"
+    ],
+    "rows_per_visit": 8,
+    "notes": "模板中基线和XX访视结构完全相同，分类数量可动态扩展；统计方法/检验统计量/P值仅在试验组列显示，对照组和合计列留空"
+  }
+}

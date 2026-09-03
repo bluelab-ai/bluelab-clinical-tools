@@ -1,0 +1,100 @@
+{
+  "code": "D_G1_EN",
+  "name": "受试者入组及完成情况表（单组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "分类",
+      "description": "指标分类标题（横向合并，仅首行显示）"
+    },
+    {
+      "index": 1,
+      "name": "项目",
+      "description": "具体指标或子项名称"
+    },
+    {
+      "index": 2,
+      "name": "结果 (N=n1)",
+      "description": "人数及百分比"
+    }
+  ],
+  "sections": [
+    {
+      "type": "category",
+      "category_label": "随机入组情况",
+      "rows": [
+        {
+          "label_values": [
+            "随机入组",
+            "随机入组"
+          ],
+          "data_values": [
+            "n2 (x.x %)"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ],
+          "note": "全部随机入组受试者的总人数和百分比"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "category_label": "试验完成情况",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "未完成研究"
+          ],
+          "data_values": [
+            "n2 (x.x %)"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ],
+          "note": "未完成研究的受试者人数和百分比"
+        },
+        {
+          "label_values": [
+            "",
+            "完成研究"
+          ],
+          "data_values": [
+            "n2 (x.x %)"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ],
+          "note": "完成研究的受试者人数和百分比"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "category_label": "提前中止退出",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "{退出原因}"
+          ],
+          "data_values": [
+            "n2 (x.x %)"
+          ],
+          "applies_to": [
+            "结果 (N=n1)"
+          ],
+          "note": "各提前中止退出原因的人数和百分比"
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "\"提前中止退出\"分类下的退出原因为可变行，根据实际出现的退出原因动态生成",
+    "variable_slots": [
+      "{退出原因}"
+    ],
+    "rows_per_reason": 1
+  }
+}

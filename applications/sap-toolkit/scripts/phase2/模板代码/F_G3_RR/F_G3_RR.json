@@ -1,0 +1,143 @@
+{
+  "code": "F_G3_RR",
+  "name": "相对危险度（RR）分析表",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "组别1 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "组别2 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
+      "name": "…… (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 5,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_group",
+      "rows": [
+        {
+          "label_values": [
+            "指标XXX",
+            "XX分类n(%)"
+          ],
+          "data_values": [
+            "n(x.x %)",
+            "n(x.x %)",
+            "n(x.x %)",
+            "n(x.x %)"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ],
+          "metric": "event_count_pct",
+          "placeholder": "n(x.x %)"
+        },
+        {
+          "label_values": [
+            "",
+            "XX分类的双侧95% CI(%)"
+          ],
+          "data_values": [
+            "x.x %, x.x %",
+            "x.x %, x.x %",
+            "x.x %, x.x %",
+            "x.x %, x.x %"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ],
+          "metric": "event_count_pct_ci",
+          "placeholder": "x.x %, x.x %"
+        },
+        {
+          "label_values": [
+            "",
+            ""
+          ],
+          "data_values": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [],
+          "metric": null,
+          "placeholder": null
+        },
+        {
+          "label_values": [
+            "",
+            "相对危险度RR"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx",
+            "x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ],
+          "metric": "rr",
+          "placeholder": "x.xxx"
+        },
+        {
+          "label_values": [
+            "",
+            "相对危险度RR的双侧95% CI"
+          ],
+          "data_values": [
+            "x.xxx, x.xxx",
+            "x.xxx, x.xxx",
+            "x.xxx, x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ],
+          "metric": "rr_ci",
+          "placeholder": "x.xxx, x.xxx"
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，每个指标占一组行",
+    "variable_slots": [
+      "指标XXX"
+    ],
+    "rows_per_indicator": 5
+  }
+}

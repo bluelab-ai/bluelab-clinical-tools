@@ -1,0 +1,142 @@
+{
+  "code": "F_G2_QUALCOM_Y_N_F_G2_QUANCOM_Y_N",
+  "name": "混合指标比较表（定性+定量-两组-有缺失）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "试验组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
+      "name": "合计 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "qualitative_group",
+      "description": "定性指标行模板（有缺失）",
+      "rows": [
+        {
+          "label_values": ["指标XXX", "例数(缺失)"],
+          "data_values": ["n3 (n4)", "n3 (n4)", "n3 (n4)"],
+          "applies_to": ["试验组 (N=n1)", "对照组 (N=n1)", "合计 (N=n1)"]
+        },
+        {
+          "label_values": ["", "分类1 n(%)"],
+          "data_values": ["n2(x.x %)", "n2(x.x %)", "n2(x.x %)"],
+          "applies_to": ["试验组 (N=n1)", "对照组 (N=n1)", "合计 (N=n1)"]
+        },
+        {
+          "label_values": ["", "分类1的双侧95% CI(%)"],
+          "data_values": ["x.x %, x.x %", "x.x %, x.x %", "x.x %, x.x %"],
+          "applies_to": ["试验组 (N=n1)", "对照组 (N=n1)", "合计 (N=n1)"]
+        },
+        {
+          "label_values": ["", "分类2 n(%)"],
+          "data_values": ["n2(x.x %)", "n2(x.x %)", "n2(x.x %)"],
+          "applies_to": ["试验组 (N=n1)", "对照组 (N=n1)", "合计 (N=n1)"]
+        },
+        {
+          "label_values": ["", "……"],
+          "data_values": ["", "", ""],
+          "applies_to": [],
+          "placeholder": true
+        },
+        {
+          "label_values": ["", "统计方法"],
+          "data_values": ["xxx", "", ""],
+          "applies_to": ["试验组 (N=n1)"]
+        },
+        {
+          "label_values": ["", "检验统计量"],
+          "data_values": ["x.xxx", "", ""],
+          "applies_to": ["试验组 (N=n1)"]
+        },
+        {
+          "label_values": ["", "P值"],
+          "data_values": ["x.xxx", "", ""],
+          "applies_to": ["试验组 (N=n1)"]
+        }
+      ]
+    },
+    {
+      "type": "quantitative_group",
+      "description": "定量指标行模板（有缺失）",
+      "rows": [
+        {
+          "label_values": ["指标XXX (单位)", "例数(缺失)"],
+          "data_values": ["n3 (n4)", "n3 (n4)", "n3 (n4)"],
+          "applies_to": ["试验组 (N=n1)", "对照组 (N=n1)", "合计 (N=n1)"]
+        },
+        {
+          "label_values": ["", "均值(标准差)"],
+          "data_values": ["x.xx (x.xxx)", "x.xx (x.xxx)", "x.xx (x.xxx)"],
+          "applies_to": ["试验组 (N=n1)", "对照组 (N=n1)", "合计 (N=n1)"]
+        },
+        {
+          "label_values": ["", "均值的双侧95% CI"],
+          "data_values": ["x.xx,x.xx", "x.xx,x.xx", "x.xx,x.xx"],
+          "applies_to": ["试验组 (N=n1)", "对照组 (N=n1)", "合计 (N=n1)"]
+        },
+        {
+          "label_values": ["", "中位数"],
+          "data_values": ["x.xx", "x.xx", "x.xx"],
+          "applies_to": ["试验组 (N=n1)", "对照组 (N=n1)", "合计 (N=n1)"]
+        },
+        {
+          "label_values": ["", "中位数的双侧95% CI"],
+          "data_values": ["x.xx,x.xx", "x.xx,x.xx", "x.xx,x.xx"],
+          "applies_to": ["试验组 (N=n1)", "对照组 (N=n1)", "合计 (N=n1)"]
+        },
+        {
+          "label_values": ["", "第25%分位数,第75%分位数"],
+          "data_values": ["x.xx, x.xx", "x.xx, x.xx", "x.xx, x.xx"],
+          "applies_to": ["试验组 (N=n1)", "对照组 (N=n1)", "合计 (N=n1)"]
+        },
+        {
+          "label_values": ["", "最小值,最大值"],
+          "data_values": ["x.x, x.x", "x.x, x.x", "x.x, x.x"],
+          "applies_to": ["试验组 (N=n1)", "对照组 (N=n1)", "合计 (N=n1)"]
+        },
+        {
+          "label_values": ["", "统计方法"],
+          "data_values": ["xxx", "", ""],
+          "applies_to": ["试验组 (N=n1)"]
+        },
+        {
+          "label_values": ["", "检验统计量"],
+          "data_values": ["x.xxx", "", ""],
+          "applies_to": ["试验组 (N=n1)"]
+        },
+        {
+          "label_values": ["", "P值"],
+          "data_values": ["x.xxx", "", ""],
+          "applies_to": ["试验组 (N=n1)"]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，定性指标展开分类行+CI行，定量指标使用固定统计行",
+    "variable_slots": ["指标XXX", "指标XXX (单位)"],
+    "qualitative_rows_per_indicator": 9,
+    "quantitative_rows_per_indicator": 10
+  }
+}

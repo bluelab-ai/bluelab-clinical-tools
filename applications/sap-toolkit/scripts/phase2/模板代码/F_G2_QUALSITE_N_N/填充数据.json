@@ -1,0 +1,14 @@
+{
+  "projects": [
+    {
+      "name": "导管相关血流感染",
+      "item_name": "不良事件",
+      "categories": ["方案偏离", "严重不良事件"]
+    },
+    {
+      "name": "呼吸机相关肺炎",
+      "item_name": "不良事件",
+      "categories": ["方案偏离"]
+    }
+  ]
+}

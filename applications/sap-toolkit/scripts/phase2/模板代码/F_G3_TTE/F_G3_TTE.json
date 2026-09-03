@@ -1,0 +1,397 @@
+{
+  "code": "F_G3_TTE",
+  "name": "生存分析表（多组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "组别1 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "组别2 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
+      "name": "…… (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 5,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "event_summary",
+      "rows": [
+        {
+          "label_values": [
+            "指标XXX",
+            "例数(缺失)"
+          ],
+          "data_values": [
+            "n3 (n4)",
+            "n3 (n4)",
+            "n3 (n4)",
+            "n3 (n4)"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "事件数"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "删失数"
+          ],
+          "data_values": [
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "quantile_stats",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "XXX（天/月/年）"
+          ],
+          "data_values": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "第25%分位数"
+          ],
+          "data_values": [
+            "x.xx",
+            "x.xx",
+            "x.xx",
+            "x.xx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "第25%分位数双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx, x.xx",
+            "x.xx, x.xx",
+            "x.xx, x.xx",
+            "x.xx, x.xx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "中位数"
+          ],
+          "data_values": [
+            "x.xx",
+            "x.xx",
+            "x.xx",
+            "x.xx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "中位数的双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx, x.xx",
+            "x.xx, x.xx",
+            "x.xx, x.xx",
+            "x.xx, x.xx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "第75%分位数"
+          ],
+          "data_values": [
+            "x.xx",
+            "x.xx",
+            "x.xx",
+            "x.xx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "第75%分位数双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx, x.xx",
+            "x.xx, x.xx",
+            "x.xx, x.xx",
+            "x.xx, x.xx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "均值(标准误)"
+          ],
+          "data_values": [
+            "x.xx (x.xxx)",
+            "x.xx (x.xxx)",
+            "x.xx (x.xxx)",
+            "x.xx (x.xxx)"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "logrank_test",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "Logrank检验"
+          ],
+          "data_values": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "检验统计量"
+          ],
+          "data_values": [
+            "x.xxx",
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "P值"
+          ],
+          "data_values": [
+            "x.xxx",
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cox_regression",
+      "rows": [
+        {
+          "label_values": [
+            "",
+            "Cox回归"
+          ],
+          "data_values": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "风险比率HR"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx",
+            "x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "风险比率HR双侧95% CI"
+          ],
+          "data_values": [
+            "x.xxx, x.xxx",
+            "x.xxx, x.xxx",
+            "x.xxx, x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "Wald卡方"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx",
+            "x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "P值"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx",
+            "x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个指标重复此结构，每个指标占一组行",
+    "variable_slots": [
+      "指标XXX"
+    ],
+    "rows_per_indicator": 19
+  }
+}

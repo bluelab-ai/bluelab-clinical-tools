@@ -1,0 +1,146 @@
+{
+  "code": "D_G3_SITEDS",
+  "name": "各中心脱落情况汇总表",
+  "columns": [
+    {
+      "index": 0,
+      "name": "中心编号",
+      "description": "临床试验中心的唯一编号标识"
+    },
+    {
+      "index": 1,
+      "name": "中心名称",
+      "description": "临床试验中心的名称"
+    },
+    {
+      "index": 2,
+      "name": "组别",
+      "description": "受试者分组标识（各治疗组及合计）"
+    },
+    {
+      "index": 3,
+      "name": "入组数",
+      "description": "该中心该组别入组的受试者人数"
+    },
+    {
+      "index": 4,
+      "name": "脱落人数(%)",
+      "description": "该中心该组别脱落的受试者人数及占入组数的百分比"
+    },
+    {
+      "index": 5,
+      "name": "完成人数(%)",
+      "description": "该中心该组别完成试验的受试者人数及占入组数的百分比"
+    }
+  ],
+  "sections": [
+    {
+      "type": "site_block",
+      "description": "单个中心的数据块，每个中心包含若干治疗组行及该中心小计行",
+      "rows": [
+        {
+          "metric": "中心-治疗组行（首行含中心编号）",
+          "label_values": [
+            "${site_id}",
+            "${site_name}",
+            "${group_name}",
+            "${enrolled}",
+            "${dropout_n}(${dropout_pct} %)",
+            "${completed_n}(${completed_pct} %)"
+          ],
+          "applies_to": [
+            "组别1",
+            "组别2",
+            "组别3"
+          ],
+          "note": "每个中心的首个治疗组行填写中心编号和中心名称，后续治疗组行留空"
+        },
+        {
+          "metric": "中心小计行",
+          "label_values": [
+            "",
+            "",
+            "合计",
+            "${site_total_enrolled}",
+            "${site_total_dropout_n}(${site_total_dropout_pct} %)",
+            "${site_total_completed_n}(${site_total_completed_pct} %)"
+          ],
+          "applies_to": [
+            "合计"
+          ],
+          "note": "每个中心各治疗组之后的该中心汇总行"
+        }
+      ]
+    },
+    {
+      "type": "separator",
+      "description": "中心之间的省略分隔行",
+      "rows": [
+        {
+          "metric": "省略分隔",
+          "label_values": [
+            "……",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [],
+          "note": "当中心数量较多时用于占位省略"
+        }
+      ]
+    },
+    {
+      "type": "grand_total_block",
+      "description": "全部中心的总计数据块，按各治疗组分别汇总",
+      "rows": [
+        {
+          "metric": "总计-治疗组行",
+          "label_values": [
+            "合计",
+            "",
+            "${group_name}",
+            "${grand_enrolled}",
+            "${grand_dropout_n}(${grand_dropout_pct} %)",
+            "${grand_completed_n}(${grand_completed_pct} %)"
+          ],
+          "applies_to": [
+            "组别1",
+            "组别2",
+            "组别3"
+          ],
+          "note": "全中心汇总中各治疗组的数据行"
+        },
+        {
+          "metric": "总计-合计行",
+          "label_values": [
+            "",
+            "",
+            "合计",
+            "${overall_enrolled}",
+            "${overall_dropout_n}(${overall_dropout_pct} %)",
+            "${overall_completed_n}(${overall_completed_pct} %)"
+          ],
+          "applies_to": [
+            "合计"
+          ],
+          "note": "全部中心全部组别的最终汇总行"
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "表格按中心重复，每个中心构成一个site_block；中心数量由实际入组中心决定，末尾附加grand_total_block",
+    "variable_slots": [
+      "site_id",
+      "site_name",
+      "group_name"
+    ],
+    "rows_per_site": {
+      "组别行数": "由实际治疗组数决定（如组别1、组别2、组别3……）",
+      "小计行数": 1
+    },
+    "note": "第一个section(site_block)按中心数重复，第二个section(separator)为固定省略行，第三个section(grand_total_block)为固定汇总块"
+  }
+}

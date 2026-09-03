@@ -1,0 +1,165 @@
+{
+  "code": "F_G2_MMRM_02_P2",
+  "name": "MMRM分析表（两组-重复测量）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "访视分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "统计指标名称"
+    },
+    {
+      "index": 2,
+      "name": "试验组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "组别2 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "sections": [
+    {
+      "type": "visit_block",
+      "rows": [
+        {
+          "label_values": [
+            "XX访视",
+            "最小二乘均数(标准误)"
+          ],
+          "data_values": [
+            "x.xx(x.xxx)",
+            "x.xx(x.xxx)",
+            "x.xx(x.xxx)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "组别2 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "最小二乘均数双侧95% CI"
+          ],
+          "data_values": [
+            "(x.xx,x.xx)",
+            "(x.xx,x.xx)",
+            "(x.xx,x.xx)"
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "组别2 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            ""
+          ],
+          "data_values": [
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [],
+          "placeholder": "empty_row"
+        },
+        {
+          "label_values": [
+            "",
+            "两组最小二乘均数差值"
+          ],
+          "data_values": [
+            "x.xx",
+            "x.xx",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "组别2 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "两组最小二乘均数差值双侧95% CI"
+          ],
+          "data_values": [
+            "(x.xx,x.xx)",
+            "(x.xx,x.xx)",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "组别2 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "检验统计量"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "组别2 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "P值"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx",
+            ""
+          ],
+          "applies_to": [
+            "试验组 (N=n1)",
+            "组别2 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            ""
+          ],
+          "data_values": [
+            "",
+            "",
+            ""
+          ],
+          "applies_to": [],
+          "placeholder": "empty_row"
+        }
+      ],
+      "repeat_indicator": "XX访视",
+      "end_marker": "……"
+    }
+  ],
+  "repeat_pattern": {
+    "description": "按访视重复此结构，每个访视占一组行，末尾以省略号结束",
+    "variable_slots": [
+      "XX访视"
+    ],
+    "rows_per_visit": 8
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "code": "E_G1_FREQ3",
+  "name": "不良事件发生频率表（按系统器官分类和首选术语）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "系统器官分类/首选术语",
+      "description": "SOC/PT 分类标识，用于标识不良事件的系统器官分类（SOC）和首选术语（PT）"
+    },
+    {
+      "index": 1,
+      "name": "例次",
+      "description": "不良事件发生例次数，格式为整数"
+    },
+    {
+      "index": 2,
+      "name": "人数(%)",
+      "description": "发生不良事件的受试者人数及百分比，格式为 n2(x.x %)"
+    }
+  ],
+  "sections": [
+    {
+      "type": "header",
+      "rows": [
+        {
+          "label_values": ["系统器官分类/首选术语"],
+          "data_values": ["XXX (N=n1)", "XXX (N=n1)"],
+          "applies_to": ["例次", "人数(%)"]
+        },
+        {
+          "label_values": ["系统器官分类/首选术语"],
+          "data_values": ["例次", "人数(%)"],
+          "applies_to": ["例次", "人数(%)"]
+        }
+      ]
+    },
+    {
+      "type": "soc_pt_block",
+      "rows": [
+        {
+          "label_values": ["SOC名称"],
+          "data_values": ["x", "n2(x.x %)"],
+          "applies_to": ["例次", "人数(%)"]
+        },
+        {
+          "label_values": ["PT名称"],
+          "data_values": ["x", "n2(x.x %)"],
+          "applies_to": ["例次", "人数(%)"]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "每个 SOC 下可包含多个 PT 条目，SOC 和 PT 均可重复出现",
+    "variable_slots": ["SOC名称", "PT名称"],
+    "rows_per_block": "1 + N (N >= 1)"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "code": "E_G2_FREQ1",
+  "name": "事件频率统计表（两组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "试验组 例次",
+      "description": "分组数据"
+    },
+    {
+      "index": 2,
+      "name": "试验组 人数(%)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "对照组 例次",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
+      "name": "对照组 人数(%)",
+      "description": "分组数据"
+    },
+    {
+      "index": 5,
+      "name": "合计 例次",
+      "description": "分组数据"
+    },
+    {
+      "index": 6,
+      "name": "合计 人数(%)",
+      "description": "分组数据"
+    },
+    {
+      "index": 7,
+      "name": "P值",
+      "description": "统计检验"
+    }
+  ],
+  "sections": [
+    {
+      "type": "indicator_group",
+      "rows": [
+        {
+          "label_values": ["不良事件分类"],
+          "data_values": ["x", "n2(x.x %)", "x", "n2(x.x %)", "x", "n2(x.x %)", "x.xxx"],
+          "applies_to": ["试验组 例次", "试验组 人数(%)", "对照组 例次", "对照组 人数(%)", "合计 例次", "合计 人数(%)", "P值"]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "可为多个分类重复此结构",
+    "variable_slots": ["不良事件分类"],
+    "rows_per_indicator": 1
+  }
+}

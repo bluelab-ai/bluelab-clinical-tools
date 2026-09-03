@@ -1,0 +1,13 @@
+{
+  "table_name": "人口学信息（FAS）",
+  "projects": [
+    {
+      "name": "性别",
+      "categories": ["男", "女"]
+    },
+    {
+      "name": "种族",
+      "categories": ["白人", "黑人", "亚裔", "其他"]
+    }
+  ]
+}

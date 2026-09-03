@@ -1,0 +1,134 @@
+{
+  "code": "D_G3_ST",
+  "name": "各分析集受试者分布表（按中心）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "中心编号",
+      "description": "临床试验中心标识编号"
+    },
+    {
+      "index": 1,
+      "name": "FAS-组别1",
+      "description": "全分析集(FAS)中组别1的受试者例数"
+    },
+    {
+      "index": 2,
+      "name": "FAS-组别2",
+      "description": "全分析集(FAS)中组别2的受试者例数"
+    },
+    {
+      "index": 3,
+      "name": "FAS-其他组别",
+      "description": "全分析集(FAS)中其他组别的受试者例数（可扩展）"
+    },
+    {
+      "index": 4,
+      "name": "FAS-合计",
+      "description": "全分析集(FAS)中所有组别的受试者合计例数"
+    },
+    {
+      "index": 5,
+      "name": "PPS-组别1",
+      "description": "符合方案集(PPS)中组别1的受试者例数"
+    },
+    {
+      "index": 6,
+      "name": "PPS-组别2",
+      "description": "符合方案集(PPS)中组别2的受试者例数"
+    },
+    {
+      "index": 7,
+      "name": "PPS-其他组别",
+      "description": "符合方案集(PPS)中其他组别的受试者例数（可扩展）"
+    },
+    {
+      "index": 8,
+      "name": "PPS-合计",
+      "description": "符合方案集(PPS)中所有组别的受试者合计例数"
+    },
+    {
+      "index": 9,
+      "name": "SS-组别1",
+      "description": "安全性分析集(SS)中组别1的受试者例数"
+    },
+    {
+      "index": 10,
+      "name": "SS-组别2",
+      "description": "安全性分析集(SS)中组别2的受试者例数"
+    },
+    {
+      "index": 11,
+      "name": "SS-其他组别",
+      "description": "安全性分析集(SS)中其他组别的受试者例数（可扩展）"
+    },
+    {
+      "index": 12,
+      "name": "SS-合计",
+      "description": "安全性分析集(SS)中所有组别的受试者合计例数"
+    }
+  ],
+  "sections": [
+    {
+      "type": "header",
+      "rows": [
+        {
+          "label_values": ["中心编号", "FAS", "FAS", "FAS", "FAS", "PPS", "PPS", "PPS", "PPS", "SS", "SS", "SS", "SS"],
+          "description": "第一层表头：分析集分组标题（跨列合并显示）"
+        },
+        {
+          "label_values": ["中心编号", "组别1", "组别2", "……", "合计", "组别1", "组别2", "……", "合计", "组别1", "组别2", "……", "合计"],
+          "description": "第二层表头：各分析集下的子列标题"
+        }
+      ]
+    },
+    {
+      "type": "data",
+      "rows": [
+        {
+          "label_values": ["{{center_id}}"],
+          "data_values": ["n1", "n1", "n1", "n1", "n1", "n1", "n1", "n1", "n1", "n1", "n1", "n1"],
+          "placeholder": "n1",
+          "metric": "受试者例数",
+          "applies_to": ["FAS-组别1", "FAS-组别2", "FAS-其他组别", "FAS-合计", "PPS-组别1", "PPS-组别2", "PPS-其他组别", "PPS-合计", "SS-组别1", "SS-组别2", "SS-其他组别", "SS-合计"],
+          "description": "各中心的受试者入组例数，按分析集和组别分别列出"
+        }
+      ]
+    },
+    {
+      "type": "total",
+      "rows": [
+        {
+          "label_values": ["合计"],
+          "data_values": ["n1", "n1", "n1", "n1", "n1", "n1", "n1", "n1", "n1", "n1", "n1", "n1"],
+          "placeholder": "n1",
+          "metric": "受试者例数合计",
+          "applies_to": ["FAS-组别1", "FAS-组别2", "FAS-其他组别", "FAS-合计", "PPS-组别1", "PPS-组别2", "PPS-其他组别", "PPS-合计", "SS-组别1", "SS-组别2", "SS-其他组别", "SS-合计"],
+          "description": "所有中心受试者入组合计例数"
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "每个中心重复一行数据行，中心编号从01开始递增；三个分析集(FAS/PPS/SS)各重复相同的4列结构（组别1、组别2、其他组别、合计）",
+    "variable_slots": ["center_id"],
+    "rows_per_center": 1,
+    "column_groups": [
+      {
+        "name": "FAS",
+        "label": "全分析集",
+        "sub_columns": ["组别1", "组别2", "……", "合计"]
+      },
+      {
+        "name": "PPS",
+        "label": "符合方案集",
+        "sub_columns": ["组别1", "组别2", "……", "合计"]
+      },
+      {
+        "name": "SS",
+        "label": "安全性分析集",
+        "sub_columns": ["组别1", "组别2", "……", "合计"]
+      }
+    ]
+  }
+}

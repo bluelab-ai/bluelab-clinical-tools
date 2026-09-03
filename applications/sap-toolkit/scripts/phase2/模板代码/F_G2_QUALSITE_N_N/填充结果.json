@@ -1,0 +1,145 @@
+{
+  "code": "F_G2_QUALCOM_N_N",
+  "name": "定性指标比较表（两组-无缺失-无亚组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "试验组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
+      "name": "合计 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "indicators": [
+    {
+      "name": "导管相关血流感染",
+      "unit": "",
+      "display": "导管相关血流感染",
+      "rows": [
+        {
+          "metric": "例数(缺失)",
+          "placeholder": "n3 (n4)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": "导管相关血流感染"
+        },
+        {
+          "metric": "方案偏离 n(%)",
+          "placeholder": "n2(x.x %)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": ""
+        },
+        {
+          "metric": "严重不良事件 n(%)",
+          "placeholder": "n2(x.x %)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": ""
+        },
+        {
+          "metric": "统计方法",
+          "placeholder": "xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ],
+          "indicator": ""
+        },
+        {
+          "metric": "检验统计量",
+          "placeholder": "x.xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ],
+          "indicator": ""
+        },
+        {
+          "metric": "P值",
+          "placeholder": "x.xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ],
+          "indicator": ""
+        }
+      ]
+    },
+    {
+      "name": "呼吸机相关肺炎",
+      "unit": "",
+      "display": "呼吸机相关肺炎",
+      "rows": [
+        {
+          "metric": "例数(缺失)",
+          "placeholder": "n3 (n4)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": "呼吸机相关肺炎"
+        },
+        {
+          "metric": "方案偏离 n(%)",
+          "placeholder": "n2(x.x %)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)",
+            "合计 (N=n1)"
+          ],
+          "indicator": ""
+        },
+        {
+          "metric": "统计方法",
+          "placeholder": "xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ],
+          "indicator": ""
+        },
+        {
+          "metric": "检验统计量",
+          "placeholder": "x.xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ],
+          "indicator": ""
+        },
+        {
+          "metric": "P值",
+          "placeholder": "x.xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ],
+          "indicator": ""
+        }
+      ]
+    }
+  ]
+}

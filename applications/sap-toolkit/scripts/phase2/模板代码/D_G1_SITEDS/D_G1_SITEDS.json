@@ -1,0 +1,85 @@
+{
+  "code": "D_G1_SITEDS",
+  "name": "各中心入组及受试者完成情况表",
+  "columns": [
+    {
+      "index": 0,
+      "name": "中心编号",
+      "description": "临床试验中心的编号标识"
+    },
+    {
+      "index": 1,
+      "name": "中心名称",
+      "description": "临床试验中心的名称"
+    },
+    {
+      "index": 2,
+      "name": "入组数",
+      "description": "各中心入组的受试者例数"
+    },
+    {
+      "index": 3,
+      "name": "脱落人数(%)",
+      "description": "各中心脱落的受试者人数及占该中心入组数的百分比"
+    },
+    {
+      "index": 4,
+      "name": "完成人数(%)",
+      "description": "各中心完成试验的受试者人数及占该中心入组数的百分比"
+    }
+  ],
+  "sections": [
+    {
+      "type": "site_row",
+      "description": "各中心数据行，按中心编号逐行展示入组及完成情况",
+      "rows": [
+        {
+          "label_values": [
+            "01",
+            ""
+          ],
+          "data_values": [
+            "n1",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "入组数",
+            "脱落人数(%)",
+            "完成人数(%)"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "total_row",
+      "description": "合计行，汇总所有中心的入组及完成情况",
+      "rows": [
+        {
+          "label_values": [
+            "合计",
+            ""
+          ],
+          "data_values": [
+            "n1",
+            "n2(x.x %)",
+            "n2(x.x %)"
+          ],
+          "applies_to": [
+            "入组数",
+            "脱落人数(%)",
+            "完成人数(%)"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "按中心编号重复数据行，每个中心占一行，最后一行为合计",
+    "variable_slots": [
+      "中心编号"
+    ],
+    "rows_per_site": 1,
+    "notes": "中心编号从01开始递增，合计行固定在末尾"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "code": "E_G1_FREQ1",
+  "name": "频率分布表（事件分类统计）",
+  "description": "按事件分类统计发生例次和人数百分比，支持多级分类层次结构",
+  "header": {
+    "row_span": 2,
+    "merged_cells": [
+      {
+        "row": 0,
+        "col_start": 1,
+        "col_end": 2,
+        "label": "结果 (N=n1)"
+      }
+    ]
+  },
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "事件分类名称，支持多级缩进层次"
+    },
+    {
+      "index": 1,
+      "name": "例次",
+      "description": "事件发生例次数"
+    },
+    {
+      "index": 2,
+      "name": "人数(%)",
+      "description": "发生事件的人数及占总人数的百分比"
+    }
+  ],
+  "sections": [
+    {
+      "type": "summary",
+      "description": "所有事件汇总行",
+      "rows": [
+        {
+          "row_type": "summary",
+          "level": 0,
+          "label_values": ["所有XXX事件"],
+          "data_values": ["x", "n2(x.x %)"],
+          "applies_to": ["例次", "人数(%)"]
+        }
+      ]
+    },
+    {
+      "type": "category_group",
+      "description": "可重复的分类块，每个分类包含分类行和若干子类行",
+      "rows": [
+        {
+          "row_type": "category",
+          "level": 0,
+          "label_values": ["A分类"],
+          "data_values": ["x", "n2(x.x %)"],
+          "applies_to": ["例次", "人数(%)"],
+          "note": "分类行可作为汇总行（有数据）或纯分组标签（data_values 为空）"
+        },
+        {
+          "row_type": "subcategory",
+          "level": 1,
+          "label_values": ["A分类子类1"],
+          "data_values": ["x", "n2(x.x %)"],
+          "applies_to": ["例次", "人数(%)"]
+        },
+        {
+          "row_type": "subcategory",
+          "level": 1,
+          "label_values": ["A分类子类2"],
+          "data_values": ["x", "n2(x.x %)"],
+          "applies_to": ["例次", "人数(%)"]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "分类块可重复多次，每个分类下可有可变数量的子类行；子类行数量由实际数据决定",
+    "variable_slots": [
+      "A分类",
+      "A分类子类1",
+      "A分类子类2"
+    ],
+    "min_subcategories": 1,
+    "max_subcategories": null,
+    "rows_per_category_block": "1 (category) + N (subcategories), N >= 1"
+  }
+}

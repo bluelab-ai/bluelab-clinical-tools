@@ -1,0 +1,58 @@
+{
+  "code": "D_G1_ST",
+  "name": "各分析集受试者分布表（单组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "中心编号",
+      "description": "临床试验中心编号"
+    },
+    {
+      "index": 1,
+      "name": "FAS",
+      "description": "全分析集（Full Analysis Set）"
+    },
+    {
+      "index": 2,
+      "name": "PPS",
+      "description": "符合方案集（Per Protocol Set）"
+    },
+    {
+      "index": 3,
+      "name": "SS",
+      "description": "安全性数据集（Safety Set）"
+    }
+  ],
+  "sections": [
+    {
+      "type": "center_distribution",
+      "rows": [
+        {
+          "label_values": ["01"],
+          "data_values": ["n1", "n1", "n1"],
+          "applies_to": ["FAS", "PPS", "SS"]
+        },
+        {
+          "label_values": ["02"],
+          "data_values": ["n1", "n1", "n1"],
+          "applies_to": ["FAS", "PPS", "SS"]
+        }
+      ]
+    },
+    {
+      "type": "summary",
+      "rows": [
+        {
+          "label_values": ["合计"],
+          "data_values": ["n1", "n1", "n1"],
+          "applies_to": ["FAS", "PPS", "SS"]
+        }
+      ]
+    }
+  ],
+  "repeat_pattern": {
+    "description": "每个中心重复此结构，最后一行为合计",
+    "variable_slots": ["中心编号"],
+    "rows_per_center": 1
+  }
+}
