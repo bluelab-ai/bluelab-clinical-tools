@@ -65,7 +65,7 @@ def read_pdf_page(client, pdf_path: str, page_num: int, api_logger: APILogger = 
 
     response = client.messages.create(
         model=MODEL,
-        max_tokens=4096,
+        max_tokens=16384,
         temperature=0,
         messages=messages,
     )
@@ -75,7 +75,7 @@ def read_pdf_page(client, pdf_path: str, page_num: int, api_logger: APILogger = 
         api_logger.log_call(
             func_name="read_pdf_page",
             model=MODEL,
-            max_tokens=4096,
+            max_tokens=16384,
             messages=messages,
             response=response,
         )
@@ -115,7 +115,7 @@ def is_toc_page(client, page_content: str, page_num: int, api_logger: APILogger 
 
         response = client.messages.create(
             model=MODEL_PRO,
-            max_tokens=1000,
+            max_tokens=16384,
             extra_body=extra_body,
             messages=messages,
         )
@@ -125,7 +125,7 @@ def is_toc_page(client, page_content: str, page_num: int, api_logger: APILogger 
             api_logger.log_call(
                 func_name="is_toc_page",
                 model=MODEL_PRO,
-                max_tokens=1000,
+                max_tokens=16384,
                 messages=messages,
                 extra_body=extra_body,
                 response=response,

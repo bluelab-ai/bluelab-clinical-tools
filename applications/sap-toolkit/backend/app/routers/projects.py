@@ -174,6 +174,8 @@ def update_tables(
         }
         if "data_source" in t:
             entry["data_source"] = t["data_source"]
+        if "locked" in t:
+            entry["locked"] = t["locked"]
         if "projects" in t:
             entry["projects"] = t["projects"]
         indexed_tables.append(entry)
@@ -503,44 +505,70 @@ def update_prompts(project_id: int, data: dict, db: Session = Depends(get_db), c
 
 @router.get("/{project_id}/table-info")
 def list_table_info(project_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    """列出 05_表格信息/ 下所有表格 JSON"""
+    """以 tables.json 为主数据源，映射到 05_表格信息/ 中的 JSON"""
     p = db.query(Project).filter(Project.id == project_id, Project.user_id == current_user.id).first()
     if not p:
         raise HTTPException(404, "项目不存在")
 
-    info_dir = os.path.join(p.output_dir, "05_表格信息")
-    if not os.path.exists(info_dir):
+    # 读取 tables.json 作为主列表
+    tables_json_path = os.path.join(p.output_dir, "tables.json")
+    if not os.path.exists(tables_json_path):
         return {"tables": []}
 
-    # 读取 tables.json 获取排序顺序
-    tables_json_path = os.path.join(p.output_dir, "tables.json")
-    order_map = {}
-    if os.path.exists(tables_json_path):
-        with open(tables_json_path, "r", encoding="utf-8") as f:
-            tables_data = json.load(f)
-        for t in tables_data.get("tables", []):
-            order_map[t["name"]] = t.get("index", 999)
+    with open(tables_json_path, "r", encoding="utf-8") as f:
+        tables_data = json.load(f)
+
+    info_dir = os.path.join(p.output_dir, "05_表格信息")
+
+    # 无需填充的判断逻辑（与 _sync_prompts_and_manual_tables 一致）
+    skip_keywords = ["主要疗效终点", "器械缺陷", "不良事件", "实验室检查", "生命体征", "合并用药"]
+    skip_names = ["各中心病例分布情况", "各中心人群划分情况"]
 
     result = []
-    for fname in sorted(os.listdir(info_dir)):
-        if not fname.endswith(".json"):
-            continue
-        fpath = os.path.join(info_dir, fname)
-        try:
-            with open(fpath, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            table_name = data.get("table_name", fname.replace(".json", ""))
-            result.append({
-                "filename": fname,
-                "table_name": table_name,
-                "projects": data.get("projects", []),
-                "sort_order": order_map.get(table_name, 999),
-            })
-        except Exception:
-            continue
+    for t in tables_data.get("tables", []):
+        table_name = t.get("name", "")
+        category = t.get("category", "")
 
-    # 按 tables.json 中的顺序排序
-    result.sort(key=lambda x: x["sort_order"])
+        # 构造文件名：table_name 中的 / 替换为 _
+        safe_name = table_name.replace("/", "_").replace("\\", "_")
+        json_filename = f"{safe_name}.json"
+        json_path = os.path.join(info_dir, json_filename) if os.path.exists(info_dir) else None
+
+        if json_path and os.path.exists(json_path):
+            # 情况1：有对应的 JSON 文件，正常加载
+            try:
+                with open(json_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                result.append({
+                    "filename": json_filename,
+                    "table_name": table_name,
+                    "projects": data.get("projects", []),
+                    "status": "normal",
+                })
+            except Exception:
+                result.append({
+                    "filename": None,
+                    "table_name": table_name,
+                    "projects": [],
+                    "status": "no_extraction",
+                })
+        elif any(kw in category for kw in skip_keywords) or any(sn in table_name for sn in skip_names):
+            # 情况2：无需填充的表
+            result.append({
+                "filename": None,
+                "table_name": table_name,
+                "projects": [],
+                "status": "no_fill_needed",
+            })
+        else:
+            # 情况3：未能在 CRF 中提取到项目
+            result.append({
+                "filename": None,
+                "table_name": table_name,
+                "projects": [],
+                "status": "no_extraction",
+            })
+
     return {"tables": result}
 
 

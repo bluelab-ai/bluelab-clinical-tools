@@ -9,6 +9,41 @@ import sys
 from pathlib import Path
 
 
+def _classify_data_source(category: str, name: str) -> str:
+    """
+    根据分类名和表格名判断数据来源。
+    只对已明确分类的类别返回标签，其余返回 None（不标记）。
+
+    Returns:
+        "none"  — 固定项目
+        "crf"   — CRF自动提取
+        "fill"  — 根据表格名填充
+    """
+    # 固定项目
+    none_categories = ["病例分布", "人口学信息", "不良事件", "心电图检查", "合并用药", "器械缺陷"]
+    for kw in none_categories:
+        if kw in category:
+            return "none"
+    none_names = ["不良事件", "不良事件编码", "严重不良事件编码", "合并用药", "器械缺陷"]
+    for kw in none_names:
+        if kw in name:
+            return "none"
+
+    # CRF自动提取
+    crf_categories = ["病史", "基线信息", "次要疗效终点分析", "安全性终点", "实验室检查", "生命体征", "体格检查"]
+    for kw in crf_categories:
+        if kw in category:
+            return "crf"
+
+    # 根据表格名填充
+    fill_categories = ["主要疗效终点分析"]
+    for kw in fill_categories:
+        if kw in category:
+            return "fill"
+
+    return "crf"
+
+
 def extract_tables_from_md(md_path: str) -> list[dict]:
     """
     从 MD 文件中提取表格
@@ -17,7 +52,7 @@ def extract_tables_from_md(md_path: str) -> list[dict]:
         md_path: MD 文件路径
 
     Returns:
-        表格列表，每个表格包含 category, index, name 字段，
+        表格列表，每个表格包含 category, index, name, data_source 字段，
         以及可选的 source_category 字段（从 [from:xxx] 标记解析）
     """
     with open(md_path, "r", encoding="utf-8") as f:
@@ -55,11 +90,15 @@ def extract_tables_from_md(md_path: str) -> list[dict]:
             if from_match:
                 source_category = from_match.group(1)
                 raw_name = re.sub(r'\s*\[from:\w+\]', '', raw_name).strip()
+            ds = _classify_data_source(current_category, raw_name)
             entry = {
                 "category": current_category,
                 "index": index,
-                "name": raw_name
+                "name": raw_name,
+                "data_source": ds,
             }
+            if ds == "title":
+                entry["locked"] = True
             if source_category:
                 entry["source_category"] = source_category
             tables.append(entry)

@@ -1,0 +1,198 @@
+{
+  "code": "F_G2_OR",
+  "name": "比值比OR表（两组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "分类标识"
+    },
+    {
+      "index": 2,
+      "name": "试验组 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "indicators": [
+    {
+      "name": "不良事件发生率",
+      "display": "不良事件发生率",
+      "rows": [
+        {
+          "indicator": "不良事件发生率",
+          "metric": "轻度n(%)",
+          "placeholder": "n2(x.x %)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "轻度的双侧95% CI(%)",
+          "placeholder": "x.x %, x.x %",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "中度n(%)",
+          "placeholder": "n2(x.x %)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "中度的双侧95% CI(%)",
+          "placeholder": "x.x %, x.x %",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "重度n(%)",
+          "placeholder": "n2(x.x %)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "重度的双侧95% CI(%)",
+          "placeholder": "x.x %, x.x %",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "比值比OR",
+          "placeholder": "x.xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "比值比OR的双侧95% CI",
+          "placeholder": "x.xxx, x.xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "治疗反应",
+      "display": "治疗反应",
+      "rows": [
+        {
+          "indicator": "治疗反应",
+          "metric": "完全缓解n(%)",
+          "placeholder": "n2(x.x %)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "完全缓解的双侧95% CI(%)",
+          "placeholder": "x.x %, x.x %",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "部分缓解n(%)",
+          "placeholder": "n2(x.x %)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "部分缓解的双侧95% CI(%)",
+          "placeholder": "x.x %, x.x %",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "疾病稳定n(%)",
+          "placeholder": "n2(x.x %)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "疾病稳定的双侧95% CI(%)",
+          "placeholder": "x.x %, x.x %",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "疾病进展n(%)",
+          "placeholder": "n2(x.x %)",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "疾病进展的双侧95% CI(%)",
+          "placeholder": "x.x %, x.x %",
+          "applies_to": [
+            "试验组 (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "比值比OR",
+          "placeholder": "x.xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        },
+        {
+          "indicator": "",
+          "metric": "比值比OR的双侧95% CI",
+          "placeholder": "x.xxx, x.xxx",
+          "applies_to": [
+            "试验组 (N=n1)"
+          ]
+        }
+      ]
+    }
+  ]
+}

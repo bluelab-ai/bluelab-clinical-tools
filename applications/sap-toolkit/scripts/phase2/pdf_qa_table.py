@@ -250,7 +250,7 @@ def read_pdf_page(pdf_path: str, page_number, api_logger: APILogger = None) -> s
 
         with client.messages.stream(
             model=MODEL,
-            max_tokens=4096 * len(page_numbers),
+            max_tokens=16384,
             temperature=0,
             extra_body=extra_body,
             messages=messages,
@@ -267,7 +267,7 @@ def read_pdf_page(pdf_path: str, page_number, api_logger: APILogger = None) -> s
             api_logger.log_call(
                 func_name="read_pdf_page (streaming)",
                 model=MODEL,
-                max_tokens=4096 * len(page_numbers),
+                max_tokens=16384,
                 messages=messages,
                 extra_body=extra_body,
                 response=None,
@@ -389,7 +389,30 @@ def run_tool_loop(pdf_path: str, user_question: str, allow_write_dir: Optional[s
 - **允许关键词匹配**：如果精确匹配失败，提取问题中的核心关键词（如"器械操作性能"、"图像质量"等），在书签标题中搜索包含这些关键词的页面
 - **匹配原则**：关键词匹配时，要求核心含义一致，不要发散匹配无关内容
 - 只有当关键词匹配也失败时，才返回空结果
-- 基于原文回答问题，不要编造"""
+- 基于原文回答问题，不要编造
+
+【重要：不要扩展读取页面】
+
+一个分析表格通常只需要 1 个最相关的 CRF 页面。找到最匹配的页面后，**不要**继续读取其他页面。
+
+**❌ 错误示例（过度扩展）：**
+用户问"器械成功率（FAS）"，找到"eva-器械成功评价"（第26页）后，又扩展读取：
+- 第27页：手术成功评价（❌ 不相关）
+- 第28页：测量功能评价（❌ 不相关）
+- 第30页：器械性能评价（❌ 不相关）
+- 第31页：器械使用安全性评价（❌ 不相关）
+- 第32页：器械使用稳定性评价（❌ 不相关）
+
+**✅ 正确示例（精确提取）：**
+用户问"器械成功率（FAS）"，只读取"eva-器械成功评价"（第26页），提取：
+- 器械成功评价（有/无）
+- 器械成功评价结果（成功/失败）
+
+**核心原则：**
+1. 只看标题判断相关性，不要推测内容
+2. 一个表格通常只需要 1 个 CRF 页面
+3. 不要因为"可能需要"而扩展读取
+4. 找到最匹配的页面后，立即提取，不要继续搜索"""
 
     # 初始消息
     messages = [
@@ -423,7 +446,7 @@ def run_tool_loop(pdf_path: str, user_question: str, allow_write_dir: Optional[s
         try:
             response = client.messages.create(
                 model=MODEL_PRO,
-                max_tokens=4096,
+                max_tokens=16384,
                 system=system_prompt,
                 tools=tools,
                 extra_body=extra_body,
@@ -442,7 +465,7 @@ def run_tool_loop(pdf_path: str, user_question: str, allow_write_dir: Optional[s
             api_logger.log_call(
                 func_name=f"run_tool_loop (第{iteration}轮)",
                 model=MODEL_PRO,
-                max_tokens=4096,
+                max_tokens=16384,
                 system=system_prompt,
                 messages=messages,
                 tools=tools,

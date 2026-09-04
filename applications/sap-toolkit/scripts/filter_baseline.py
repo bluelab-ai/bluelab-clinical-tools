@@ -127,7 +127,7 @@ def filter_baseline_items(first_visit_items: list[dict], safety_content: str, ap
     def call_ai():
         return client.messages.create(
             model=MODEL,
-            max_tokens=4096,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             tools=[FILTER_TOOL],
@@ -146,7 +146,7 @@ def filter_baseline_items(first_visit_items: list[dict], safety_content: str, ap
         api_logger.log_call(
             func_name="filter_baseline_items",
             model=MODEL,
-            max_tokens=4096,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             messages=messages,

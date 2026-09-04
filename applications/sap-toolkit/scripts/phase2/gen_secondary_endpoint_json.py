@@ -46,7 +46,7 @@ def generate_secondary_endpoint_json(md_file: str, table_names: list[str], outpu
         try:
             response = client.messages.create(
                 model=MODEL,
-                max_tokens=4096,
+                max_tokens=16384,
                 messages=[{"role": "user", "content": prompt}],
                 tools=[{
                     "name": "write_table_json",

@@ -1,0 +1,270 @@
+{
+  "code": "F_G3_ANCOVA_02",
+  "name": "协方差分析表（多组）",
+  "columns": [
+    {
+      "index": 0,
+      "name": "项目",
+      "description": "分类标识"
+    },
+    {
+      "index": 1,
+      "name": "指标",
+      "description": "统计指标行标签"
+    },
+    {
+      "index": 2,
+      "name": "组别1 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 3,
+      "name": "组别2 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
+      "name": "…… (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 5,
+      "name": "对照组 (N=n1)",
+      "description": "分组数据"
+    }
+  ],
+  "indicators": [
+    {
+      "name": "收缩压",
+      "unit": "mmHg",
+      "display": "收缩压 (mmHg)",
+      "rows": [
+        {
+          "label_values": [
+            "收缩压 (mmHg)",
+            "最小二乘均数(标准误)"
+          ],
+          "data_values": [
+            "x.xx(x.xxx)",
+            "x.xx(x.xxx)",
+            "x.xx(x.xxx)",
+            "x.xx(x.xxx)"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "最小二乘均数双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx,x.xx",
+            "x.xx,x.xx",
+            "x.xx,x.xx",
+            "x.xx,x.xx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            ""
+          ],
+          "data_values": [],
+          "applies_to": [],
+          "note": "空行分隔符"
+        },
+        {
+          "label_values": [
+            "",
+            "两组最小二乘均数差值"
+          ],
+          "data_values": [
+            "x.xx",
+            "x.xx",
+            "x.xx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "两组最小二乘均数差值双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx,x.xx",
+            "x.xx,x.xx",
+            "x.xx,x.xx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "检验统计量"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx",
+            "x.xxx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "P值"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx",
+            "x.xxx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "舒张压",
+      "unit": "mmHg",
+      "display": "舒张压 (mmHg)",
+      "rows": [
+        {
+          "label_values": [
+            "舒张压 (mmHg)",
+            "最小二乘均数(标准误)"
+          ],
+          "data_values": [
+            "x.xx(x.xxx)",
+            "x.xx(x.xxx)",
+            "x.xx(x.xxx)",
+            "x.xx(x.xxx)"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "最小二乘均数双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx,x.xx",
+            "x.xx,x.xx",
+            "x.xx,x.xx",
+            "x.xx,x.xx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)",
+            "对照组 (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            ""
+          ],
+          "data_values": [],
+          "applies_to": [],
+          "note": "空行分隔符"
+        },
+        {
+          "label_values": [
+            "",
+            "两组最小二乘均数差值"
+          ],
+          "data_values": [
+            "x.xx",
+            "x.xx",
+            "x.xx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "两组最小二乘均数差值双侧95% CI"
+          ],
+          "data_values": [
+            "x.xx,x.xx",
+            "x.xx,x.xx",
+            "x.xx,x.xx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "检验统计量"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx",
+            "x.xxx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        },
+        {
+          "label_values": [
+            "",
+            "P值"
+          ],
+          "data_values": [
+            "x.xxx",
+            "x.xxx",
+            "x.xxx"
+          ],
+          "applies_to": [
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
+            "…… (N=n1)"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -11,9 +11,10 @@ import ProgressRing from "../components/ProgressRing";
 import type { Project, ManualProject } from "../types";
 
 interface TableInfo {
-  filename: string;
+  filename: string | null;
   table_name: string;
   projects: ManualProject[];
+  status: "normal" | "no_fill_needed" | "no_extraction";
 }
 
 export default function ReviewEditorPage() {
@@ -70,7 +71,7 @@ export default function ReviewEditorPage() {
 
   // 保存当前表格
   const saveCurrentTable = async () => {
-    if (!selectedTable) return;
+    if (!selectedTable || !selectedTable.filename) return;
     setSaving(true);
     setSaveMsg("");
     try {
@@ -93,6 +94,7 @@ export default function ReviewEditorPage() {
     setSaveMsg("");
     try {
       for (const table of tables) {
+        if (!table.filename) continue; // 跳过无文件的表格
         await api.put(`/projects/${id}/table-info/${table.filename}`, {
           projects: table.projects,
         });
@@ -356,21 +358,35 @@ export default function ReviewEditorPage() {
             <h2 className="text-sm font-semibold text-slate-700">表格列表（{tables.length}）</h2>
           </div>
           <div className="flex-1 overflow-y-auto custom-scrollbar">
-            {tables.map((t, i) => (
-              <button
-                key={t.filename}
-                onClick={() => { setSelectedIdx(i); setDirty(false); }}
-                className={`w-full text-left px-4 py-2.5 text-sm border-b border-slate-50 transition-colors cursor-pointer flex items-center gap-2 ${
-                  i === selectedIdx
-                    ? "bg-blue-50 text-blue-700 font-medium"
-                    : "text-slate-600 hover:bg-slate-50"
-                }`}
-              >
-                <ChevronRight size={14} className={i === selectedIdx ? "text-blue-400" : "text-slate-300"} />
-                <span className="truncate">{t.table_name}</span>
-                <span className="ml-auto text-xs text-slate-400 flex-shrink-0">{t.projects.length}项</span>
-              </button>
-            ))}
+            {tables.map((t, i) => {
+              const isSelected = i === selectedIdx;
+              const isDisabled = t.status !== "normal";
+              return (
+                <button
+                  key={`${t.table_name}-${i}`}
+                  onClick={() => { setSelectedIdx(i); setDirty(false); }}
+                  className={`w-full text-left px-4 py-2.5 text-sm border-b border-slate-50 transition-colors flex items-center gap-2 ${
+                    isDisabled
+                      ? "cursor-default text-slate-400 bg-slate-50/50"
+                      : isSelected
+                        ? "bg-blue-50 text-blue-700 font-medium cursor-pointer"
+                        : "text-slate-600 hover:bg-slate-50 cursor-pointer"
+                  }`}
+                >
+                  <ChevronRight size={14} className={isSelected ? "text-blue-400" : "text-slate-300"} />
+                  <span className="truncate">{t.table_name}</span>
+                  {t.status === "normal" && (
+                    <span className="ml-auto text-xs text-slate-400 flex-shrink-0">{t.projects.length}项</span>
+                  )}
+                  {t.status === "no_fill_needed" && (
+                    <span className="ml-auto text-xs text-slate-400 flex-shrink-0">无需填充</span>
+                  )}
+                  {t.status === "no_extraction" && (
+                    <span className="ml-auto text-xs text-amber-500 flex-shrink-0">未提取</span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </aside>
 
@@ -382,29 +398,60 @@ export default function ReviewEditorPage() {
                 <div>
                   <h2 className="text-base font-bold text-slate-900">{selectedTable.table_name}</h2>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    {selectedTable.projects.length} 个指标项目
-                    {dirty && <span className="text-amber-500 ml-2">● 未保存</span>}
+                    {selectedTable.status === "normal" && (
+                      <>
+                        {selectedTable.projects.length} 个指标项目
+                        {dirty && <span className="text-amber-500 ml-2">● 未保存</span>}
+                      </>
+                    )}
+                    {selectedTable.status === "no_fill_needed" && (
+                      <span className="text-slate-400">此表格无需填充指标</span>
+                    )}
+                    {selectedTable.status === "no_extraction" && (
+                      <span className="text-amber-500">未能在 CRF 中提取到项目</span>
+                    )}
                   </p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={addProject}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors cursor-pointer"
-                  >
-                    <Plus size={14} /> 添加指标
-                  </button>
-                  <button
-                    onClick={saveCurrentTable}
-                    disabled={saving || !dirty}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    <Save size={14} /> 保存
-                  </button>
-                </div>
+                {selectedTable.status === "normal" && (
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={addProject}
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors cursor-pointer"
+                    >
+                      <Plus size={14} /> 添加指标
+                    </button>
+                    <button
+                      onClick={saveCurrentTable}
+                      disabled={saving || !dirty}
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <Save size={14} /> 保存
+                    </button>
+                  </div>
+                )}
               </div>
 
               <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-4">
-                {selectedTable.projects.length === 0 && (
+                {/* 无需填充提示 */}
+                {selectedTable.status === "no_fill_needed" && (
+                  <div className="flex flex-col items-center justify-center py-16 text-slate-400">
+                    <FileSpreadsheet size={48} className="mb-4 text-slate-300" />
+                    <p className="text-sm font-medium">此表格无需填充指标</p>
+                    <p className="text-xs mt-1">该类别的表格不需要从 CRF 中提取指标</p>
+                  </div>
+                )}
+
+                {/* 未能提取提示 */}
+                {selectedTable.status === "no_extraction" && (
+                  <div className="flex flex-col items-center justify-center py-16 text-amber-500">
+                    <AlertCircle size={48} className="mb-4 text-amber-400" />
+                    <p className="text-sm font-medium">未能在 CRF 中提取到项目</p>
+                    <p className="text-xs mt-1 text-slate-400">请检查 CRF 文件是否包含此表格的相关内容</p>
+                  </div>
+                )}
+
+                {/* 正常编辑区 */}
+                {selectedTable.status === "normal" && selectedTable.projects.length === 0 && (
                   <div className="text-center py-12 text-slate-400">
                     <p className="text-sm">暂无指标项目</p>
                     <button
@@ -416,7 +463,7 @@ export default function ReviewEditorPage() {
                   </div>
                 )}
 
-                {selectedTable.projects.map((proj, pi) => {
+                {selectedTable.status === "normal" && selectedTable.projects.map((proj, pi) => {
                   const isQualitative = "categories" in proj;
                   return (
                     <div

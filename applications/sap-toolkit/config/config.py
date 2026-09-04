@@ -5,12 +5,15 @@ SAP Toolkit 配置文件
 """
 
 # API 配置
-API_KEY = "tp-cuw69l6jpailrlau85thw2jr1w408lwk8jfwzx0xv8pinicc"
-BASE_URL = "https://token-plan-cn.xiaomimimo.com/anthropic"
+API_KEY = "849338788ffe4d4aa847fde46630dd87.VK4dbmlRjlJ7HhgJ"
+BASE_URL = "https://open.bigmodel.cn/api/anthropic"
 
 # 模型配置
-MODEL = "mimo-v2.5"           # 普通任务模型（页面读取、目录判断）
-MODEL_PRO = "mimo-v2.5-pro"   # 复杂任务模型（数据提取、分析）
+MODEL = "GLM-5.3-Flash"       # 普通任务模型（页面读取、目录判断）
+MODEL_PRO = "GLM-5.3-Flash"   # 复杂任务模型（数据提取、分析）
+
+# Token 配置（GLM-5.3-Flash 的 thinking 会消耗 max_tokens，设大避免截断）
+MAX_TOKENS = 16384            # 统一使用足够大的值
 
 # 思考模式配置
 THINKING_ENABLED = True       # 是否开启思考模式

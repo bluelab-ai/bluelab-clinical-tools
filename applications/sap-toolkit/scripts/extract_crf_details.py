@@ -216,7 +216,7 @@ def extract_safety_item(
         for iteration in range(max_iterations):
             response = client.messages.create(
                 model=MODEL_PRO,
-                max_tokens=4096,
+                max_tokens=16384,
                 system=system_prompt,
                 tools=all_tools,
                 extra_body=extra_body,
@@ -229,7 +229,7 @@ def extract_safety_item(
                 api_logger.log_call(
                     func_name=f"extract_safety_item ({item_name}) 第{iteration+1}轮",
                     model=MODEL_PRO,
-                    max_tokens=4096,
+                    max_tokens=16384,
                     system=system_prompt,
                     messages=messages,
                     tools=all_tools,
@@ -404,7 +404,7 @@ def extract_medical_history(
 
         response = client.messages.create(
             model=MODEL,
-            max_tokens=4096,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             tools=[history_tool],
@@ -419,7 +419,7 @@ def extract_medical_history(
             api_logger.log_call(
                 func_name="extract_medical_history",
                 model=MODEL,
-                max_tokens=4096,
+                max_tokens=16384,
                 temperature=0,
                 system=system_prompt,
                 messages=messages,

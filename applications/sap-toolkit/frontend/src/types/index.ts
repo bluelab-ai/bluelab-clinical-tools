@@ -25,7 +25,8 @@ export interface CatalogItem {
   category: string;
   index: number;
   name: string;
-  data_source?: "auto" | "manual";
+  data_source?: "auto" | "manual" | "none" | "title" | "crf" | "fill";
+  locked?: boolean;
   projects?: ManualProject[];
 }
 

@@ -199,7 +199,7 @@ def read_pdf_page(pdf_path: str, page_number, api_logger: APILogger = None) -> s
 
         with client.messages.stream(
             model=MODEL,
-            max_tokens=4096 * len(page_numbers),
+            max_tokens=16384,
             temperature=0,
             extra_body=extra_body,
             messages=messages,
@@ -216,7 +216,7 @@ def read_pdf_page(pdf_path: str, page_number, api_logger: APILogger = None) -> s
             api_logger.log_call(
                 func_name="read_pdf_page (streaming)",
                 model=MODEL,
-                max_tokens=4096 * len(page_numbers),
+                max_tokens=16384,
                 messages=messages,
                 extra_body=extra_body,
                 response=None,
@@ -312,7 +312,7 @@ def run_tool_loop(pdf_path: str, user_question: str, output_path: Optional[str] 
         extra_body = get_thinking_config(budget_tokens=2000)
         response = client.messages.create(
             model=MODEL_PRO,
-            max_tokens=4096,
+            max_tokens=16384,
             system=system_prompt,
             tools=tools,
             extra_body=extra_body,
@@ -324,7 +324,7 @@ def run_tool_loop(pdf_path: str, user_question: str, output_path: Optional[str] 
             api_logger.log_call(
                 func_name=f"run_tool_loop (第{iteration}轮)",
                 model=MODEL_PRO,
-                max_tokens=4096,
+                max_tokens=16384,
                 system=system_prompt,
                 messages=messages,
                 tools=tools,
@@ -516,7 +516,7 @@ def run_tool_loop_with_toc(
         extra_body = get_thinking_config(budget_tokens=2000)
         response = client.messages.create(
             model=MODEL_PRO,
-            max_tokens=4096,
+            max_tokens=16384,
             system=system_prompt,
             tools=tools,
             extra_body=extra_body,
@@ -528,7 +528,7 @@ def run_tool_loop_with_toc(
             api_logger.log_call(
                 func_name=f"run_tool_loop_with_toc (第{iteration}轮)",
                 model=MODEL_PRO,
-                max_tokens=4096,
+                max_tokens=16384,
                 system=system_prompt,
                 messages=messages,
                 tools=tools,

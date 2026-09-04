@@ -258,7 +258,7 @@ def extract_first_visit(content: str, api_logger: APILogger = None) -> dict:
     def call_ai():
         return client.messages.create(
             model=MODEL,
-            max_tokens=4096,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             tools=[FIRST_VISIT_TOOL],
@@ -277,7 +277,7 @@ def extract_first_visit(content: str, api_logger: APILogger = None) -> dict:
         api_logger.log_call(
             func_name="extract_first_visit",
             model=MODEL,
-            max_tokens=4096,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             messages=messages,

@@ -1,0 +1,13 @@
+{
+  "table_name": "收缩压（mmHg）-协方差分析（含交互项）（FAS）",
+  "projects": [
+    {
+      "name": "收缩压",
+      "unit": "mmHg"
+    },
+    {
+      "name": "舒张压",
+      "unit": "mmHg"
+    }
+  ]
+}

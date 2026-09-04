@@ -705,7 +705,7 @@ def extract_endpoints(sap_content: str, api_logger: APILogger = None) -> dict:
     def call_ai():
         return client.messages.create(
             model=MODEL,
-            max_tokens=8192,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             tools=[EXTRACTION_TOOL],
@@ -724,7 +724,7 @@ def extract_endpoints(sap_content: str, api_logger: APILogger = None) -> dict:
         api_logger.log_call(
             func_name="extract_endpoints",
             model=MODEL,
-            max_tokens=8192,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             messages=messages,
@@ -788,7 +788,7 @@ def extract_secondary_endpoints(sap_content: str, api_logger: APILogger = None) 
     def call_ai():
         return client.messages.create(
             model=MODEL,
-            max_tokens=8192,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             tools=[SECONDARY_EXTRACTION_TOOL],
@@ -807,7 +807,7 @@ def extract_secondary_endpoints(sap_content: str, api_logger: APILogger = None) 
         api_logger.log_call(
             func_name="extract_secondary_endpoints",
             model=MODEL,
-            max_tokens=8192,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             messages=messages,
@@ -871,7 +871,7 @@ def extract_safety_endpoints(sap_content: str, api_logger: APILogger = None) -> 
     def call_ai():
         return client.messages.create(
             model=MODEL,
-            max_tokens=8192,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             tools=[SAFETY_EXTRACTION_TOOL],
@@ -890,7 +890,7 @@ def extract_safety_endpoints(sap_content: str, api_logger: APILogger = None) -> 
         api_logger.log_call(
             func_name="extract_safety_endpoints",
             model=MODEL,
-            max_tokens=8192,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             messages=messages,
@@ -948,7 +948,7 @@ def extract_sample_info(sap_content: str, api_logger: APILogger = None) -> dict:
     def call_ai():
         return client.messages.create(
             model=MODEL,
-            max_tokens=8192,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             tools=[SAMPLE_EXTRACTION_TOOL],
@@ -967,7 +967,7 @@ def extract_sample_info(sap_content: str, api_logger: APILogger = None) -> dict:
         api_logger.log_call(
             func_name="extract_sample_info",
             model=MODEL,
-            max_tokens=8192,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             messages=messages,
@@ -1018,7 +1018,7 @@ def extract_stat_methods(sap_content: str, api_logger: APILogger = None) -> dict
     def call_ai():
         return client.messages.create(
             model=MODEL,
-            max_tokens=8192,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             tools=[STAT_METHODS_EXTRACTION_TOOL],
@@ -1037,7 +1037,7 @@ def extract_stat_methods(sap_content: str, api_logger: APILogger = None) -> dict
         api_logger.log_call(
             func_name="extract_stat_methods",
             model=MODEL,
-            max_tokens=8192,
+            max_tokens=16384,
             temperature=0,
             system=system_prompt,
             messages=messages,

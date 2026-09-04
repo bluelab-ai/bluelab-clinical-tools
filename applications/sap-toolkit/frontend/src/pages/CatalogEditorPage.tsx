@@ -13,6 +13,13 @@ interface CategoryGroup {
   collapsed: boolean;
 }
 
+const SOURCE_BADGES: Record<string, { label: string; color: string }> = {
+  none:  { label: "固定项目", color: "bg-slate-100 text-slate-500" },
+  title: { label: "标题提取", color: "bg-violet-50 text-violet-600" },
+  crf:   { label: "CRF自动提取", color: "bg-emerald-50 text-emerald-600" },
+  fill:  { label: "根据表格名填充", color: "bg-amber-50 text-amber-600" },
+};
+
 interface AddTableForm {
   show: boolean;
   gi: number | null;
@@ -388,30 +395,41 @@ export default function CatalogEditorPage() {
                       ) : (
                         <>
                           <span
-                            className="flex-1 text-sm text-slate-700 cursor-pointer hover:text-blue-600"
-                            onClick={() => startEdit(gi, ii, item.name)}
+                            className={`flex-1 text-sm ${item.locked ? "text-slate-400" : "text-slate-700 cursor-pointer hover:text-blue-600"}`}
+                            onClick={() => !item.locked && startEdit(gi, ii, item.name)}
                           >
                             {item.name}
                           </span>
-                          <button
-                            onClick={() => showAddForm(gi, ii + 1)}
-                            className="w-7 h-7 rounded-lg hover:bg-blue-100 flex items-center justify-center text-slate-300 hover:text-blue-500 opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
-                            title="在此行后插入"
-                          >
-                            <Plus size={13} />
-                          </button>
-                          <button
-                            onClick={() => startEdit(gi, ii, item.name)}
-                            className="w-7 h-7 rounded-lg hover:bg-blue-100 flex items-center justify-center text-slate-300 hover:text-blue-500 opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
-                          >
-                            <Pencil size={13} />
-                          </button>
-                          <button
-                            onClick={() => deleteItem(gi, ii)}
-                            className="w-7 h-7 rounded-lg hover:bg-red-100 flex items-center justify-center text-slate-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
-                          >
-                            <Trash2 size={13} />
-                          </button>
+                          {item.data_source && SOURCE_BADGES[item.data_source] && (
+                            <span className={`text-xs px-2 py-0.5 rounded-full font-medium shrink-0 ${SOURCE_BADGES[item.data_source].color}`}>
+                              {SOURCE_BADGES[item.data_source].label}
+                            </span>
+                          )}
+                          {item.locked ? (
+                            <span className="text-xs text-slate-400 px-1.5">🔒</span>
+                          ) : (
+                            <>
+                              <button
+                                onClick={() => showAddForm(gi, ii + 1)}
+                                className="w-7 h-7 rounded-lg hover:bg-blue-100 flex items-center justify-center text-slate-300 hover:text-blue-500 opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
+                                title="在此行后插入"
+                              >
+                                <Plus size={13} />
+                              </button>
+                              <button
+                                onClick={() => startEdit(gi, ii, item.name)}
+                                className="w-7 h-7 rounded-lg hover:bg-blue-100 flex items-center justify-center text-slate-300 hover:text-blue-500 opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
+                              >
+                                <Pencil size={13} />
+                              </button>
+                              <button
+                                onClick={() => deleteItem(gi, ii)}
+                                className="w-7 h-7 rounded-lg hover:bg-red-100 flex items-center justify-center text-slate-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
+                              >
+                                <Trash2 size={13} />
+                              </button>
+                            </>
+                          )}
                         </>
                       )}
                     </div>

@@ -72,7 +72,7 @@ def generate_from_md_by_ai(table_name: str, md_file: str) -> dict:
     try:
         response = client.messages.create(
             model=MODEL_PRO,
-            max_tokens=4096,
+            max_tokens=16384,
             messages=[{"role": "user", "content": prompt}],
             tools=[{
                 "name": "write_table_json",
