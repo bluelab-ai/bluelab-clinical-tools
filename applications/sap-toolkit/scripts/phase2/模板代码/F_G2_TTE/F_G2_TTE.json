@@ -151,6 +151,6 @@
   "repeat_pattern": {
     "description": "可为多个指标重复此结构，每个指标占一组行",
     "variable_slots": ["指标XXX", "XXX（天/月/年）"],
-    "rows_per_indicator": 19
+    "rows_per_indicator": 22
   }
 }

@@ -381,7 +381,7 @@ def build_all_template_codes(tables_file: str,
                 "template_code": f"F_{group_code}_ANCOVA_{suffix}"
             })
         # 生命体征、心电图检查、体格检查使用特殊规则
-        elif any(keyword in table_name for keyword in ["生命体征", "心电图检查", "体格检查"]) and "基线" not in table_name:
+        elif any(keyword in table_name for keyword in ["生命体征", "心电图检查", "体格检查"]):
             # 优先从05_表格信息中查找单独文件
             safe_name = table_name.replace("/", "_")
             json_file = os.path.join(info_dir, f"{safe_name}.json")

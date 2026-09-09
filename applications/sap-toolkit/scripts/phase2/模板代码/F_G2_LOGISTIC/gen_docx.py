@@ -186,7 +186,7 @@ def generate_docx(filled_data, output_path):
 
         # 填写表头行
         for j, col in enumerate(columns):
-            set_cell_text(table.rows[0].cells[j], col["name"], WD_ALIGN_PARAGRAPH.CENTER)
+            set_cell_text(table.rows[0].cells[j], col["name"], WD_ALIGN_PARAGRAPH.LEFT)
 
         # 填写数据行
         for i, row_data in enumerate(rows):
@@ -212,7 +212,7 @@ def generate_docx(filled_data, output_path):
                 for k, col_name in enumerate(applies_to):
                     col_idx = 2 + k
                     if col_idx < num_cols:
-                        set_cell_text(table.rows[row_idx].cells[col_idx], placeholder, WD_ALIGN_PARAGRAPH.CENTER)
+                        set_cell_text(table.rows[row_idx].cells[col_idx], placeholder, WD_ALIGN_PARAGRAPH.LEFT)
 
         # 表头行属性
         set_row_header(table.rows[0])

@@ -84,7 +84,10 @@ def fill_template(template_code, data_path, output_path=None):
 
             if "visits" in params:
                 # 需要 visits 参数
-                visits = data.get("visits", ["筛选期", "治疗期", "30天随访"])
+                if getattr(module, "REQUIRES_EXPLICIT_VISITS", False):
+                    visits = data.get("visits", [])
+                else:
+                    visits = data.get("visits", ["筛选期", "治疗期", "30天随访"])
                 result = module.fill_template(semantic, projects, visits)
             else:
                 # 不需要 visits 参数

@@ -20,10 +20,13 @@ def fill_template(semantic, projects, visits):
     result = copy.deepcopy(semantic)
     row_template = result["sections"][0]["rows"]
 
-    # 基线部分：行1-6（行0是指标名）
-    baseline_rows = row_template[1:7]
-    # 访视部分：行7-32（每个访视重复）
-    visit_template = row_template[7:]
+    # 基线部分不含行0的指标名；XX访视起的结构按每个访视重复。
+    baseline_end = next(
+        i for i, row in enumerate(row_template)
+        if "XX访视" in row.get("label_values", [])
+    )
+    baseline_rows = row_template[1:baseline_end]
+    visit_template = row_template[baseline_end:]
 
     indicators = []
     for proj in projects:
@@ -56,7 +59,7 @@ def fill_template(semantic, projects, visits):
                 metric = label_vals[1] if len(label_vals) > 1 else ""
                 metric = metric.replace("XX访视", visit)
                 # 访视标题不缩进，统计行缩进4格
-                visit_headers = [visit, f"{visit}较基线变化值", f"{visit}较基线变化值与0比较", f"{visit}较基线变化率(%)", f"{visit}较基线变化率与0比较"]
+                visit_headers = [visit, f"{visit}较基线变化值"]
                 if metric and metric not in visit_headers:
                     metric = "    " + metric
                 data_vals = row.get("data_values", [])

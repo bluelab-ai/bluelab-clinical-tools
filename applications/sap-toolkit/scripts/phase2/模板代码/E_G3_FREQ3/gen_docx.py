@@ -225,23 +225,23 @@ def generate_docx(filled_data, output_path):
     merge_cells(table, 0, 7, 8)  # 合计
 
     # 填写表头行1
-    set_cell_text(table.rows[0].cells[0], "SOC/PT", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[0].cells[1], "组别1\n(N=n1)", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[0].cells[3], "组别2\n(N=n1)", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[0].cells[5], "组别3\n(N=n1)", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[0].cells[7], "合计\n(N=n1)", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[0].cells[9], "P值", WD_ALIGN_PARAGRAPH.CENTER)
+    set_cell_text(table.rows[0].cells[0], "SOC/PT", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[0].cells[1], "组别1\n(N=n1)", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[0].cells[3], "组别2\n(N=n1)", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[0].cells[5], "组别3\n(N=n1)", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[0].cells[7], "合计\n(N=n1)", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[0].cells[9], "P值", WD_ALIGN_PARAGRAPH.LEFT)
 
     # 填写表头行2
-    set_cell_text(table.rows[1].cells[1], "例次", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[1].cells[2], "人数(%)", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[1].cells[3], "例次", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[1].cells[4], "人数(%)", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[1].cells[5], "例次", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[1].cells[6], "人数(%)", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[1].cells[7], "例次", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[1].cells[8], "人数(%)", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[1].cells[9], "P值", WD_ALIGN_PARAGRAPH.CENTER)
+    set_cell_text(table.rows[1].cells[1], "例次", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[1].cells[2], "人数(%)", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[1].cells[3], "例次", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[1].cells[4], "人数(%)", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[1].cells[5], "例次", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[1].cells[6], "人数(%)", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[1].cells[7], "例次", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[1].cells[8], "人数(%)", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[1].cells[9], "P值", WD_ALIGN_PARAGRAPH.LEFT)
 
     # 填写数据行
     for i, row_data in enumerate(rows):
@@ -260,7 +260,7 @@ def generate_docx(filled_data, output_path):
         for k, val in enumerate(data_vals):
             col_idx = 1 + k
             if col_idx < num_cols:
-                set_cell_text(table.rows[row_idx].cells[col_idx], val, WD_ALIGN_PARAGRAPH.CENTER)
+                set_cell_text(table.rows[row_idx].cells[col_idx], val, WD_ALIGN_PARAGRAPH.LEFT)
 
     # 表头行属性
     set_row_header(table.rows[0])

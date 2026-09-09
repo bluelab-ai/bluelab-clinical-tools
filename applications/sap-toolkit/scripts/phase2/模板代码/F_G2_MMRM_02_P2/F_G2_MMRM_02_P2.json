@@ -19,11 +19,6 @@
     },
     {
       "index": 3,
-      "name": "组别2 (N=n1)",
-      "description": "分组数据"
-    },
-    {
-      "index": 4,
       "name": "对照组 (N=n1)",
       "description": "分组数据"
     }
@@ -39,12 +34,10 @@
           ],
           "data_values": [
             "x.xx(x.xxx)",
-            "x.xx(x.xxx)",
             "x.xx(x.xxx)"
           ],
           "applies_to": [
             "试验组 (N=n1)",
-            "组别2 (N=n1)",
             "对照组 (N=n1)"
           ]
         },
@@ -55,12 +48,10 @@
           ],
           "data_values": [
             "(x.xx,x.xx)",
-            "(x.xx,x.xx)",
             "(x.xx,x.xx)"
           ],
           "applies_to": [
             "试验组 (N=n1)",
-            "组别2 (N=n1)",
             "对照组 (N=n1)"
           ]
         },
@@ -70,7 +61,6 @@
             ""
           ],
           "data_values": [
-            "",
             "",
             ""
           ],
@@ -84,12 +74,10 @@
           ],
           "data_values": [
             "x.xx",
-            "x.xx",
             ""
           ],
           "applies_to": [
-            "试验组 (N=n1)",
-            "组别2 (N=n1)"
+            "试验组 (N=n1)"
           ]
         },
         {
@@ -99,12 +87,10 @@
           ],
           "data_values": [
             "(x.xx,x.xx)",
-            "(x.xx,x.xx)",
             ""
           ],
           "applies_to": [
-            "试验组 (N=n1)",
-            "组别2 (N=n1)"
+            "试验组 (N=n1)"
           ]
         },
         {
@@ -114,12 +100,10 @@
           ],
           "data_values": [
             "x.xxx",
-            "x.xxx",
             ""
           ],
           "applies_to": [
-            "试验组 (N=n1)",
-            "组别2 (N=n1)"
+            "试验组 (N=n1)"
           ]
         },
         {
@@ -129,12 +113,10 @@
           ],
           "data_values": [
             "x.xxx",
-            "x.xxx",
             ""
           ],
           "applies_to": [
-            "试验组 (N=n1)",
-            "组别2 (N=n1)"
+            "试验组 (N=n1)"
           ]
         },
         {
@@ -143,7 +125,6 @@
             ""
           ],
           "data_values": [
-            "",
             "",
             ""
           ],

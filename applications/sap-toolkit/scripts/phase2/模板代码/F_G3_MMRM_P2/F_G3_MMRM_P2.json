@@ -1,6 +1,6 @@
 {
-  "code": "F_G2_MMRM_P2",
-  "name": "MMRM最小二乘均数比较表（两组-安慰剂对照）",
+  "code": "F_G3_MMRM_P2",
+  "name": "MMRM最小二乘均数比较表（多组-安慰剂对照）",
   "columns": [
     {
       "index": 0,
@@ -14,11 +14,16 @@
     },
     {
       "index": 2,
-      "name": "试验组 (N=n1)",
+      "name": "组别1 (N=n1)",
       "description": "分组数据"
     },
     {
       "index": 3,
+      "name": "组别2 (N=n1)",
+      "description": "分组数据"
+    },
+    {
+      "index": 4,
       "name": "对照组 (N=n1)",
       "description": "分组数据"
     }
@@ -34,10 +39,12 @@
           ],
           "data_values": [
             "x.xx(x.xxx)",
+            "x.xx(x.xxx)",
             "x.xx(x.xxx)"
           ],
           "applies_to": [
-            "试验组 (N=n1)",
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
             "对照组 (N=n1)"
           ]
         },
@@ -48,10 +55,12 @@
           ],
           "data_values": [
             "(x.xx,x.xx)",
+            "(x.xx,x.xx)",
             "(x.xx,x.xx)"
           ],
           "applies_to": [
-            "试验组 (N=n1)",
+            "组别1 (N=n1)",
+            "组别2 (N=n1)",
             "对照组 (N=n1)"
           ]
         },
@@ -61,6 +70,7 @@
             ""
           ],
           "data_values": [
+            "",
             "",
             ""
           ],
@@ -73,10 +83,12 @@
           ],
           "data_values": [
             "x.xx",
+            "x.xx",
             ""
           ],
           "applies_to": [
-            "试验组 (N=n1)"
+            "组别1 (N=n1)",
+            "组别2 (N=n1)"
           ]
         },
         {
@@ -86,10 +98,12 @@
           ],
           "data_values": [
             "(x.xx,x.xx)",
+            "(x.xx,x.xx)",
             ""
           ],
           "applies_to": [
-            "试验组 (N=n1)"
+            "组别1 (N=n1)",
+            "组别2 (N=n1)"
           ]
         },
         {
@@ -99,10 +113,12 @@
           ],
           "data_values": [
             "x.xxx",
+            "x.xxx",
             ""
           ],
           "applies_to": [
-            "试验组 (N=n1)"
+            "组别1 (N=n1)",
+            "组别2 (N=n1)"
           ]
         },
         {
@@ -112,10 +128,11 @@
           ],
           "data_values": [
             "x.xxx",
+            "",
             ""
           ],
           "applies_to": [
-            "试验组 (N=n1)"
+            "组别1 (N=n1)"
           ]
         }
       ]
@@ -126,6 +143,6 @@
     "variable_slots": [
       "指标XXX (单位)"
     ],
-    "rows_per_indicator": 7
+    "rows_per_indicator": 8
   }
 }

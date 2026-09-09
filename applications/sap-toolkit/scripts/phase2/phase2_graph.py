@@ -34,6 +34,7 @@ from scripts.phase2.extract_template import extract_tables_to_folder
 from scripts.phase2.fill_table import fill_tables_batch
 from scripts.phase2.merge_tables import merge_tables
 from scripts.phase2.gen_table_json import main as gen_table_json
+from scripts.phase2.enrich_mmrm_visits import enrich_mmrm_visits
 from scripts.phase2.format_word_tables import process_document
 
 
@@ -56,6 +57,7 @@ NODE_NAMES = {
     "copy_dependencies": "复制依赖文件",
     "gen_table_json": "生成表格JSON",
     "gen_template_codes": "生成模板代码",
+    "enrich_mmrm_visits": "补全MMRM访视",
     "extract_templates": "提取模板",
     "fill_tables": "填充表格",
     "merge_tables": "合并表格",
@@ -316,6 +318,19 @@ def gen_template_codes(state: Phase2State) -> dict:
         return {"template_codes": {"total": 0, "tables": [], "error": str(e)}}
 
 
+def enrich_mmrm_visit_data(state: Phase2State) -> dict:
+    """Add actual endpoint visits only to F_G2_MMRM_02_P2 input JSON files."""
+    try:
+        result = enrich_mmrm_visits(state["output_dir"])
+        log(
+            "MMRM访视: "
+            f"补全 {result['updated']}，保留人工 {result['preserved']}，不可用 {result['unavailable']}"
+        )
+    except Exception as error:
+        log(f"⚠️ MMRM访视补全失败: {error}", "WARN")
+    return {}
+
+
 # ===== Node: 提取模板 =====
 def extract_templates(state: Phase2State) -> dict:
     """根据模板代码从模版库中提取表格模板"""
@@ -407,6 +422,7 @@ def build_phase2_graph():
     graph.add_node("copy_dependencies", copy_dependencies)
     graph.add_node("gen_table_json", gen_table_json_node)
     graph.add_node("gen_template_codes", gen_template_codes)
+    graph.add_node("enrich_mmrm_visits", enrich_mmrm_visit_data)
     graph.add_node("extract_templates", extract_templates)
     graph.add_node("fill_tables", fill_tables)
     graph.add_node("merge_tables", merge_all_tables)
@@ -418,7 +434,8 @@ def build_phase2_graph():
     graph.add_edge("batch_extract", "copy_dependencies")
     graph.add_edge("copy_dependencies", "gen_table_json")
     graph.add_edge("gen_table_json", "gen_template_codes")
-    graph.add_edge("gen_template_codes", "extract_templates")
+    graph.add_edge("gen_template_codes", "enrich_mmrm_visits")
+    graph.add_edge("enrich_mmrm_visits", "extract_templates")
     graph.add_edge("extract_templates", "fill_tables")
     graph.add_edge("fill_tables", "merge_tables")
     graph.add_edge("merge_tables", "format_tables")
@@ -447,6 +464,7 @@ def build_phase2a_graph():
 
 PHASE2B_NODE_NAMES = {
     "gen_template_codes": "生成模板代码",
+    "enrich_mmrm_visits": "补全MMRM访视",
     "extract_templates": "提取模板",
     "fill_tables": "填充表格",
     "merge_tables": "合并表格",
@@ -459,13 +477,15 @@ def build_phase2b_graph():
     graph = StateGraph(Phase2State)
 
     graph.add_node("gen_template_codes", gen_template_codes)
+    graph.add_node("enrich_mmrm_visits", enrich_mmrm_visit_data)
     graph.add_node("extract_templates", extract_templates)
     graph.add_node("fill_tables", fill_tables)
     graph.add_node("merge_tables", merge_all_tables)
     graph.add_node("format_tables", format_merged_table)
 
     graph.add_edge(START, "gen_template_codes")
-    graph.add_edge("gen_template_codes", "extract_templates")
+    graph.add_edge("gen_template_codes", "enrich_mmrm_visits")
+    graph.add_edge("enrich_mmrm_visits", "extract_templates")
     graph.add_edge("extract_templates", "fill_tables")
     graph.add_edge("fill_tables", "merge_tables")
     graph.add_edge("merge_tables", "format_tables")
@@ -502,10 +522,10 @@ def run_phase2(output_dir: str, crf_pdf: str, max_workers: int = 8, steps: str |
         total = 4
     elif steps == "b":
         graph = build_phase2b_graph()
-        total = 5
+        total = 6
     else:
         graph = build_phase2_graph()
-        total = 9
+        total = 10
 
     initial_state = {
         "output_dir": output_dir,

@@ -18,19 +18,16 @@ def save_json(path, data):
 
 def fill_template(semantic, projects, visits):
     result = copy.deepcopy(semantic)
-    row_template = result["sections"][0]["rows"]
+    baseline_rows = result["sections"][0]["rows"]
+    visit_rows = result["sections"][1]["rows"]
+    change_rows = result["sections"][2]["rows"]
 
-    indicators = []
-    for proj in projects:
-        name = proj["name"]
-        unit = proj.get("unit", "")
-        display = f"{name} ({unit})" if unit else name
-
-        rows = []
-        # 基线部分：第一行合并指标名
+    def append_rows(rows, row_template, indicator="", visit=""):
         for i, row in enumerate(row_template):
             label_vals = row.get("label_values", [])
             metric = label_vals[1] if len(label_vals) > 1 else ""
+            if visit:
+                metric = metric.replace("XX访视", visit)
             if i > 0:
                 metric = "    " + metric
             data_vals = row.get("data_values", [])
@@ -39,8 +36,20 @@ def fill_template(semantic, projects, visits):
                 "metric": metric,
                 "placeholder": placeholder,
                 "applies_to": row.get("applies_to", []),
-                "indicator": display if i == 0 else ""
+                "indicator": indicator if i == 0 else ""
             })
+
+    indicators = []
+    for proj in projects:
+        name = proj["name"]
+        unit = proj.get("unit", "")
+        display = f"{name} ({unit})" if unit else name
+
+        rows = []
+        append_rows(rows, baseline_rows, indicator=display)
+        for visit in visits[1:]:
+            append_rows(rows, visit_rows, visit=visit)
+            append_rows(rows, change_rows, visit=visit)
 
         indicators.append({"name": name, "unit": unit, "display": display, "rows": rows})
 

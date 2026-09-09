@@ -62,7 +62,7 @@ def fill_template(semantic, projects, visits):
                 metric = label_vals[1] if len(label_vals) > 1 else ""
                 metric = metric.replace("XX访视", visit)
                 # 访视标题不缩进，统计行缩进4格
-                visit_headers = [visit, f"{visit}较基线变化值", f"{visit}较基线变化值与0比较", f"{visit}较基线变化率(%)", f"{visit}较基线变化率与0比较"]
+                visit_headers = [visit, f"{visit}较基线变化值"]
                 if metric and metric not in visit_headers:
                     metric = "    " + metric
                 data_vals = row.get("data_values", [])

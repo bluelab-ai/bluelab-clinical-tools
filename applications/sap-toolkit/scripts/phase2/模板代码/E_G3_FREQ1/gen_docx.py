@@ -224,21 +224,21 @@ def generate_docx(filled_data, output_path):
     merge_cells(table, 0, 6, 7)  # 合计
 
     # 填写表头行1
-    set_cell_text(table.rows[0].cells[0], "项目", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[0].cells[1], "指标", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[0].cells[2], "组别1", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[0].cells[4], "组别2", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[0].cells[6], "合计", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[0].cells[8], "P值", WD_ALIGN_PARAGRAPH.CENTER)
+    set_cell_text(table.rows[0].cells[0], "项目", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[0].cells[1], "指标", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[0].cells[2], "组别1", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[0].cells[4], "组别2", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[0].cells[6], "合计", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[0].cells[8], "P值", WD_ALIGN_PARAGRAPH.LEFT)
 
     # 填写表头行2
-    set_cell_text(table.rows[1].cells[2], "例次", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[1].cells[3], "人数(%)", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[1].cells[4], "例次", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[1].cells[5], "人数(%)", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[1].cells[6], "例次", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[1].cells[7], "人数(%)", WD_ALIGN_PARAGRAPH.CENTER)
-    set_cell_text(table.rows[1].cells[8], "P值", WD_ALIGN_PARAGRAPH.CENTER)
+    set_cell_text(table.rows[1].cells[2], "例次", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[1].cells[3], "人数(%)", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[1].cells[4], "例次", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[1].cells[5], "人数(%)", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[1].cells[6], "例次", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[1].cells[7], "人数(%)", WD_ALIGN_PARAGRAPH.LEFT)
+    set_cell_text(table.rows[1].cells[8], "P值", WD_ALIGN_PARAGRAPH.LEFT)
 
     # 填写数据行
     for i, row_data in enumerate(rows):
@@ -262,19 +262,19 @@ def generate_docx(filled_data, output_path):
         applies_to = row_data.get("applies_to", [])
         for k, col_name in enumerate(applies_to):
             if col_name == "组别1 例次":
-                set_cell_text(table.rows[row_idx].cells[2], data_vals[k] if k < len(data_vals) else "", WD_ALIGN_PARAGRAPH.CENTER)
+                set_cell_text(table.rows[row_idx].cells[2], data_vals[k] if k < len(data_vals) else "", WD_ALIGN_PARAGRAPH.LEFT)
             elif col_name == "组别1 人数(%)":
-                set_cell_text(table.rows[row_idx].cells[3], data_vals[k] if k < len(data_vals) else "", WD_ALIGN_PARAGRAPH.CENTER)
+                set_cell_text(table.rows[row_idx].cells[3], data_vals[k] if k < len(data_vals) else "", WD_ALIGN_PARAGRAPH.LEFT)
             elif col_name == "组别2 例次":
-                set_cell_text(table.rows[row_idx].cells[4], data_vals[k] if k < len(data_vals) else "", WD_ALIGN_PARAGRAPH.CENTER)
+                set_cell_text(table.rows[row_idx].cells[4], data_vals[k] if k < len(data_vals) else "", WD_ALIGN_PARAGRAPH.LEFT)
             elif col_name == "组别2 人数(%)":
-                set_cell_text(table.rows[row_idx].cells[5], data_vals[k] if k < len(data_vals) else "", WD_ALIGN_PARAGRAPH.CENTER)
+                set_cell_text(table.rows[row_idx].cells[5], data_vals[k] if k < len(data_vals) else "", WD_ALIGN_PARAGRAPH.LEFT)
             elif col_name == "合计 例次":
-                set_cell_text(table.rows[row_idx].cells[6], data_vals[k] if k < len(data_vals) else "", WD_ALIGN_PARAGRAPH.CENTER)
+                set_cell_text(table.rows[row_idx].cells[6], data_vals[k] if k < len(data_vals) else "", WD_ALIGN_PARAGRAPH.LEFT)
             elif col_name == "合计 人数(%)":
-                set_cell_text(table.rows[row_idx].cells[7], data_vals[k] if k < len(data_vals) else "", WD_ALIGN_PARAGRAPH.CENTER)
+                set_cell_text(table.rows[row_idx].cells[7], data_vals[k] if k < len(data_vals) else "", WD_ALIGN_PARAGRAPH.LEFT)
             elif col_name == "P值":
-                set_cell_text(table.rows[row_idx].cells[8], data_vals[k] if k < len(data_vals) else "", WD_ALIGN_PARAGRAPH.CENTER)
+                set_cell_text(table.rows[row_idx].cells[8], data_vals[k] if k < len(data_vals) else "", WD_ALIGN_PARAGRAPH.LEFT)
 
     # 表头行属性
     set_row_header(table.rows[0])

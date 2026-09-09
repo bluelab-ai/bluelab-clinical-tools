@@ -191,8 +191,9 @@ def update_tables(
 
     # Update project
     p.tables_count = len(indexed_tables)
-    p.phase = "catalog"
-    p.status = "completed"
+    if p.phase != "completed":
+        p.phase = "catalog"
+        p.status = "completed"
     db.commit()
 
     return {"total": len(indexed_tables), "tables": indexed_tables}

@@ -83,6 +83,30 @@ def format_paragraph(paragraph) -> None:
         set_run_fonts(paragraph.add_run())
 
 
+def is_population_by_center_table(table) -> bool:
+    """Identify D_G*_ST tables after their template code is no longer available."""
+    if not table.rows:
+        return False
+
+    header = [cell.text.strip() for cell in table.rows[0].cells]
+    return (
+        bool(header)
+        and header[0] == "中心编号"
+        and {"FAS", "PPS", "SS"}.issubset(header)
+    )
+
+
+def set_full_page_width(table) -> None:
+    """Set the table's preferred width to 100% of the printable page width."""
+    tbl_pr = table._tbl.tblPr
+    table_width = tbl_pr.first_child_found_in("w:tblW")
+    if table_width is None:
+        table_width = OxmlElement("w:tblW")
+        tbl_pr.insert(0, table_width)
+    table_width.set(qn("w:w"), "5000")
+    table_width.set(qn("w:type"), "pct")
+
+
 def set_table_auto_fit(table) -> None:
     """Enable Word's automatic table layout.
 
@@ -98,6 +122,9 @@ def set_table_auto_fit(table) -> None:
         tbl_layout = OxmlElement("w:tblLayout")
         tbl_pr.append(tbl_layout)
     tbl_layout.set(qn("w:type"), "autofit")
+
+    if is_population_by_center_table(table):
+        set_full_page_width(table)
 
 
 def format_table(table) -> None:

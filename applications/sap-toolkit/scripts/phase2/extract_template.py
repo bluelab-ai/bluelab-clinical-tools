@@ -5,6 +5,7 @@ TFL模版库表格提取工具
 """
 
 import docx
+from docx.enum.section import WD_ORIENT
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 import re
@@ -13,10 +14,19 @@ import os
 import copy
 
 
+FULL_WIDTH_ST_CODES = {"D_G1_ST", "D_G2_ST", "D_G3_ST"}
+
+
 def get_template_path():
     """获取模版库文件路径"""
     script_dir = os.path.dirname(os.path.abspath(__file__))
     return os.path.join(script_dir, "模版.docx")
+
+
+def set_st_page_orientation(section):
+    """Match the landscape page used by the population-distribution tables."""
+    section.page_width, section.page_height = section.page_height, section.page_width
+    section.orientation = WD_ORIENT.LANDSCAPE
 
 
 def load_template_library(template_path=None):
@@ -127,6 +137,8 @@ def extract_table_by_code(code, table_name=None, template_path=None, output_path
     section = new_doc.sections[0]
     section.left_margin = 687600
     section.right_margin = 687600
+    if code in FULL_WIDTH_ST_CODES:
+        set_st_page_orientation(section)
 
     # 将表格XML直接插入到文档body中
     body = new_doc.element.body
@@ -209,6 +221,8 @@ def extract_multiple_tables(codes, table_names=None, template_path=None, output_
     section = new_doc.sections[0]
     section.left_margin = 687600
     section.right_margin = 687600
+    if any(code in FULL_WIDTH_ST_CODES for code in codes):
+        set_st_page_orientation(section)
 
     body = new_doc.element.body
     extracted_count = 0
