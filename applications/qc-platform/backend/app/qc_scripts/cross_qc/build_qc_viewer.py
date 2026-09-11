@@ -47,6 +47,7 @@ _CLASS_LABEL = {
     "pending": "🟣 待人工",
     "ok": "✅ 无问题",
     "none": "⬜ 未被质控",
+    "failed": "❌ 核查失败",
 }
 
 # Runtime globals set by main()
@@ -623,6 +624,7 @@ body { display: flex; flex-direction: column; overflow: hidden; background: #f8f
 .badge-pending   { background: #f3e8ff; color: #6b21a8; }
 .badge-ok        { background: #dcfce7; color: #166534; }
 .badge-none      { background: #f1f5f9; color: #94a3b8; }
+.badge-failed    { background: #fee2e2; color: #991b1b; }
 
 .table-list-item .table-idx { font-size: 12px; color: #94a3b8; min-width: 28px; font-weight: 600; }
 .table-list-item .table-name {
@@ -1056,6 +1058,16 @@ function updateRightPanel(tableIdx) {{
         '  <div class="qc-conclusion-badge badge-' + conclusion[0] + '">' + conclusion[1] + '</div>' +
         '  ' + pairData.html +
         '</div>';
+    }} else if (pairNum) {{
+      const conclusion = PAIR_CONCLUSIONS[String(pairNum)] || ['none', '⬜ 未被质控'];
+      const isFailed = conclusion[0] === 'failed';
+      contentArea.innerHTML =
+        '<div class="no-qc-notice">' +
+        '  <div class="icon">' + (isFailed ? '❌' : '📭') + '</div>' +
+        '  <h3>' + (isFailed ? '该表格核查失败' : '该表格未被质控') + '</h3>' +
+        '  <p>此表格（' + escapeHtml(item.tableNumber) + ' ' + escapeHtml(item.shortName) + '）' +
+             (isFailed ? '在核查过程中发生异常，未能生成核查报告' : '未包含在质控报告中') + '</p>' +
+        '</div>';
     }} else {{
       contentArea.innerHTML =
         '<div class="no-qc-notice">' +
@@ -1181,6 +1193,10 @@ def main():
         "--output", default=None,
         help="输出 HTML 路径（默认 DOCX 同目录下的 qc-viewer.html）",
     )
+    parser.add_argument(
+        "--failed", default="",
+        help="逗号分隔的失败 Pair ID 列表",
+    )
     args = parser.parse_args()
 
     # ── Resolve input paths ──
@@ -1244,6 +1260,12 @@ def main():
     )
     TABLE_IDX_TO_PAIR = table_idx_to_pair
     PAIR_CONCLUSIONS = auto_conclusions
+
+    # 标记核查失败的 Pair（红色标签，区别于灰色"未被质控"）
+    failed_ids = [int(x) for x in args.failed.split(",") if x.strip()] if args.failed else []
+    for fid in failed_ids:
+        if fid in PAIR_CONCLUSIONS:
+            PAIR_CONCLUSIONS[fid] = ("failed", "❌ 核查失败")
 
     # Overlay TOC conclusions from QC report
     md_conclusions = parse_conclusions_from_md(md_path.read_text(encoding="utf-8"))

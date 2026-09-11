@@ -235,6 +235,7 @@ async def _run_qc_workflow(
                     pass
 
         # ── 逐行读取 stdout ──
+        failed_items: list[str] = []
         async for line_bytes in process.stdout:
             line = line_bytes.decode("utf-8", errors="replace").rstrip()
             if not line:
@@ -289,17 +290,23 @@ async def _run_qc_workflow(
                 await output_queue.put(_sse_event("progress", {"percent": 100, "text": "质控完成"}))
                 continue
 
-            if any(kw in line for kw in ["Traceback", "❌"]) or (
-                "Error" in line and any(k in line for k in ["文件不存在", "失败", "Exception", "Error:"])
+            # 致命错误：Traceback 或关键异常
+            if "Traceback" in line or (
+                "Error" in line and any(k in line for k in ["文件不存在", "Exception", "Error:"])
             ):
-                await output_queue.put(_sse_event("error", {"content": line.strip()}))
+                await output_queue.put(_sse_event("fatal_error", {"content": line.strip()}))
+                continue
+            # 单表/配对失败：含 ❌ 但非 Traceback
+            if "❌" in line:
+                failed_items.append(line.strip())
+                await output_queue.put(_sse_event("item_error", {"content": line.strip()}))
                 continue
 
         await process.wait()
         return_code = process.returncode
 
         if return_code != 0:
-            await output_queue.put(_sse_event("error", {"content": f"工作流异常退出 (退出码: {return_code})"}))
+            await output_queue.put(_sse_event("fatal_error", {"content": f"工作流异常退出 (退出码: {return_code})"}))
 
         # 收集结果
         result_files = []
@@ -310,10 +317,17 @@ async def _run_qc_workflow(
         except Exception:
             pass
 
+        # 从文件计数推断成功数
+        success_count = len(result_files)
+        failed_count = len(failed_items)
+
         await output_queue.put(_sse_event("done", {
             "files": result_files,
             "project_dir": project_dir,
             "session_id": session_id,
+            "success_count": success_count,
+            "failed_count": failed_count,
+            "failed_items": failed_items,
         }))
 
     except asyncio.CancelledError:
@@ -536,6 +550,7 @@ async def _run_inner_qc_workflow(
         file_monitor_task = asyncio.create_task(monitor_qc_files())
 
         # ── 逐行读取 stdout ──
+        failed_items: list[str] = []
         async for line_bytes in process.stdout:
             line = line_bytes.decode("utf-8", errors="replace").rstrip()
             if not line:
@@ -621,21 +636,37 @@ async def _run_inner_qc_workflow(
                 await output_queue.put(_sse_event("progress", {"percent": 100, "text": "质控完成"}))
                 continue
 
-            if any(kw in line for kw in ["Traceback", "❌"]) or (
-                "Error" in line and any(k in line for k in ["文件不存在", "失败", "Exception", "Error:"])
+            # 致命错误：Traceback 或关键异常
+            if "Traceback" in line or (
+                "Error" in line and any(k in line for k in ["文件不存在", "Exception", "Error:"])
             ):
-                await output_queue.put(_sse_event("error", {"content": line.strip()}))
+                await output_queue.put(_sse_event("fatal_error", {"content": line.strip()}))
+                continue
+            # 单表失败：含 ❌ 但非 Traceback
+            if "❌" in line:
+                failed_items.append(line.strip())
+                await output_queue.put(_sse_event("item_error", {"content": line.strip()}))
                 continue
 
         await process.wait()
         return_code = process.returncode
 
         if return_code != 0:
-            await output_queue.put(_sse_event("error", {"content": f"工作流异常退出 (退出码: {return_code})"}))
+            await output_queue.put(_sse_event("fatal_error", {"content": f"工作流异常退出 (退出码: {return_code})"}))
+
+        # 从文件计数推断成功数
+        try:
+            success_count = len(list(Path(project_dir).rglob("qc_*.json")))
+        except Exception:
+            success_count = 0
+        failed_count = len(failed_items)
 
         await output_queue.put(_sse_event("done", {
             "project_dir": project_dir,
             "session_id": session_id,
+            "success_count": success_count,
+            "failed_count": failed_count,
+            "failed_items": failed_items,
         }))
 
     except asyncio.CancelledError:
@@ -823,6 +854,7 @@ async def _run_protocol_table_qc_workflow(
             5: (90, "正在汇总生成质控报告..."),
         }
 
+        failed_items: list[str] = []
         async for line_bytes in process.stdout:
             line = line_bytes.decode("utf-8", errors="replace").rstrip()
             if not line:
@@ -884,18 +916,23 @@ async def _run_protocol_table_qc_workflow(
                 await output_queue.put(_sse_event("total_pairs", {"total": agent_count}))
                 continue
 
-            # Error detection
-            if any(kw in line for kw in ["Traceback", "❌"]) or (
-                "Error" in line and any(k in line for k in ["文件不存在", "失败", "Exception", "Error:"])
+            # 致命错误：Traceback 或关键异常
+            if "Traceback" in line or (
+                "Error" in line and any(k in line for k in ["文件不存在", "Exception", "Error:"])
             ):
-                await output_queue.put(_sse_event("error", {"content": line.strip()}))
+                await output_queue.put(_sse_event("fatal_error", {"content": line.strip()}))
+                continue
+            # 单表/章节失败：含 ❌ 但非 Traceback（排除已被 m_section 捕获的状态行）
+            if "❌" in line and not re.match(r"^\[.+?\]\s*(✅|⚠️|❌)\s*$", line.strip()):
+                failed_items.append(line.strip())
+                await output_queue.put(_sse_event("item_error", {"content": line.strip()}))
                 continue
 
         await process.wait()
         return_code = process.returncode
 
         if return_code != 0:
-            await output_queue.put(_sse_event("error", {"content": f"工作流异常退出 (退出码: {return_code})"}))
+            await output_queue.put(_sse_event("fatal_error", {"content": f"工作流异常退出 (退出码: {return_code})"}))
 
         # Collect result files
         result_files = []
@@ -910,10 +947,16 @@ async def _run_protocol_table_qc_workflow(
         except Exception:
             pass
 
+        success_count = len(result_files)
+        failed_count = len(failed_items)
+
         await output_queue.put(_sse_event("done", {
             "files": result_files,
             "project_dir": project_dir,
             "session_id": session_id,
+            "success_count": success_count,
+            "failed_count": failed_count,
+            "failed_items": failed_items,
         }))
 
     except asyncio.CancelledError:
@@ -995,10 +1038,24 @@ async def qc_protocol_table(
 async def serve_review_html(
     session_id: str,
     request: Request,
+    token: str = "",
     _=Depends(get_current_user),
 ):
-    """提供人工复核 HTML 页面，供前端自动弹出新标签页"""
+    """提供人工复核 HTML 页面。
+
+    支持通过 ?token=xxx 传递 JWT 作为 <a> 标签跳转时的认证。
+    """
     from fastapi.responses import HTMLResponse
+
+    # 如果 query param 带了 token 但 header 没有，手动验证
+    if token and not getattr(request.state, "user_id", 0):
+        try:
+            from app.utils.security import decode_token
+            payload = decode_token(token)
+            request.state.user_id = payload["user_id"]
+            request.state.workspace = payload["workspace"]
+        except Exception:
+            pass  # fall through to normal auth
 
     project_dir = _find_project_dir(session_id, request.state.workspace)
     if not project_dir:

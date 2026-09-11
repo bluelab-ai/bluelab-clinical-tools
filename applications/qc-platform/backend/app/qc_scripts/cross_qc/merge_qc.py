@@ -100,7 +100,8 @@ def extract_conclusion(content: str) -> str:
     return '✅ 无问题'
 
 
-def merge_qc_results(target_dir: str, output_file: str):
+def merge_qc_results(target_dir: str, output_file: str, failed_ids: list[int] | None = None):
+    failed_ids = failed_ids or []
     files = []
     for fname in os.listdir(target_dir):
         m = re.match(r'^QC结果-Pair(\d+)\.md$', fname)
@@ -108,7 +109,7 @@ def merge_qc_results(target_dir: str, output_file: str):
             files.append((int(m.group(1)), fname))
     files.sort(key=lambda x: x[0])
 
-    if not files:
+    if not files and not failed_ids:
         print("未找到 QC结果-PairN.md 文件")
         return
 
@@ -139,6 +140,7 @@ def merge_qc_results(target_dir: str, output_file: str):
     pending_n = sev_counter.get('PENDING', 0)
     total_issues = major_n + minor_n + suggestion_n
 
+    total_pairs = len(files) + len(failed_ids)
     with open(output_file, 'w') as out:
         # ========== 封面 ==========
         out.write("# TFL 反向质控核查 — QC 结果报告\n\n")
@@ -146,7 +148,11 @@ def merge_qc_results(target_dir: str, output_file: str):
         docx_files = sorted([f for f in os.listdir(target_dir) if f.endswith('.docx') and not f.startswith('~')])
         for docx_f in docx_files:
             out.write(f"**源文件**: {docx_f}  \n")
-        out.write(f"**核查对数**: {len(files)} 对\n\n")
+        if failed_ids:
+            out.write(f"**核查对数**: {len(files)} 对（共 {total_pairs} 对，{len(failed_ids)} 对核查失败）  \n")
+            out.write(f"**核查失败 Pair**: {', '.join(f'Pair {i}' for i in failed_ids)}  \n\n")
+        else:
+            out.write(f"**核查对数**: {len(files)} 对\n\n")
 
         out.write("## 核查概览\n\n")
         out.write("| 分级 | 数量 |\n")
@@ -207,6 +213,17 @@ def merge_qc_results(target_dir: str, output_file: str):
             body = re.sub(r'^\| 参考清单 \| 清单人群 \|\n\|[-| ]+\|\n(?:\|.+\|\n)*', '', body, count=1, flags=re.MULTILINE).strip()
             out.write(body)
 
+        # ========== 核查失败章节 ==========
+        if failed_ids:
+            out.write("\n\n---\n\n")
+            out.write("## 核查失败\n\n")
+            out.write("以下 Pair 因异常未能完成核查：\n\n")
+            out.write("| Pair | 状态 |\n")
+            out.write("|------|------|\n")
+            for fid in failed_ids:
+                out.write(f"| Pair {fid:02d} | ❌ 核查失败 |\n")
+            out.write("\n")
+
         out.write("\n")
 
     print(f"已合并 {len(files)} 个文件 → {output_file}")
@@ -215,6 +232,14 @@ def merge_qc_results(target_dir: str, output_file: str):
 
 
 if __name__ == '__main__':
-    target = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
-    output = sys.argv[2] if len(sys.argv) > 2 else os.path.join(target, 'QC结果-全部合并.md')
-    merge_qc_results(target, output)
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("target_dir", nargs="?", default=os.getcwd())
+    parser.add_argument("output_file", nargs="?", default=None)
+    parser.add_argument("--failed", default="", help="逗号分隔的失败 Pair ID 列表")
+    args = parser.parse_args()
+
+    target = args.target_dir
+    output = args.output_file or os.path.join(target, 'QC结果-全部合并.md')
+    failed_ids = [int(x) for x in args.failed.split(",") if x.strip()] if args.failed else []
+    merge_qc_results(target, output, failed_ids)

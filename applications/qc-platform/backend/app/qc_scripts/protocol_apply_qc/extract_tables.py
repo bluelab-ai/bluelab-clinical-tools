@@ -35,7 +35,7 @@ from config import LLM_API_KEY, LLM_API_BASE, LLM_MODEL
 
 def _sanitize_filename(name: str) -> str:
     """清洗文件名：替换非法字符，限制长度"""
-    name = re.sub(r'[/\\:*?"<>|]', '-', name)
+    name = re.sub(r'[/\\:*?"<>|]', ',', name)
     name = re.sub(r'\s+', ' ', name).strip()
     if len(name) > 120:
         name = name[:120]
@@ -467,7 +467,8 @@ def process_one(docx_path, output_dir, doc_type=None,
         pop = entry.get('population', '-')
 
         safe = _sanitize_filename(title)
-        pop_suffix = f"-{pop}" if pop and pop != '-' else ""
+        safe_pop = _sanitize_filename(pop) if pop and pop != '-' else ""
+        pop_suffix = f"-{safe_pop}" if safe_pop else ""
         filename = f"{seq:02d}-{safe}{pop_suffix}.xlsx"
         xlsx_path = os.path.join(output_dir, filename)
 

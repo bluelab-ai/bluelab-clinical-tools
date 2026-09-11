@@ -103,7 +103,8 @@ def cross_table_rules(results, baseline):
     return findings
 
 
-def render(results, cross, baseline, source_hint):
+def render(results, cross, baseline, source_hint, failed_indices=None):
+    failed_indices = failed_indices or []
     lines = []
     total = len(results)
     concl = Counter(r.get("conclusion", "PASS") for r in results)
@@ -115,8 +116,13 @@ def render(results, cross, baseline, source_hint):
     lines.append("# 临床试验表格内部 QC 报告\n")
     lines.append("## 概要\n")
     lines.append(f"- 覆盖：{source_hint or '（未指定源文件）'}")
-    lines.append(f"- 表格总数：**{total}** ｜ 通过：**{passed}** ｜ "
-                 f"问题总数：**{n_issues}** ｜ 待人工：**{n_pending}**")
+    if failed_indices:
+        grand_total = total + len(failed_indices)
+        lines.append(f"- 表格总数：**{total}**（共 {grand_total} 张，{len(failed_indices)} 张核查失败）｜ "
+                     f"通过：**{passed}** ｜ 问题总数：**{n_issues}** ｜ 待人工：**{n_pending}**")
+    else:
+        lines.append(f"- 表格总数：**{total}** ｜ 通过：**{passed}** ｜ "
+                     f"问题总数：**{n_issues}** ｜ 待人工：**{n_pending}**")
     concl_bits = " / ".join(f"{k} {concl[k]}" for k in
                             ["CRITICAL", "MAJOR", "MINOR", "SUGGESTION", "PASS"]
                             if concl.get(k))
@@ -178,6 +184,16 @@ def render(results, cross, baseline, source_hint):
             lines.append(f"- {t} ✓")
         lines.append("")
 
+    # 核查失败
+    if failed_indices:
+        lines.append("## 核查失败\n")
+        lines.append("以下表格因异常未能完成核查：\n")
+        lines.append("| 编号 | 状态 |")
+        lines.append("|------|------|")
+        for idx in failed_indices:
+            lines.append(f"| 表 {idx:02d} | ❌ 核查失败 |")
+        lines.append("")
+
     return "\n".join(lines)
 
 
@@ -187,10 +203,13 @@ def main():
     ap.add_argument("--baseline", help="人群划分表写出的 baseline.json", default=None)
     ap.add_argument("--out", help="输出报告路径", default=None)
     ap.add_argument("--source", help="源文件名（写进概要）", default=None)
+    ap.add_argument("--failed", default="", help="逗号分隔的失败表索引列表")
     args = ap.parse_args()
 
     results = load_results(args.qc_dir)
-    if not results:
+    failed_indices = [int(x) for x in args.failed.split(",") if x.strip()] if args.failed else []
+
+    if not results and not failed_indices:
         print(f"错误：{args.qc_dir} 下没有 qc_*.json")
         sys.exit(1)
 
@@ -200,13 +219,13 @@ def main():
             baseline = json.load(f)
 
     cross = cross_table_rules(results, baseline)
-    report = render(results, cross, baseline, args.source)
+    report = render(results, cross, baseline, args.source, failed_indices)
 
     out = args.out or os.path.join(args.qc_dir, "总体QC报告.md")
     with open(out, "w", encoding="utf-8") as f:
         f.write(report)
 
-    print(f"合并 {len(results)} 张表，跨表问题 {len(cross)} 条 → {out}")
+    print(f"合并 {len(results)} 张表，跨表问题 {len(cross)} 条，失败 {len(failed_indices)} 张 → {out}")
 
 
 if __name__ == "__main__":

@@ -43,9 +43,10 @@ SEVERITY_LABEL = {
     "major":   "🔴 Major",
     "manual":  "🟡 待人工",
     "pass":    "🟢 核查无误",
+    "failed":  "❌ 核查失败",
     "none":    "⚪ 未核查",
 }
-SEVERITY_ORDER = ["major", "manual", "pass", "none"]
+SEVERITY_ORDER = ["major", "manual", "pass", "failed", "none"]
 
 
 def classify(conclusion: str, pending: int) -> str:
@@ -308,6 +309,7 @@ body { display: flex; flex-direction: column; overflow: hidden; background: #f8f
 .badge-major  { background: #fee2e2; color: #991b1b; }
 .badge-manual { background: #fef9c3; color: #854d0e; }
 .badge-pass   { background: #dcfce7; color: #166534; }
+.badge-failed { background: #fee2e2; color: #991b1b; }
 .badge-none   { background: #f1f5f9; color: #94a3b8; }
 
 .empty { padding: 24px; text-align: center; color: #94a3b8; font-size: 13px; }
@@ -582,6 +584,7 @@ function dismissCover() {{
       <button data-filter="major">🔴 Major</button>
       <button data-filter="manual">🟡 待人工</button>
       <button data-filter="pass">🟢 核查无误</button>
+      <button data-filter="failed">❌ 核查失败</button>
       <button data-filter="none">⚪ 未核查</button>
     </div>
     <div id="tableList" class="table-list"></div>
@@ -613,6 +616,7 @@ const SEV_LABEL = {{
   major: '🔴 Major',
   manual: '🟡 待人工',
   pass: '🟢 核查无误',
+  failed: '❌ 核查失败',
   none: '⚪ 未核查',
 }};
 
@@ -708,8 +712,13 @@ function showItem(idx, ephemeral) {{
       '</div>';
     contentBody.innerHTML = meta + it.table_html;
   }} else {{
-    contentBody.innerHTML = '<div class="placeholder"><div class="icon">📭</div>' +
-      '<p>该表格' + (view === 'report' ? '没有审查报告' : '没有原始表格文件') + '</p></div>';
+    const isFailed = it.severity === 'failed';
+    const icon = isFailed ? '❌' : '📭';
+    const msg = isFailed
+      ? '该表格核查失败，在核查过程中发生异常，未能生成核查报告'
+      : '该表格' + (view === 'report' ? '没有审查报告' : '没有原始表格文件');
+    contentBody.innerHTML = '<div class="placeholder"><div class="icon">' + icon + '</div>' +
+      '<p>' + msg + '</p></div>';
   }}
 }}
 
@@ -789,6 +798,8 @@ def main():
                     help="输出 HTML 路径（默认为 reports-dir 同级的 report-viewer.html）")
     ap.add_argument("--project-name", default=None,
                     help="项目名（用于页面标题；默认取 reports-dir 上一级目录名）")
+    ap.add_argument("--failed", default="",
+                    help="逗号分隔的失败表索引列表")
     args = ap.parse_args()
 
     reports_dir = Path(args.reports_dir).expanduser().resolve()
@@ -801,6 +812,7 @@ def main():
     output_path = (Path(args.output).expanduser().resolve()
                    if args.output else reports_dir.parent / "report-viewer.html")
     project_name = args.project_name or reports_dir.parent.name
+    failed_indices = set(int(x) for x in args.failed.split(",") if x.strip()) if args.failed else set()
 
     print(f"📝 读取审查报告: {reports_dir}")
     reports = load_reports(reports_dir)
@@ -835,7 +847,12 @@ def main():
             table_number = f"表 {idx}"
             short_name   = "(无标题)"
 
-        severity = rep["severity"] if rep else "none"
+        if rep:
+            severity = rep["severity"]
+        elif idx in failed_indices:
+            severity = "failed"
+        else:
+            severity = "none"
         stats[severity] = stats.get(severity, 0) + 1
         stats["total"] += 1
 
@@ -845,7 +862,7 @@ def main():
             "short_name": short_name,
             "filename": tab["filename"] if tab else None,
             "severity": severity,
-            "conclusion": rep["conclusion"] if rep else "未核查",
+            "conclusion": rep["conclusion"] if rep else ("核查失败" if idx in failed_indices else "未核查"),
             "pending": rep["pending"] if rep else 0,
             "report_html": rep["html"] if rep else None,
             "table_html": tab["html"] if tab else None,

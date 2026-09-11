@@ -35,7 +35,7 @@ from config import LLM_API_KEY, LLM_API_BASE, LLM_MODEL
 
 def _sanitize_filename(name: str) -> str:
     """清洗文件名：替换非法字符，限制长度"""
-    name = re.sub(r'[/\\:*?"<>|]', '-', name)
+    name = re.sub(r'[/\\:*?"<>|]', ',', name)
     name = re.sub(r'\s+', ' ', name).strip()
     if len(name) > 120:
         name = name[:120]
@@ -279,21 +279,27 @@ def _call_llm_extract(context_text: str, api_key: str, api_base: str,
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# 续表合并
+# 续表标记
 # ═══════════════════════════════════════════════════════════════════════════
 
-def _merge_continued(results: list[dict]) -> list[dict]:
-    """将 is_continued=True 的条目合并到前一个非续表条目。"""
-    merged = []
-    for r in results:
-        if r.get('is_continued') and merged:
-            r['table_num'] = merged[-1]['table_num']
-            r['title'] = merged[-1]['title']
-            if r.get('population', '-') == '-':
-                r['population'] = merged[-1].get('population', '-')
-            r['_was_continued'] = True
-        merged.append(r)
-    return merged
+def _mark_continued_tables(results: list[dict]) -> list[dict]:
+    """标记每张主表的续表索引，不修改续表标题。
+
+    逻辑：顺序遍历，每张主表向下找续表，直到遇到下一个主表或结束。
+    """
+    n = len(results)
+    for i in range(n):
+        if results[i].get('is_continued'):
+            continue  # 跳过续表，续表不作为主表
+        # 主表：向下找续表
+        continued = []
+        for j in range(i + 1, n):
+            if results[j].get('is_continued'):
+                continued.append(j)
+            else:
+                break  # 遇到下一个主表，停止
+        results[i]['continued_tables'] = continued
+    return results
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -361,7 +367,7 @@ def build_table_index(doc, doc_type: str, api_key=None, api_base=None,
 
             results.append(info)
 
-    results = _merge_continued(results)
+    results = _mark_continued_tables(results)
 
     if use_llm:
         print(f"  ✅ LLM 提取: {llm_ok_count}/{len(results)} 个表格"
@@ -452,7 +458,7 @@ def process_one(docx_path, output_dir, doc_type=None,
         index_entries = index_entries[:len(tables)]
 
     num_unnamed = sum(1 for e in index_entries if not e['title'] or e['title'] == '未命名')
-    num_continued = sum(1 for e in index_entries if e.get('_was_continued'))
+    num_continued = sum(1 for e in index_entries if e.get('is_continued'))
     print(f"  表格数: {len(tables)}  有标题: {len(tables) - num_unnamed}"
           + (f"  续表: {num_continued}" if num_continued else ""))
 
@@ -467,20 +473,23 @@ def process_one(docx_path, output_dir, doc_type=None,
         pop = entry.get('population', '-')
 
         safe = _sanitize_filename(title)
-        pop_suffix = f"-{pop}" if pop and pop != '-' else ""
+        safe_pop = _sanitize_filename(pop) if pop and pop != '-' else ""
+        pop_suffix = f"-{safe_pop}" if safe_pop else ""
         filename = f"{seq:02d}-{safe}{pop_suffix}.xlsx"
         xlsx_path = os.path.join(output_dir, filename)
 
         rows, cols = len(table_data), max((len(r) for r in table_data), default=0)
         save_table_to_xlsx(table_data, xlsx_path)
         status = "  ⚠ 无标题" if title == "未命名" else ""
-        continued_mark = "  (续表)" if entry.get('_was_continued') else ""
+        continued_mark = "  (续表)" if entry.get('is_continued') else ""
         print(f"  → {filename}  ({rows} 行 × {cols} 列){status}{continued_mark}")
 
         index_data.append({
             'num': num if num else str(seq),
             'title': title,
             'population': pop,
+            'is_continued': entry.get('is_continued', False),
+            'continued_tables': entry.get('continued_tables', []),
         })
 
     label = "表格" if doc_type == "表格" else "清单"

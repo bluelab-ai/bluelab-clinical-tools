@@ -28,7 +28,7 @@ def clean(v):
 
 
 def sanitize_filename(name):
-    name = re.sub(r'[/\\:*?"<>|]', '-', name)
+    name = re.sub(r'[/\\:*?"<>|]', ',', name)
     name = re.sub(r'\s+', ' ', name).strip()
     if len(name) > 120: name = name[:120]
     return name

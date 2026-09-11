@@ -41,6 +41,7 @@ export default function ProtocolTableQCPage() {
   const [progress, setProgress] = useState(0);
   const [progressText, setProgressText] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [failedItems, setFailedItems] = useState<string[]>([]);
   const [qcComplete, setQcComplete] = useState(false);
 
   // Temp folder lifecycle
@@ -176,7 +177,19 @@ export default function ProtocolTableQCPage() {
             // For protocol-table QC, total_pairs represents agent count
             break;
 
+          case "item_error":
+            // 单章节失败，不中断 UI
+            setFailedItems(prev => [...prev, (data.content as string) || "未知错误"]);
+            break;
+
+          case "fatal_error":
+            // 致命错误，中断 UI
+            setErrorMsg((data.content as string) || "质控过程发生错误");
+            setIsRunning(false);
+            break;
+
           case "error":
+            // 兼容旧格式
             setErrorMsg((data.content as string) || "质控过程发生错误");
             setIsRunning(false);
             break;
@@ -184,10 +197,27 @@ export default function ProtocolTableQCPage() {
           case "done":
             progressRef.current = 100;
             setProgress(100);
-            setProgressText("质控完成");
+            {
+              const failedCount = (data.failed_count as number) || 0;
+              const successCount = (data.success_count as number) || 0;
+              if (failedCount > 0) {
+                setProgressText(`质控完成：${successCount} 成功，${failedCount} 失败`);
+              } else {
+                setProgressText("质控完成");
+              }
+            }
             setQcComplete(true);
             setIsRunning(false);
             if (data.session_id) setSessionId(data.session_id as string);
+            // 合并 done 事件中的失败项
+            if (data.failed_items && Array.isArray(data.failed_items)) {
+              setFailedItems(prev => {
+                const newItems = (data.failed_items as string[]).filter(
+                  item => !prev.includes(item)
+                );
+                return [...prev, ...newItems];
+              });
+            }
             break;
         }
       },
@@ -317,6 +347,16 @@ export default function ProtocolTableQCPage() {
                   <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-xl flex items-start gap-2 w-full">
                     <AlertCircle size={16} className="text-red-500 flex-shrink-0 mt-0.5" />
                     <p className="text-sm text-red-700">{errorMsg}</p>
+                  </div>
+                )}
+
+                {/* Failed items (non-blocking) */}
+                {failedItems.length > 0 && !errorMsg && (
+                  <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-2 w-full">
+                    <AlertCircle size={16} className="text-amber-500 flex-shrink-0 mt-0.5" />
+                    <div className="text-sm text-amber-700">
+                      <p className="font-medium">{failedItems.length} 个章节核查失败（不影响其他章节）</p>
+                    </div>
                   </div>
                 )}
               </div>

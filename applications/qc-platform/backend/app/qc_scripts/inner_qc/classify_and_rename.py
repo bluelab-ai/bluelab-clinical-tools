@@ -174,7 +174,8 @@ def main():
         print(f"{num:<6} {tp:<14} {rest}")
 
         # 新文件名：编号-类型-原标题（分析集已由 extract_tables 嵌入）
-        new_name = f"{num}-{tp}-{rest}.xlsx"
+        safe_rest = re.sub(r'[/\\:*?"<>|]', ',', rest)
+        new_name = f"{num}-{tp}-{safe_rest}.xlsx"
 
         old_path = os.path.join(input_dir, fname)
         new_path = os.path.join(output_dir, new_name)

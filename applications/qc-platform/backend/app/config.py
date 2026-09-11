@@ -8,9 +8,9 @@ import os
 SECRET_KEY = "dev-secret-change-in-production"
 
 # LLM API 配置（所有 QC 脚本统一从此读取）
-LLM_API_KEY = "sk-97e4571a55f04b5aa19b68cfb01a3378"
-LLM_API_BASE = "https://api.deepseek.com/anthropic"
-LLM_MODEL = "deepseek-v4-pro"
+LLM_API_KEY = "849338788ffe4d4aa847fde46630dd87.VK4dbmlRjlJ7HhgJ"
+LLM_API_BASE = "https://open.bigmodel.cn/api/anthropic"
+LLM_MODEL = "GLM-5.3-Flash"
 
 # ============================================================
 # 以下为系统路径配置，通常无需修改

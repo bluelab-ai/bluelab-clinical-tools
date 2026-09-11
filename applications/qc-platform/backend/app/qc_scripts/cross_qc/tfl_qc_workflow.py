@@ -841,6 +841,7 @@ def phase3_run_qc(state: QCState) -> dict:
             )
             return {
                 "pair_report_paths": [str(p) for p in report_files],
+                "failed_pair_ids": [],
                 "current_phase": "phase3_done",
             }
 
@@ -948,6 +949,7 @@ def phase3_run_qc(state: QCState) -> dict:
 
     return {
         "pair_report_paths": [str(p) for p in report_files],
+        "failed_pair_ids": sorted(missing_ids),
         "current_phase": "phase3_done",
     }
 
@@ -969,6 +971,8 @@ def phase4_merge(state: QCState) -> dict:
     project = state["project_dir"]
     skill = state["skill_dir"]
     merge_script = os.path.join(skill, "merge_qc.py")
+    failed_ids = state.get("failed_pair_ids", [])
+    failed_arg = ["--failed", ",".join(str(i) for i in failed_ids)] if failed_ids else []
 
     if not os.path.exists(merge_script):
         print("  ⚠️ merge_qc.py 不存在，生成简单合并")
@@ -976,12 +980,12 @@ def phase4_merge(state: QCState) -> dict:
         return _simple_merge(state)
 
     # 生成完整详情报告
-    result = _run_script(merge_script, [project], cwd=project)
+    result = _run_script(merge_script, [project] + failed_arg, cwd=project)
     detail_path = os.path.join(project, "QC结果-全部合并.md")
 
     # 生成带封面汇总
     summary_path = os.path.join(project, "QC报告-汇总.md")
-    _run_script(merge_script, [project, summary_path], cwd=project)
+    _run_script(merge_script, [project, summary_path] + failed_arg, cwd=project)
 
     print("✅ Phase 4 完成")
     return {
@@ -1019,13 +1023,15 @@ def phase4b_build_viewer(state: QCState) -> dict:
         return {"current_phase": "phase4b_done"}
 
     output_html = os.path.join(project, "qc-viewer.html")
+    failed_ids = state.get("failed_pair_ids", [])
+    failed_arg = ["--failed", ",".join(str(i) for i in failed_ids)] if failed_ids else []
 
     cmd_args = [
         "--docx", table_input,
         "--md", summary_path,
         "--mapping", mapping_path,
         "--output", output_html,
-    ]
+    ] + failed_arg
 
     result = _run_script(build_script, cmd_args, cwd=project)
 
@@ -1046,6 +1052,7 @@ def phase4b_build_viewer(state: QCState) -> dict:
 def _simple_merge(state: QCState) -> dict:
     """简易合并（merge_qc.py 不可用时的 fallback）"""
     project = state["project_dir"]
+    failed_ids = state.get("failed_pair_ids", [])
     detail_path = os.path.join(project, "QC结果-全部合并.md")
 
     report_files = sorted(
@@ -1053,13 +1060,17 @@ def _simple_merge(state: QCState) -> dict:
         key=lambda p: int(p.stem.split("Pair")[-1]) if p.stem.split("Pair")[-1].isdigit() else 0,
     )
 
+    total_pairs = len(report_files) + len(failed_ids)
     lines = [
         "# TFL 反向质控核查报告",
         "",
         f"**生成时间:** {datetime.now().strftime('%Y-%m-%d %H:%M')}",
-        f"**Pair 总数:** {len(report_files)}",
+        f"**核查对数:** {len(report_files)} 对" + (f"（共 {total_pairs} 对，{len(failed_ids)} 对核查失败）" if failed_ids else ""),
         "",
     ]
+    if failed_ids:
+        lines.append(f"**核查失败 Pair:** {', '.join(f'Pair {i}' for i in failed_ids)}")
+        lines.append("")
 
     # 提取各 pair 结论做统计
     stats: dict[str, int] = {}
@@ -1107,6 +1118,22 @@ def _simple_merge(state: QCState) -> dict:
                     lines.append(line)
         except Exception as e:
             lines.append(f"*读取失败: {e}*")
+        lines.append("")
+
+    # 核查失败章节
+    if failed_ids:
+        lines.extend([
+            "---",
+            "",
+            "## 核查失败",
+            "",
+            "以下 Pair 因异常未能完成核查：",
+            "",
+            "| Pair | 状态 |",
+            "|------|------|",
+        ])
+        for fid in failed_ids:
+            lines.append(f"| Pair {fid:02d} | ❌ 核查失败 |")
         lines.append("")
 
     with open(detail_path, "w") as f:

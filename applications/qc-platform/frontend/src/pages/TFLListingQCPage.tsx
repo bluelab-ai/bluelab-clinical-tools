@@ -15,6 +15,7 @@ import {
   AlertCircle,
   ListChecks,
   FileWarning,
+  ExternalLink,
 } from "lucide-react";
 import api from "../services/api";
 import { useSSE } from "../hooks/useSSE";
@@ -46,6 +47,7 @@ export default function TFLListingQCPage() {
   const [completedPairs, setCompletedPairs] = useState(0);
   const [totalPairs, setTotalPairs] = useState(0);
   const [errorMsg, setErrorMsg] = useState("");
+  const [failedItems, setFailedItems] = useState<string[]>([]);
   const [qcComplete, setQcComplete] = useState(false);
   const [resultFiles, setResultFiles] = useState<string[]>([]);
 
@@ -61,6 +63,7 @@ export default function TFLListingQCPage() {
   // Human review pending — 人工审核模式下 HTML 已生成、等待用户审核
   const [reviewPending, setReviewPending] = useState(false);
   const reviewPendingRef = useRef(false);  // ref 解决 SSE 闭包陈旧问题
+  const [reviewHtmlUrl, setReviewHtmlUrl] = useState("");  // 审核页面 URL
 
   // SSE 回调中读取进度值的 ref（解决 startQC/resumeQC 内联闭包陈旧问题）
   const completedRef = useRef(0);
@@ -144,7 +147,12 @@ export default function TFLListingQCPage() {
             if (data.session_id) setSessionId(data.session_id as string);
             if (data.project_dir) setProjectDir(data.project_dir as string);
             if (data.html_url) {
-              window.open(data.html_url as string, "_blank", "noopener");
+              // URL 附加 token 供 <a> 标签跳转时认证
+              const token = localStorage.getItem("token") || "";
+              const url = token
+                ? `${data.html_url}?token=${encodeURIComponent(token)}`
+                : (data.html_url as string);
+              setReviewHtmlUrl(url);
             }
             setProgressText("等待人工审核...");
             setReviewPending(true);
@@ -180,7 +188,19 @@ export default function TFLListingQCPage() {
             // 静默忽略（修订标记等非阻断性提醒）
             break;
 
+          case "item_error":
+            // 单表/配对失败，不中断 UI，追加到失败列表
+            setFailedItems(prev => [...prev, (data.content as string) || "未知错误"]);
+            break;
+
+          case "fatal_error":
+            // 致命错误，中断 UI
+            setErrorMsg((data.content as string) || "质控过程发生错误");
+            setIsRunning(false);
+            break;
+
           case "error":
+            // 兼容旧格式
             setErrorMsg((data.content as string) || "质控过程发生错误");
             setIsRunning(false);
             break;
@@ -189,12 +209,27 @@ export default function TFLListingQCPage() {
             if (!reviewPendingRef.current) {
               progressRef.current = 100;
               setProgress(100);
-              setProgressText("质控完成");
+              const failedCount = (data.failed_count as number) || 0;
+              const successCount = (data.success_count as number) || 0;
+              if (failedCount > 0) {
+                setProgressText(`质控完成：${successCount} 成功，${failedCount} 失败`);
+              } else {
+                setProgressText("质控完成");
+              }
               setQcComplete(true);
               setIsRunning(false);
               if (data.session_id) setSessionId(data.session_id as string);
             }
             if (data.files) setResultFiles(data.files as string[]);
+            // 合并 done 事件中的失败项
+            if (data.failed_items && Array.isArray(data.failed_items)) {
+              setFailedItems(prev => {
+                const newItems = (data.failed_items as string[]).filter(
+                  item => !prev.includes(item)
+                );
+                return [...prev, ...newItems];
+              });
+            }
             break;
         }
       },
@@ -278,6 +313,7 @@ export default function TFLListingQCPage() {
     setProgressText("正在启动...");
     setReviewPending(false);
     reviewPendingRef.current = false;
+    setReviewHtmlUrl("");
     setSessionId("");
     setProjectDir("");
     setReviewJsonState({ file: null, uploaded: false, uploading: false, path: "" });
@@ -301,6 +337,7 @@ export default function TFLListingQCPage() {
     setIsRunning(false);
     setReviewPending(false);
     reviewPendingRef.current = false;
+    setReviewHtmlUrl("");
     setProgress(0);
     progressRef.current = 0;
     setCompletedPairs(0);
@@ -356,6 +393,7 @@ export default function TFLListingQCPage() {
     setResultFiles([]);
     setReviewPending(false);
     reviewPendingRef.current = false;
+    setReviewHtmlUrl("");
     setSessionId("");
     setProjectDir("");
     setReviewJsonState({ file: null, uploaded: false, uploading: false, path: "" });
@@ -513,6 +551,16 @@ export default function TFLListingQCPage() {
                   <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-xl flex items-start gap-2 w-full">
                     <AlertCircle size={16} className="text-red-500 flex-shrink-0 mt-0.5" />
                     <p className="text-sm text-red-700">{errorMsg}</p>
+                  </div>
+                )}
+
+                {/* Failed items (non-blocking) */}
+                {failedItems.length > 0 && !errorMsg && (
+                  <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-2 w-full">
+                    <AlertCircle size={16} className="text-amber-500 flex-shrink-0 mt-0.5" />
+                    <div className="text-sm text-amber-700">
+                      <p className="font-medium">{failedItems.length} 个配对核查失败（不影响其他配对）</p>
+                    </div>
                   </div>
                 )}
               </div>
@@ -730,16 +778,29 @@ export default function TFLListingQCPage() {
 
             {/* Review in progress indicator */}
             {manualQC && sessionId && !reviewJsonState.uploaded && (
-              <div className="bg-blue-50/50 rounded-2xl border border-blue-100/50 p-4 flex items-start gap-3">
-                <Loader2 size={18} className="text-blue-600 animate-spin flex-shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-sm font-semibold text-slate-900 mb-1">等待人工审核</h4>
-                  <p className="text-xs text-slate-600">
-                    复核页面已在新标签页中打开。审查完成后，请导出
-                    <code className="bg-blue-100 px-1 rounded">表格-清单-映射表-已复核.json</code>
-                    ，并通过上方上传栏上传以继续管线。
-                  </p>
+              <div className="bg-blue-50/50 rounded-2xl border border-blue-100/50 p-4 space-y-3">
+                <div className="flex items-start gap-3">
+                  <Loader2 size={18} className="text-blue-600 animate-spin flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-semibold text-slate-900 mb-1">等待人工审核</h4>
+                    <p className="text-xs text-slate-600">
+                      点击下方按钮打开审核页面，审查完成后导出
+                      <code className="bg-blue-100 px-1 rounded">表格-清单-映射表-已复核.json</code>
+                      ，并通过上方上传栏上传以继续管线。
+                    </p>
+                  </div>
                 </div>
+                {reviewHtmlUrl && (
+                  <a
+                    href={reviewHtmlUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl transition-colors"
+                  >
+                    <ExternalLink size={16} />
+                    打开匹配复核页面
+                  </a>
+                )}
               </div>
             )}
 

@@ -33,14 +33,42 @@ def _strip_continuation(title):
 
 def _find_sibling_listings(listings, best_idx):
     best = listings[best_idx]
-    best_stripped = _strip_continuation(best['title'])
+    # 使用 original_title（如果有）来匹配同组清单
+    best_title = best.get('original_title', best['title'])
+    best_stripped = _strip_continuation(best_title)
     siblings = []
     for l in listings:
-        if _strip_continuation(l['title']) == best_stripped:
+        l_title = l.get('original_title', l['title'])
+        if _strip_continuation(l_title) == best_stripped:
             siblings.append(l)
     siblings.sort(key=lambda l: l.get('num', l.get('seq', 0)))
-    return [{'清单编号': l.get('num', l.get('seq')), '清单名称': l['title'],
+    return [{'清单编号': l.get('num', l.get('seq')), '清单名称': l.get('original_title', l['title']),
              '清单人群': l.get('population', '-')} for l in siblings]
+
+
+def _build_match_list_with_continuations(listings, best_idx):
+    """构建匹配清单列表：主清单 + 清单续表。
+
+    通过清单的 continued_tables 字段找续表，而不是标题匹配。
+    """
+    main_listing = listings[best_idx]
+    match_list = [{
+        '清单编号': main_listing.get('num', main_listing.get('seq')),
+        '清单名称': main_listing['title'],
+        '清单人群': main_listing.get('population', '-'),
+    }]
+
+    # 添加清单续表
+    for cont_idx in main_listing.get('continued_tables', []):
+        if 0 <= cont_idx < len(listings):
+            cont_listing = listings[cont_idx]
+            match_list.append({
+                '清单编号': cont_listing.get('num', cont_listing.get('seq')),
+                '清单名称': cont_listing['title'],
+                '清单人群': cont_listing.get('population', '-'),
+            })
+
+    return match_list
 
 
 def _lcs_len(a, b):
@@ -96,6 +124,10 @@ def match(tables, listings, model_name="BAAI/bge-large-zh-v1.5"):
 
     results = []
     for i, t in enumerate(tables):
+        # 跳过续表，续表不参与匹配
+        if t.get('is_continued'):
+            continue
+
         top3 = np.argsort(sim[i])[::-1][:3]
         kw_idx, kw_name = try_keyword_match(t['title'], listing_titles, sim[i])
 
@@ -104,9 +136,11 @@ def match(tables, listings, model_name="BAAI/bge-large-zh-v1.5"):
             sc = sim[i].copy(); sc[kw_idx] = -1
             second_j = int(np.argmax(sc))
             gap = round(float(sim[i][kw_idx] - sim[i][second_j]), 4)
-            match_list = _find_sibling_listings(listings, kw_idx)
+            # 构建匹配清单列表：主清单 + 清单续表
+            match_list = _build_match_list_with_continuations(listings, kw_idx)
             results.append({
                 "表格名称": t['title'], "表格人群": t.get('population', '-'),
+                "表格续表": t.get('continued_tables', []),
                 "最佳匹配_清单编号": l.get('num', l.get('seq')),
                 "最佳匹配_清单名称": l['title'],
                 "清单人群": l.get('population', '-'),
@@ -132,9 +166,11 @@ def match(tables, listings, model_name="BAAI/bge-large-zh-v1.5"):
             else: conf = "低"
 
             need_review = "是" if (source_type == "多源候选" or conf in ("低", "中")) else "否"
-            match_list = _find_sibling_listings(listings, best_j)
+            # 构建匹配清单列表：主清单 + 清单续表
+            match_list = _build_match_list_with_continuations(listings, best_j)
             results.append({
                 "表格名称": t['title'], "表格人群": t.get('population', '-'),
+                "表格续表": t.get('continued_tables', []),
                 "最佳匹配_清单编号": l.get('num', l.get('seq')),
                 "最佳匹配_清单名称": l['title'],
                 "清单人群": l.get('population', '-'),
@@ -160,6 +196,7 @@ def write_json(results, path):
         method_label = r['来源类型'].replace('直接匹配', '余弦相似度匹配').replace('多源候选', '余弦相似度匹配')
         output.append({
             "表格编号": i + 1, "表格名称": r['表格名称'], "表格人群": r['表格人群'],
+            "表格续表": r.get('表格续表', []),
             "最佳匹配": {
                 "清单编号": r['最佳匹配_清单编号'],
                 "清单名称": r['最佳匹配_清单名称'],

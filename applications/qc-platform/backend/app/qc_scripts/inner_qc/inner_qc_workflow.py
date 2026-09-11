@@ -1081,6 +1081,7 @@ def phase4_run_qc(state: InnerQCState) -> dict:
             print("  ✅ 全部表已完成，跳过大模型调用")
             return {
                 "qc_report_paths": [md for md, _ in already_done.values()],
+                "failed_table_indices": [],
                 "current_phase": "phase4_done",
             }
 
@@ -1161,6 +1162,7 @@ def phase4_run_qc(state: InnerQCState) -> dict:
 
     return {
         "qc_report_paths": qc_report_paths,
+        "failed_table_indices": failed_indices,
         "current_phase": "phase4_done",
     }
 
@@ -1180,6 +1182,8 @@ def phase6_merge(state: InnerQCState) -> dict:
     qc_output_dir = state["qc_output_dir"]
     baseline_path = state.get("baseline_path", "")
     table_input = state["table_input"]
+    failed_indices = state.get("failed_table_indices", [])
+    failed_arg = ["--failed", ",".join(str(i) for i in failed_indices)] if failed_indices else []
 
     # 优先用 merge_qc.py（proven），备选 build_reports.py（新版）
     merge_script = os.path.join(skill, "merge_qc.py")
@@ -1189,7 +1193,7 @@ def phase6_merge(state: InnerQCState) -> dict:
         print("  ⚠️ 没有可用的合并脚本，跳过")
         return {"current_phase": "phase6_merge_done"}
 
-    args = [qc_output_dir]
+    args = [qc_output_dir] + failed_arg
     if baseline_path and os.path.exists(baseline_path):
         args += ["--baseline", baseline_path]
     args += ["--source", os.path.basename(table_input)]
@@ -1227,12 +1231,15 @@ def phase6_build_viewer(state: InnerQCState) -> dict:
         print("  ⚠️ build_report_viewer.py 不存在，跳过 HTML 构建")
         return {"current_phase": "phase6_done"}
 
+    failed_indices = state.get("failed_table_indices", [])
+    failed_arg = ["--failed", ",".join(str(i) for i in failed_indices)] if failed_indices else []
+
     output_html = os.path.join(qc_output_dir, "QC可视化报告.html")
     args = [
         "--reports-dir", qc_output_dir,
         "--tables-dir", tables_dir,
         "--output", output_html,
-    ]
+    ] + failed_arg
 
     result = _run_script(build_script, args, cwd=project)
 
