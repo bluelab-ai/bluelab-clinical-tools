@@ -226,6 +226,14 @@ def main():
     table_names = parse_table_names(args.table_names_txt)
     log(f"解析表格名称: {len(table_names)} 张表", "INFO")
 
+    # 2.1 生存分析过滤：如果 method_flags.survival 或 cox 为 true，只保留生存分析表
+    if not args.safety:
+        method_flags = endpoint_data.get("statistical_methods", {}).get("method_flags", {})
+        if method_flags.get("survival") or method_flags.get("cox"):
+            original_count = len(table_names)
+            table_names = [t for t in table_names if "生存分析" in t]
+            log(f"检测到生存分析终点，过滤后保留 {len(table_names)}/{original_count} 张表", "INFO")
+
     # 3. 创建输出目录
     os.makedirs(args.output_dir, exist_ok=True)
 

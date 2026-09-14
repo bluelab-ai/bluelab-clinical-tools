@@ -138,16 +138,9 @@ def has_confidence_interval(stats_file: str) -> str:
         stats_file: 统计方法 JSON 文件路径
 
     Returns:
-        涉及置信区间 → "Y_N"
-        不涉及 → "N_N"
+        固定返回 "N_N"（不区分置信区间模板）
     """
-    with open(stats_file, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    confidence_interval = data.get("confidence_interval", {})
-    required = confidence_interval.get("required", False)
-
-    return "Y_N" if required else "N_N"
+    return "N_N"
 
 
 def build_template_code(json_file: str, sample_file: str, stats_file: str) -> str | list[str]:
