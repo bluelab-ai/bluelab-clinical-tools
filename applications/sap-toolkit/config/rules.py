@@ -19,7 +19,7 @@ METHOD_NAME_MAPPING = {
     "t检验": ["t检验", "t-test", "Student's t检验"],
     "卡方检验": ["卡方检验", "Chi-square Test", "χ²检验"],
     "CMH检验": ["CMH检验", "CMH", "Cochran-Mantel-Haenszel", "Cochran-Mantel-Haenszel检验"],
-    "中心效应CMH检验": ["中心效应CMH检验", "中心效应CMH", "中心校正CMH", "stratified CMH"],
+    "考虑中心效应的CMH检验": ["考虑中心效应的CMH检验", "中心效应CMH检验", "中心效应CMH", "中心校正CMH", "stratified CMH"],
     "Fisher精确检验": ["Fisher精确检验", "Fisher's Exact Test"],
     "Wilcoxon检验": ["Wilcoxon检验", "Wilcoxon Rank Sum Test"],
     "Mann-Whitney U检验": ["Mann-Whitney U检验", "Mann-Whitney Test"],
@@ -44,7 +44,7 @@ MMRM_METHODS = ["混合效应模型重复测量"]
 # 需要单独出表的方法 → 1张表
 SINGLE_TABLE_METHODS = [
     "优效性检验", "非劣效检验", "等效性检验",
-    "Logistic回归", "生存分析", "中心效应CMH检验",
+    "Logistic回归", "生存分析", "考虑中心效应的CMH检验",
 ]
 
 # 不需要单独出表的方法（Cox回归、Kaplan-Meier、普通CMH等）

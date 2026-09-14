@@ -160,7 +160,7 @@ EXTRACTION_TOOL = {
                             "fisher": {"type": "boolean", "description": "Fisher精确检验"},
                             "wilcoxon": {"type": "boolean", "description": "Wilcoxon检验/Mann-Whitney U检验"},
                             "cmh": {"type": "boolean", "description": "CMH检验"},
-                            "center_cmh": {"type": "boolean", "description": "中心效应CMH检验"},
+                            "center_cmh": {"type": "boolean", "description": "考虑中心效应的CMH检验"},
                             "descriptive": {"type": "boolean", "description": "描述性分析"}
                         },
                         "required": ["ancova", "mmrm", "non_inferiority", "superiority", "equivalence", "logistic", "cox", "survival", "t_test", "chi_square", "fisher", "wilcoxon", "cmh", "center_cmh", "descriptive"]
@@ -299,7 +299,7 @@ SECONDARY_EXTRACTION_TOOL = {
                             "fisher": {"type": "boolean", "description": "Fisher精确检验"},
                             "wilcoxon": {"type": "boolean", "description": "Wilcoxon检验/Mann-Whitney U检验"},
                             "cmh": {"type": "boolean", "description": "CMH检验"},
-                            "center_cmh": {"type": "boolean", "description": "中心效应CMH检验"},
+                            "center_cmh": {"type": "boolean", "description": "考虑中心效应的CMH检验"},
                             "descriptive": {"type": "boolean", "description": "描述性分析"}
                         },
                         "required": ["ancova", "mmrm", "non_inferiority", "superiority", "equivalence", "logistic", "cox", "survival", "t_test", "chi_square", "fisher", "wilcoxon", "cmh", "center_cmh", "descriptive"]
@@ -1078,12 +1078,12 @@ MMRM_TEMPLATE_CODES = ["P1", "P2", "02_P1", "02_P2"]
 
 # 出1张表的方法
 SINGLE_TABLE_METHODS = {
+    "center_cmh": "考虑中心效应的CMH检验",
     "non_inferiority": "非劣效检验",
     "superiority": "优效性检验",
     "equivalence": "等效性检验",
     "logistic": "Logistic回归",
     "survival": "生存分析",
-    "center_cmh": "中心效应CMH检验",
 }
 
 

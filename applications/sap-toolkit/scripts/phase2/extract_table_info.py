@@ -249,7 +249,12 @@ def extract_table_info(
 
     # 构建 prompt：优先使用自定义 instruction，否则走原有逻辑
     if instruction:
-        user_question = f"""{instruction}
+        # 如果 instruction 已包含完整的提取要求和输出格式（特殊表格），直接使用
+        # 否则（普通表格的简短 instruction）拼接公共规则
+        if "【提取要求】" in instruction and "【输出格式】" in instruction:
+            user_question = instruction
+        else:
+            user_question = f"""{instruction}
 
 【提取要求】
 {EXTRACT_RULES}

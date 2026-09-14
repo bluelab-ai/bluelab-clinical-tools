@@ -226,9 +226,9 @@ PRIMARY_EXTRACTION_RULES = """## 提取原则（必须先读完再提取）
 | 广义线性模型 | 广义线性模型, GLM, Generalized Linear Model |
 | 多重比较 | 多重比较, Multiple Comparisons |
 | CMH检验 | CMH, Cochran-Mantel-Haenszel, CMH检验 |
-| 中心效应CMH检验 | 中心效应CMH, 中心校正CMH, stratified CMH, 分层CMH |
+| 考虑中心效应的CMH检验 | 中心效应CMH, 中心校正CMH, stratified CMH, 分层CMH |
 
-**重要提示**：如果 CMH 检验中提到了"中心"、"中心效应"、"分层"等关键词，必须提取为"中心效应CMH检验"，而不是"CMH检验"。"""
+**重要提示**：如果 CMH 检验中提到了"中心"、"中心效应"、"分层"等关键词，必须提取为"考虑中心效应的CMH检验"，而不是"CMH检验"。"""
 
 # 次要终点提取系统提示词
 SECONDARY_SYSTEM_PROMPT = """你是一个临床试验 SAP 文档信息提取专家。
@@ -302,9 +302,9 @@ SECONDARY_EXTRACTION_RULES = """## 提取原则（必须先读完再提取）
   - 广义线性模型：GLM, glm, generalized linear model
   - 多重比较：多重检验, 多重性调整, multiple comparison
   - CMH检验：CMH, Cochran-Mantel-Haenszel, CMH检验
-  - 中心效应CMH检验：中心效应CMH, 中心校正CMH, stratified CMH, 分层CMH
+  - 考虑中心效应的CMH检验：中心效应CMH, 中心校正CMH, stratified CMH, 分层CMH
 
-**重要提示**：如果 CMH 检验中提到了"中心"、"中心效应"、"分层"等关键词，必须提取为"中心效应CMH检验"，而不是"CMH检验"。
+**重要提示**：如果 CMH 检验中提到了"中心"、"中心效应"、"分层"等关键词，必须提取为"考虑中心效应的CMH检验"，而不是"CMH检验"。
 
 ### 3. 多重性调整
 - 是否进行多重性调整

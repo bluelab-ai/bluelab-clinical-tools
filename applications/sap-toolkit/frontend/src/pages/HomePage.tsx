@@ -30,8 +30,10 @@ export default function HomePage() {
   const fetchProjects = async () => {
     try {
       const res = await api.get("/projects");
-      setProjects(res.data);
-    } catch {} finally {
+      setProjects(Array.isArray(res.data) ? res.data : []);
+    } catch {
+      setProjects([]);
+    } finally {
       setLoading(false);
     }
   };

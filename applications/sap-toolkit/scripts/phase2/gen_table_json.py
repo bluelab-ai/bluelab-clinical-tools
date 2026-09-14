@@ -122,13 +122,13 @@ def gen_cross_tables(lab_data, output_dir, exclude_categories=None):
     items = lab_data.get("analysis_items", [])
     category_map = {
         "血常规": "血常规",
-        "肝功能": "肝功能",
-        "肾功能": "肾功能",
+        "血生化": "血生化",
         "凝血功能": "凝血功能",
+        "尿常规": "尿常规",
     }
     # 默认排除基线指标
     if exclude_categories is None:
-        exclude_categories = ["传染病筛查", "其他"]
+        exclude_categories = ["其他"]
     created = []
 
     for item in items:
@@ -218,52 +218,6 @@ def gen_ecg_table(details_dir, output_dir, visits_map=None):
     return table_name
 
 
-def gen_urea_table(lab_data, output_dir):
-    """生成尿素/尿素氮(UREA/BUN)（SS）.json（多模板：定性+定量）"""
-    table_name = "尿素/尿素氮(UREA/BUN)（SS）"
-    safe_name = table_name.replace("/", "_")
-    table_file = os.path.join(output_dir, f"{safe_name}.json")
-
-    if os.path.exists(table_file):
-        return None
-
-    # 从实验室检查中找 UREA 和 BUN
-    urea_unit = ""
-    bun_unit = ""
-    for item in lab_data.get("analysis_items", []):
-        if "UREA" in item["name"]:
-            urea_unit = item.get("unit", "")
-        if "BUN" in item["name"]:
-            bun_unit = item.get("unit", "")
-
-    table_json = {
-        "table_name": table_name,
-        "projects": [
-            {
-                "name": "尿素（UREA）",
-                "categories": EVAL_CATEGORIES
-            },
-            {
-                "name": "尿素氮（BUN）",
-                "categories": EVAL_CATEGORIES
-            },
-            {
-                "name": "尿素（UREA）检测结果",
-                "unit": urea_unit or "mmol/L"
-            },
-            {
-                "name": "尿素氮（BUN）检测结果",
-                "unit": bun_unit or "mmol/L"
-            }
-        ]
-    }
-
-    with open(table_file, "w", encoding="utf-8") as f:
-        json.dump(table_json, f, ensure_ascii=False, indent=2)
-
-    return table_name
-
-
 def main(details_dir, output_dir, content_dir=None):
     os.makedirs(output_dir, exist_ok=True)
 
@@ -319,20 +273,13 @@ def main(details_dir, output_dir, content_dir=None):
         all_created.extend(created)
         print(f"✅ 前后交叉表: {len(created)} 个", file=sys.stderr)
 
-    # 3. 尿素/尿素氮
-    if lab_data:
-        result = gen_urea_table(lab_data, output_dir)
-        if result:
-            all_created.append(result)
-            print(f"✅ 尿素/尿素氮表: 1 个", file=sys.stderr)
-
-    # 4. 心电图检查（添加visits）
+    # 3. 心电图检查（添加visits）
     result = gen_ecg_table(details_dir, output_dir, visits_map)
     if result:
         all_created.append(result)
         print(f"✅ 心电图检查表: 1 个", file=sys.stderr)
 
-    # 5. 基线表 JSON（从子表合并生成）
+    # 4. 基线表 JSON（从子表合并生成）
     created = gen_baseline_tables(details_dir, output_dir, content_dir)
     all_created.extend(created)
 

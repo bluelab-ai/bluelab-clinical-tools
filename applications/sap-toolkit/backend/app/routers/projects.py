@@ -235,7 +235,8 @@ def _sync_prompts_and_manual_tables(output_dir: str, tables: list):
             with open(json_file, "w", encoding="utf-8") as f:
                 json.dump(table_json, f, ensure_ascii=False, indent=2)
 
-        elif data_source == "auto":
+        else:
+            # auto-extracted tables (data_source == "crf" or others)
             # Check if should skip
             if any(kw in category for kw in skip_keywords):
                 continue

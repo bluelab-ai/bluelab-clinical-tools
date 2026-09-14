@@ -331,7 +331,7 @@ def build_all_template_codes(tables_file: str,
                     "template_code": f"F_{group_code}_{ep_type}_{suffix}"
                 })
         # CMH 表格
-        elif "中心效应CMH检验" in table_name:
+        elif "考虑中心效应的CMH检验" in table_name:
             results.append({
                 "index": table_index,
                 "category": table.get("category"),

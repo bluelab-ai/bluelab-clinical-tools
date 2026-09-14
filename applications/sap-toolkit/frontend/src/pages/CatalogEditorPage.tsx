@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, FileSpreadsheet, Loader2, Save, Play, Plus, Trash2,
   ChevronDown, ChevronRight, CheckCircle2, AlertCircle, Pencil, X,
+  GripVertical,
 } from "lucide-react";
 import api from "../services/api";
 import type { Project, CatalogItem, ManualProject } from "../types";
@@ -14,10 +15,12 @@ interface CategoryGroup {
 }
 
 const SOURCE_BADGES: Record<string, { label: string; color: string }> = {
-  none:  { label: "固定项目", color: "bg-slate-100 text-slate-500" },
-  title: { label: "标题提取", color: "bg-violet-50 text-violet-600" },
-  crf:   { label: "CRF自动提取", color: "bg-emerald-50 text-emerald-600" },
-  fill:  { label: "根据表格名填充", color: "bg-amber-50 text-amber-600" },
+  none:        { label: "固定项目", color: "bg-slate-100 text-slate-500" },
+  title:       { label: "标题提取", color: "bg-violet-50 text-violet-600" },
+  crf:         { label: "CRF自动提取", color: "bg-emerald-50 text-emerald-600" },
+  fill:        { label: "根据表格名填充", color: "bg-amber-50 text-amber-600" },
+  manual:      { label: "人工指定", color: "bg-rose-50 text-rose-600" },
+  manual_edit: { label: "人工指定", color: "bg-rose-50 text-rose-600" },
 };
 
 interface AddTableForm {
@@ -52,6 +55,11 @@ export default function CatalogEditorPage() {
   const [newCategoryName, setNewCategoryName] = useState("");
   const [showAddCategory, setShowAddCategory] = useState(false);
   const [addForm, setAddForm] = useState<AddTableForm>(emptyForm);
+  const [dragState, setDragState] = useState<{
+    dragging: { gi: number; ii: number | null } | null;
+    overCategory: number | null;
+    overIndex: number | null;
+  }>({ dragging: null, overCategory: null, overIndex: null });
 
   const fetchProject = async () => {
     try {
@@ -106,7 +114,7 @@ export default function CatalogEditorPage() {
           ? {
               ...g,
               items: g.items.map((item, ii) =>
-                ii === editingCell.ii ? { ...item, name: editValue } : item
+                ii === editingCell.ii ? { ...item, name: editValue, data_source: "manual_edit" as const } : item
               ),
             }
           : g
@@ -219,6 +227,69 @@ export default function CatalogEditorPage() {
     setGroups((prev) => prev.filter((_, i) => i !== gi));
   };
 
+  const handleDragStart = useCallback((gi: number, ii: number | null, e: React.DragEvent) => {
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", `${gi}-${ii ?? "cat"}`);
+    setDragState({ dragging: { gi, ii }, overCategory: null, overIndex: null });
+  }, []);
+
+  const handleDragOver = useCallback((gi: number, ii: number | null, e: React.DragEvent) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    setDragState((prev) => ({ ...prev, overCategory: gi, overIndex: ii }));
+  }, []);
+
+  const handleDrop = useCallback((toGi: number, toIi: number | null, e: React.DragEvent) => {
+    e.preventDefault();
+    const data = e.dataTransfer.getData("text/plain");
+    const [fromGiStr, fromIiStr] = data.split("-");
+    const fromGi = parseInt(fromGiStr);
+    const fromIi = fromIiStr === "cat" ? null : parseInt(fromIiStr);
+
+    if (isNaN(fromGi)) return;
+
+    setGroups((prev) => {
+      // Category drag
+      if (fromIi === null) {
+        if (fromGi === toGi) return prev;
+        const newGroups = [...prev];
+        const [moved] = newGroups.splice(fromGi, 1);
+        const insertAt = toGi > fromGi ? toGi - 1 : toGi;
+        newGroups.splice(insertAt, 0, moved);
+        return newGroups;
+      }
+
+      // Item drag
+      const item = prev[fromGi]?.items[fromIi];
+      if (!item) return prev;
+
+      const newGroups = prev.map((g, i) => {
+        if (i === fromGi) {
+          return { ...g, items: g.items.filter((_, j) => j !== fromIi) };
+        }
+        return g;
+      });
+
+      const targetGi = toGi >= newGroups.length ? newGroups.length - 1 : toGi;
+      const targetIndex = toIi !== null ? toIi : newGroups[targetGi].items.length;
+
+      return newGroups.map((g, i) => {
+        if (i === targetGi) {
+          const newItems = [...g.items];
+          newItems.splice(targetIndex, 0, { ...item, category: g.category });
+          return { ...g, items: newItems };
+        }
+        return g;
+      }).filter((g) => g.items.length > 0);
+    });
+
+    setDragState({ dragging: null, overCategory: null, overIndex: null });
+  }, []);
+
+  const handleDragEnd = useCallback(() => {
+    setDragState({ dragging: null, overCategory: null, overIndex: null });
+  }, []);
+
   const handleSave = async () => {
     setSaving(true);
     setSaveMsg("");
@@ -328,13 +399,41 @@ export default function CatalogEditorPage() {
         {/* Category Groups */}
         <div className="space-y-4">
           {groups.map((group, gi) => (
-            <div key={gi} className="bg-white rounded-2xl border border-slate-200/70 shadow-sm overflow-hidden">
+            <div
+              key={gi}
+              className={`bg-white rounded-2xl border shadow-sm overflow-hidden transition-all ${
+                dragState.dragging?.gi === gi && dragState.dragging?.ii === null
+                  ? "opacity-50"
+                  : ""
+              } ${
+                dragState.overCategory === gi && dragState.overIndex === null
+                  ? "border-blue-400 ring-2 ring-blue-100"
+                  : "border-slate-200/70"
+              }`}
+              onDragOver={(e) => {
+                e.preventDefault();
+                handleDragOver(gi, null, e);
+              }}
+              onDrop={(e) => handleDrop(gi, null, e)}
+            >
               {/* Category Header */}
               <div
                 className="flex items-center justify-between px-5 py-3.5 bg-slate-50 border-b border-slate-200/70 cursor-pointer select-none"
                 onClick={() => toggleCollapse(gi)}
               >
                 <div className="flex items-center gap-3">
+                  <div
+                    draggable
+                    onDragStart={(e) => {
+                      e.stopPropagation();
+                      handleDragStart(gi, null, e);
+                    }}
+                    onDragEnd={handleDragEnd}
+                    className="cursor-grab active:cursor-grabbing p-1 rounded hover:bg-slate-200 transition-colors"
+                    title="拖拽移动分类"
+                  >
+                    <GripVertical size={16} className="text-slate-400" />
+                  </div>
                   {group.collapsed ? (
                     <ChevronRight size={18} className="text-slate-400" />
                   ) : (
@@ -360,9 +459,37 @@ export default function CatalogEditorPage() {
                   {group.items.map((item, ii) => (
                     <div
                       key={ii}
-                      className="flex items-center gap-3 px-5 py-3 hover:bg-slate-50/50 transition-colors group"
+                      draggable={!item.locked}
+                      onDragStart={(e) => handleDragStart(gi, ii, e)}
+                      onDragEnd={handleDragEnd}
+                      onDragOver={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleDragOver(gi, ii, e);
+                      }}
+                      onDrop={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleDrop(gi, ii, e);
+                      }}
+                      className={`flex items-center gap-3 px-5 py-3 hover:bg-slate-50/50 transition-all group ${
+                        dragState.dragging?.gi === gi && dragState.dragging?.ii === ii
+                          ? "opacity-50 bg-blue-50"
+                          : ""
+                      } ${
+                        dragState.overCategory === gi && dragState.overIndex === ii
+                          ? "border-t-2 border-blue-400"
+                          : ""
+                      }`}
                     >
-                      <span className="text-xs text-slate-400 font-mono w-8 text-right">
+                      {!item.locked && (
+                        <GripVertical
+                          size={16}
+                          className="text-slate-300 cursor-grab active:cursor-grabbing shrink-0"
+                        />
+                      )}
+
+                      <span className="text-xs text-slate-400 font-mono w-8 text-right shrink-0">
                         {ii + 1}
                       </span>
 
@@ -434,6 +561,25 @@ export default function CatalogEditorPage() {
                       )}
                     </div>
                   ))}
+
+                  {/* Drop zone at bottom */}
+                  <div
+                    className={`h-2 transition-all ${
+                      dragState.overCategory === gi && dragState.overIndex === group.items.length
+                        ? "bg-blue-100"
+                        : ""
+                    }`}
+                    onDragOver={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleDragOver(gi, group.items.length, e);
+                    }}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleDrop(gi, group.items.length, e);
+                    }}
+                  />
 
                   {/* Add item button */}
                   <button

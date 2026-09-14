@@ -12,6 +12,7 @@ export default function PromptsEditorPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [showCommon, setShowCommon] = useState(true);
+  const [previewIdx, setPreviewIdx] = useState<number | null>(null);
 
   useEffect(() => {
     const load = async () => {
@@ -72,6 +73,24 @@ export default function PromptsEditorPage() {
   const handleGenerate = async () => {
     await handleSave();
     navigate(`/project/${id}/phase2`);
+  };
+
+  const buildFullPrompt = (item: PromptItem): string => {
+    if (!prompts?.common) return item.instruction;
+    // 如果 instruction 已包含完整的提取要求和输出格式（特殊表格），直接返回
+    if (item.instruction.includes("【提取要求】") && item.instruction.includes("【输出格式】")) {
+      return item.instruction;
+    }
+    // 普通表格：拼接公共规则
+    return `${item.instruction}
+
+【提取要求】
+${prompts.common.extract_rules}
+
+【输出格式】
+${prompts.common.output_format}
+
+${prompts.common.notes}`;
   };
 
   const categoryGroups: Record<string, { item: PromptItem; idx: number }[]> = {};
@@ -166,11 +185,25 @@ export default function PromptsEditorPage() {
                 <div key={entry.idx} className={`px-5 py-4 transition-colors ${entry.item.enabled ? "" : "bg-gray-50 opacity-60"}`}>
                   <div className="flex items-center justify-between mb-2">
                     <span className={`font-medium text-sm ${entry.item.enabled ? "text-gray-900" : "text-gray-400 line-through"}`}>{entry.item.name}</span>
-                    <button onClick={() => toggleEnabled(entry.idx)} className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${entry.item.enabled ? "bg-indigo-600" : "bg-gray-300"}`}>
-                      <span className={`inline-block h-3.5 w-3.5 rounded-full bg-white transition-transform ${entry.item.enabled ? "translate-x-4.5" : "translate-x-1"}`} style={{ transform: entry.item.enabled ? "translateX(18px)" : "translateX(4px)" }} />
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button onClick={() => setPreviewIdx(previewIdx === entry.idx ? null : entry.idx)} className="text-xs text-indigo-600 hover:text-indigo-800 transition-colors">
+                        {previewIdx === entry.idx ? "收起预览" : "预览完整 Prompt"}
+                      </button>
+                      <button onClick={() => toggleEnabled(entry.idx)} className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${entry.item.enabled ? "bg-indigo-600" : "bg-gray-300"}`}>
+                        <span className={`inline-block h-3.5 w-3.5 rounded-full bg-white transition-transform ${entry.item.enabled ? "translate-x-4.5" : "translate-x-1"}`} style={{ transform: entry.item.enabled ? "translateX(18px)" : "translateX(4px)" }} />
+                      </button>
+                    </div>
                   </div>
                   <textarea value={entry.item.instruction} onChange={(e) => updateInstruction(entry.idx, e.target.value)} disabled={!entry.item.enabled} rows={4} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-y disabled:bg-gray-100 disabled:cursor-not-allowed" />
+                  {previewIdx === entry.idx && (
+                    <div className="mt-3 p-3 bg-gray-50 border border-gray-200 rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-medium text-gray-500">最终发送给 AI 的完整 Prompt</span>
+                        <span className="text-xs text-gray-400">{buildFullPrompt(entry.item).length} 字符</span>
+                      </div>
+                      <pre className="text-xs text-gray-700 whitespace-pre-wrap break-words font-mono leading-relaxed max-h-96 overflow-y-auto">{buildFullPrompt(entry.item)}</pre>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

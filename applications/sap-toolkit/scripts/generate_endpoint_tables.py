@@ -69,7 +69,7 @@ def find_method_for_table(table_name: str, methods: List[Dict]) -> Optional[Dict
         "混合效应模型估计情况", "最小二乘均数",
         "重复测量的混合效应模型估计情况",
         "非劣效检验", "优效性检验", "等效性检验",
-        "Logistic回归", "生存分析", "中心效应CMH检验",
+        "Logistic回归", "生存分析", "考虑中心效应的CMH检验",
     ]
 
     for keyword in METHOD_KEYWORDS:

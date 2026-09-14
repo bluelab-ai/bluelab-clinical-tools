@@ -70,7 +70,7 @@ LAB_ITEMS_TOOL = {
                         "category": {
                             "type": "string",
                             "description": "检查类别",
-                            "enum": ["血常规", "肝功能", "肾功能", "凝血功能", "传染病筛查", "尿液检查", "其他"]
+                            "enum": ["血常规", "血生化", "凝血功能", "尿常规", "其他"]
                         },
                         "unit": {"type": "string", "description": "测量单位（如 g/L, μmol/L, U/L 等）"}
                     },
@@ -138,7 +138,8 @@ def extract_safety_item(
         tool_def = LAB_ITEMS_TOOL
         tool_name = "extract_lab_items"
         category_hint = """3. 每个项目必须标注所属的**检查类别**（category），类别名称必须使用以下固定值：
-   - 血常规、肝功能、肾功能、凝血功能、传染病筛查、尿液检查、其他"""
+   - 血常规、血生化、凝血功能、尿常规、其他
+   注意：类别应根据CRF页面划分，如血生化页面中的所有项目（包括肝功能、肾功能、电解质、血糖、血脂等）都归为"血生化"类别"""
     else:
         tool_def = SAFETY_ITEMS_TOOL
         tool_name = "extract_safety_items"
@@ -245,11 +246,9 @@ def extract_safety_item(
                     # 将 only_in_first_visit 字段添加到 analysis_items 中，并补充 parent 字段
                     CATEGORY_TO_PARENT = {
                         "血常规": "血常规",
-                        "肝功能": "血生化",
-                        "肾功能": "血生化",
+                        "血生化": "血生化",
                         "凝血功能": "凝血常规",
-                        "传染病筛查": "其他",
-                        "尿液检查": "尿常规",
+                        "尿常规": "尿常规",
                         "其他": "其他",
                     }
                     if "analysis_items" in result:
