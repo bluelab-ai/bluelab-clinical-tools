@@ -841,6 +841,17 @@ def generate_primary_tables(state: WorkflowState) -> dict:
         json_data = extract_endpoints(sap_content, api_logger=api_logger)
         table_data = generate_table_names(json_data)
 
+        # 生存分析过滤：如果 method_flags.survival 或 cox 为 true，只保留生存分析表
+        method_flags = json_data.get("statistical_methods", {}).get("method_flags", {})
+        if method_flags.get("survival") or method_flags.get("cox"):
+            total_before = sum(len(c.get("tables", [])) for c in table_data)
+            for category_data in table_data:
+                original = category_data.get("tables", [])
+                filtered = [t for t in original if "生存分析" in t.get("name", "")]
+                category_data["tables"] = filtered
+            total_after = sum(len(c.get("tables", [])) for c in table_data)
+            log(f"检测到生存分析终点，过滤 {total_before} → {total_after} 张表", "INFO")
+
         json_output = os.path.join(tables_dir, "主要评价终点.json")
         table_output = os.path.join(tables_dir, "主要评价终点_表格名称.txt")
 
@@ -855,6 +866,7 @@ def generate_primary_tables(state: WorkflowState) -> dict:
         os.makedirs(info_dir, exist_ok=True)
         from scripts.generate_endpoint_tables import parse_table_names, generate_table_json
         table_names = parse_table_names(table_output)
+
         for table_name in table_names:
             table_json = generate_table_json(table_name, json_data.get("endpoints", []), json_data.get("statistical_methods", {}).get("primary_analysis", {}).get("methods", []))
             safe_name = table_name.replace("/", "_").replace("\\", "_")
@@ -917,6 +929,14 @@ def generate_secondary_tables(state: WorkflowState) -> dict:
         os.makedirs(info_dir, exist_ok=True)
         from scripts.generate_endpoint_tables import parse_table_names, generate_table_json
         table_names = parse_table_names(table_output)
+
+        # 生存分析过滤：如果 method_flags.survival 或 cox 为 true，只保留生存分析表
+        method_flags = json_data.get("statistical_methods", {}).get("method_flags", {})
+        if method_flags.get("survival") or method_flags.get("cox"):
+            original_count = len(table_names)
+            table_names = [t for t in table_names if "生存分析" in t]
+            log(f"检测到生存分析终点，过滤后保留 {len(table_names)}/{original_count} 张表", "INFO")
+
         for table_name in table_names:
             table_json = generate_table_json(table_name, json_data.get("endpoints", []), json_data.get("statistical_methods", {}).get("primary_analysis", {}).get("methods", []))
             safe_name = table_name.replace("/", "_").replace("\\", "_")
